@@ -67,7 +67,7 @@
                         }
                         else
                         {
-                            $new_url                =   trailingslashit(    home_url()  )   . str_replace( '/wp-content' , $new_content_path, $wph->default_variables['uploads_directory'] );
+                            $new_url                =   trailingslashit(    home_url()  )   . str_replace( '/wp-content' , $new_content_path, $wph->default_variables['upload_url'] );
                         }
                     
                     $data['url']            =   str_replace($data['baseurl'], $new_url, $data['url']);

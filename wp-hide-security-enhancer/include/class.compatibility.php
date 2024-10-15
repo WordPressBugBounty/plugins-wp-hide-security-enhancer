@@ -91,6 +91,7 @@
                     include_once(WPH_PATH . 'compatibility/qtranslate-xt.php');
                     include_once(WPH_PATH . 'compatibility/redirection.php');
                     include_once(WPH_PATH . 'compatibility/wpforms-lite.php');
+                    include_once(WPH_PATH . 'compatibility/dokan.php');
                     
                     /**
                     * Themes

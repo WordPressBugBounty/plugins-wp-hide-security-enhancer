@@ -19,7 +19,8 @@
                     if( !   $this->is_plugin_active() )
                         return FALSE;
                     
-                    define ('WP_ROCKET_WHITE_LABEL_FOOTPRINT', true);
+                    if ( ! defined ( 'WP_ROCKET_WHITE_LABEL_FOOTPRINT' ) )
+                        define ('WP_ROCKET_WHITE_LABEL_FOOTPRINT', true);
                         
                     global $wph;
                     

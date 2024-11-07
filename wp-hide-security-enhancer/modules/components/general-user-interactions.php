@@ -252,7 +252,8 @@
             function _init_disable_mouse_right_click( $saved_field_data )
                 {
                     add_action( 'wp_enqueue_scripts',   array ( $this,  'wp_enqueue_scripts' ) );    
-                    add_filter( 'wp_footer',            array ( $this,  'output_footer_js' ) );  
+                    add_filter( 'wp_footer',            array ( $this,  'output_footer_js' ) ); 
+                    add_filter( 'login_footer' ,        array ( $this,  'output_footer_js' ) );   
                 }
                 
             
@@ -264,7 +265,7 @@
                     if ( $disable_developer_tools == 'no' )
                         return;
                         
-                    wp_register_script('devtools-detect', WPH_URL . '/assets/js/devtools-detect.js');
+                    wp_register_script('devtools-detect', WPH_URL . '/assets/js/devtools-detect.js', array(), WPH_CORE_VERSION );
                     wp_enqueue_script ( 'devtools-detect' );
                     
                 }

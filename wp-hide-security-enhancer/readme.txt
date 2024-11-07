@@ -4,7 +4,7 @@ Donate link: https://www.nsp-code.com/
 Tags: wordpress hide, security, security headers, custom login, login hide
 Requires at least: 2.8
 Tested up to: 6.7
-Stable tag: 2.4.7
+Stable tag: 2.5
 License: GPLv2 or later
 
 Secure your site by hiding exploitable WordPress traces ( plugins, themes, wp-content, wp-includes, wp-admin, login URL). Enhanced Security Headers.
@@ -417,6 +417,15 @@ Please get in touch with us and we’ll do our best to include it inthe next ver
 
 == Changelog ==
 
+= 2.5 =
+* Include a version number for all script and style assets to ensure the correct data loads when cached.
+* Load the user interaction JavaScript on the login page as well, to ensure functionality on that page.
+* Add submenu items to the main menu for improved accessibility.
+* Check if LSWCP_TAG_PREFIX is defined when using LiteSpeed Cache before clearing the caches.
+* Clear the Elementor caches, if active, when options change.
+* Fix: Use rtrim instead of trim to strip the trailing \/ in the URL.
+* Update and check compatibility with WordPress 6.7.
+
 = 2.4.7 =
 * Fix: Check if data block is serialized, before applying the revert replacements.
 * Compatibility update for WP Job Manager
@@ -680,227 +689,6 @@ https://wp-hide.com/documentation/wph-components-components_run-ignore_component
 * Fix attachment_url_to_postid
 * Fix undefined get_metadata_raw
 
-= 1.6.3.2 =
-* Confirmation page for Recovery link
-* Use home_url() instead site_url() for recovery links to ensure the format is correct for WordPress instances using own directory
-* Trigger the login URL change e-mail at shutdown instead init
-* Compatibility with TranslatePress - Multilingual
-* Fix undefined notice
-* Fix meta Uncaught TypeError: count(): Argument
-* Slight code improvements 
-
-= 1.6.3.1 =
-* Improved description for Test Rewrite procedure, when the server fails to provide a valid response,  rewrite engine is not active or the custom urls are not allowd.
-* Fixed Undefined Property Notice
-
-= 1.6.3 =
-* Server Environment Check to ensure there are no rewrite issues and the plugin can be safely deployed.
-* Interactive feedback with hints and explanations for environment issues.
-* Improved UI
-* Clear fusion cache when plugin options changed if avada active
-* Fix New Search Path replacement to include an end slash, to avoid catch wrong urls
-* Check and tag for WordPress 5.7
-
-= 1.6.2.5 =
-* Fix: Add slash for "New Search Path" to avoid wrong replacements with urls containing the new search slug.
-
-= 1.6.2.4 =
-* Reverse URLs when saving a options, to avoid custom urls to be writted within the database.
-* Check if string before making a replacement on metadata
-* Compatibility file for Oxigen editor, when using Signatures
-* Simple Firewall compatibility file update - check if FernleafSystems\Wordpress\Plugin\Shield\Controller\Controller class exists before apply
-                                                         
-= 1.6.2.0.4 =
-* Update Compatibility file with Oxygen editor, for image with link wrapper
-* WordPress 5.6 compatibility tag update
-
-= 1.6.2.0.3 =
-* Compatibility file with Oxygen editor
-
-= 1.6.2.0.2 =
-* Fix: Check the replacements for update_post_metadata method on text and array types.
-
-= 1.6.2 =
-* Reverse URLs when saving a meta data field, to avoid custom urls to be writted within the database.
-* Trigger a system notice when deployed on MultiSite, as not being compatible.
-* Don't run _init_remove_html_new_lines when AJAX call to avoid front side processing errors.
-* WP Rocket compatibility file updates, to works with combined CSS assets
-* Shield Security compatibility update, to works with version 10 and up.
-* Prevent nottices and errors when attempt to rite on .htaccess file.
-* New filter wph/components/wp_oembed_add_discovery_links to allow disabling the Remove Oembed - wp_oembed_add_discovery_links
-* New filter wph/components/wp_oembed_add_host_js to allow disabling the Remove Oembed - wp_oembed_add_host_js
-* New compatibility file for wePOS plugin
-* New compatibility file for Asset CleanUp Pro Page Speed Booster plugin
-
-
-= 1.6.1.3 =
-* Compatibility with Hyper Cache
-* Update JSON REST service disable, remove the json_enabled as being deprecated, rely on rest_authentication_errors filter
-* Fix WooCommerce Update Database link when changing the default /wp-admin/ slug
-* Fix password forget return URL
-* Remove callback for Compatibility file for Shield Security within new-admin module
-
-= 1.6.1.1 =
-* Fix: Remove callback for Compatibility file for Shield Security within custom login module
-
-= 1.6.1 =
-* Compatibility file fix for Shield Security
-* WordPress 5.5.1 compatibility tag
-
-= 1.6.0.9.1 =
-* Ignore CDN value check for domain name similitude
-
-= 1.6.0.9 =
-* LiteSpeed guide on Setup interface
-* New functionality - Disable mouse right click
-* Compatibility file - JobBoardWP
-* Compatibility WP-Optimize - Clean, Compress, Cache
-* WordPress 505 compatibility tag
-
-= 1.6.0.8 =
-* Avoid using domain name as replacement for any option, or might conclude to wrong replacements within the outputted HTML or wrong reversed urls.
-* Add system reserved words as 'wp', 'admin', 'admin-ajax.php'
-* Slight General code improvements
-* Clean cookie for the new custom slug, if set.
-* Integration with WP-Optimize - Clean, Compress, Cache
-
-= 1.6.0.6 =
-* WP Job Manager - compatibility update
-
-= 1.6.0.5 =
-* New Setup interface with helps and hints on how to use the plugin.
-* New Sample Setup, which deploy a basic set-up of plugin options
-* Remove internal wp_mail and rely on WordPress core
-* Improved FAQ area
-* Updated base language file
-
-= 1.6.0.4 =
-* Purge cache for Fast Velocity Minify plugin, when clearing internal cache
-* Return new admin slug when calling admin_url() and if default admin is customized
-* Use no-protocol when loading the files, to ensure they are being loaded over current domain protocol
-* BuddyPress compatibility file update
-* Elementor compatibility file update
-* ShortPixel Adaptive Images compatibility file update
-* WooCommerce compatibility file update
-* WP Rocket compatibility file update
-* New compatibility file for Fast Velocity Minify
-* New compatibility file for LiteSpeed Cache
-* New compatibility file for Swift Performance
-* New compatibility file for WP Speed of Light
-
-= 1.6 =
-* New filter wp-hide/content_urls_replacement
-* Compatibility with Ultimate Member, user picture upload fix
-* Updated compatibility with W3 Cache, using postprocessorRequire option
-* Fluentform compatibility updates
-* Outputs the whole stack of errors for $wp_filesystem if exists
-* Typo fix in Uploads module
-
-
-= 1.5.9.9 =
-* Updated procedure for server type identification
-* Add new type text/plain for filterable content
-* Add server_nginx_config to main class, to be used within other modules
-* Updated rewrite quantifier for IIS from .+ to .*
-* Ignore wp-content block if agent is LiteSpeed-Image
-
-= 1.5.9.5 =
-* Updated is_filterable_content_type method, return TRUE if no Content-Type header found
-
-= 1.5.9.4 =
-* Fix readme demo site protocol
-
-= 1.5.9.4 =
-* Fix "undefined method WPH_functions::get_site_module_saved_value()" when content type is text/xml
-
-= 1.5.9.3 =
-* Check for filterable buffer content type, before doing replacements, to prevent erroneously changes
-* Update only URLs on XML content type
-* Updated plugin demo site URL on readme file
-* Compatibility update for ShortPixel Image Optimizer plugin 
-* Notice possible issue for Cron block on certain servers
-
-= 1.5.9 =
-* New admin interfaces skin.
-* Relocated plugin assets within a different folder for better organisator. 
-* Updated mu-loader module
-* Add help and hints for each options for easier understanding.
-* Allow same base slug to be used for individual plugins
-* Updated language file
-* Check if environment file is not available and outputs admin messages
-* Environment class with relocated environment json, to avoid security scanners false reports.
-* Cache Enabler plugin compatibility module 
-* WoodMart theme compatibility
-* Compatibility module for WP Smush  and WP Smush PRO plugins
-* Add the new filter available for WP Rocket to change css content
-* WebARX compatibility module update
-* W3 Cache module update
-
-= 1.5.8.2 =
-* Ensure base slug (e.g. base_slug/slug ) is not being used for another option to prevent rewrite conflicts
-* Return correct home path when using own directory for WordPress and hosting account use the same slug in the path.
-* Relocated get_default_variables() function on a higher priority execution level, to get default system details. 
-* Switched Yes / No options selection, to outputs first No then Yes ( more logical )
-
-= 1.5.8 =
-* Add reserved option names to avoid conflicts e.g. wp
-* Always clear any code plugin cache when plugin update
-* Easy Digital Downloads compatibility
-* Elementor plugin compatibility
-* Fusion Builder plugin compatibility
-* Divi theme compatibility updates
-* WP Fastest Cache plugin compatibility updates
-* Check if ob_gzhandler and zlib.output_compression before using 'ob_gzhandler' output buffering handler
-
-
-= 1.5.7 =
-* Autoptimize css/js cache and minify compatibility
-* Wp Hummingbird and WP Hummingbird PRO assets cache compatibility
-
-= 1.5.6.9 =
-* New functionality: Remove Link Header 
-
-= 1.5.6.8 =
-* Fix: Call for invalid method WP_Error::has_errors()
-* Fix: Attempt to clear Opcache if API not being restricted
-
-= 1.5.6.7 =
-* Allow internal cron jobs to run even if wp-cron.php is blocked.
-* Check with wp_filesystem for any errors and output the messages, before attempt to write any content
-* Trigger site cache clear on settings changed or code update
-* Slight css updates
-* Mark block option in red text for better visibility and user awareness
-
-= 1.5.6.4 =
-* Fix: Keep double quote at the start of the replacements when doing JSON matches to avoid replacing strings for other domains
-* Fix: Run compatibility pachage for "ShortPixel Adaptive Images" only when plugin is active
-
-= 1.5.6.3 =
-* Fix: remove javascript comments produce worng replacements on specific format.
-
-= 1.5.6.2 =
-* Use current site prefix when retreiving 'user_roles'
-
-= 1.5.6 =
-* Fix BBPress menus by calling directly the wp_user_roles option ratter get_roles()
-* Replace comments within inline JavaScript code when Remove Comments active
-* Possible login conflict notices when using WebArx, WPS Hide Login
-* New action wp-hide/admin_notices when plugin admin notices
-* Return updated url when calling admin_url instead replaced when buffer outputs to ensure compatibility with specific plugins
-
-= 1.5.5.9 =
-* Compatibility module for ShortPixel Adaptive Image plugin
-* Add support for texarea fields within plugin options interface
-* Fixed urls for minified files when using WP Rocket cache plugin
-
-= 1.5.5.7 =
-* Filter remove fix
-
-= 1.5.5.6 =
-* Fix log-in page when using Wp Rocket cache
-
-= 1.5.5.5 =
-* Fix admin dashboard replacements when using Wp Rocket cache
  
 
 See full list of changelogs at https://wp-hide.com/plugin-changelogs/

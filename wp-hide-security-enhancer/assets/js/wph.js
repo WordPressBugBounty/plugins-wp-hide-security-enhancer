@@ -4,7 +4,19 @@
         
             constructor() {
                 this.SiteScanProgress_interval = false;
-                this.AJAX_data  =   false  
+                this.AJAX_data  =   false;
+                
+                this.adminInit();  
+            }
+            
+            adminInit() {
+                
+                jQuery( document ).ready( function() {
+                    if ( jQuery( '.submenu.wph-highlight').length > 0 )
+                        jQuery( '.submenu.wph-highlight').closest( 'li' ).addClass('wph-current');
+                })   
+                
+                
             }
             
             selectText(node) 

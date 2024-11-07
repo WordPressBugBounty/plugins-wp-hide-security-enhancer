@@ -623,7 +623,7 @@
                             }
 
                     
-                    $home_path      =   trim($home_path, '\\/ ');
+                    $home_path      =   rtrim($home_path, '\\/ ');
                     
                     //not for windows
                     if ( DIRECTORY_SEPARATOR    !=  '\\')
@@ -3250,9 +3250,16 @@
                             do_action('flying_press_purge_everything:after');
                         }
                         
-                    if (class_exists('\LiteSpeed\Purge'))
+                    if (class_exists('\LiteSpeed\Purge')    &&   defined ( 'LSWCP_TAG_PREFIX' ) )
                         {
                             \LiteSpeed\Purge::purge_all();
+                        }
+                        
+                        
+                    if ( did_action( 'elementor/loaded' ) ) 
+                        {
+                            // Automatically purge and regenerate the Elementor CSS cache
+                            \Elementor\Plugin::instance()->files_manager->clear_cache();
                         }
                         
                 }

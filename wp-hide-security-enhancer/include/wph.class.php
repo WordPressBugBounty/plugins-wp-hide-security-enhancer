@@ -349,9 +349,9 @@
             
             function admin_print_styles()
                 {
-                    wp_enqueue_style( 'tipsy.css', WPH_URL . '/assets/css/tipsy.css');
+                    wp_enqueue_style( 'tipsy.css', WPH_URL . '/assets/css/tipsy.css', array(), WPH_CORE_VERSION );
                     
-                    wp_register_style('WPHStyle', WPH_URL . '/assets/css/wph.css');
+                    wp_register_style('WPHStyle', WPH_URL . '/assets/css/wph.css', array(), WPH_CORE_VERSION );
                     wp_enqueue_style( 'WPHStyle'); 
                 
                 }
@@ -359,7 +359,7 @@
                 
             function admin_print_styles_general()
                 {
-                    wp_register_style('WPH-Styles-general', WPH_URL . '/assets/css/wph-general.css');
+                    wp_register_style('WPH-Styles-general', WPH_URL . '/assets/css/wph-general.css', array(), WPH_CORE_VERSION );
                     wp_enqueue_style( 'WPH-Styles-general'); 
                 }
                 
@@ -367,9 +367,9 @@
             function admin_print_scripts()
                 {
                     wp_enqueue_script( 'jquery');
-                    wp_register_script('wph', WPH_URL . '/assets/js/wph.js');
+                    wp_register_script('wph', WPH_URL . '/assets/js/wph.js', array(), WPH_CORE_VERSION );
                     
-                    wp_enqueue_script('jquery.tipsy.js', WPH_URL . '/assets/js/jquery.tipsy.js' ); 
+                    wp_enqueue_script('jquery.tipsy.js', WPH_URL . '/assets/js/jquery.tipsy.js', array(), WPH_CORE_VERSION  ); 
                     
                     // Localize the script with new data
                     $translation_array = array(
@@ -421,14 +421,40 @@
                     add_action('admin_print_styles-' . $hookID ,    array( $this->security_scan, 'admin_print_styles'));
                     add_action('admin_print_scripts-' . $hookID ,   array( $this->security_scan, 'admin_print_scripts'));
          
+                    $current_page       =   isset ( $_GET['page'] ) ?       preg_replace( '/[^a-zA-Z0-9\-\_$]/m' , "", $_GET['page'] ) :        '';
+                    $current_component  =   isset ( $_GET['component'] ) ?  preg_replace( '/[^a-zA-Z0-9\-\_$]/m' , "", $_GET['component'] ) :   '';
+         
+                    $main_menu_slug     =   'wp-hide';
+         
                     foreach($this->modules   as  $module)
                         {
                             $interface_menu_data    =   $module->get_interface_menu_data();
                                                     
-                            $hookID   =             add_submenu_page( 'wp-hide', 'WP Hide', $interface_menu_data['menu_title'], 'manage_options', $interface_menu_data['menu_slug'], array($this->admin_interface,'_render'));
+                            $hookID   =             add_submenu_page( $main_menu_slug, 'WP Hide', $interface_menu_data['menu_title'], 'manage_options', $interface_menu_data['menu_slug'], array($this->admin_interface,'_render'));
                             
                             add_action('admin_print_styles-' . $hookID ,    array($this, 'admin_print_styles'));
                             add_action('admin_print_scripts-' . $hookID ,   array($this, 'admin_print_scripts'));
+                            
+                            if ( $module->get_module_slug() ==  $current_page )
+                                {
+                                    foreach( $module->components   as  $module_component )
+                                        {
+                                            if( ! $module_component->title)
+                                                continue;
+                                                
+                                            if ( in_array ( $module->get_module_slug() , array ( 'wp-hide-security-headers', 'wp-hide-login', 'wp-hide-cdn' ) ) )
+                                                continue;
+                                                
+                                            $class  =   'wph-info submenu';
+                                            if ( $current_component ==  $module_component->id )
+                                                $class  .=   ' wph-highlight';
+                                                
+                                            add_submenu_page( $main_menu_slug, 'WP Hide PRO ' . $interface_menu_data['menu_title'], '<span class="' . $class .'">→</span> ' . $module_component->title, 'manage_options', $interface_menu_data['menu_slug'] . '&component=' . $module_component->id, array($this->admin_interface,'_render'));
+                                                                                                                                
+                                        }
+
+                                }
+                            
                         }   
 
                 }

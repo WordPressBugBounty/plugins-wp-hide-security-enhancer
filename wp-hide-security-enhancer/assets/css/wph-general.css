@@ -1,1 +1,3 @@
 #adminmenu span.wph-info {display: inline-block;font-size: 9px;}
+#adminmenu span.wph-info.submenu {padding-left: 20px}
+#adminmenu .wph-current a {box-shadow: inset 2px 0 0 0 currentColor; color: #2ea2cc}

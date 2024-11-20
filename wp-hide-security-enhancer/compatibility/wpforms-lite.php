@@ -26,7 +26,7 @@
                     
                     include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
                     
-                    if ( is_plugin_active( 'wpforms-lite/wpforms.php' ) )
+                    if ( is_plugin_active( 'wpforms-lite/wpforms.php' ) ||  is_plugin_active( 'wpforms/wpforms.php' ) )
                         return TRUE;
                         else
                         return FALSE;

@@ -248,7 +248,8 @@
                             <h2><?php _e( "Getting Started", 'wp-hide-security-enhancer' ) ?></h2>
                         </div>
                         <div class="container-description">
-                            <p><b>WP Hide & Security Enhancer</b> <?php _e( "plugin helps to hide your WordPress, theme, and plugins", 'wp-hide-security-enhancer' ) ?>. <?php _e( "This improves the site security as hackers' boots can't exploit the vulnerabilities of your site, as not being aware of the user code", 'wp-hide-security-enhancer' ) ?>. <?php _e( "Daily, more vulnerabilities are found", 'wp-hide-security-enhancer' ) ?> <a href="https://wpvulndb.com/" target="_blank">WPVulndb.com/</a>, <?php _e( "but using WP Hide & Security Enhancer you will be perfectly safe", 'wp-hide-security-enhancer' ) ?> !</p>
+                            <p>The <b>WP Hide & Security Enhancer</b> <?php _e( "plugin enhances your website's security by concealing your WordPress installation, themes, and plugins. By keeping critical information hidden, it prevents hackers and automated bots from exploiting known vulnerabilities", 'wp-hide-security-enhancer' ) ?>. <?php _e( "With new vulnerabilities discovered every day", 'wp-hide-security-enhancer' ) ?> ( <a href="https://wpscan.com/plugins/" target="_blank">WPVulndb.com/</a> ) <?php _e( "using WP Hide & Security Enhancer ensures an added layer of protection, keeping your site safe and secure.", 'wp-hide-security-enhancer' ) ?> !</p>
+                            <p><?php _e('You can begin with a ', 'wp-hide-security-enhancer') ?> <b><?php _e('Sample Setup', 'wp-hide-security-enhancer') ?></b> <?php _e('to get started quickly. Then, use the', 'wp-hide-security-enhancer') ?> <a class="button-primary" href="<?php echo esc_url(admin_url( 'admin.php?page=wp-hide-security-scan')) ?>"><b>Scan</b></a> <?php _e('interface to identify potential vulnerabilities and fine-tune the plugin settings for optimal security. This approach ensures your website is protected with the highest level of defense', 'wp-hide-security-enhancer') ?>.</p>
 
                         </div> 
                         
@@ -277,7 +278,7 @@
                         
                         </div>
                         
-                        <div class="start-container title setup">
+                        <div id="wph-sample-setup" class="start-container title setup">
                             <h2><?php _e( "Sample setup", 'wp-hide-security-enhancer' ) ?></h2>
                         </div>
                         <div class="container-description">

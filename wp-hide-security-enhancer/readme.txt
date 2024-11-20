@@ -4,7 +4,7 @@ Donate link: https://www.nsp-code.com/
 Tags: wordpress hide, security, security headers, custom login, login hide
 Requires at least: 2.8
 Tested up to: 6.7
-Stable tag: 2.5
+Stable tag: 2.5.1
 License: GPLv2 or later
 
 Secure your site by hiding exploitable WordPress traces ( plugins, themes, wp-content, wp-includes, wp-admin, login URL). Enhanced Security Headers.
@@ -416,6 +416,9 @@ Please get in touch with us and we’ll do our best to include it inthe next ver
 2. Sample front html code.
 
 == Changelog ==
+
+= 2.5.1 =
+* Update the compatibility file for WPForms Lite and WPForms PRO
 
 = 2.5 =
 * Include a version number for all script and style assets to ensure the correct data loads when cached.

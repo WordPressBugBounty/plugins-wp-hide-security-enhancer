@@ -20,8 +20,8 @@
                 {
                     
                     $this->action           =   $action;
-                    $this->file_path        =   $file_path;
-                    $this->replacement_path =   $replacement_path;
+                    $this->file_path        =   preg_replace('/\.+[\\/]+/', '', $file_path );
+                    $this->replacement_path =   preg_replace('/\.+[\\/]+/', '', $replacement_path );
                     
                     $this->define_wp_constants();
                     
@@ -31,8 +31,8 @@
                     if  ( empty ( $this->environment ) )
                         die();
                                         
-                    $normalize_abspath      =   str_replace( '\\', '/', ABSPATH);
-                    $normalize_abspath      =   str_replace( '\\', '/', $normalize_abspath);
+                    $normalize_abspath      =   $this->normalize_path ( ABSPATH );
+                    $normalize_abspath      =   $this->normalize_path ( $normalize_abspath );
                     
                     //exclude any wordpress directory if exists
                     if( $this->environment->wordpress_directory !=  ''  &&  $this->environment->wordpress_directory !=  '/')
@@ -42,11 +42,11 @@
                     
                     //append doc root to path 
                     $this->full_file_path   =   str_replace( ltrim( $this->environment->site_relative_path , '\/'), "",  $normalize_abspath); 
-                    $this->full_file_path   =   str_replace( '\\', '/', $this->full_file_path);
+                    $this->full_file_path   =   $this->normalize_path ( $this->full_file_path );
                     $this->full_file_path   =   rtrim( $this->full_file_path , '/') . "/";
                     
                     $this->full_file_path  .=   ltrim($this->file_path, '\/');
-                    $this->full_file_path   =   str_replace( '\\', '/', $this->full_file_path);
+                    $this->full_file_path   =   $this->normalize_path ( $this->full_file_path );
 
                     //check if file exists
                     if (!file_exists($this->full_file_path))
@@ -210,7 +210,21 @@
                     $file_url   .=  !empty($this->environment->site_relative_path)    ?   $this->environment->site_relative_path    :   '';   
                     $file_url   .=  $this->replacement_path;
                     
-                    $pathinfo   =   pathinfo( $this->environment->cache_path . $file_url );
+                    $cached_file_path   =   $this->environment->cache_path . $file_url;
+                    
+                    /*
+                    $cached_file_path   =   realpath ( $this->environment->cache_path . $file_url );
+                    $cached_file_path   =   $this->normalize_path ( $cached_file_path );
+                    
+                    if (    strpos( $cached_file_path, $this->environment->cache_path ) !== 0 )
+                        die();
+                    */
+                    
+                    $pathinfo   =   pathinfo( $cached_file_path );
+                    
+                    //allow only css files
+                    if ( ! in_array ( strtolower ( $pathinfo['extension'] ), array ( 'css') ) )
+                        die();
                                 
                     if ( ! is_dir( $pathinfo['dirname'] ) ) 
                         {
@@ -233,7 +247,19 @@
                             //error saving the cache data to cache file
                         }
                 
-                }             
+                }
+                
+            
+            /**
+            * Normalize the path
+            * 
+            * @param mixed $path
+            */
+            function normalize_path( $path )
+                {
+                    $path   =   str_replace( '\\', '/', $path );
+                    return $path;
+                }
        
         }
 

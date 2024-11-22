@@ -211,15 +211,7 @@
                     $file_url   .=  $this->replacement_path;
                     
                     $cached_file_path   =   $this->environment->cache_path . $file_url;
-                    
-                    /*
-                    $cached_file_path   =   realpath ( $this->environment->cache_path . $file_url );
-                    $cached_file_path   =   $this->normalize_path ( $cached_file_path );
-                    
-                    if (    strpos( $cached_file_path, $this->environment->cache_path ) !== 0 )
-                        die();
-                    */
-                    
+                       
                     $pathinfo   =   pathinfo( $cached_file_path );
                     
                     //allow only css files
@@ -230,6 +222,12 @@
                         {
                            wp_mkdir_p( $pathinfo['dirname'] );
                         }
+                
+                    //Ensure the realpath is in the cache folder
+                    $real_file_path =   realpath ( trailingslashit($pathinfo['dirname']) );
+                    $real_file_path =   $this->normalize_path( $real_file_path );
+                    if ( ! $real_file_path ||   stripos ( $real_file_path, $this->environment->cache_path ) !== 0 )
+                        die();
                 
                     global $wp_filesystem;
 

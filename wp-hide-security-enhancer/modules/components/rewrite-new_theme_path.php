@@ -456,14 +456,14 @@
                                 $new_content_path =   $this->wph->functions->get_module_item_setting('new_content_path');
                                 if(!empty($new_content_path))
                                     {
-                                        $path   =   str_replace( trailingslashit( WP_CONTENT_URL ) , "/", $default_path);
+                                        $path   =   str_replace( trailingslashit( preg_replace( '/^https?:\/\//', '', WP_CONTENT_URL ) ) , "/", preg_replace( '/^https?:\/\//', '', $default_path ));
                                         $path   =   $new_content_path . $path;
                                     }
                                     else
                                     {
-                                        $path   =   str_replace( trailingslashit( WP_CONTENT_URL ) , "/", $default_path);
+                                        $path   =   str_replace( trailingslashit( preg_replace( '/^https?:\/\//', '', WP_CONTENT_URL ) ) , "/", preg_replace( '/^https?:\/\//', '', $default_path ));
                                         
-                                        $wp_content_folder      =   str_replace( site_url() , '' , WP_CONTENT_URL);
+                                        $wp_content_folder      =   str_replace( preg_replace( '/^https?:\/\//', '', site_url() ) , '' , preg_replace( '/^https?:\/\//', '', WP_CONTENT_URL ));
                                         $wp_content_folder      =   trim($wp_content_folder, '/');
                                         
                                         $path   =   $wp_content_folder . $path;
@@ -664,14 +664,14 @@
                                 $new_content_path =   $this->wph->functions->get_module_item_setting('new_content_path');
                                 if(!empty($new_content_path))
                                     {
-                                        $path   =   str_replace( trailingslashit( WP_CONTENT_URL ) , "/", $default_path);
+                                        $path   =   str_replace( trailingslashit( preg_replace( '/^https?:\/\//', '', WP_CONTENT_URL ) ) , "/", preg_replace( '/^https?:\/\//', '', $default_path ));
                                         $path   =   $new_content_path . $path;
                                     }
                                     else
                                     {
-                                        $path   =   str_replace( trailingslashit( WP_CONTENT_URL ) , "/", $default_path);
+                                        $path   =   str_replace( trailingslashit( preg_replace( '/^https?:\/\//', '', WP_CONTENT_URL ) ) , "/", preg_replace( '/^https?:\/\//', '', $default_path ));
                                         
-                                        $wp_content_folder      =   str_replace( site_url() , '' , WP_CONTENT_URL);
+                                        $wp_content_folder      =   str_replace( preg_replace( '/^https?:\/\//', '', site_url() ) , '' , preg_replace( '/^https?:\/\//', '', WP_CONTENT_URL ));
                                         $wp_content_folder      =   trim($wp_content_folder, '/');
                                         
                                         $path   =   $wp_content_folder . $path;

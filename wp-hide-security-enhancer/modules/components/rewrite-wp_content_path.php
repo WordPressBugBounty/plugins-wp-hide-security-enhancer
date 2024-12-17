@@ -13,19 +13,7 @@
                 {
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'new_content_path',
-                                                                    'label'         =>  __('New Content Path',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Change default /wp-content/',    'wp-hide-security-enhancer') . '<br />' .__('Your default wp-content path is set to',    'wp-hide-security-enhancer') . ' <strong>'.   $this->wph->default_variables['content_directory'] .'</strong>',
                                                                     
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Content Path',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("By default, a WordPress installation includes a 'wp-content' folder that stores files and resources utilized by themes and plugins. The 'wp-content' directory serves as a distinctive fingerprint, making it easy for anyone to identify the site as being built on the WordPress platform.",    'wp-hide-security-enhancer') . " <br />  <br />
-                                                                                                                                            <code>&lt;script type='text/javascript' src='https://-domain-name-/wp-content/cache/static/asset.js'&gt;&lt;/script&gt;</code>
-                                                                                                                                            <br /><br /> " . __("After filling in this option e.g. data the links become:",    'wp-hide-security-enhancer') . " <br />  <br /> 
-                                                                                                                                            <code>&lt;script type='text/javascript' src='https://-domain-name-/data/cache/static/asset.js'&gt;&lt;/script&gt;</code>",
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-wp-content/'
-                                                                                                        ),
-                                                                    
-                                                                    'value_description' =>  __('e.g. my_content',    'wp-hide-security-enhancer'),
                                                                     'input_type'    =>  'text',
                                                                     
                                                                     'sanitize_type' =>  array(array($this->wph->functions, 'sanitize_file_path_name')),
@@ -35,26 +23,9 @@
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'block_wp_content_path',
-                                                                    'label'         =>  __('Block wp-content URL',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Block default /wp-content/ path. Your default wp-content path is set to',    'wp-hide-security-enhancer') . ' <strong>'.   $this->wph->default_variables['content_directory'] .'</strong>',
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block wp-content URL',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("This restricts access to the default wp-content URLs exclusively for non-logged-in users.<br />The functionality apply only if <b>New Content Path</b> option is filled in.",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-wp-content/'
-                                                                                                        ),
-                                                                    
-                                                                    'advanced_option'   =>  array(
-                                                                        
-                                                                                                        'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break the layout if server not supporting the feature. Ensure New Content Path options works fine before activate this. Once active test it thoroughly.<br />If not working, set to <b>No</b> to revert.',    'wp-hide-security-enhancer')
-                                                                                                
-                                                                                                ),
-                                                                    
+                                                                                                                       
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                  
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -62,6 +33,68 @@
                                                                     );
                                                                     
                     return $this->module_settings;   
+                }
+                
+            function set_module_components_description( $component_settings )
+                {
+                    
+                    
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'new_content_path' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('New Content Path',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Change default /wp-content/',    'wp-hide-security-enhancer') . '<br />' .__('Your default wp-content path is set to',    'wp-hide-security-enhancer') . ' <strong>'.   $this->wph->default_variables['content_directory'] .'</strong>',
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Content Path',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("By default, a WordPress installation includes a 'wp-content' folder that stores files and resources utilized by themes and plugins. The 'wp-content' directory serves as a distinctive fingerprint, making it easy for anyone to identify the site as being built on the WordPress platform.",    'wp-hide-security-enhancer') . " <br />  <br />
+                                                                                                                                                                                                        <code>&lt;script type='text/javascript' src='https://-domain-name-/wp-content/cache/static/asset.js'&gt;&lt;/script&gt;</code>
+                                                                                                                                                                                                        <br /><br /> " . __("After filling in this option e.g. data the links become:",    'wp-hide-security-enhancer') . " <br />  <br /> 
+                                                                                                                                                                                                        <code>&lt;script type='text/javascript' src='https://-domain-name-/data/cache/static/asset.js'&gt;&lt;/script&gt;</code>",
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-wp-content/'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'value_description' =>  __('e.g. my_content',    'wp-hide-security-enhancer'),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'block_wp_content_path' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Block wp-content URL',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Block default /wp-content/ path. Your default wp-content path is set to',    'wp-hide-security-enhancer') . ' <strong>'.   $this->wph->default_variables['content_directory'] .'</strong>',
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block wp-content URL',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("This restricts access to the default wp-content URLs exclusively for non-logged-in users.<br />The functionality apply only if <b>New Content Path</b> option is filled in.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-wp-content/'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'advanced_option'   =>  array(
+                                                                                                                                    
+                                                                                                                                                                    'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break the layout if server not supporting the feature. Ensure New Content Path options works fine before activate this. Once active test it thoroughly.<br />If not working, set to <b>No</b> to revert.',    'wp-hide-security-enhancer')
+                                                                                                                                                            
+                                                                                                                                                            ),
+                                                                                                                                
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                    
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
                 }
                 
             

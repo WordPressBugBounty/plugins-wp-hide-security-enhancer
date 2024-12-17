@@ -24,19 +24,7 @@
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'new_theme_path',
-                                                                    'label'         =>  __('New Theme Path',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Change theme url, which as default the path is set to',    'wp-hide-security-enhancer') . ' <strong>'. str_replace(get_bloginfo('wpurl'), '' ,$this->wph->default_variables['template_url'])  .'/</strong>',
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Theme Path',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("This option helps to change the theme url to a custom one. As default all theme assets ( styles, JavaScript etc ) are loaded using the theme url and appear on front side html source like this:",    'wp-hide-security-enhancer') ." <br />  <br />
-                                                                                                                                            <code>&lt;link rel='stylesheet' href='http://-domain-name-/wp-content/themes/Divi/style.css' type='text/css' media='all' /&gt;</code>
-                                                                                                                                            <br /><br /> " . __("When using this option, if filling with `template`, all urls on front side become as follow:",    'wp-hide-security-enhancer') ." <br />  <br /> 
-                                                                                                                                            <code>&lt;link rel='stylesheet' href='http://-domain-name-/template/style.css' type='text/css' media='all' /&gt;</code>" ,
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-theme/'
-                                                                                                        ),
-                                                                    
-                                                                    'value_description'     =>  __('Example',    'wp-hide-security-enhancer') . ': <b>template</b>',
+                                                    
                                                                     'input_type'            =>  'text',
                                                                                                                                         
                                                                     'sanitize_type' =>  array(array($this->wph->functions, 'sanitize_file_path_name'), 'strtolower'),
@@ -46,18 +34,7 @@
                                         
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'new_style_file_path',
-                                                                    'label'         =>  __('New Style File Path',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Change default theme style file style.css, current path is set to',    'wp-hide-security-enhancer') . ' <strong>'. str_replace(get_bloginfo('wpurl'), '' ,   $this->wph->default_variables['template_url'])  .'/style.css</strong>',
                                                                     
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Style File Path',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("This allow to change the default style.css filename to something else e.g. template-style.css. Per this example, on front side the main style link change from /style.css to /template-style.css",    'wp-hide-security-enhancer') ." <br />  <br /> 
-                                                                                                                                            <code>&lt;link rel='stylesheet' href='http://-domain-name-/template/template-style.css' type='text/css' media='all' /&gt;</code>",
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-theme/',
-                                                                                                        'input_value_extension'     =>  'css'
-                                                                                                        ),
-                                                                    
-                                                                    'value_description' =>  __('Example',    'wp-hide-security-enhancer') . ': <b>skin.css</b>',
                                                                     'input_type'    =>  'text',
                                                                     
                                                                     'sanitize_type' =>  array(array($this->wph->functions, 'sanitize_file_path_name')),
@@ -67,33 +44,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                         'id'            =>  'style_file_clean',
-                                                                        'label'         =>  __('Remove description header from Style file',    'wp-hide-security-enhancer'),
-                                                                        'description'   =>  
-                                                                                            array(
-                                                                                            __('Strip out all meta data from style file.',    'wp-hide-security-enhancer') . '<br />'
-                                                                                            ),
-                                                                        
-                                                                        'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove description header from Style file',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("Strip out all meta data from style file as Theme Name, Theme URI, Author etc. Those are important informations for hackers to find out possible theme security breaches. A list of headers can e found at",    'wp-hide-security-enhancer') . " <a href='https://codex.wordpress.org/Theme_Development#Theme_Stylesheet' target='_blank'>". __("Theme Headers",    'wp-hide-security-enhancer') . "</a><br /><br />" .
-                                                                                                                                        __("This feature may fail if style file url not available on html ( being concatenated ).",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-theme/'
-                                                                                                        ),
-                                                                        
-                                                                        'advanced_option'   =>  array(
-                                                                        
-                                                                                                        'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break the layout if server not supporting the feature. Once active test it thoroughly.<br />If not working, set to No to revert.',    'wp-hide-security-enhancer')
-                                                                                                
-                                                                                                ),
-                                                                        
+                                                                                                                                                
                                                                         'input_type'    =>  'radio',
-                                                                        'options'       =>  array(
-                                                                                                    'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                    'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                    ),
-                                                                                                    
-                                                                        'options_post'  =>   '<p><span class="dashicons dashicons-warning important" alt="f534">warning</span> ' . __('This functionality use caching! If active, cache clear is recommended on styles updates.',    'wp-hide-security-enhancer') .' </p> <p><a href="admin.php?page=wp-hide-rewrite&wph_cache_clear=true" class="button">' . __("Cache Clear",    'wp-hide-security-enhancer') . "</a></p>" ,
-                                                                        
+                                                                                                                                 
                                                                         'default_value' =>  'no',
                                                                         
                                                                         'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -116,19 +69,7 @@
                             
                             $this->module_settings[]                  =   array(
                                                                             'id'            =>  'new_theme_child_path',
-                                                                            'label'         =>  __('New Theme Path',    'wp-hide-security-enhancer'),
-                                                                            'description'   =>  __('Change child theme url, which as default the path is set to',    'wp-hide-security-enhancer') . ' <strong>'. str_replace(get_bloginfo('wpurl'), '' , trailingslashit($this->wph->templates_data['themes_url']) . $this->wph->templates_data['child']['folder_name'])  .'/</strong>',
-
-                                                                            'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Theme Path',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("This option helps to change the child theme url to a custom one. As default all theme assets ( styles, JavaScript etc ) are loaded using the theme url and appear on front side html source like this:",    'wp-hide-security-enhancer') . " <br />  <br />
-                                                                                                                                            <code>&lt;link rel='stylesheet' href='http://-domain-name-/wp-content/themes/Divi-child/style.css' type='text/css' media='all' /&gt;</code>
-                                                                                                                                            <br /><br /> " . __("When using this option, if filling with `template-child`, all urls on front side become as follow:",    'wp-hide-security-enhancer') . " <br />  <br /> 
-                                                                                                                                            <code>&lt;link rel='stylesheet' href='http://-domain-name-/template-child/style.css' type='text/css' media='all' /&gt;</code>",
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-theme/'
-                                                                                                        ),
-                                                                    
-                                                                            'value_description'     =>  __('Example',    'wp-hide-security-enhancer') . ': <b>template-child</b>',
+                                                                            
                                                                             'input_type'    =>  'text',
                                                                             
                                                                             'sanitize_type' =>  array(array($this->wph->functions, 'sanitize_file_path_name'), 'strtolower'),
@@ -137,18 +78,7 @@
                                                                             
                             $this->module_settings[]                  =   array(
                                                                             'id'            =>  'child_style_file_path',
-                                                                            'label'         =>  __('New Style File Path',    'wp-hide-security-enhancer'),
-                                                                            'description'   =>  __('Change default child theme style file style.css, current path is set to',    'wp-hide-security-enhancer') . ' <strong>'. str_replace(get_bloginfo('wpurl'), '' ,   $this->wph->default_variables['stylesheet_uri'])  .'/style.css</strong>',
-                                                                            
-                                                                            'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Style File Path',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("This allow to change the default style.css filename to something else e.g. template-style.css. Per this example, on front side the main style link change from /style.css to /child-style.css",    'wp-hide-security-enhancer') . " <br />  <br /> 
-                                                                                                                                            <code>&lt;link rel='stylesheet' href='http://-domain-name-/template-child/child-style.css' type='text/css' media='all' /&gt;</code>",
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-theme/',
-                                                                                                        'input_value_extension'     =>  'css'
-                                                                                                        ),
-                                                                    
-                                                                            'value_description' =>  __('Example',    'wp-hide-security-enhancer') . ': <b>child-skin.css</b>',
+                                                                          
                                                                             'input_type'    =>  'text',
                                                                             
                                                                             'sanitize_type' =>  array(array($this->wph->functions, 'sanitize_file_path_name')),
@@ -158,33 +88,8 @@
                                                                             
                             $this->module_settings[]                  =   array(
                                                                                 'id'            =>  'child_style_file_clean',
-                                                                                'label'         =>  __('Remove description header from Style file',    'wp-hide-security-enhancer'),
-                                                                                'description'   =>  
-                                                                                                    array(
-                                                                                                        __('Strip out all meta data from child theme style file.',    'wp-hide-security-enhancer') . '<br />'
-                                                                                                        ),
-                                                                                
-                                                                                'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove description header from Style file',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("Strip out all meta data from style file as Theme Name, Theme URI, Author etc. Those are important informations for hackers to find out possible theme security breaches. A list of headers can e found at",    'wp-hide-security-enhancer') . " <a href='https://codex.wordpress.org/Theme_Development#Theme_Stylesheet' target='_blank'>" . __("Theme Headers",    'wp-hide-security-enhancer') . "</a><br /><br />" .
-                                                                                                                                        __("This feature may fail if style file url not available on html ( being concatenated ).",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-theme/'
-                                                                                                        ),
-                                                                        
-                                                                                'advanced_option'   =>  array(
-                                                                                
-                                                                                                                'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break the layout if server not supporting the feature. Ensure all regular options works fine before activate this. Once active test it thoroughly.<br />If not working, set to No to revert.',    'wp-hide-security-enhancer')
-                                                                                                        
-                                                                                                        ),
-                                                                                
                                                                                 
                                                                                 'input_type'    =>  'radio',
-                                                                                'options'       =>  array(
-                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                            ),
-                                                                                
-                                                                                'options_post'  =>   '<p><span class="dashicons dashicons-warning important" alt="f534">warning</span> ' . __('This functionality use caching! If active, cache clear is recommended on styles updates.',    'wp-hide-security-enhancer') .'</p><p><a href="admin.php?page=wp-wp-hide-rewrite&wph_cache_clear=true" class="button">' . __("Cache Clear",    'wp-hide-security-enhancer') . '</a></p>' ,
                                                                         
                                                                                 'default_value' =>  'no',
                                                                                 
@@ -202,7 +107,157 @@
                     return $this->module_settings;   
                 }
                 
-                
+            
+            function set_module_components_description( $component_settings )
+                {
+                    
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'new_theme_path' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('New Theme Path',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Change theme url, which as default the path is set to',    'wp-hide-security-enhancer') . ' <strong>'. str_replace(get_bloginfo('wpurl'), '' ,$this->wph->default_variables['template_url'])  .'/</strong>',
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Theme Path',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("This option helps to change the theme url to a custom one. As default all theme assets ( styles, JavaScript etc ) are loaded using the theme url and appear on front side html source like this:",    'wp-hide-security-enhancer') ." <br />  <br />
+                                                                                                                                                                                                        <code>&lt;link rel='stylesheet' href='http://-domain-name-/wp-content/themes/Divi/style.css' type='text/css' media='all' /&gt;</code>
+                                                                                                                                                                                                        <br /><br /> " . __("When using this option, if filling with `template`, all urls on front side become as follow:",    'wp-hide-security-enhancer') ." <br />  <br /> 
+                                                                                                                                                                                                        <code>&lt;link rel='stylesheet' href='http://-domain-name-/template/style.css' type='text/css' media='all' /&gt;</code>" ,
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-theme/'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'value_description'     =>  __('Example',    'wp-hide-security-enhancer') . ': <b>template</b>',
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'new_style_file_path' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('New Style File Path',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Change default theme style file style.css, current path is set to',    'wp-hide-security-enhancer') . ' <strong>'. str_replace(get_bloginfo('wpurl'), '' ,   $this->wph->default_variables['template_url'])  .'/style.css</strong>',
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Style File Path',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("This allow to change the default style.css filename to something else e.g. template-style.css. Per this example, on front side the main style link change from /style.css to /template-style.css",    'wp-hide-security-enhancer') ." <br />  <br /> 
+                                                                                                                                                                                                        <code>&lt;link rel='stylesheet' href='http://-domain-name-/template/template-style.css' type='text/css' media='all' /&gt;</code>",
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-theme/',
+                                                                                                                                                                    'input_value_extension'     =>  'css'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'value_description' =>  __('Example',    'wp-hide-security-enhancer') . ': <b>skin.css</b>',
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'style_file_clean' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Remove description header from Style file',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  
+                                                                                                                                                    array(
+                                                                                                                                                    __('Strip out all meta data from style file.',    'wp-hide-security-enhancer') . '<br />'
+                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove description header from Style file',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("Strip out all meta data from style file as Theme Name, Theme URI, Author etc. Those are important informations for hackers to find out possible theme security breaches. A list of headers can e found at",    'wp-hide-security-enhancer') . " <a href='https://codex.wordpress.org/Theme_Development#Theme_Stylesheet' target='_blank'>". __("Theme Headers",    'wp-hide-security-enhancer') . "</a><br /><br />" .
+                                                                                                                                                                                                __("This feature may fail if style file url not available on html ( being concatenated ).",    'wp-hide-security-enhancer'),
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-theme/'
+                                                                                                                                                                ),
+                                                                                                                                
+                                                                                                                                'advanced_option'   =>  array(
+                                                                                                                                
+                                                                                                                                                                'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break the layout if server not supporting the feature. Once active test it thoroughly.<br />If not working, set to No to revert.',    'wp-hide-security-enhancer')
+                                                                                                                                                        
+                                                                                                                                                        ),
+                                                                                                                                
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                
+                                                                                                                                'options_post'  =>   '<p><span class="dashicons dashicons-warning important" alt="f534">warning</span> ' . __('This functionality use caching! If active, cache clear is recommended on styles updates.',    'wp-hide-security-enhancer') .' </p> <p><a href="admin.php?page=wp-hide-rewrite&component=theme&wph_cache_clear=true" class="button">' . __("Cache Clear",    'wp-hide-security-enhancer') . "</a></p>" ,                            
+                                                                                                                                
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'new_theme_child_path' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('New Theme Path',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Change child theme url, which as default the path is set to',    'wp-hide-security-enhancer') . ' <strong>'. str_replace(get_bloginfo('wpurl'), '' , trailingslashit($this->wph->templates_data['themes_url']) . $this->wph->templates_data['child']['folder_name'])  .'/</strong>',
+
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                            'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Theme Path',    'wp-hide-security-enhancer'),
+                                                                                                                                                            'description'               =>  __("This option helps to change the child theme url to a custom one. As default all theme assets ( styles, JavaScript etc ) are loaded using the theme url and appear on front side html source like this:",    'wp-hide-security-enhancer') . " <br />  <br />
+                                                                                                                                                                                                <code>&lt;link rel='stylesheet' href='http://-domain-name-/wp-content/themes/Divi-child/style.css' type='text/css' media='all' /&gt;</code>
+                                                                                                                                                                                                <br /><br /> " . __("When using this option, if filling with `template-child`, all urls on front side become as follow:",    'wp-hide-security-enhancer') . " <br />  <br /> 
+                                                                                                                                                                                                <code>&lt;link rel='stylesheet' href='http://-domain-name-/template-child/style.css' type='text/css' media='all' /&gt;</code>",
+                                                                                                                                                            'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-theme/'
+                                                                                                                                                            ),
+                                                                                                                        
+                                                                                                                                'value_description'     =>  __('Example',    'wp-hide-security-enhancer') . ': <b>template-child</b>',
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'child_style_file_path' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('New Style File Path',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Change default child theme style file style.css, current path is set to',    'wp-hide-security-enhancer') . ' <strong>'. str_replace(get_bloginfo('wpurl'), '' ,   $this->wph->default_variables['stylesheet_uri'])  .'/style.css</strong>',
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                            'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Style File Path',    'wp-hide-security-enhancer'),
+                                                                                                                                                            'description'               =>  __("This allow to change the default style.css filename to something else e.g. template-style.css. Per this example, on front side the main style link change from /style.css to /child-style.css",    'wp-hide-security-enhancer') . " <br />  <br /> 
+                                                                                                                                                                                                <code>&lt;link rel='stylesheet' href='http://-domain-name-/template-child/child-style.css' type='text/css' media='all' /&gt;</code>",
+                                                                                                                                                            'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-theme/',
+                                                                                                                                                            'input_value_extension'     =>  'css'
+                                                                                                                                                            ),
+                                                                                                                        
+                                                                                                                                'value_description' =>  __('Example',    'wp-hide-security-enhancer') . ': <b>child-skin.css</b>',
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'child_style_file_clean' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Remove description header from Style file',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  
+                                                                                                                                                    array(
+                                                                                                                                                        __('Strip out all meta data from child theme style file.',    'wp-hide-security-enhancer') . '<br />'
+                                                                                                                                                        ),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove description header from Style file',    'wp-hide-security-enhancer'),
+                                                                                                                                                        'description'               =>  __("Strip out all meta data from style file as Theme Name, Theme URI, Author etc. Those are important informations for hackers to find out possible theme security breaches. A list of headers can e found at",    'wp-hide-security-enhancer') . " <a href='https://codex.wordpress.org/Theme_Development#Theme_Stylesheet' target='_blank'>" . __("Theme Headers",    'wp-hide-security-enhancer') . "</a><br /><br />" .
+                                                                                                                                                                                        __("This feature may fail if style file url not available on html ( being concatenated ).",    'wp-hide-security-enhancer'),
+                                                                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-theme/'
+                                                                                                                                                        ),
+                                                                                                                        
+                                                                                                                                'advanced_option'   =>  array(
+                                                                                                                                
+                                                                                                                                                                'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break the layout if server not supporting the feature. Ensure all regular options works fine before activate this. Once active test it thoroughly.<br />If not working, set to No to revert.',    'wp-hide-security-enhancer')
+                                                                                                                                                        
+                                                                                                                                                        ),
+
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                
+                                                                                                                                'options_post'  =>   '<p><span class="dashicons dashicons-warning important" alt="f534">warning</span> ' . __('This functionality use caching! If active, cache clear is recommended on styles updates.',    'wp-hide-security-enhancer') .'</p><p><a href="admin.php?page=wp-hide-rewrite&component=theme&wph_cache_clear=true" class="button">' . __("Cache Clear",    'wp-hide-security-enhancer') . '</a></p>' ,
+                                                                                                                        
+                                                                                                                                ) );
+                                                                break;
+                                    
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
+                }    
                 
                 
             /**

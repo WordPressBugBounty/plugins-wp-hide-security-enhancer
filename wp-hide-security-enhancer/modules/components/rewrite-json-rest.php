@@ -14,21 +14,9 @@
                 {
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'clean_json_base_route',
-                                                                    'label'         =>  __('Clean the REST API response',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('As default, when calling the REST API base route ( e.g. /wp-json/ ) the service outputs all available namespaces and routes.',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Clean the REST API response',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("When calling the site REST API base route ( e.g. /wp-json/ or ?rest_route=/ ) the service outputs all available namespaces and routes for current site. This can be a breach for the system, as outputs important information regarding certain used theme and plugins. ",    'wp-hide-security-enhancer') .
-                                                                                                                                            "<br /><br />" . __("Recommended selection for this option is Yes, to ensure no inside data is being exposed. ",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-json-rest/'
-                                                                                                        ),
                                                         
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                       
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -38,28 +26,9 @@
                                                                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'disable_json_rest_v1',
-                                                                    'label'         =>  __('Disable JSON REST V1 service',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('An API service for WordPress which is active by default.',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable JSON REST V1 service',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("The WordPress REST API is an easy-to-use set of HTTP endpoints which allows access a site data in simple JSON format. That including users, posts, taxonomies and more. Retrieving or updating is as simple as sending a HTTP request.",    'wp-hide-security-enhancer') .
-                                                                                                                                            "<br />" . __("A REST API can be consumed everywhere. On mobile applications, on front-end (web apps) or any other devices that have access on the net, practically everything can connect from anywhere to your site and interact though JSON REST API service.",    'wp-hide-security-enhancer') .
-                                                                                                                                            "<br /><br />" . __("V1 was the first development version of API, which currently is deprecated. To disable the usage of it, simply chose Yes.",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-json-rest/'
-                                                                                                        ),
-                                                                    
-                                                                    'advanced_option'   =>  array(
-                                                                        
-                                                                                                        'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break specific functionality. Some plugins might use this API. Once active test it thoroughly.<br />If not working, set to <b>No</b> to revert.',    'wp-hide-security-enhancer')
-                                                                                                
-                                                                                                ),
-                                                                    
+                                                                                                                   
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                               
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -70,29 +39,9 @@
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'disable_json_rest_v2',
-                                                                    'label'         =>  __('Disable JSON REST V2 service',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('An API service for WordPress which is active by default.',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable JSON REST V2 service',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("The WordPress REST API is an easy-to-use set of HTTP endpoints which allows access a site data in simple JSON format. That including users, posts, taxonomies and more. Retrieving or updating is as simple as sending a HTTP request.",    'wp-hide-security-enhancer') .
-                                                                                                                                            "<br />" . __("A REST API can be consumed everywhere. On mobile applications, on front-end (web apps) or any other devices that have access on the net, practically everything can connect from anywhere to your site and interact though JSON REST API service.",    'wp-hide-security-enhancer') .
-                                                                                                                                            "<br /><br />" . __("V2 is the current development version of API, which is included into WordPress as default. To disable the usage of it, simply chose Yes." ,    'wp-hide-security-enhancer') .
-                                                                                                                                            "<br ><span class='important'>" . __("This might be required by specific plugins, including the new WordPress editor Gutenberg, JetPack etc.",    'wp-hide-security-enhancer') . "</span>",
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-json-rest/'
-                                                                                                        ),
-                                                                    
-                                                                    'advanced_option'   =>  array(
-                                                                        
-                                                                                                        'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break specific functionality. Some plugins like Gutenberg editor use this API. Once active test it thoroughly.<br />If not working, set to <b>No</b> to revert.',    'wp-hide-security-enhancer')
-                                                                                                
-                                                                                                ),
-                                                                    
+                                                                                                                    
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                       
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -107,30 +56,9 @@
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'block_json_rest',
-                                                                    'label'         =>  __('Block any JSON REST calls',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Any call for JSON REST API service will be blocked.',    'wp-hide-security-enhancer'),
-
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block any JSON REST calls',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("This blocks the JSON REST API service.",    'wp-hide-security-enhancer') . "<br />". 
-                                                                                                                                        __("When selecting the <b>Non logged-in</b> the service is blocked for all non-authenticated users.",    'wp-hide-security-enhancer') .  "<br />" .
-                                                                                                                                        __("When selecting the <b>All</b> the service is blocked for everyone.",    'wp-hide-security-enhancer') .
-                                                                                                                                            "<br ><span class='important'>" . __("This might be required by specific plugins, including the new WordPress editor Gutenberg, JetPack etc. So if required to block the API, the <b>Non logged-in</b> is the appropriate option to use.",    'wp-hide-security-enhancer') . "</span>",
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-json-rest/'
-                                                                                                        ),
-                                                                    
-                                                                    'advanced_option'   =>  array(
-                                                                        
-                                                                                                        'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break specific functionality. Some plugins like Gutenberg editor use this API. Once active test it thoroughly.<br />If not working, set to <b>No</b> to revert.',    'wp-hide-security-enhancer')
-                                                                                                
-                                                                                                ),
-                                                                    
+                                                                                                                                       
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'            =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'non-logged-in' =>  __('Non logged-in',    'wp-hide-security-enhancer'),
-                                                                                                'yes'           =>  __('All',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                                    
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -147,20 +75,9 @@
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'disable_json_rest_wphead_link',
-                                                                    'label'         =>  __('Disable output the REST API link tag into page header',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('By default a REST API link tag is being append to HTML.',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('disable_json_rest_wphead_link',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("As default the API url is being append into the front html head tag. Using this option, it will be replaced.",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-json-rest/'
-                                                                                                        ),
-                                                        
+                                                      
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -171,20 +88,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'disable_json_rest_xmlrpc_rsd',
-                                                                    'label'         =>  __('Disable JSON REST WP RSD endpoint from XML-RPC responses',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('By default a WP RSD endpoint is being append to the XML respose.',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('disable_json_rest_xmlrpc_rsd',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("Disable any RSD endpoint from a XML-RPC response.",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-json-rest/'
-                                                                                                        ),
-                                                                    
+                                                 
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                            
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -194,20 +100,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'disable_json_rest_template_redirect',
-                                                                    'label'         =>  __('Disable Sends a Link header for the REST API',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('On template_redirect, disable Sends a Link header for the REST API.',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('disable_json_rest_template_redirect',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("Disable Sends a Link header for the REST API, on template_redirect",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-json-rest/'
-                                                                                                        ),
-                                                                    
+                                       
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                            
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -218,6 +113,184 @@
                                                                     
                     return $this->module_settings;   
                 }
+                
+                
+                
+            function set_module_components_description( $component_settings )
+                {
+                    
+                    
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'clean_json_base_route' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Clean the REST API response',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('As default, when calling the REST API base route ( e.g. /wp-json/ ) the service outputs all available namespaces and routes.',    'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Clean the REST API response',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("When calling the site REST API base route ( e.g. /wp-json/ or ?rest_route=/ ) the service outputs all available namespaces and routes for current site. This can be a breach for the system, as outputs important information regarding certain used theme and plugins. ",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                        "<br /><br />" . __("Recommended selection for this option is Yes, to ensure no inside data is being exposed. ",    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-json-rest/'
+                                                                                                                                                                    ),
+                                                                                                                    
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'disable_json_rest_v1' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Disable JSON REST V1 service',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('An API service for WordPress which is active by default.',    'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable JSON REST V1 service',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("The WordPress REST API is an easy-to-use set of HTTP endpoints which allows access a site data in simple JSON format. That including users, posts, taxonomies and more. Retrieving or updating is as simple as sending a HTTP request.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                        "<br />" . __("A REST API can be consumed everywhere. On mobile applications, on front-end (web apps) or any other devices that have access on the net, practically everything can connect from anywhere to your site and interact though JSON REST API service.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                        "<br /><br />" . __("V1 was the first development version of API, which currently is deprecated. To disable the usage of it, simply chose Yes.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-json-rest/'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'advanced_option'   =>  array(
+                                                                                                                                    
+                                                                                                                                                                    'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break specific functionality. Some plugins might use this API. Once active test it thoroughly.<br />If not working, set to <b>No</b> to revert.',    'wp-hide-security-enhancer')
+                                                                                                                                                            
+                                                                                                                                                            ),
+                                                                                                                                
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'disable_json_rest_v2' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Disable JSON REST V2 service',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('An API service for WordPress which is active by default.',    'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable JSON REST V2 service',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("The WordPress REST API is an easy-to-use set of HTTP endpoints which allows access a site data in simple JSON format. That including users, posts, taxonomies and more. Retrieving or updating is as simple as sending a HTTP request.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                        "<br />" . __("A REST API can be consumed everywhere. On mobile applications, on front-end (web apps) or any other devices that have access on the net, practically everything can connect from anywhere to your site and interact though JSON REST API service.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                        "<br /><br />" . __("V2 is the current development version of API, which is included into WordPress as default. To disable the usage of it, simply chose Yes." ,    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                        "<br ><span class='important'>" . __("This might be required by specific plugins, including the new WordPress editor Gutenberg, JetPack etc.",    'wp-hide-security-enhancer') . "</span>",
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-json-rest/'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'advanced_option'   =>  array(
+                                                                                                                                    
+                                                                                                                                                                    'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break specific functionality. Some plugins like Gutenberg editor use this API. Once active test it thoroughly.<br />If not working, set to <b>No</b> to revert.',    'wp-hide-security-enhancer')
+                                                                                                                                                            
+                                                                                                                                                            ),
+                                                                                                                                
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'block_json_rest' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Block any JSON REST calls',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Any call for JSON REST API service will be blocked.',    'wp-hide-security-enhancer'),
+
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block any JSON REST calls',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("This blocks the JSON REST API service.",    'wp-hide-security-enhancer') . "<br />". 
+                                                                                                                                                                                                    __("When selecting the <b>Non logged-in</b> the service is blocked for all non-authenticated users.",    'wp-hide-security-enhancer') .  "<br />" .
+                                                                                                                                                                                                    __("When selecting the <b>All</b> the service is blocked for everyone.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                        "<br ><span class='important'>" . __("This might be required by specific plugins, including the new WordPress editor Gutenberg, JetPack etc. So if required to block the API, the <b>Non logged-in</b> is the appropriate option to use.",    'wp-hide-security-enhancer') . "</span>",
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-json-rest/'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'advanced_option'   =>  array(
+                                                                                                                                    
+                                                                                                                                                                    'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break specific functionality. Some plugins like Gutenberg editor use this API. Once active test it thoroughly.<br />If not working, set to <b>No</b> to revert.',    'wp-hide-security-enhancer')
+                                                                                                                                                            
+                                                                                                                                                            ),
+                                                                                                                                
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'            =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'non-logged-in' =>  __('Non logged-in',    'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'           =>  __('All',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'disable_json_rest_wphead_link' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Disable output the REST API link tag into page header',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('By default a REST API link tag is being append to HTML.',    'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('disable_json_rest_wphead_link',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("As default the API url is being append into the front html head tag. Using this option, it will be replaced.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-json-rest/'
+                                                                                                                                                                    ),
+                                                                                                                    
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'disable_json_rest_xmlrpc_rsd' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Disable JSON REST WP RSD endpoint from XML-RPC responses',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('By default a WP RSD endpoint is being append to the XML respose.',    'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('disable_json_rest_xmlrpc_rsd',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("Disable any RSD endpoint from a XML-RPC response.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-json-rest/'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'disable_json_rest_template_redirect' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Disable Sends a Link header for the REST API',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('On template_redirect, disable Sends a Link header for the REST API.',    'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('disable_json_rest_template_redirect',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("Disable Sends a Link header for the REST API, on template_redirect",    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-json-rest/'
+                                                                                                                                                                    ),
+                                                                
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                 
+                    
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
+                }
+                
                 
             function _init_clean_json_base_route( $saved_field_data )
                 {

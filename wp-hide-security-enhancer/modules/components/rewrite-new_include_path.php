@@ -14,19 +14,7 @@
                 {
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'new_include_path',
-                                                                    'label'         =>  __('New Includes Path',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Change default /wp-includes/ path.',    'wp-hide-security-enhancer') ,
                                                                     
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Includes Path',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("By default, a WordPress installation contains a 'wp-includes' folder that stores files and resources utilized by the WordPress core, themes, and plugins. The 'wp-includes' directory serves as a common fingerprint, making it easy for anyone to identify the site as being built on WordPress.",    'wp-hide-security-enhancer') ." <br />  <br />
-                                                                                                                                            <code>&lt;script type='text/javascript' src='https://-domain-name-/wp-include/js/jquery/jquery.js'&gt;&lt;/script&gt;</code>
-                                                                                                                                            <br /><br /> " . __("After filling in this option e.g. resources the links will change to this:",    'wp-hide-security-enhancer') . " <br />  <br /> 
-                                                                                                                                            <code>&lt;script type='text/javascript' src='https://-domain-name-/resources/js/jquery/jquery.js'&gt;&lt;/script&gt;</code>",
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-wp-includes/'
-                                                                                                        ),
-                                                                    
-                                                                    'value_description' =>  __('e.g. my_includes',    'wp-hide-security-enhancer'),
                                                                     'input_type'    =>  'text',
                                                                     
                                                                     'sanitize_type' =>  array(array($this->wph->functions, 'sanitize_file_path_name')),
@@ -34,26 +22,9 @@
                                                                     );
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'block_wpinclude_url',
-                                                                    'label'         =>  __('Block wp-includes URL',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Block /wp-includes/ files from being accesible through default urls. <br />Apply only if <b>New Includes Path</b> is not empty.',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block wp-includes URL',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("This blocks the default wp-includes urls only for non loged-in users.<br />The functionality apply only if <b>New Includes Path</b> option is filled in.",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-wp-includes/'
-                                                                                                        ),
-                                                                    
-                                                                    'advanced_option'   =>  array(
-                                                                        
-                                                                                                        'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break the layout if server not supporting the feature. Ensure `New Includes Path` option works fine before activate this. Once active test it thoroughly.<br />If not working, set to <b>No</b> to revert.',    'wp-hide-security-enhancer')
-                                                                                                
-                                                                                                ),
-                                                                    
+                                                                                                                       
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                         
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -61,6 +32,69 @@
                                                                     );
                                                                     
                     return $this->module_settings;   
+                }
+                
+                
+            function set_module_components_description( $component_settings )
+                {
+                    
+                    
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'new_include_path' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('New Includes Path',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Change default /wp-includes/ path.',    'wp-hide-security-enhancer') ,
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Includes Path',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("By default, a WordPress installation contains a 'wp-includes' folder that stores files and resources utilized by the WordPress core, themes, and plugins. The 'wp-includes' directory serves as a common fingerprint, making it easy for anyone to identify the site as being built on WordPress.",    'wp-hide-security-enhancer') ." <br />  <br />
+                                                                                                                                                                                                        <code>&lt;script type='text/javascript' src='https://-domain-name-/wp-include/js/jquery/jquery.js'&gt;&lt;/script&gt;</code>
+                                                                                                                                                                                                        <br /><br /> " . __("After filling in this option e.g. resources the links will change to this:",    'wp-hide-security-enhancer') . " <br />  <br /> 
+                                                                                                                                                                                                        <code>&lt;script type='text/javascript' src='https://-domain-name-/resources/js/jquery/jquery.js'&gt;&lt;/script&gt;</code>",
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-wp-includes/'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'value_description' =>  __('e.g. my_includes',    'wp-hide-security-enhancer'),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'block_wpinclude_url' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Block wp-includes URL',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Block /wp-includes/ files from being accesible through default urls. <br />Apply only if <b>New Includes Path</b> is not empty.',    'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block wp-includes URL',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("This blocks the default wp-includes urls only for non loged-in users.<br />The functionality apply only if <b>New Includes Path</b> option is filled in.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-wp-includes/'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'advanced_option'   =>  array(
+                                                                                                                                    
+                                                                                                                                                                    'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break the layout if server not supporting the feature. Ensure `New Includes Path` option works fine before activate this. Once active test it thoroughly.<br />If not working, set to <b>No</b> to revert.',    'wp-hide-security-enhancer')
+                                                                                                                                                            
+                                                                                                                                                            ),
+                                                                                                                                
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                    
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
                 }
                 
                 

@@ -14,17 +14,7 @@
                 {
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'new_upload_path',
-                                                                    'label'         =>  __('New Uploads Path',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('The default uploads path is set to',    'wp-hide-security-enhancer') . ' <strong>/wp-content/uploads/</strong>',
                                                                     
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Uploads Path',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("Use any alphanumeric symbols for this field which will be used as the new slug for the uploads folder. Using this option the default media folder can be mapped to another path. Filling with a slug like 'media' the links become like this:",    'wp-hide-security-enhancer') . "<br />  <br />
-                                                                                                                                            <code>&lt;img class=&quot;alignnone size-full&quot; src=&quot;http://domain.com/media/106658.jpg&quot; alt=&quot;&quot; width=&quot;640&quot; height=&quot;390&quot; alt=&quot;&quot; /&gt;</code>",
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-uploads/'
-                                                                                                        ),
-                                                                    
-                                                                    'value_description' =>  __('e.g. media',    'wp-hide-security-enhancer'),
                                                                     'input_type'    =>  'text',
                                                                     
                                                                     'sanitize_type' =>  array(array($this->wph->functions, 'sanitize_file_path_name')),
@@ -33,26 +23,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'block_upload_url',
-                                                                    'label'         =>  __('Block default uploads URL',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Block default /wp-content/uploads/ media folder from being accesible through default urls.',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block default uploads URL',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("This blocks the default wp-content/uploads/ url.<br />The functionality apply only if <b>New Plugins Path</b> option is filled in.",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-uploads/'
-                                                                                                        ),
-                                                                        
-                                                                    'advanced_option'   =>  array(
-                                                                        
-                                                                                                        'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break the layout if server not supporting the feature. Ensure `New Uploads Path` option works fine before activate this. Once active test it thoroughly.<br />If not working, set to <b>No</b> to revert.',    'wp-hide-security-enhancer')
-                                                                                                
-                                                                                                ),
-                                                                    
+                                                                                                                           
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                     
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -64,6 +37,66 @@
                 }
                 
                 
+            function set_module_components_description( $component_settings )
+                {
+                    
+                    
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'new_upload_path' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('New Uploads Path',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('The default uploads path is set to',    'wp-hide-security-enhancer') . ' <strong>/wp-content/uploads/</strong>',
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Uploads Path',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("Use any alphanumeric symbols for this field which will be used as the new slug for the uploads folder. Using this option the default media folder can be mapped to another path. Filling with a slug like 'media' the links become like this:",    'wp-hide-security-enhancer') . "<br />  <br />
+                                                                                                                                                                                                        <code>&lt;img class=&quot;alignnone size-full&quot; src=&quot;http://domain.com/media/106658.jpg&quot; alt=&quot;&quot; width=&quot;640&quot; height=&quot;390&quot; alt=&quot;&quot; /&gt;</code>",
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-uploads/'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'value_description' =>  __('e.g. media',    'wp-hide-security-enhancer'),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'block_upload_url' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Block default uploads URL',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Block default /wp-content/uploads/ media folder from being accesible through default urls.',    'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block default uploads URL',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("This blocks the default wp-content/uploads/ url.<br />The functionality apply only if <b>New Plugins Path</b> option is filled in.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-uploads/'
+                                                                                                                                                                    ),
+                                                                                                                                    
+                                                                                                                                'advanced_option'   =>  array(
+                                                                                                                                    
+                                                                                                                                                                    'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break the layout if server not supporting the feature. Ensure `New Uploads Path` option works fine before activate this. Once active test it thoroughly.<br />If not working, set to <b>No</b> to revert.',    'wp-hide-security-enhancer')
+                                                                                                                                                            
+                                                                                                                                                            ),
+                                                                                                                                
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                    
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
+                }
+                     
                 
             function _init_new_upload_path($saved_field_data)
                 {

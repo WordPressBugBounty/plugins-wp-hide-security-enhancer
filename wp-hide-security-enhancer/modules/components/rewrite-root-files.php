@@ -16,20 +16,9 @@
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'block_license_txt',
-                                                                    'label'         =>  __('Block license.txt',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Block access to license.txt root file',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block license.txt',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("This is a text file which contain the licensing terms for WordPress framework. Obviously you don't want that visible as every site containing such file must be a WordPress.",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-root-files/'
-                                                                                                        ),
-                                                                    
+                                                                                                                                    
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                                 
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -38,20 +27,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'block_readme_html',
-                                                                    'label'         =>  __('Block readme.html',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Block access to readme.html root file',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block readme.html',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("A Hypertext Markup Language file with general information about installed WordPress, version, instalation steps, updating, requirements, resources etc.",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-root-files/'
-                                                                                                        ),
-                                                                    
+                                                            
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                             
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -60,62 +38,20 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'block_wp_activate_php',
-                                                                    'label'         =>  __('Block wp-activate.php',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Block access to wp-activate.php file.',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block wp-activate.php',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("Block access to wp-activate.php file. Through this file new users confirms that the activation key that is received in the email after signs up for a new blog, matches the key for that user.",    'wp-hide-security-enhancer') . 
-                                                                                                                                            "<br />" . __("If anyone can register on your site, you should keep this no NO.",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-root-files/'
-                                                                                                        ),
-                                                                    
+                                                         
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                              
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
                                                                     'processing_order'  =>  55
                                                                     );
-                    
-                    $local_ip   =   $this->domain_get_ip();
-                    $option_description     =   '';
-                    if (    $local_ip   === FALSE )
-                        {
-                            $option_description     .=   '<br /><span class="important">'  .   __('Unable to identify site domain IP, blocking wp-cron.php will stop the site internal WordPress cron functionality.',    'wp-hide-security-enhancer') .   '</span>';   
-                        }
-                        else
-                        {
-                            $option_description     .=   '<br /><span class="important">'  .   __('Site domain rezolved to IP',    'wp-hide-security-enhancer') . ' ' . $local_ip . ' ' .  __('If blocked, all internal calls to cron will continue to run fine. All calls from a different IP are blocked, including direct calls.',    'wp-hide-security-enhancer') . '</span>';
-                            $option_description     .=   '<br /><span class="important">'  .   __('On certain servers, different ip\'s can be used to call the cron internally. If the Cron service apepars to not trigger anymore, this option should be  disabled.',    'wp-hide-security-enhancer') . '</span>';
-                        }
-                    
+                          
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'block_wp_cron_php',
-                                                                    'label'         =>  __('Block wp-cron.php',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  "Block access to wp-cron.php file",
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block wp-cron.php',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("The file wp-cron.php is the portion of WordPress that handles scheduled events within a WordPress site. If remote cron calls not being used this can be set to Yes..",    'wp-hide-security-enhancer') .
-                                                                                                                                            "<br />" . $option_description,
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-root-files/'
-                                                                                                        ),
-                                                                    
-                                                                    'advanced_option'   =>  array(
-                                                                        
-                                                                                                        'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('The Cron service is how WordPress handles scheduling time-based tasks in WordPress. If not working correctly, some core features such as checking for updates and publishing scheduled will fail.',    'wp-hide-security-enhancer')
-                                                                                                
-                                                                                                ),
-                                                                    
+                                                                                                                                    
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                            
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -124,20 +60,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'block_default_wp_signup_php',
-                                                                    'label'         =>  __('Block wp-signup.php',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Block default wp-signup.php file.',  'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block wp-signup.php',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("The wp-signup.php allow for anyone to register to your site. If the registration functionality is turned off, is safe to block the  wp-signup.php.",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-root-files/'
-                                                                                                        ),
-                                                                    
+                                                                                                                            
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                                
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -147,20 +72,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'block_default_wp_register_php',
-                                                                    'label'         =>  __('Block wp-register.php',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Block default wp-register.php file.',  'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block wp-register.php',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("This is a deprecated file but still present in many WordPress installs.  When called the user is redirected to /register page. Is safe to block the wp-register.php.",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-root-files/'
-                                                                                                        ),
-                                                                    
+                                                     
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                         
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -170,20 +84,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'block_other_wp_files',
-                                                                    'label'         =>  __('Block other wp-*.php files',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Block other wp-*.php files in the root.',  'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block other wp-*.php files',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("Block other wp-*.php files. E.g. wp-blog-header.php, wp-config.php, wp-cron.php. Those files are used internally, blocking those will not affect any functionality. Other root files (wp-activate.php, wp-login.php, wp-signup.php) are ignored, they can be controlled through own setting.",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-root-files/'
-                                                                                                        ),
                                                                     
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                               
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -195,7 +98,173 @@
                 }
                 
          
-                
+            function set_module_components_description( $component_settings )
+                {
+                    
+                    
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'block_license_txt' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Block license.txt',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Block access to license.txt root file',    'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block license.txt',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("This is a text file which contain the licensing terms for WordPress framework. Obviously you don't want that visible as every site containing such file must be a WordPress.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-root-files/'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'block_readme_html' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Block readme.html',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Block access to readme.html root file',    'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block readme.html',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("A Hypertext Markup Language file with general information about installed WordPress, version, instalation steps, updating, requirements, resources etc.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-root-files/'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'block_wp_activate_php' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Block wp-activate.php',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Block access to wp-activate.php file.',    'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block wp-activate.php',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("Block access to wp-activate.php file. Through this file new users confirms that the activation key that is received in the email after signs up for a new blog, matches the key for that user.",    'wp-hide-security-enhancer') . 
+                                                                                                                                                                                                        "<br />" . __("If anyone can register on your site, you should keep this no NO.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-root-files/'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'block_wp_cron_php' :
+                                                                
+                                                                $local_ip   =   $this->domain_get_ip();
+                                                                $option_description     =   '';
+                                                                if (    $local_ip   === FALSE )
+                                                                    {
+                                                                        $option_description     .=   '<br /><span class="important">'  .   __('Unable to identify site domain IP, blocking wp-cron.php will stop the site internal WordPress cron functionality.',    'wp-hide-security-enhancer') .   '</span>';   
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        $option_description     .=   '<br /><span class="important">'  .   __('Site domain rezolved to IP',    'wp-hide-security-enhancer') . ' ' . $local_ip . ' ' .  __('If blocked, all internal calls to cron will continue to run fine. All calls from a different IP are blocked, including direct calls.',    'wp-hide-security-enhancer') . '</span>';
+                                                                        $option_description     .=   '<br /><span class="important">'  .   __('On certain servers, different ip\'s can be used to call the cron internally. If the Cron service apepars to not trigger anymore, this option should be  disabled.',    'wp-hide-security-enhancer') . '</span>';
+                                                                    }
+                                                                
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Block wp-cron.php',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  "Block access to wp-cron.php file",
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block wp-cron.php',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("The file wp-cron.php is the portion of WordPress that handles scheduled events within a WordPress site. If remote cron calls not being used this can be set to Yes..",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                        "<br />" . $option_description,
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-root-files/'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'advanced_option'   =>  array(
+                                                                                                                                    
+                                                                                                                                                                    'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('The Cron service is how WordPress handles scheduling time-based tasks in WordPress. If not working correctly, some core features such as checking for updates and publishing scheduled will fail.',    'wp-hide-security-enhancer')
+                                                                                                                                                            
+                                                                                                                                                            ),
+                                                                                                                                
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'block_default_wp_signup_php' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Block wp-signup.php',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Block default wp-signup.php file.',  'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block wp-signup.php',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("The wp-signup.php allow for anyone to register to your site. If the registration functionality is turned off, is safe to block the  wp-signup.php.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-root-files/'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'block_default_wp_register_php' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Block wp-register.php',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Block default wp-register.php file.',  'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block wp-register.php',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("This is a deprecated file but still present in many WordPress installs.  When called the user is redirected to /register page. Is safe to block the wp-register.php.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-root-files/'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'block_other_wp_files' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Block other wp-*.php files',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Block other wp-*.php files in the root.',  'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block other wp-*.php files',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("Block other wp-*.php files. E.g. wp-blog-header.php, wp-config.php, wp-cron.php. Those files are used internally, blocking those will not affect any functionality. Other root files (wp-activate.php, wp-login.php, wp-signup.php) are ignored, they can be controlled through own setting.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-root-files/'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                    
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
+                }
+                    
             function _callback_saved_block_license_txt($saved_field_data)
                 {
                     $processing_response    =   array();

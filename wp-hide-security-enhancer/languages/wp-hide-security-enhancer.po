@@ -1,26 +1,26 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Hide & Security Enhancer\n"
-"POT-Creation-Date: 2023-07-20 09:01+0300\n"
-"PO-Revision-Date: 2023-07-20 09:01+0300\n"
+"POT-Creation-Date: 2024-12-17 15:59+0200\n"
+"PO-Revision-Date: 2024-12-17 15:59+0200\n"
 "Last-Translator: NspCode <contact@nsp-code.com>\n"
 "Language-Team: Nsp Code\n"
-"Language: en_US\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: compatibility/webarx.php:41 compatibility/wps-hide-login.php:38
+#: compatibility/webarx.php:48 compatibility/wps-hide-login.php:45
 msgid "WP Hide Conflict Notice."
 msgstr ""
 
-#: compatibility/webarx.php:41 compatibility/wps-hide-login.php:38
+#: compatibility/webarx.php:48 compatibility/wps-hide-login.php:45
 msgid ""
 "You use another plugin (WebARX) to change the default wp-login.php. To avoid "
 "conflicts, activate the option within a single code."
@@ -34,31 +34,31 @@ msgid ""
 msgstr ""
 
 #: include/admin-interface.class.php:102
-#: include/admin-interfaces/setup.class.php:172
+#: include/admin-interfaces/setup.class.php:222
 msgid "Checking your environment .."
 msgstr ""
 
 #: include/admin-interface.class.php:115
-#: include/admin-interfaces/setup.class.php:185
+#: include/admin-interfaces/setup.class.php:235
 msgid ""
 "Critical issues were identified on your site, please fix them before proceeding "
 "with customizations."
 msgstr ""
 
 #: include/admin-interface.class.php:122
-#: include/admin-interfaces/setup.class.php:192
+#: include/admin-interfaces/setup.class.php:242
 msgid "No problems have been found on your server environment."
 msgstr ""
 
-#: include/admin-interface.class.php:184
+#: include/admin-interface.class.php:192
 msgid "Save"
 msgstr ""
 
-#: include/admin-interface.class.php:200
+#: include/admin-interface.class.php:208
 msgid "Reset Page Settings"
 msgstr ""
 
-#: include/admin-interface.class.php:225
+#: include/admin-interface.class.php:233
 msgid "Reset All Settings"
 msgstr ""
 
@@ -85,6 +85,11 @@ msgstr ""
 msgid ""
 "Also, once the plugin options changed, a LiteSpeed service may be required. "
 "Through SSH run the command"
+msgstr ""
+
+#: include/admin-interfaces/notice-is-litespeed.php:9
+msgid ""
+"On certain servers (e.g. Hostinger ) the service restart may not be required."
 msgstr ""
 
 #: include/admin-interfaces/notice-is-wpengine.php:5
@@ -296,8 +301,8 @@ msgid ""
 msgstr ""
 
 #: include/admin-interfaces/security-scan.class.php:547
-#: include/functions.class.php:1016 include/functions.class.php:1083
-#: include/functions.class.php:1246 include/functions.class.php:1313
+#: include/functions.class.php:1073 include/functions.class.php:1140
+#: include/functions.class.php:1303 include/functions.class.php:1370
 msgid "Ignore"
 msgstr ""
 
@@ -318,28 +323,28 @@ msgid "The wp_remote_get() returns a Not Found page."
 msgstr ""
 
 #: include/admin-interfaces/security-scan.class.php:794
-#: include/functions.class.php:1070 include/functions.class.php:1186
-#: include/functions.class.php:1300
+#: include/functions.class.php:1127 include/functions.class.php:1243
+#: include/functions.class.php:1357
 msgid ""
 "The wp_remote_get() returns a 401 error code, the request could not be "
 "authenticated. Does the site use an httpd password?"
 msgstr ""
 
 #: include/admin-interfaces/security-scan.class.php:800
-#: include/functions.class.php:1078 include/functions.class.php:1194
-#: include/functions.class.php:1308
+#: include/functions.class.php:1135 include/functions.class.php:1251
+#: include/functions.class.php:1365
 msgid "The wp_remote_get() returns a"
 msgstr ""
 
 #: include/admin-interfaces/security-scan.class.php:800
-#: include/functions.class.php:1078 include/functions.class.php:1194
-#: include/functions.class.php:1308
+#: include/functions.class.php:1135 include/functions.class.php:1251
+#: include/functions.class.php:1365
 msgid "error code"
 msgstr ""
 
 #: include/admin-interfaces/security-scan.class.php:804
-#: include/functions.class.php:1093 include/functions.class.php:1205
-#: include/functions.class.php:1323
+#: include/functions.class.php:1150 include/functions.class.php:1262
+#: include/functions.class.php:1380
 msgid "Unespected error code for wp_remote_get() call."
 msgstr ""
 
@@ -560,8 +565,8 @@ msgid ""
 msgstr ""
 
 #: include/admin-interfaces/security-scan/scan_item_hide_admin_url.php:29
-#: modules/components/admin-admin_url.php:16
-#: modules/components/admin-admin_url.php:22
+#: modules/components/admin-admin_url.php:66
+#: modules/components/admin-admin_url.php:72
 msgid "New Admin Url"
 msgstr ""
 
@@ -701,8 +706,8 @@ msgid ""
 msgstr ""
 
 #: include/admin-interfaces/security-scan/scan_item_hide_check_plugins.php:29
-#: modules/components/rewrite-new_plugin_path.php:17
-#: modules/components/rewrite-new_plugin_path.php:21
+#: modules/components/rewrite-new_plugin_path.php:89
+#: modules/components/rewrite-new_plugin_path.php:93
 msgid "New Plugins Path"
 msgstr ""
 
@@ -735,10 +740,10 @@ msgid ""
 msgstr ""
 
 #: include/admin-interfaces/security-scan/scan_item_hide_check_theme.php:29
-#: modules/components/rewrite-new_theme_path.php:27
-#: modules/components/rewrite-new_theme_path.php:31
-#: modules/components/rewrite-new_theme_path.php:119
 #: modules/components/rewrite-new_theme_path.php:123
+#: modules/components/rewrite-new_theme_path.php:127
+#: modules/components/rewrite-new_theme_path.php:189
+#: modules/components/rewrite-new_theme_path.php:193
 msgid "New Theme Path"
 msgstr ""
 
@@ -751,7 +756,6 @@ msgid "Hide default /wp-content/ "
 msgstr ""
 
 #: include/admin-interfaces/security-scan/scan_item_hide_check_wp_content.php:32
-#: modules/components/rewrite-wp_content_path.php:21
 msgid ""
 "As default a WordPress installation contain a wp-content folder which store "
 "files and resources used by themes and plugin. The wp-content is a common "
@@ -782,7 +786,6 @@ msgid "Hide default /wp-includes/ "
 msgstr ""
 
 #: include/admin-interfaces/security-scan/scan_item_hide_check_wp_includes.php:32
-#: modules/components/rewrite-new_include_path.php:22
 msgid ""
 "As default a WordPress installation contain a wp-include folder which store "
 "files and resources used by WordPress core, themes and plugin. The wp-includes "
@@ -852,8 +855,8 @@ msgid ""
 msgstr ""
 
 #: include/admin-interfaces/security-scan/scan_item_hide_json_clean_api.php:29
-#: modules/components/rewrite-json-rest.php:17
-#: modules/components/rewrite-json-rest.php:21
+#: modules/components/rewrite-json-rest.php:132
+#: modules/components/rewrite-json-rest.php:136
 msgid "Clean the REST API response"
 msgstr ""
 
@@ -875,13 +878,13 @@ msgid ""
 msgstr ""
 
 #: include/admin-interfaces/security-scan/scan_item_hide_license_txt.php:29
-#: modules/components/rewrite-root-files.php:19
-#: modules/components/rewrite-root-files.php:23
+#: modules/components/rewrite-root-files.php:114
+#: modules/components/rewrite-root-files.php:118
 msgid "Block license.txt"
 msgstr ""
 
 #: include/admin-interfaces/security-scan/scan_item_hide_license_txt.php:32
-#: modules/components/rewrite-root-files.php:24
+#: modules/components/rewrite-root-files.php:119
 msgid ""
 "This is a text file which contain the licensing terms for WordPress framework. "
 "Obviously you don't want that visible as every site containing such file must "
@@ -895,8 +898,8 @@ msgid ""
 msgstr ""
 
 #: include/admin-interfaces/security-scan/scan_item_hide_new_wp_login.php:29
-#: modules/components/admin-new_wp_login_php.php:16
-#: modules/components/admin-new_wp_login_php.php:22
+#: modules/components/admin-login_php.php:80
+#: modules/components/admin-login_php.php:86
 msgid "New wp-login.php"
 msgstr ""
 
@@ -976,13 +979,13 @@ msgid ""
 msgstr ""
 
 #: include/admin-interfaces/security-scan/scan_item_hide_readme_html.php:29
-#: modules/components/rewrite-root-files.php:41
-#: modules/components/rewrite-root-files.php:45
+#: modules/components/rewrite-root-files.php:132
+#: modules/components/rewrite-root-files.php:136
 msgid "Block readme.html"
 msgstr ""
 
 #: include/admin-interfaces/security-scan/scan_item_hide_readme_html.php:32
-#: modules/components/rewrite-root-files.php:46
+#: modules/components/rewrite-root-files.php:137
 msgid ""
 "A Hypertext Markup Language file with general information about installed "
 "WordPress, version, instalation steps, updating, requirements, resources etc."
@@ -1012,6 +1015,7 @@ msgstr ""
 
 #: include/admin-interfaces/security-scan/scan_item_hide_remove_header_link.php:29
 #: modules/components/general-headers.php:17
+#: modules/components/general-headers.php:21
 #: modules/components/security-add_headers.php:17
 msgid "Remove Link Header"
 msgstr ""
@@ -1186,20 +1190,20 @@ msgid "XML-RPC"
 msgstr ""
 
 #: include/admin-interfaces/security-scan/scan_item_hide_xml_rpc.php:32
-#: modules/components/rewrite-new_xml-rpc-path.php:22
+#: modules/components/rewrite-new_xml-rpc-path.php:76
 msgid ""
 "XML-RPC is a remote procedure call (RPC) protocol which uses XML to encode its "
 "calls and HTTP as a transport mechanism. This service allow other applications "
 "to talk to your WordPress site."
 msgstr ""
 
-#: include/admin-interfaces/security-scan/scan_item_hide_xml_rpc.php:55
+#: include/admin-interfaces/security-scan/scan_item_hide_xml_rpc.php:56
 msgid ""
 "<span class=\"dashicons dashicons-no\"></span>The XML-RPC module has not been "
 "customised."
 msgstr ""
 
-#: include/admin-interfaces/security-scan/scan_item_hide_xml_rpc.php:66
+#: include/admin-interfaces/security-scan/scan_item_hide_xml_rpc.php:67
 msgid ""
 "<span class=\"dashicons dashicons-yes\"></span>The XML-RPC appears properly "
 "configured."
@@ -1668,67 +1672,86 @@ msgid ""
 "continue?"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:60 include/wph.class.php:532
+#: include/admin-interfaces/setup.class.php:60 include/wph.class.php:595
 msgid "Settings saved"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:60 include/wph.class.php:532
+#: include/admin-interfaces/setup.class.php:60 include/wph.class.php:595
 msgid "Remember, site cache clear is required."
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:147
+#: include/admin-interfaces/setup.class.php:197
 msgid "Setup"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:157
+#: include/admin-interfaces/setup.class.php:207
 msgid "Sample Setup deployed !"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:160
+#: include/admin-interfaces/setup.class.php:210
 msgid ""
 "A basic plugin set-up has been deployed, to get you started. A site cache clear "
 "is required to ensure the updates are reflected on the front side"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:161
+#: include/admin-interfaces/setup.class.php:211
 msgid ""
 "Check with the front side to ensure everything is working. Further adjustments "
 "to other options is recommended"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:198
+#: include/admin-interfaces/setup.class.php:248
 msgid "Getting Started"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:201
-msgid "plugin helps to hide your WordPress, theme, and plugins"
-msgstr ""
-
-#: include/admin-interfaces/setup.class.php:201
+#: include/admin-interfaces/setup.class.php:251
 msgid ""
-"This improves the site security as hackers' boots can't exploit the "
-"vulnerabilities of your site, as not being aware of the user code"
+"plugin enhances your website's security by concealing your WordPress "
+"installation, themes, and plugins. By keeping critical information hidden, it "
+"prevents hackers and automated bots from exploiting known vulnerabilities"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:201
-msgid "Daily, more vulnerabilities are found"
+#: include/admin-interfaces/setup.class.php:251
+msgid "With new vulnerabilities discovered every day"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:201
-msgid "but using WP Hide & Security Enhancer you will be perfectly safe"
+#: include/admin-interfaces/setup.class.php:251
+msgid ""
+"using WP Hide & Security Enhancer ensures an added layer of protection, keeping "
+"your site safe and secure."
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:206 include/functions.class.php:2354
-#: include/functions.class.php:2406
+#: include/admin-interfaces/setup.class.php:252
+msgid "You can begin with a "
+msgstr ""
+
+#: include/admin-interfaces/setup.class.php:252
+#: modules/components/security-check_headers.php:30
+msgid "Sample Setup"
+msgstr ""
+
+#: include/admin-interfaces/setup.class.php:252
+msgid "to get started quickly. Then, use the"
+msgstr ""
+
+#: include/admin-interfaces/setup.class.php:252
+msgid ""
+"interface to identify potential vulnerabilities and fine-tune the plugin "
+"settings for optimal security. This approach ensures your website is protected "
+"with the highest level of defense"
+msgstr ""
+
+#: include/admin-interfaces/setup.class.php:257 include/functions.class.php:2406
+#: include/functions.class.php:2458
 #: modules/components/security-check_headers.php:27
 msgid "Recovery"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:213
+#: include/admin-interfaces/setup.class.php:264
 msgid "Basic functionality"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:216
+#: include/admin-interfaces/setup.class.php:267
 msgid ""
 "The basic principle of the plugin is to change default assets URLs, remove or "
 "change specific HTML elements, and disable unused services. This makes "
@@ -1738,41 +1761,41 @@ msgid ""
 "processed on the fly using output buffering and filters"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:218
+#: include/admin-interfaces/setup.class.php:269
 msgid ""
 "A default directory structure for WordPress appears like this on outputted HTML"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:220
+#: include/admin-interfaces/setup.class.php:271
 msgid ""
 "So the most important first step, is to change the default /wp-content/ and /wp-"
 "includes/ to something else. This can be done at"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:220 include/functions.class.php:2452
+#: include/admin-interfaces/setup.class.php:271 include/functions.class.php:2504
 msgid "and"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:221
+#: include/admin-interfaces/setup.class.php:272
 msgid "Further adjustments to"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:221
+#: include/admin-interfaces/setup.class.php:272
 msgid "can be applied"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:223
+#: include/admin-interfaces/setup.class.php:274
 msgid ""
 "At this point, for all simple sites, the WordPress CMS is already hidden. If "
 "using complex themes and plugins, further plugin options adjustments are "
 "necessarily or PRO might be required ( for example"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:223
+#: include/admin-interfaces/setup.class.php:274
 msgid "hiding Elementor"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:225
+#: include/admin-interfaces/setup.class.php:276
 msgid ""
 "Take the time to understand each option, there are in-line additional help also "
 "external description to each of the features. If need additional assistance, "
@@ -1780,28 +1803,51 @@ msgid ""
 "found at"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:225
+#: include/admin-interfaces/setup.class.php:276
 msgid "Documentation"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:231
+#: include/admin-interfaces/setup.class.php:282
 msgid "Sample setup"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:234
+#: include/admin-interfaces/setup.class.php:285
 msgid ""
-"This creates a simple setup to get you started. The procedure activates some of "
-"the basic plugin options.  All options will be reset and any existing values "
-"will be overwritten, so use with caution.  After the procedure, for all basic "
-"sites, the WordPress CMS will be already hidden, otherwise further options "
-"adjustments will be necessary"
+"This establishes a straightforward setup to kickstart your journey. The process "
+"triggers activation of fundamental plugin options. Be mindful that all settings "
+"will revert to default, potentially overwriting existing values, so exercise "
+"caution. Following this procedure, WordPress CMS will be concealed on basic "
+"sites; otherwise, additional adjustments may be required for more customized "
+"configurations."
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:236
-msgid "Run Sample Setup"
+#: include/admin-interfaces/setup.class.php:287
+msgid "Create Plugin Setup"
 msgstr ""
 
-#: include/admin-interfaces/setup.class.php:247
+#: include/admin-interfaces/setup.class.php:288
+msgid "Comprehensive Setup"
+msgstr ""
+
+#: include/admin-interfaces/setup.class.php:293
+msgid ""
+"Additional adjustments to the settings may be needed to tailor them to your "
+"specific environment. Utilize the Scan feature for easier identification of "
+"necessary improvements."
+msgstr ""
+
+#: include/admin-interfaces/setup.class.php:294
+msgid "For more complex sites, consider employing the "
+msgstr ""
+
+#: include/admin-interfaces/setup.class.php:294
+msgid ""
+"plugin, which offers advanced tools such as PostProcessing with Replacements "
+"for targeted removal of individual fingerprints (e.g., elementor, divi, "
+"woocommerce, etc.)."
+msgstr ""
+
+#: include/admin-interfaces/setup.class.php:300
 msgid "Demo Video"
 msgstr ""
 
@@ -1830,334 +1876,344 @@ msgstr ""
 msgid "Check with folder/file permission or contact server administrator."
 msgstr ""
 
-#: include/functions.class.php:282 include/functions.class.php:283
-#: include/functions.class.php:284 include/functions.class.php:285
-#: include/functions.class.php:286
+#: include/functions.class.php:285 include/functions.class.php:286
+#: include/functions.class.php:287 include/functions.class.php:288
+#: include/functions.class.php:289 include/functions.class.php:290
+#: include/functions.class.php:291 include/functions.class.php:292
 msgid "is a system reserved."
 msgstr ""
 
-#: include/functions.class.php:296
+#: include/functions.class.php:302
 msgid "is similar to domain name."
 msgstr ""
 
-#: include/functions.class.php:310 include/functions.class.php:332
-#: include/functions.class.php:351 include/functions.class.php:360
+#: include/functions.class.php:316 include/functions.class.php:363
+#: include/functions.class.php:382 include/functions.class.php:391
 #: modules/components/security-check_headers.php:241
 msgid "Value"
 msgstr ""
 
-#: include/functions.class.php:310 include/functions.class.php:332
-#: include/functions.class.php:351 include/functions.class.php:360
+#: include/functions.class.php:316 include/functions.class.php:342
+#: include/functions.class.php:353 include/functions.class.php:363
+#: include/functions.class.php:382 include/functions.class.php:391
 msgid "set for"
 msgstr ""
 
-#: include/functions.class.php:310
+#: include/functions.class.php:316
 msgid "already in use for another option."
 msgstr ""
 
-#: include/functions.class.php:332
+#: include/functions.class.php:342 include/functions.class.php:353
+msgid "The value"
+msgstr ""
+
+#: include/functions.class.php:342 include/functions.class.php:353
+#, php-format
+msgid "must be a minimum of %s characters or longer."
+msgstr ""
+
+#: include/functions.class.php:363
 msgid "use the same base slug "
 msgstr ""
 
-#: include/functions.class.php:332
+#: include/functions.class.php:363
 msgid "used for another option."
 msgstr ""
 
-#: include/functions.class.php:467
+#: include/functions.class.php:498
 msgid ""
 "W3 Total Cache Plugin is active, make sure you clear the cache for new changes "
 "to apply"
 msgstr ""
 
-#: include/functions.class.php:471
+#: include/functions.class.php:502
 msgid ""
 "WP Super Cache Plugin is active, make sure you clear the cache for new changes "
 "to apply"
 msgstr ""
 
-#: include/functions.class.php:476
+#: include/functions.class.php:507
 msgid ""
 "WP Fastest Cache Plugin is active, make sure you clear the cache for new "
 "changes to apply"
 msgstr ""
 
-#: include/functions.class.php:916
+#: include/functions.class.php:973
 msgid ""
 "Copy the following link to a safe place. You can use it later to reset all "
 "plugin options if something goes wrong or lost the new login URL."
 msgstr ""
 
-#: include/functions.class.php:1016 include/functions.class.php:1246
+#: include/functions.class.php:1073 include/functions.class.php:1303
 msgid "Make a fix or manually check the "
 msgstr ""
 
-#: include/functions.class.php:1016 include/functions.class.php:1082
-#: include/functions.class.php:1083 include/functions.class.php:1135
-#: include/functions.class.php:1198 include/functions.class.php:1246
-#: include/functions.class.php:1312 include/functions.class.php:1313
-#: include/functions.class.php:1330
+#: include/functions.class.php:1073 include/functions.class.php:1139
+#: include/functions.class.php:1140 include/functions.class.php:1192
+#: include/functions.class.php:1255 include/functions.class.php:1303
+#: include/functions.class.php:1369 include/functions.class.php:1370
+#: include/functions.class.php:1387
 msgid "Test URL"
 msgstr ""
 
-#: include/functions.class.php:1016 include/functions.class.php:1246
+#: include/functions.class.php:1073 include/functions.class.php:1303
 msgid ""
 "if the result is a JSON response (contains a name and description), the "
 "rewrites are working correctly on your site and you can"
 msgstr ""
 
-#: include/functions.class.php:1016 include/functions.class.php:1083
-#: include/functions.class.php:1246 include/functions.class.php:1313
+#: include/functions.class.php:1073 include/functions.class.php:1140
+#: include/functions.class.php:1303 include/functions.class.php:1370
 msgid "this notification"
 msgstr ""
 
-#: include/functions.class.php:1017 include/functions.class.php:1084
-#: include/functions.class.php:1247 include/functions.class.php:1314
+#: include/functions.class.php:1074 include/functions.class.php:1141
+#: include/functions.class.php:1304 include/functions.class.php:1371
 msgid "Sample result, the appearance can be different from a browser to another:"
 msgstr ""
 
-#: include/functions.class.php:1018 include/functions.class.php:1085
-#: include/functions.class.php:1248 include/functions.class.php:1315
+#: include/functions.class.php:1075 include/functions.class.php:1142
+#: include/functions.class.php:1305 include/functions.class.php:1372
 msgid "The Ignore action will be available until the next plugin options update."
 msgstr ""
 
-#: include/functions.class.php:1019 include/functions.class.php:1249
+#: include/functions.class.php:1076 include/functions.class.php:1306
 msgid ""
 "If the Test URL is not functional, the plugin will fail to provide specific "
 "features. Check your Hosting provider for more details regarding rewrites and "
 "how to activate on your account."
 msgstr ""
 
-#: include/functions.class.php:1025 include/functions.class.php:1141
-#: include/functions.class.php:1255
+#: include/functions.class.php:1082 include/functions.class.php:1198
+#: include/functions.class.php:1312
 msgid "The wp_remote_get() returns invalid Response Code"
 msgstr ""
 
-#: include/functions.class.php:1039 include/functions.class.php:1155
-#: include/functions.class.php:1269
+#: include/functions.class.php:1096 include/functions.class.php:1212
+#: include/functions.class.php:1326
 msgid ""
 "The .htaccess file does not appears to exists on the server. To fix, go to "
 "Settings > Permalinks and save once."
 msgstr ""
 
-#: include/functions.class.php:1044 include/functions.class.php:1160
-#: include/functions.class.php:1274
+#: include/functions.class.php:1101 include/functions.class.php:1217
+#: include/functions.class.php:1331
 msgid "The test rewrite does not exist."
 msgstr ""
 
-#: include/functions.class.php:1044 include/functions.class.php:1160
-#: include/functions.class.php:1274
+#: include/functions.class.php:1101 include/functions.class.php:1217
+#: include/functions.class.php:1331
 msgid ""
 "To fix go to Settings > Permalinks and save once, the core will attempt to "
 "update the required rewrites. If the problem persists, check with your host "
 "support on the correct .htaccess file write permission."
 msgstr ""
 
-#: include/functions.class.php:1055
+#: include/functions.class.php:1112
 msgid ""
 "The wp_remote_get() returns a Not Found page, the web.config file does not "
 "appears to exists on the server. To fix, go to Settings > Permalinks and save "
 "once."
 msgstr ""
 
-#: include/functions.class.php:1058
+#: include/functions.class.php:1115
 msgid ""
 "The wp_remote_get() returns a Not Found page, the test rewrite does not exist. "
 "To fix, go to Settings > Permalinks and save once. This can occour if you "
 "updated from an old plugin version. "
 msgstr ""
 
-#: include/functions.class.php:1062
+#: include/functions.class.php:1119
 msgid ""
 "The wp_remote_get() returns a Not Found page, probably the Rewrites are not "
 "active on your server!"
 msgstr ""
 
-#: include/functions.class.php:1082 include/functions.class.php:1312
+#: include/functions.class.php:1139 include/functions.class.php:1369
 msgid ""
 "A custom rewrite line has been inserted into your rewrite file for testing. The "
 msgstr ""
 
-#: include/functions.class.php:1082 include/functions.class.php:1312
+#: include/functions.class.php:1139 include/functions.class.php:1369
 msgid ""
 "expected to return a JSON response (contains a name and description) The server "
 "instead replied a"
 msgstr ""
 
-#: include/functions.class.php:1082 include/functions.class.php:1312
+#: include/functions.class.php:1139 include/functions.class.php:1369
 msgid "error with the message"
 msgstr ""
 
-#: include/functions.class.php:1083 include/functions.class.php:1313
+#: include/functions.class.php:1140 include/functions.class.php:1370
 msgid ""
 "In certain environments ( e.g. Cloudflare) the plugin may not be allowed to "
 "check the test rewrite automatically. If checking manually the "
 msgstr ""
 
-#: include/functions.class.php:1083 include/functions.class.php:1313
+#: include/functions.class.php:1140 include/functions.class.php:1370
 msgid ""
 "if the result is a valid JSON response (contains a name and description), you "
 "can"
 msgstr ""
 
-#: include/functions.class.php:1086 include/functions.class.php:1316
+#: include/functions.class.php:1143 include/functions.class.php:1373
 msgid ""
 "If manually checking the Test URL fails too, you need to get in touch with your "
 "server support for a fix. The rewrite engine is either disabled for your "
 "account or their internal set-up does not allow such rewrites. "
 msgstr ""
 
-#: include/functions.class.php:1098 include/functions.class.php:1210
-#: include/functions.class.php:1329
+#: include/functions.class.php:1155 include/functions.class.php:1267
+#: include/functions.class.php:1386
 msgid ""
 "The wp_remote_get() returns an invalid JSON data, probably the server blocks "
 "custom rewrites."
 msgstr ""
 
-#: include/functions.class.php:1135 include/functions.class.php:1198
-#: include/functions.class.php:1330
+#: include/functions.class.php:1192 include/functions.class.php:1255
+#: include/functions.class.php:1387
 msgid "Make a fix and manually check the "
 msgstr ""
 
-#: include/functions.class.php:1171 include/functions.class.php:1285
+#: include/functions.class.php:1228 include/functions.class.php:1342
 msgid ""
 "The wp_remote_get() returns a <b>Not Found</b> page, the web.config file does "
 "not appears to exists on the server. To fix, go to Settings > Permalinks and "
 "save once."
 msgstr ""
 
-#: include/functions.class.php:1174 include/functions.class.php:1288
+#: include/functions.class.php:1231 include/functions.class.php:1345
 msgid ""
 "The wp_remote_get() returns a <b>Not Found</b> page, the test rewrite does not "
 "exist. To fix, go to Settings > Permalinks and save once. This can occour if "
 "you updated from an old plugin version. "
 msgstr ""
 
-#: include/functions.class.php:1178 include/functions.class.php:1292
+#: include/functions.class.php:1235 include/functions.class.php:1349
 msgid ""
 "The wp_remote_get() returns a <b>Not Found</b> page, probably the Rewrites are "
 "not active on your server!"
 msgstr ""
 
-#: include/functions.class.php:2221
-#: modules/components/admin-new_wp_login_php.php:110
+#: include/functions.class.php:2273 modules/components/admin-login_php.php:207
 msgid "Hello"
 msgstr ""
 
-#: include/functions.class.php:2222
+#: include/functions.class.php:2274
 msgid ""
 "This is a system automated message to inform that you can always use a recovery "
 "link if something go wrong"
 msgstr ""
 
-#: include/functions.class.php:2223
+#: include/functions.class.php:2275
 msgid "Please keep this URL to a safe place."
 msgstr ""
 
-#: include/functions.class.php:2355
+#: include/functions.class.php:2407
 msgid "The plugin options have been reset successfully."
 msgstr ""
 
-#: include/functions.class.php:2362
+#: include/functions.class.php:2414
 msgid ""
 "Ensure the .htaccess file does not contain any WP-Hide rewrite lines. The "
 "plugin already attempts to clear the lines, if the operation fails, they are "
 "required to be removed manually. "
 msgstr ""
 
-#: include/functions.class.php:2369
+#: include/functions.class.php:2421
 msgid ""
 "Ensure the web.config file does not contain any WP-Hide rewrite lines. The "
 "plugin already attempts to clear the lines, if the operation fails, they are "
 "required to be removed manually. "
 msgstr ""
 
-#: include/functions.class.php:2376 include/functions.class.php:2463
+#: include/functions.class.php:2428 include/functions.class.php:2515
 msgid "Continue to your Site"
 msgstr ""
 
-#: include/functions.class.php:2413
+#: include/functions.class.php:2465
 msgid "Headers Recovery"
 msgstr ""
 
-#: include/functions.class.php:2414
+#: include/functions.class.php:2466
 msgid "The plugin Headers options have been disabled successfully."
 msgstr ""
 
-#: include/functions.class.php:2421
+#: include/functions.class.php:2473
 msgid ""
 "Ensure the .htaccess file does not contain any rewrite Header lines. The plugin "
 "already attempted to clear the data. If the operation fails, manual removal is "
 "required."
 msgstr ""
 
-#: include/functions.class.php:2428
+#: include/functions.class.php:2480
 msgid ""
 "Ensure the web.config file does not contain any rewrite Header lines. The "
 "plugin already attempted to clear the data. If the operation fails, manual "
 "removal is required."
 msgstr ""
 
-#: include/functions.class.php:2439
+#: include/functions.class.php:2491
 msgid ""
 "Your site use WPEngine! You need to get in touch with live support and ask to "
 "remove the custom Nginx Header rewrite code from your account."
 msgstr ""
 
-#: include/functions.class.php:2445
+#: include/functions.class.php:2497
 msgid ""
 "Your site use Kinsta! You need to get in touch with live support and ask to "
 "remove the custom Nginx Header rewrite code from your account."
 msgstr ""
 
-#: include/functions.class.php:2452
+#: include/functions.class.php:2504
 msgid "Check with your Nginx config file located usually at"
 msgstr ""
 
-#: include/functions.class.php:2452
+#: include/functions.class.php:2504
 msgid "and remove any Header rewrite rules within"
 msgstr ""
 
-#: include/functions.class.php:2453
+#: include/functions.class.php:2505
 msgid "After the configuration file update"
 msgstr ""
 
-#: include/functions.class.php:2453
+#: include/functions.class.php:2505
 msgid "Test"
 msgstr ""
 
-#: include/functions.class.php:2453
+#: include/functions.class.php:2505
 msgid "the new data using "
 msgstr ""
 
-#: include/functions.class.php:2453
+#: include/functions.class.php:2505
 msgid "If successfully compiled, restart the Nginx service."
 msgstr ""
 
-#: include/functions.class.php:2736
+#: include/functions.class.php:2788
 #, php-format
 msgid "The %1$s plugin header is deprecated. Use %2$s instead."
 msgstr ""
 
-#: include/functions.class.php:2821
+#: include/functions.class.php:2873
 #, php-format
 msgid "By %s."
 msgstr ""
 
-#: include/functions.class.php:3278
+#: include/functions.class.php:3356
 msgid ""
 "Help us to maintain this plugin by sending improvements, suggestions and "
 "reporting any issues at "
 msgstr ""
 
-#: include/functions.class.php:3280
+#: include/functions.class.php:3358
 msgid "Did you know there is a"
 msgstr ""
 
-#: include/functions.class.php:3280
+#: include/functions.class.php:3358
 msgid "version of this plug-in?"
 msgstr ""
 
-#: include/functions.class.php:3282
+#: include/functions.class.php:3360
 msgid ""
 "Did you find this plugin useful? Please support our work by submitting a "
 "review, spread the word about the code, or write an article about the plugin in "
@@ -2168,45 +2224,48 @@ msgstr ""
 msgid "Run a fist scan to determine the current protection level of your website."
 msgstr ""
 
-#: include/wph.class.php:369
+#: include/wph.class.php:406
 msgid ""
 "Are you sure to reset the current page settings? All options will be changed to "
 "default. An Save is still required for the page."
 msgstr ""
 
-#: include/wph.class.php:370
+#: include/wph.class.php:407
 msgid ""
 "Are you sure to reset all settings? All options will be removed. Manual removal "
 "of rewrite lines is required if no access from PHP."
 msgstr ""
 
-#: include/wph.class.php:371
+#: include/wph.class.php:408
 msgid ""
 "This creates a sample setup for Headers. That will overwrite any Headers "
 "settings previously created through the plugin options. Are you sure?"
 msgstr ""
 
-#: include/wph.class.php:498
+#: include/wph.class.php:561
 msgid "All Settings where restored to default"
 msgstr ""
 
-#: include/wph.class.php:506
+#: include/wph.class.php:569
 msgid "Headers Sample Setup deployed successfully."
 msgstr ""
 
-#: include/wph.class.php:574
+#: include/wph.class.php:637
 msgid "Cache cleared"
 msgstr ""
 
-#: modules/components/admin-admin_url.php:18
+#: modules/components/admin-admin_url.php:68
 msgid "Create a new admin url instead default /wp-admin and /login."
 msgstr ""
 
-#: modules/components/admin-admin_url.php:22
-#: modules/components/admin-admin_url.php:44
-#: modules/components/admin-new_wp_login_php.php:22
-#: modules/components/admin-new_wp_login_php.php:51
-#: modules/components/cdn-setup.php:20 modules/components/general-admin-bar.php:50
+#: modules/components/admin-admin_url.php:72
+#: modules/components/admin-admin_url.php:89
+#: modules/components/admin-admin_url.php:112
+#: modules/components/admin-login_php.php:86
+#: modules/components/admin-login_php.php:109
+#: modules/components/admin-login_php.php:136 modules/components/cdn-setup.php:44
+#: modules/components/general-admin-bar.php:50
+#: modules/components/general-block-detectors.php:21
 #: modules/components/general-emulate.php:20
 #: modules/components/general-feed.php:20
 #: modules/components/general-headers.php:21
@@ -2232,51 +2291,55 @@ msgstr ""
 #: modules/components/general-user-interactions.php:74
 #: modules/components/general-user-interactions.php:96
 #: modules/components/general-user-interactions.php:118
-#: modules/components/general-user-interactions.php:141
-#: modules/components/general-user-interactions.php:164
-#: modules/components/general-user-interactions.php:186
+#: modules/components/general-user-interactions.php:140
+#: modules/components/general-user-interactions.php:162
+#: modules/components/general-user-interactions.php:185
+#: modules/components/general-user-interactions.php:208
+#: modules/components/general-user-interactions.php:230
 #: modules/components/general-wpemoji.php:20
 #: modules/components/general-wpemoji.php:42
+#: modules/components/login_captcha.php:78
 #: modules/components/rewrite-author.php:21
 #: modules/components/rewrite-author.php:42
 #: modules/components/rewrite-comments.php:21
 #: modules/components/rewrite-comments.php:43
-#: modules/components/rewrite-json-rest.php:21
-#: modules/components/rewrite-json-rest.php:45
-#: modules/components/rewrite-json-rest.php:77
-#: modules/components/rewrite-json-rest.php:114
-#: modules/components/rewrite-json-rest.php:154
-#: modules/components/rewrite-json-rest.php:178
-#: modules/components/rewrite-json-rest.php:201
-#: modules/components/rewrite-new_include_path.php:21
-#: modules/components/rewrite-new_include_path.php:41
-#: modules/components/rewrite-new_plugin_path.php:21
-#: modules/components/rewrite-new_plugin_path.php:40
-#: modules/components/rewrite-new_plugin_path.php:92
-#: modules/components/rewrite-new_theme_path.php:31
-#: modules/components/rewrite-new_theme_path.php:53
-#: modules/components/rewrite-new_theme_path.php:77
-#: modules/components/rewrite-new_theme_path.php:123
-#: modules/components/rewrite-new_theme_path.php:144
-#: modules/components/rewrite-new_theme_path.php:168
-#: modules/components/rewrite-new_upload_path.php:21
-#: modules/components/rewrite-new_upload_path.php:40
-#: modules/components/rewrite-new_xml-rpc-path.php:21
-#: modules/components/rewrite-new_xml-rpc-path.php:43
-#: modules/components/rewrite-new_xml-rpc-path.php:73
-#: modules/components/rewrite-new_xml-rpc-path.php:102
-#: modules/components/rewrite-root-files.php:23
-#: modules/components/rewrite-root-files.php:45
-#: modules/components/rewrite-root-files.php:67
-#: modules/components/rewrite-root-files.php:102
-#: modules/components/rewrite-root-files.php:131
+#: modules/components/rewrite-json-rest.php:136
+#: modules/components/rewrite-json-rest.php:155
+#: modules/components/rewrite-json-rest.php:181
+#: modules/components/rewrite-json-rest.php:208
+#: modules/components/rewrite-json-rest.php:236
+#: modules/components/rewrite-json-rest.php:254
+#: modules/components/rewrite-json-rest.php:272
+#: modules/components/rewrite-new_include_path.php:55
+#: modules/components/rewrite-new_include_path.php:73
+#: modules/components/rewrite-new_plugin_path.php:93
+#: modules/components/rewrite-new_plugin_path.php:109
+#: modules/components/rewrite-new_plugin_path.php:154
+#: modules/components/rewrite-new_theme_path.php:127
+#: modules/components/rewrite-new_theme_path.php:145
+#: modules/components/rewrite-new_theme_path.php:165
+#: modules/components/rewrite-new_theme_path.php:193
+#: modules/components/rewrite-new_theme_path.php:211
+#: modules/components/rewrite-new_theme_path.php:231
+#: modules/components/rewrite-new_upload_path.php:57
+#: modules/components/rewrite-new_upload_path.php:73
+#: modules/components/rewrite-new_xml-rpc-path.php:75
+#: modules/components/rewrite-new_xml-rpc-path.php:93
+#: modules/components/rewrite-new_xml-rpc-path.php:114
+#: modules/components/rewrite-new_xml-rpc-path.php:131
+#: modules/components/rewrite-new_xml-rpc-path.php:148
+#: modules/components/rewrite-root-files.php:118
+#: modules/components/rewrite-root-files.php:136
 #: modules/components/rewrite-root-files.php:154
-#: modules/components/rewrite-root-files.php:177
-#: modules/components/rewrite-search.php:21
-#: modules/components/rewrite-search.php:42
-#: modules/components/rewrite-slash.php:20
-#: modules/components/rewrite-wp_content_path.php:20
-#: modules/components/rewrite-wp_content_path.php:42
+#: modules/components/rewrite-root-files.php:186
+#: modules/components/rewrite-root-files.php:211
+#: modules/components/rewrite-root-files.php:229
+#: modules/components/rewrite-root-files.php:247
+#: modules/components/rewrite-search.php:57
+#: modules/components/rewrite-search.php:75
+#: modules/components/rewrite-slash.php:45
+#: modules/components/rewrite-wp_content_path.php:55
+#: modules/components/rewrite-wp_content_path.php:73
 #: modules/components/security-add_headers.php:21
 #: modules/components/security-add_headers.php:46
 #: modules/components/security-add_headers.php:69
@@ -2292,7 +2355,7 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: modules/components/admin-admin_url.php:23
+#: modules/components/admin-admin_url.php:73
 msgid ""
 "Despite the flexibility of WordPress framework, there are few ways to configure "
 "the admin login url customization for making a bit safer against unauthorized "
@@ -2300,67 +2363,60 @@ msgid ""
 "through WordPress core but require custom code to make it happen."
 msgstr ""
 
-#: modules/components/admin-admin_url.php:24
+#: modules/components/admin-admin_url.php:74
 msgid ""
 "This feature provide an easy way to change the default /wp-admin/ to a "
 "different slug."
 msgstr ""
 
-#: modules/components/admin-admin_url.php:25
+#: modules/components/admin-admin_url.php:75
 msgid ""
 "Once changed, the new url will be used to access all Dashboard sections, from "
 "Posts and Pages section to Plugins, Appearance and Settings."
 msgstr ""
 
-#: modules/components/admin-admin_url.php:38
-#: modules/components/admin-admin_url.php:44
+#: modules/components/admin-admin_url.php:83
+msgid "Disable Admin Url redirect to Login page"
+msgstr ""
+
+#: modules/components/admin-admin_url.php:85
+msgid "Disable the customized Admin Url redirect to Login page"
+msgstr ""
+
+#: modules/components/admin-admin_url.php:89
+#: modules/components/admin-admin_url.php:106
+#: modules/components/admin-admin_url.php:112
 msgid "Block default Admin Url"
 msgstr ""
 
-#: modules/components/admin-admin_url.php:40
-msgid "Block default admin url and files from being accesible."
-msgstr ""
-
-#: modules/components/admin-admin_url.php:45
+#: modules/components/admin-admin_url.php:90
 msgid ""
-"If set to Yes, the old admin url will be blocked and a default theme 404 error "
-"page will be returned."
+"The option provides the ability to control the redirection behavior of the "
+"customized URL to the login page."
 msgstr ""
 
-#: modules/components/admin-admin_url.php:46
+#: modules/components/admin-admin_url.php:91
 msgid ""
-"Ensure the New Admin Url option works correctly on your server before activate "
-"this."
+"By default, when a non-logged-in user attempts to access the WordPress admin "
+"area via the customized URL, they are automatically redirected to the login "
+"page for authentication."
 msgstr ""
 
-#: modules/components/admin-admin_url.php:53
-#: modules/components/admin-new_wp_login_php.php:59
-#: modules/components/rewrite-json-rest.php:54
-#: modules/components/rewrite-json-rest.php:87
-#: modules/components/rewrite-json-rest.php:124
-#: modules/components/rewrite-new_include_path.php:48
-#: modules/components/rewrite-new_plugin_path.php:47
-#: modules/components/rewrite-new_theme_path.php:85
-#: modules/components/rewrite-new_theme_path.php:176
-#: modules/components/rewrite-new_upload_path.php:47
-#: modules/components/rewrite-new_xml-rpc-path.php:51
-#: modules/components/rewrite-new_xml-rpc-path.php:80
-#: modules/components/rewrite-new_xml-rpc-path.php:109
-#: modules/components/rewrite-root-files.php:110
-#: modules/components/rewrite-wp_content_path.php:49
-msgid "This is an advanced option !"
+#: modules/components/admin-admin_url.php:92
+msgid "Instead it will be redirected to homepage."
 msgstr ""
 
-#: modules/components/admin-admin_url.php:53
+#: modules/components/admin-admin_url.php:93
 msgid ""
-"This can break the layour of dashboard admin if server not supporting the "
-"feature. Ensure `New Admin Url` option works fine before activate this.<br />If "
-"not working, use the recovery link to revert."
+"The option might interfere with specific plugins that use redirects when "
+"calling the admin URL."
 msgstr ""
 
-#: modules/components/admin-admin_url.php:59
-#: modules/components/admin-new_wp_login_php.php:65
+#: modules/components/admin-admin_url.php:98
+#: modules/components/admin-admin_url.php:126
+#: modules/components/admin-login_php.php:122
 #: modules/components/general-admin-bar.php:57
+#: modules/components/general-block-detectors.php:35
 #: modules/components/general-emulate.php:35
 #: modules/components/general-feed.php:31
 #: modules/components/general-headers.php:30
@@ -2385,48 +2441,53 @@ msgstr ""
 #: modules/components/general-user-interactions.php:59
 #: modules/components/general-user-interactions.php:81
 #: modules/components/general-user-interactions.php:103
-#: modules/components/general-user-interactions.php:126
-#: modules/components/general-user-interactions.php:149
-#: modules/components/general-user-interactions.php:171
+#: modules/components/general-user-interactions.php:125
+#: modules/components/general-user-interactions.php:147
+#: modules/components/general-user-interactions.php:170
 #: modules/components/general-user-interactions.php:193
+#: modules/components/general-user-interactions.php:215
+#: modules/components/general-user-interactions.php:237
 #: modules/components/general-wpemoji.php:27
 #: modules/components/general-wpemoji.php:50
 #: modules/components/rewrite-author.php:49
 #: modules/components/rewrite-comments.php:50
-#: modules/components/rewrite-json-rest.php:29
-#: modules/components/rewrite-json-rest.php:60
-#: modules/components/rewrite-json-rest.php:93
-#: modules/components/rewrite-json-rest.php:130
-#: modules/components/rewrite-json-rest.php:161
-#: modules/components/rewrite-json-rest.php:185
-#: modules/components/rewrite-json-rest.php:208
-#: modules/components/rewrite-new_include_path.php:54
-#: modules/components/rewrite-new_plugin_path.php:53
-#: modules/components/rewrite-new_theme_path.php:91
-#: modules/components/rewrite-new_theme_path.php:183
-#: modules/components/rewrite-new_upload_path.php:53
-#: modules/components/rewrite-new_xml-rpc-path.php:57
-#: modules/components/rewrite-new_xml-rpc-path.php:86
-#: modules/components/rewrite-new_xml-rpc-path.php:115
-#: modules/components/rewrite-root-files.php:30
-#: modules/components/rewrite-root-files.php:52
-#: modules/components/rewrite-root-files.php:75
-#: modules/components/rewrite-root-files.php:116
-#: modules/components/rewrite-root-files.php:138
+#: modules/components/rewrite-json-rest.php:143
+#: modules/components/rewrite-json-rest.php:169
+#: modules/components/rewrite-json-rest.php:196
+#: modules/components/rewrite-json-rest.php:223
+#: modules/components/rewrite-json-rest.php:242
+#: modules/components/rewrite-json-rest.php:260
+#: modules/components/rewrite-json-rest.php:278
+#: modules/components/rewrite-new_include_path.php:85
+#: modules/components/rewrite-new_plugin_path.php:121
+#: modules/components/rewrite-new_theme_path.php:178
+#: modules/components/rewrite-new_theme_path.php:244
+#: modules/components/rewrite-new_upload_path.php:85
+#: modules/components/rewrite-new_xml-rpc-path.php:103
+#: modules/components/rewrite-new_xml-rpc-path.php:120
+#: modules/components/rewrite-new_xml-rpc-path.php:137
+#: modules/components/rewrite-new_xml-rpc-path.php:153
+#: modules/components/rewrite-root-files.php:124
+#: modules/components/rewrite-root-files.php:142
 #: modules/components/rewrite-root-files.php:161
-#: modules/components/rewrite-root-files.php:184
-#: modules/components/rewrite-search.php:49
-#: modules/components/rewrite-slash.php:35
-#: modules/components/rewrite-wp_content_path.php:55
+#: modules/components/rewrite-root-files.php:199
+#: modules/components/rewrite-root-files.php:217
+#: modules/components/rewrite-root-files.php:235
+#: modules/components/rewrite-root-files.php:253
+#: modules/components/rewrite-search.php:81
+#: modules/components/rewrite-slash.php:59
+#: modules/components/rewrite-wp_content_path.php:85
 #: modules/components/security-add_headers.php:30
 #: modules/components/security-add_headers.php:54
 #: modules/components/security-add_headers.php:76
 msgid "No"
 msgstr ""
 
-#: modules/components/admin-admin_url.php:60
-#: modules/components/admin-new_wp_login_php.php:66
+#: modules/components/admin-admin_url.php:99
+#: modules/components/admin-admin_url.php:127
+#: modules/components/admin-login_php.php:123
 #: modules/components/general-admin-bar.php:58
+#: modules/components/general-block-detectors.php:36
 #: modules/components/general-feed.php:32
 #: modules/components/general-headers.php:31
 #: modules/components/general-headers.php:55
@@ -2450,131 +2511,202 @@ msgstr ""
 #: modules/components/general-user-interactions.php:60
 #: modules/components/general-user-interactions.php:82
 #: modules/components/general-user-interactions.php:104
-#: modules/components/general-user-interactions.php:127
-#: modules/components/general-user-interactions.php:150
-#: modules/components/general-user-interactions.php:172
+#: modules/components/general-user-interactions.php:126
+#: modules/components/general-user-interactions.php:148
+#: modules/components/general-user-interactions.php:171
 #: modules/components/general-user-interactions.php:194
+#: modules/components/general-user-interactions.php:216
+#: modules/components/general-user-interactions.php:238
 #: modules/components/general-wpemoji.php:28
 #: modules/components/general-wpemoji.php:51
 #: modules/components/rewrite-author.php:50
 #: modules/components/rewrite-comments.php:51
-#: modules/components/rewrite-json-rest.php:30
-#: modules/components/rewrite-json-rest.php:61
-#: modules/components/rewrite-json-rest.php:94
-#: modules/components/rewrite-json-rest.php:162
-#: modules/components/rewrite-json-rest.php:186
-#: modules/components/rewrite-json-rest.php:209
-#: modules/components/rewrite-new_include_path.php:55
-#: modules/components/rewrite-new_plugin_path.php:54
-#: modules/components/rewrite-new_theme_path.php:92
-#: modules/components/rewrite-new_theme_path.php:184
-#: modules/components/rewrite-new_upload_path.php:54
-#: modules/components/rewrite-new_xml-rpc-path.php:58
-#: modules/components/rewrite-new_xml-rpc-path.php:87
-#: modules/components/rewrite-new_xml-rpc-path.php:116
-#: modules/components/rewrite-root-files.php:31
-#: modules/components/rewrite-root-files.php:53
-#: modules/components/rewrite-root-files.php:76
-#: modules/components/rewrite-root-files.php:117
-#: modules/components/rewrite-root-files.php:139
+#: modules/components/rewrite-json-rest.php:144
+#: modules/components/rewrite-json-rest.php:170
+#: modules/components/rewrite-json-rest.php:197
+#: modules/components/rewrite-json-rest.php:243
+#: modules/components/rewrite-json-rest.php:261
+#: modules/components/rewrite-json-rest.php:279
+#: modules/components/rewrite-new_include_path.php:86
+#: modules/components/rewrite-new_plugin_path.php:122
+#: modules/components/rewrite-new_theme_path.php:179
+#: modules/components/rewrite-new_theme_path.php:245
+#: modules/components/rewrite-new_upload_path.php:86
+#: modules/components/rewrite-new_xml-rpc-path.php:104
+#: modules/components/rewrite-new_xml-rpc-path.php:121
+#: modules/components/rewrite-new_xml-rpc-path.php:138
+#: modules/components/rewrite-new_xml-rpc-path.php:154
+#: modules/components/rewrite-root-files.php:125
+#: modules/components/rewrite-root-files.php:143
 #: modules/components/rewrite-root-files.php:162
-#: modules/components/rewrite-root-files.php:185
-#: modules/components/rewrite-search.php:50
-#: modules/components/rewrite-slash.php:36
-#: modules/components/rewrite-wp_content_path.php:56
+#: modules/components/rewrite-root-files.php:200
+#: modules/components/rewrite-root-files.php:218
+#: modules/components/rewrite-root-files.php:236
+#: modules/components/rewrite-root-files.php:254
+#: modules/components/rewrite-search.php:82
+#: modules/components/rewrite-slash.php:60
+#: modules/components/rewrite-wp_content_path.php:86
 #: modules/components/security-add_headers.php:31
 #: modules/components/security-add_headers.php:55
 #: modules/components/security-add_headers.php:77
 msgid "Yes"
 msgstr ""
 
-#: modules/components/admin-new_wp_login_php.php:18
-msgid ""
-"Map a new wp-login.php instead default. This also need to include <i>.php</i> "
-"extension."
+#: modules/components/admin-admin_url.php:108
+msgid "Block default admin url and files from being accesible."
 msgstr ""
 
-#: modules/components/admin-new_wp_login_php.php:23
+#: modules/components/admin-admin_url.php:113
+msgid ""
+"If set to Yes, the old admin url will be blocked and a default theme 404 error "
+"page will be returned."
+msgstr ""
+
+#: modules/components/admin-admin_url.php:114
+msgid ""
+"Ensure the New Admin Url option works correctly on your server before activate "
+"this."
+msgstr ""
+
+#: modules/components/admin-admin_url.php:121
+#: modules/components/admin-login_php.php:117
+#: modules/components/rewrite-json-rest.php:164
+#: modules/components/rewrite-json-rest.php:191
+#: modules/components/rewrite-json-rest.php:218
+#: modules/components/rewrite-new_include_path.php:80
+#: modules/components/rewrite-new_plugin_path.php:116
+#: modules/components/rewrite-new_theme_path.php:173
+#: modules/components/rewrite-new_theme_path.php:239
+#: modules/components/rewrite-new_upload_path.php:80
+#: modules/components/rewrite-new_xml-rpc-path.php:99
+#: modules/components/rewrite-root-files.php:194
+#: modules/components/rewrite-wp_content_path.php:80
+msgid "This is an advanced option !"
+msgstr ""
+
+#: modules/components/admin-admin_url.php:121
+msgid ""
+"This can break the layour of dashboard admin if server not supporting the "
+"feature. Ensure `New Admin Url` option works fine before activate this.<br />If "
+"not working, use the recovery link to revert."
+msgstr ""
+
+#: modules/components/admin-login_php.php:82
+msgid "Map a new wp-login.php instead default."
+msgstr ""
+
+#: modules/components/admin-login_php.php:87
 msgid ""
 "There are a lot of security issues that come from having your login page open "
 "to the public. Most specifically, brute force attacks. Because of the ubiquity "
 "of WordPress, these kinds of attacks are becoming more and more common."
 msgstr ""
 
-#: modules/components/admin-new_wp_login_php.php:24
+#: modules/components/admin-login_php.php:88
 msgid ""
 "Map a new wp-login.php instead default prevent hackers boot to attempt to brute "
 "force a site login. Being known only by the site owner, the url itself becomes "
 "private."
 msgstr ""
 
-#: modules/components/admin-new_wp_login_php.php:25
+#: modules/components/admin-login_php.php:89
 msgid "Make sure you keep the new login url to a safe place, in case to forget."
 msgstr ""
 
-#: modules/components/admin-new_wp_login_php.php:35
+#: modules/components/admin-login_php.php:98
 msgid ""
 "Make sure your log-in url is not already modified by another plugin or theme. "
 "In such case, you should disable other code and take advantage of these "
 "features."
 msgstr ""
 
-#: modules/components/admin-new_wp_login_php.php:47
-#: modules/components/admin-new_wp_login_php.php:51
+#: modules/components/admin-login_php.php:105
+#: modules/components/admin-login_php.php:109
 msgid "Block default wp-login.php"
 msgstr ""
 
-#: modules/components/admin-new_wp_login_php.php:48
+#: modules/components/admin-login_php.php:106
 msgid "Block default wp-login.php file from being accesible."
 msgstr ""
 
-#: modules/components/admin-new_wp_login_php.php:52
+#: modules/components/admin-login_php.php:110
 msgid ""
 "If set to Yes, the old login url will be blocked and a default theme 404 error "
 "page will be returned."
 msgstr ""
 
-#: modules/components/admin-new_wp_login_php.php:53
+#: modules/components/admin-login_php.php:111
 msgid ""
 "Ensure the New wp-login.php option works correctly on your server before "
 "activate this."
 msgstr ""
 
-#: modules/components/admin-new_wp_login_php.php:59
+#: modules/components/admin-login_php.php:117
 msgid ""
 "This can break the login page if server not supporting the feature. Ensure `New "
 "wp-login.php` option works fine before activate this.<br />If not working, use "
 "the recovery link to revert."
 msgstr ""
 
-#: modules/components/admin-new_wp_login_php.php:111
+#: modules/components/admin-login_php.php:130
+msgid "Custom Login page Logo"
+msgstr ""
+
+#: modules/components/admin-login_php.php:132
+msgid "Change the default WordPress login page Logo."
+msgstr ""
+
+#: modules/components/admin-login_php.php:136
+msgid "Custom Login Logo"
+msgstr ""
+
+#: modules/components/admin-login_php.php:137
+msgid ""
+"The feature in the WP Hide plugin allows you to replace the standard WordPress "
+"login page logo with a custom image of your choice. This customization enhances "
+"your site's branding by displaying your logo on the login page, admin "
+"dashboard, and other areas where the default logo appears. To use this feature, "
+"simply upload your desired logo in the WP Hide settings and save the changes. "
+"Your new logo will be displayed immediately, providing a more personalized and "
+"professional appearance for your WordPress site."
+msgstr ""
+
+#: modules/components/admin-login_php.php:138
+msgid "Recommended width size is 320px."
+msgstr ""
+
+#: modules/components/admin-login_php.php:208
 msgid ""
 "This is an automated message to inform that your login url has been changed at"
 msgstr ""
 
-#: modules/components/admin-new_wp_login_php.php:112
+#: modules/components/admin-login_php.php:209
 msgid "The new login url is"
 msgstr ""
 
-#: modules/components/admin-new_wp_login_php.php:113
-msgid "Additionality you can use this to recover the default login / admin links "
+#: modules/components/admin-login_php.php:210
+msgid ""
+"Additionally, you can use the following link to recover the default login/admin "
+"access: "
 msgstr ""
 
-#: modules/components/admin-new_wp_login_php.php:114
-msgid "Please keep this url safe for recover, if forgot"
+#: modules/components/admin-login_php.php:211
+msgid ""
+"Please ensure the safety of this URL for potential recovery in case of "
+"forgetfulness."
 msgstr ""
 
-#: modules/components/cdn-setup.php:16 modules/components/cdn-setup.php:20
+#: modules/components/cdn-setup.php:40 modules/components/cdn-setup.php:44
 msgid "CDN Url"
 msgstr ""
 
-#: modules/components/cdn-setup.php:17
+#: modules/components/cdn-setup.php:41
 msgid ""
 "Some CDN providers (like stackpath.com ) replace site assets with custom url, "
 "enter here such url. Otherwise this option should stay empty."
 msgstr ""
 
-#: modules/components/cdn-setup.php:21
+#: modules/components/cdn-setup.php:45
 msgid ""
 "A Content Delivery Network - CDN - is a network of servers located around the "
 "globe in fundamental spots with fast access. It takes a while for a web page to "
@@ -2583,11 +2715,11 @@ msgid ""
 "such as images, CSS, JavaScript, audio and video streams."
 msgstr ""
 
-#: modules/components/cdn-setup.php:22
+#: modules/components/cdn-setup.php:46
 msgid "Sample CDN url:"
 msgstr ""
 
-#: modules/components/cdn-setup.php:24
+#: modules/components/cdn-setup.php:48
 msgid ""
 "Enter a CDN Url to allow the plugin to process assets provided through CDN "
 "service."
@@ -2613,6 +2745,48 @@ msgstr ""
 
 #: modules/components/general-admin-bar.php:50
 msgid "role."
+msgstr ""
+
+#: modules/components/general-block-detectors.php:17
+msgid "Block Theme / Plugin detectors."
+msgstr ""
+
+#: modules/components/general-block-detectors.php:18
+msgid "Block common Theme / Plugin detectors and scanners."
+msgstr ""
+
+#: modules/components/general-block-detectors.php:21
+msgid "Block Theme / Plugin detectors"
+msgstr ""
+
+#: modules/components/general-block-detectors.php:22
+msgid ""
+"Enhance your website's privacy and security with the Block Theme Detectors "
+"feature. This tool prevents known user agents and IP addresses associated with "
+"popular theme detectors from accessing your site's design and theme-related "
+"information. By doing so, it keeps your creative choices private and reduces "
+"the risk of targeted attacks exploiting specific theme vulnerabilities."
+msgstr ""
+
+#: modules/components/general-block-detectors.php:23
+msgid "Key Benefits"
+msgstr ""
+
+#: modules/components/general-block-detectors.php:25
+msgid ""
+"Privacy: Protect your website's theme details from being copied or analyzed"
+msgstr ""
+
+#: modules/components/general-block-detectors.php:26
+msgid "Security: Minimize exposure to potential threats"
+msgstr ""
+
+#: modules/components/general-block-detectors.php:27
+msgid "Performance: Optimize server resources by blocking unnecessary traffic"
+msgstr ""
+
+#: modules/components/general-block-detectors.php:28
+msgid "Competitive Edge: Maintain a unique brand identity"
 msgstr ""
 
 #: modules/components/general-emulate.php:17
@@ -2738,16 +2912,6 @@ msgid ""
 "JSON url."
 msgstr ""
 
-#: modules/components/general-headers.php:21
-#: modules/components/general-scripts.php:16
-#: modules/components/general-scripts.php:20
-#: modules/components/general-styles.php:16
-#: modules/components/general-styles.php:20
-#: modules/components/general-styles.php:43
-#: modules/components/security-add_headers.php:21
-msgid "Remove Version"
-msgstr ""
-
 #: modules/components/general-headers.php:22
 #: modules/components/security-add_headers.php:22
 msgid ""
@@ -2766,7 +2930,6 @@ msgstr ""
 
 #: modules/components/general-headers.php:42
 #: modules/components/general-headers.php:46
-#: modules/components/general-headers.php:69
 #: modules/components/security-add_headers.php:42
 #: modules/components/security-add_headers.php:46
 msgid "Remove X-Powered-By Header"
@@ -2777,6 +2940,7 @@ msgid "Remove X-Powered-By Header if set."
 msgstr ""
 
 #: modules/components/general-headers.php:65
+#: modules/components/general-headers.php:69
 msgid "Remove Server Header"
 msgstr ""
 
@@ -2849,7 +3013,7 @@ msgid "Html & JavaScript"
 msgstr ""
 
 #: modules/components/general-html.php:65
-#: modules/components/rewrite-json-rest.php:132
+#: modules/components/rewrite-json-rest.php:225
 msgid "All"
 msgstr ""
 
@@ -2958,12 +3122,12 @@ msgid ""
 msgstr ""
 
 #: modules/components/general-meta.php:150 modules/components/general-meta.php:154
-#: modules/components/rewrite-json-rest.php:150
+#: modules/components/rewrite-json-rest.php:232
 msgid "Disable output the REST API link tag into page header"
 msgstr ""
 
 #: modules/components/general-meta.php:151
-#: modules/components/rewrite-json-rest.php:151
+#: modules/components/rewrite-json-rest.php:233
 msgid "By default a REST API link tag is being append to HTML."
 msgstr ""
 
@@ -3071,6 +3235,14 @@ msgstr ""
 msgid "Sample robots.txt url:"
 msgstr ""
 
+#: modules/components/general-scripts.php:16
+#: modules/components/general-scripts.php:20
+#: modules/components/general-styles.php:16
+#: modules/components/general-styles.php:20
+#: modules/components/security-add_headers.php:21
+msgid "Remove Version"
+msgstr ""
+
 #: modules/components/general-scripts.php:17
 msgid "Remove version number from enqueued script files."
 msgstr ""
@@ -3113,6 +3285,7 @@ msgid ""
 msgstr ""
 
 #: modules/components/general-styles.php:39
+#: modules/components/general-styles.php:43
 msgid "Remove ID from link tags"
 msgstr ""
 
@@ -3169,99 +3342,125 @@ msgstr ""
 
 #: modules/components/general-user-interactions.php:70
 #: modules/components/general-user-interactions.php:74
-msgid "Disable Copy / Paste"
+msgid "Disable Copy"
 msgstr ""
 
 #: modules/components/general-user-interactions.php:71
-msgid "Disable text copy and paste on your pages."
+msgid "Disable text copy on your pages."
 msgstr ""
 
 #: modules/components/general-user-interactions.php:75
-msgid "Through the option copy and paste browser functionality is disabled."
+msgid "Through this option, the browser copy functionality is disabled."
 msgstr ""
 
 #: modules/components/general-user-interactions.php:92
 #: modules/components/general-user-interactions.php:96
-msgid "Disable Print"
+msgid "Disable Cut"
 msgstr ""
 
 #: modules/components/general-user-interactions.php:93
-msgid "Disable Print function on your pages."
+msgid "Disable text cut on your pages."
 msgstr ""
 
 #: modules/components/general-user-interactions.php:97
+msgid "Through this option, the browser cut functionality is disabled."
+msgstr ""
+
+#: modules/components/general-user-interactions.php:114
+#: modules/components/general-user-interactions.php:118
+msgid "Disable Paste"
+msgstr ""
+
+#: modules/components/general-user-interactions.php:115
+msgid "Disable text paste on your pages."
+msgstr ""
+
+#: modules/components/general-user-interactions.php:119
+msgid "Through this option, the browser paste functionality is disabled."
+msgstr ""
+
+#: modules/components/general-user-interactions.php:136
+#: modules/components/general-user-interactions.php:140
+msgid "Disable Print"
+msgstr ""
+
+#: modules/components/general-user-interactions.php:137
+msgid "Disable Print function on your pages."
+msgstr ""
+
+#: modules/components/general-user-interactions.php:141
 msgid ""
 "When using the option, the browser Print dialogue is not available so a site "
 "print is disabled."
 msgstr ""
 
-#: modules/components/general-user-interactions.php:114
-#: modules/components/general-user-interactions.php:118
+#: modules/components/general-user-interactions.php:158
+#: modules/components/general-user-interactions.php:162
 msgid "Disable Print Screen"
 msgstr ""
 
-#: modules/components/general-user-interactions.php:115
+#: modules/components/general-user-interactions.php:159
 msgid "Disable Print Screen function on your pages."
 msgstr ""
 
-#: modules/components/general-user-interactions.php:119
+#: modules/components/general-user-interactions.php:163
 msgid ""
 "The Print Screen function captures an image of the entire screen and copies it "
 "to the Clipboard in the computer's memory."
 msgstr ""
 
-#: modules/components/general-user-interactions.php:120
+#: modules/components/general-user-interactions.php:164
 msgid "If the functionality is not required, the option helps to disable it."
 msgstr ""
 
-#: modules/components/general-user-interactions.php:137
-#: modules/components/general-user-interactions.php:141
+#: modules/components/general-user-interactions.php:181
+#: modules/components/general-user-interactions.php:185
 msgid "Disable Developer Tools"
 msgstr ""
 
-#: modules/components/general-user-interactions.php:138
+#: modules/components/general-user-interactions.php:182
 msgid "Disable the browser Developr Tools on your pages."
 msgstr ""
 
-#: modules/components/general-user-interactions.php:142
+#: modules/components/general-user-interactions.php:186
 msgid ""
 "Every modern web browser includes a powerful tool called Developer Tools. "
 "Through the application, a user can inspect currently-loaded HTML, CSS and "
 "JavaScript."
 msgstr ""
 
-#: modules/components/general-user-interactions.php:143
+#: modules/components/general-user-interactions.php:187
 msgid ""
 "To prevent the user from deeply checking into your site architecture, the "
 "browser Inspect can be disabled through this option. "
 msgstr ""
 
-#: modules/components/general-user-interactions.php:160
-#: modules/components/general-user-interactions.php:164
+#: modules/components/general-user-interactions.php:204
+#: modules/components/general-user-interactions.php:208
 msgid "Disable View Source"
 msgstr ""
 
-#: modules/components/general-user-interactions.php:161
+#: modules/components/general-user-interactions.php:205
 msgid "Disable the browser view source on your pages."
 msgstr ""
 
-#: modules/components/general-user-interactions.php:165
+#: modules/components/general-user-interactions.php:209
 msgid ""
 "The page source is an HTML set of tags code. An HTML tag is an element that, "
 "along with CSS and JavaScript, tells the Web browser what to do and how to "
 "display the text and images."
 msgstr ""
 
-#: modules/components/general-user-interactions.php:182
-#: modules/components/general-user-interactions.php:186
+#: modules/components/general-user-interactions.php:226
+#: modules/components/general-user-interactions.php:230
 msgid "Disable Drag / Drop"
 msgstr ""
 
-#: modules/components/general-user-interactions.php:183
+#: modules/components/general-user-interactions.php:227
 msgid "Disable the browser drag and drop for images on your pages."
 msgstr ""
 
-#: modules/components/general-user-interactions.php:187
+#: modules/components/general-user-interactions.php:231
 msgid ""
 "The Drag and Drop operation describes the action o selecting an object or text "
 "on the page and moving it to a different area."
@@ -3269,7 +3468,6 @@ msgstr ""
 
 #: modules/components/general-wpemoji.php:16
 #: modules/components/general-wpemoji.php:20
-#: modules/components/general-wpemoji.php:42
 msgid "Disable Emoji"
 msgstr ""
 
@@ -3285,6 +3483,7 @@ msgid ""
 msgstr ""
 
 #: modules/components/general-wpemoji.php:38
+#: modules/components/general-wpemoji.php:42
 msgid "Disable TinyMCE Emoji"
 msgstr ""
 
@@ -3296,6 +3495,248 @@ msgstr ""
 msgid ""
 "Disable TinyMCE Emoji This is also loaded along the WordPress default TinyMCE "
 "editor, but it can be disabled through this option."
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:26
+#: modules/components/login_captcha-google-v3.php:26
+msgid "Site Key"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:30
+#: modules/components/login_captcha-google-v3.php:30
+msgid "Secret Key"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:34
+msgid "Theme"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:37
+msgid "Light"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:38
+msgid "Dark"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:42
+msgid "Language"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:45
+msgid "Auto Detect"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:46
+msgid "Arabic"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:47
+msgid "German"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:48
+msgid "English"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:49
+msgid "Spanish"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:50
+msgid "Farsi/Persian"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:51
+msgid "French"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:52
+msgid "Indonesian"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:53
+msgid "Italian"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:54
+msgid "Japanese"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:55
+msgid "Korean"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:56
+msgid "Dutch"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:57
+msgid "Polish"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:58
+msgid "Portuguese"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:59
+msgid "Portuguese (Brazil)"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:60
+msgid "Romania"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:61
+msgid "Russian"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:62
+msgid "Turkish"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:63
+msgid "Ukrainian"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:64
+msgid "Chinese"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:65
+msgid "Chinese (Simplified)"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:66
+msgid "Chinese (Traditional)"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:125
+#: modules/components/login_captcha-google-v3.php:106
+msgid "Test API"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:126
+#: modules/components/login_captcha-google-v3.php:108
+msgid "The captcha will not show on the front side until the Test is successful."
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:140
+msgid "The Google Captcha V2 integration is completed."
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:158
+#: modules/components/login_captcha-google-v3.php:140
+msgid "You can get your site key and secret key from"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:159
+#: modules/components/login_captcha-google-v3.php:141
+msgid ""
+"After filling in and saving the options, remember to click the <b "
+"class=\"important\">Test API</b> button located at the top of this section. The "
+"CAPTCHA won't appear on the front end until the test is successfully completed"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:183
+#: modules/components/login_captcha-google-v3.php:170
+msgid "The API returned an error"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:295
+#: modules/components/login_captcha-google-v2.php:316
+#: modules/components/login_captcha-google-v3.php:309
+#: modules/components/login_captcha-google-v3.php:330
+msgid "Error!"
+msgstr ""
+
+#: modules/components/login_captcha-google-v2.php:295
+#: modules/components/login_captcha-google-v2.php:316
+#: modules/components/login_captcha-google-v3.php:309
+#: modules/components/login_captcha-google-v3.php:330
+msgid "Unable to verify that you are human."
+msgstr ""
+
+#: modules/components/login_captcha-google-v3.php:34
+msgid "Required Score to validate ( range 0.0 - 1.0 ). Default 0.5 "
+msgstr ""
+
+#: modules/components/login_captcha-google-v3.php:107
+msgid ""
+"If the Test API button is not triggering, check the Google badge message on the "
+"bottom-right corner of your screen. The provided site key may be invalid for "
+"this domain."
+msgstr ""
+
+#: modules/components/login_captcha-google-v3.php:122
+msgid "The Google Captcha V3 integration is completed."
+msgstr ""
+
+#: modules/components/login_captcha-google-v3.php:142
+msgid ""
+"reCAPTCHA v3 returns a score for each request without user friction. The score "
+"is based on interactions with your site and enables you to take an appropriate "
+"action for your site."
+msgstr ""
+
+#: modules/components/login_captcha-google-v3.php:143
+msgid ""
+"The default score is 0.5 which is considered a safe value to distinguish "
+"between bots and real users. "
+msgstr ""
+
+#: modules/components/login_captcha-google-v3.php:144
+msgid "Warning"
+msgstr ""
+
+#: modules/components/login_captcha-google-v3.php:145
+msgid ""
+"Setting an excessively high value may result in being locked out of your site's "
+"login. Conversely, using an extremely low value can validate bots. The optimal "
+"value is 0.5."
+msgstr ""
+
+#: modules/components/login_captcha.php:72 modules/components/login_captcha.php:78
+msgid "Captcha Type"
+msgstr ""
+
+#: modules/components/login_captcha.php:74
+msgid ""
+"Select the required CAPTCHA type to protect the Login, Registration page, "
+"Password Forget etc."
+msgstr ""
+
+#: modules/components/login_captcha.php:79
+msgid ""
+"CAPTCHA, short for \"Completely Automated Public Turing test to tell Computers "
+"and Humans Apart,\" is a critical cybersecurity tool. It distinguishes human "
+"users from automated bots by presenting challenges like distorted characters or "
+"image recognition tasks. CAPTCHA safeguards websites, login pages, and online "
+"services from unwanted intrusion, spam, and fraud. Its evolution includes "
+"advanced variants and innovations like reCAPTCHA, continually enhancing digital "
+"security."
+msgstr ""
+
+#: modules/components/login_captcha.php:80
+msgid ""
+"While it's a robust defense, adversaries are adapting, making CAPTCHA's ongoing "
+"development crucial in the fight against online threats."
+msgstr ""
+
+#: modules/components/login_captcha.php:148
+msgid "Disabled"
+msgstr ""
+
+#: modules/components/login_captcha.php:149
+msgid "Google Captcha V2"
+msgstr ""
+
+#: modules/components/login_captcha.php:150
+msgid "Google Captcha V3"
+msgstr ""
+
+#: modules/components/login_captcha.php:151
+msgid "CloudFlare Turnstile <span class=\"wph-pro\">PRO</span>"
 msgstr ""
 
 #: modules/components/rewrite-author.php:17
@@ -3319,8 +3760,8 @@ msgstr ""
 
 #: modules/components/rewrite-author.php:38
 #: modules/components/rewrite-author.php:42
-#: modules/components/rewrite-search.php:38
-#: modules/components/rewrite-search.php:42
+#: modules/components/rewrite-search.php:71
+#: modules/components/rewrite-search.php:75
 msgid "Block default"
 msgstr ""
 
@@ -3329,12 +3770,12 @@ msgid "Block default /author/ when using custom one."
 msgstr ""
 
 #: modules/components/rewrite-author.php:39
-#: modules/components/rewrite-search.php:39
+#: modules/components/rewrite-search.php:72
 msgid "Apply only if "
 msgstr ""
 
 #: modules/components/rewrite-author.php:39
-#: modules/components/rewrite-search.php:39
+#: modules/components/rewrite-search.php:72
 msgid "is not empty."
 msgstr ""
 
@@ -3379,13 +3820,13 @@ msgid ""
 "only if <b>New wp-comments-post.php</b> option is filled in."
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:18
+#: modules/components/rewrite-json-rest.php:133
 msgid ""
 "As default, when calling the REST API base route ( e.g. /wp-json/ ) the service "
 "outputs all available namespaces and routes."
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:22
+#: modules/components/rewrite-json-rest.php:137
 msgid ""
 "When calling the site REST API base route ( e.g. /wp-json/ or ?rest_route=/ ) "
 "the service outputs all available namespaces and routes for current site. This "
@@ -3393,24 +3834,24 @@ msgid ""
 "certain used theme and plugins. "
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:23
+#: modules/components/rewrite-json-rest.php:138
 msgid ""
 "Recommended selection for this option is Yes, to ensure no inside data is being "
 "exposed. "
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:41
-#: modules/components/rewrite-json-rest.php:45
+#: modules/components/rewrite-json-rest.php:151
+#: modules/components/rewrite-json-rest.php:155
 msgid "Disable JSON REST V1 service"
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:42
-#: modules/components/rewrite-json-rest.php:74
+#: modules/components/rewrite-json-rest.php:152
+#: modules/components/rewrite-json-rest.php:178
 msgid "An API service for WordPress which is active by default."
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:46
-#: modules/components/rewrite-json-rest.php:78
+#: modules/components/rewrite-json-rest.php:156
+#: modules/components/rewrite-json-rest.php:182
 msgid ""
 "The WordPress REST API is an easy-to-use set of HTTP endpoints which allows "
 "access a site data in simple JSON format. That including users, posts, "
@@ -3418,8 +3859,8 @@ msgid ""
 "request."
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:47
-#: modules/components/rewrite-json-rest.php:79
+#: modules/components/rewrite-json-rest.php:157
+#: modules/components/rewrite-json-rest.php:183
 msgid ""
 "A REST API can be consumed everywhere. On mobile applications, on front-end "
 "(web apps) or any other devices that have access on the net, practically "
@@ -3427,356 +3868,370 @@ msgid ""
 "API service."
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:48
+#: modules/components/rewrite-json-rest.php:158
 msgid ""
 "V1 was the first development version of API, which currently is deprecated. To "
 "disable the usage of it, simply chose Yes."
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:54
+#: modules/components/rewrite-json-rest.php:164
 msgid ""
 "This can break specific functionality. Some plugins might use this API. Once "
 "active test it thoroughly.<br />If not working, set to <b>No</b> to revert."
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:73
-#: modules/components/rewrite-json-rest.php:77
+#: modules/components/rewrite-json-rest.php:177
+#: modules/components/rewrite-json-rest.php:181
 msgid "Disable JSON REST V2 service"
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:80
+#: modules/components/rewrite-json-rest.php:184
 msgid ""
 "V2 is the current development version of API, which is included into WordPress "
 "as default. To disable the usage of it, simply chose Yes."
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:81
+#: modules/components/rewrite-json-rest.php:185
 msgid ""
-"This might be required by specific plugins, including new WordPress editor "
-"Gutenberg."
+"This might be required by specific plugins, including the new WordPress editor "
+"Gutenberg, JetPack etc."
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:87
-#: modules/components/rewrite-json-rest.php:124
+#: modules/components/rewrite-json-rest.php:191
+#: modules/components/rewrite-json-rest.php:218
 msgid ""
 "This can break specific functionality. Some plugins like Gutenberg editor use "
 "this API. Once active test it thoroughly.<br />If not working, set to <b>No</b> "
 "to revert."
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:110
-#: modules/components/rewrite-json-rest.php:114
+#: modules/components/rewrite-json-rest.php:204
+#: modules/components/rewrite-json-rest.php:208
 msgid "Block any JSON REST calls"
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:111
+#: modules/components/rewrite-json-rest.php:205
 msgid "Any call for JSON REST API service will be blocked."
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:115
+#: modules/components/rewrite-json-rest.php:209
 msgid "This blocks the JSON REST API service."
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:116
+#: modules/components/rewrite-json-rest.php:210
 msgid ""
 "When selecting the <b>Non logged-in</b> the service is blocked for all non-"
 "authenticated users."
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:117
+#: modules/components/rewrite-json-rest.php:211
 msgid "When selecting the <b>All</b> the service is blocked for everyone."
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:118
+#: modules/components/rewrite-json-rest.php:212
 msgid ""
-"This might be required by specific plugins, including new WordPress editor "
-"Gutenberg. So if required to block the API, the <b>Non logged-in</b> is the "
-"appropriate option to use."
+"This might be required by specific plugins, including the new WordPress editor "
+"Gutenberg, JetPack etc. So if required to block the API, the <b>Non logged-in</"
+"b> is the appropriate option to use."
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:131
+#: modules/components/rewrite-json-rest.php:224
 msgid "Non logged-in"
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:154
+#: modules/components/rewrite-json-rest.php:236
 msgid "disable_json_rest_wphead_link"
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:155
+#: modules/components/rewrite-json-rest.php:237
 msgid ""
 "As default the API url is being append into the front html head tag. Using this "
 "option, it will be replaced."
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:174
+#: modules/components/rewrite-json-rest.php:250
 msgid "Disable JSON REST WP RSD endpoint from XML-RPC responses"
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:175
+#: modules/components/rewrite-json-rest.php:251
 msgid "By default a WP RSD endpoint is being append to the XML respose."
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:178
+#: modules/components/rewrite-json-rest.php:254
 msgid "disable_json_rest_xmlrpc_rsd"
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:179
+#: modules/components/rewrite-json-rest.php:255
 msgid "Disable any RSD endpoint from a XML-RPC response."
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:197
+#: modules/components/rewrite-json-rest.php:268
 msgid "Disable Sends a Link header for the REST API"
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:198
+#: modules/components/rewrite-json-rest.php:269
 msgid "On template_redirect, disable Sends a Link header for the REST API."
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:201
+#: modules/components/rewrite-json-rest.php:272
 msgid "disable_json_rest_template_redirect"
 msgstr ""
 
-#: modules/components/rewrite-json-rest.php:202
+#: modules/components/rewrite-json-rest.php:273
 msgid "Disable Sends a Link header for the REST API, on template_redirect"
 msgstr ""
 
-#: modules/components/rewrite-new_include_path.php:17
-#: modules/components/rewrite-new_include_path.php:21
-#: modules/components/rewrite-new_include_path.php:41
+#: modules/components/rewrite-new_include_path.php:51
+#: modules/components/rewrite-new_include_path.php:55
 msgid "New Includes Path"
 msgstr ""
 
-#: modules/components/rewrite-new_include_path.php:18
+#: modules/components/rewrite-new_include_path.php:52
 msgid "Change default /wp-includes/ path."
 msgstr ""
 
-#: modules/components/rewrite-new_include_path.php:24
+#: modules/components/rewrite-new_include_path.php:56
+msgid ""
+"By default, a WordPress installation contains a 'wp-includes' folder that "
+"stores files and resources utilized by the WordPress core, themes, and plugins. "
+"The 'wp-includes' directory serves as a common fingerprint, making it easy for "
+"anyone to identify the site as being built on WordPress."
+msgstr ""
+
+#: modules/components/rewrite-new_include_path.php:58
 msgid "After filling in this option e.g. resources the links will change to this:"
 msgstr ""
 
-#: modules/components/rewrite-new_include_path.php:29
+#: modules/components/rewrite-new_include_path.php:63
 msgid "e.g. my_includes"
 msgstr ""
 
-#: modules/components/rewrite-new_include_path.php:37
+#: modules/components/rewrite-new_include_path.php:69
+#: modules/components/rewrite-new_include_path.php:73
 msgid "Block wp-includes URL"
 msgstr ""
 
-#: modules/components/rewrite-new_include_path.php:38
+#: modules/components/rewrite-new_include_path.php:70
 msgid ""
 "Block /wp-includes/ files from being accesible through default urls. <br /"
 ">Apply only if <b>New Includes Path</b> is not empty."
 msgstr ""
 
-#: modules/components/rewrite-new_include_path.php:42
+#: modules/components/rewrite-new_include_path.php:74
 msgid ""
 "This blocks the default wp-includes urls only for non loged-in users.<br />The "
 "functionality apply only if <b>New Includes Path</b> option is filled in."
 msgstr ""
 
-#: modules/components/rewrite-new_include_path.php:48
-#: modules/components/rewrite-new_plugin_path.php:47
+#: modules/components/rewrite-new_include_path.php:80
 msgid ""
 "This can break the layout if server not supporting the feature. Ensure `New "
 "Includes Path` option works fine before activate this. Once active test it "
 "thoroughly.<br />If not working, set to <b>No</b> to revert."
 msgstr ""
 
-#: modules/components/rewrite-new_plugin_path.php:18
+#: modules/components/rewrite-new_plugin_path.php:90
 msgid "The default plugins path is set to"
 msgstr ""
 
-#: modules/components/rewrite-new_plugin_path.php:22
+#: modules/components/rewrite-new_plugin_path.php:94
 msgid ""
 "Use any alphanumeric symbols for this field which will be used as the new slug "
 "for the plugins folder. Presuming the `apps` slug is being used, all plugins "
 "urls become to something like this:"
 msgstr ""
 
-#: modules/components/rewrite-new_plugin_path.php:36
-#: modules/components/rewrite-new_plugin_path.php:40
+#: modules/components/rewrite-new_plugin_path.php:105
+#: modules/components/rewrite-new_plugin_path.php:109
 msgid "Block plugins URL"
 msgstr ""
 
-#: modules/components/rewrite-new_plugin_path.php:37
+#: modules/components/rewrite-new_plugin_path.php:106
 msgid ""
 "Block default /wp-content/plugins/ files from being accesible through default "
 "urls."
 msgstr ""
 
-#: modules/components/rewrite-new_plugin_path.php:41
+#: modules/components/rewrite-new_plugin_path.php:110
 msgid ""
 "This blocks the default wp-content/plugins/ url.<br />The functionality apply "
 "only if <b>New Plugins Path</b> option is filled in."
 msgstr ""
 
-#: modules/components/rewrite-new_plugin_path.php:88
-#: modules/components/rewrite-new_plugin_path.php:92
+#: modules/components/rewrite-new_plugin_path.php:116
+msgid ""
+"This can break the layout if server not supporting the feature. Ensure `New "
+"Plugins Path` option works fine before activate this. Once active test it "
+"thoroughly.<br />If not working, set to <b>No</b> to revert."
+msgstr ""
+
+#: modules/components/rewrite-new_plugin_path.php:150
+#: modules/components/rewrite-new_plugin_path.php:154
 msgid "New Path for"
 msgstr ""
 
-#: modules/components/rewrite-new_plugin_path.php:88
+#: modules/components/rewrite-new_plugin_path.php:150
 msgid "plugin"
 msgstr ""
 
-#: modules/components/rewrite-new_plugin_path.php:89
+#: modules/components/rewrite-new_plugin_path.php:151
 msgid "This setting if set, overwrites the"
 msgstr ""
 
-#: modules/components/rewrite-new_plugin_path.php:89
+#: modules/components/rewrite-new_plugin_path.php:151
 msgid "New Plugin Path"
 msgstr ""
 
-#: modules/components/rewrite-new_plugin_path.php:89
+#: modules/components/rewrite-new_plugin_path.php:151
 msgid "value for this plugin."
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:28
+#: modules/components/rewrite-new_theme_path.php:124
 msgid "Change theme url, which as default the path is set to"
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:32
+#: modules/components/rewrite-new_theme_path.php:128
 msgid ""
 "This option helps to change the theme url to a custom one. As default all theme "
 "assets ( styles, JavaScript etc ) are loaded using the theme url and appear on "
 "front side html source like this:"
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:34
+#: modules/components/rewrite-new_theme_path.php:130
 msgid ""
 "When using this option, if filling with `template`, all urls on front side "
 "become as follow:"
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:39
-#: modules/components/rewrite-new_theme_path.php:60
-#: modules/components/rewrite-new_theme_path.php:131
-#: modules/components/rewrite-new_theme_path.php:151
+#: modules/components/rewrite-new_theme_path.php:135
+#: modules/components/rewrite-new_theme_path.php:152
+#: modules/components/rewrite-new_theme_path.php:201
+#: modules/components/rewrite-new_theme_path.php:218
 msgid "Example"
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:49
-#: modules/components/rewrite-new_theme_path.php:53
-#: modules/components/rewrite-new_theme_path.php:77
-#: modules/components/rewrite-new_theme_path.php:140
-#: modules/components/rewrite-new_theme_path.php:144
-#: modules/components/rewrite-new_theme_path.php:168
+#: modules/components/rewrite-new_theme_path.php:141
+#: modules/components/rewrite-new_theme_path.php:145
+#: modules/components/rewrite-new_theme_path.php:207
+#: modules/components/rewrite-new_theme_path.php:211
 msgid "New Style File Path"
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:50
+#: modules/components/rewrite-new_theme_path.php:142
 msgid "Change default theme style file style.css, current path is set to"
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:54
+#: modules/components/rewrite-new_theme_path.php:146
 msgid ""
 "This allow to change the default style.css filename to something else e.g. "
 "template-style.css. Per this example, on front side the main style link change "
 "from /style.css to /template-style.css"
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:70
-#: modules/components/rewrite-new_theme_path.php:161
+#: modules/components/rewrite-new_theme_path.php:158
+#: modules/components/rewrite-new_theme_path.php:165
+#: modules/components/rewrite-new_theme_path.php:224
+#: modules/components/rewrite-new_theme_path.php:231
 msgid "Remove description header from Style file"
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:73
+#: modules/components/rewrite-new_theme_path.php:161
 msgid "Strip out all meta data from style file."
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:78
-#: modules/components/rewrite-new_theme_path.php:169
+#: modules/components/rewrite-new_theme_path.php:166
+#: modules/components/rewrite-new_theme_path.php:232
 msgid ""
 "Strip out all meta data from style file as Theme Name, Theme URI, Author etc. "
 "Those are important informations for hackers to find out possible theme "
 "security breaches. A list of headers can e found at"
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:78
-#: modules/components/rewrite-new_theme_path.php:169
+#: modules/components/rewrite-new_theme_path.php:166
+#: modules/components/rewrite-new_theme_path.php:232
 msgid "Theme Headers"
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:79
-#: modules/components/rewrite-new_theme_path.php:170
+#: modules/components/rewrite-new_theme_path.php:167
+#: modules/components/rewrite-new_theme_path.php:233
 msgid ""
 "This feature may fail if style file url not available on html ( being "
 "concatenated )."
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:85
+#: modules/components/rewrite-new_theme_path.php:173
 msgid ""
 "This can break the layout if server not supporting the feature. Once active "
 "test it thoroughly.<br />If not working, set to No to revert."
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:95
-#: modules/components/rewrite-new_theme_path.php:187
+#: modules/components/rewrite-new_theme_path.php:182
+#: modules/components/rewrite-new_theme_path.php:248
 msgid ""
 "This functionality use caching! If active, cache clear is recommended on styles "
 "updates."
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:95
-#: modules/components/rewrite-new_theme_path.php:187
+#: modules/components/rewrite-new_theme_path.php:182
+#: modules/components/rewrite-new_theme_path.php:248
 msgid "Cache Clear"
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:120
+#: modules/components/rewrite-new_theme_path.php:190
 msgid "Change child theme url, which as default the path is set to"
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:124
+#: modules/components/rewrite-new_theme_path.php:194
 msgid ""
 "This option helps to change the child theme url to a custom one. As default all "
 "theme assets ( styles, JavaScript etc ) are loaded using the theme url and "
 "appear on front side html source like this:"
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:126
+#: modules/components/rewrite-new_theme_path.php:196
 msgid ""
 "When using this option, if filling with `template-child`, all urls on front "
 "side become as follow:"
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:141
+#: modules/components/rewrite-new_theme_path.php:208
 msgid "Change default child theme style file style.css, current path is set to"
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:145
+#: modules/components/rewrite-new_theme_path.php:212
 msgid ""
 "This allow to change the default style.css filename to something else e.g. "
 "template-style.css. Per this example, on front side the main style link change "
 "from /style.css to /child-style.css"
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:164
+#: modules/components/rewrite-new_theme_path.php:227
 msgid "Strip out all meta data from child theme style file."
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:176
+#: modules/components/rewrite-new_theme_path.php:239
 msgid ""
 "This can break the layout if server not supporting the feature. Ensure all "
 "regular options works fine before activate this. Once active test it thoroughly."
 "<br />If not working, set to No to revert."
 msgstr ""
 
-#: modules/components/rewrite-new_theme_path.php:821
+#: modules/components/rewrite-new_theme_path.php:876
 msgid ""
 "When changing the Child Theme Path it is recommended to also change the Main "
 "Theme Path to avoid relative paths issues within style files and layout break."
 msgstr ""
 
-#: modules/components/rewrite-new_upload_path.php:17
-#: modules/components/rewrite-new_upload_path.php:21
+#: modules/components/rewrite-new_upload_path.php:53
+#: modules/components/rewrite-new_upload_path.php:57
 msgid "New Uploads Path"
 msgstr ""
 
-#: modules/components/rewrite-new_upload_path.php:18
+#: modules/components/rewrite-new_upload_path.php:54
 msgid "The default uploads path is set to"
 msgstr ""
 
-#: modules/components/rewrite-new_upload_path.php:22
+#: modules/components/rewrite-new_upload_path.php:58
 msgid ""
 "Use any alphanumeric symbols for this field which will be used as the new slug "
 "for the uploads folder. Using this option the default media folder can be "
@@ -3784,236 +4239,259 @@ msgid ""
 "this:"
 msgstr ""
 
-#: modules/components/rewrite-new_upload_path.php:27
+#: modules/components/rewrite-new_upload_path.php:63
 msgid "e.g. media"
 msgstr ""
 
-#: modules/components/rewrite-new_upload_path.php:36
-#: modules/components/rewrite-new_upload_path.php:40
+#: modules/components/rewrite-new_upload_path.php:69
+#: modules/components/rewrite-new_upload_path.php:73
 msgid "Block default uploads URL"
 msgstr ""
 
-#: modules/components/rewrite-new_upload_path.php:37
+#: modules/components/rewrite-new_upload_path.php:70
 msgid ""
 "Block default /wp-content/uploads/ media folder from being accesible through "
 "default urls."
 msgstr ""
 
-#: modules/components/rewrite-new_upload_path.php:41
+#: modules/components/rewrite-new_upload_path.php:74
 msgid ""
 "This blocks the default wp-content/uploads/ url.<br />The functionality apply "
 "only if <b>New Plugins Path</b> option is filled in."
 msgstr ""
 
-#: modules/components/rewrite-new_upload_path.php:47
+#: modules/components/rewrite-new_upload_path.php:80
 msgid ""
 "This can break the layout if server not supporting the feature. Ensure `New "
 "Uploads Path` option works fine before activate this. Once active test it "
 "thoroughly.<br />If not working, set to <b>No</b> to revert."
 msgstr ""
 
-#: modules/components/rewrite-new_xml-rpc-path.php:17
-#: modules/components/rewrite-new_xml-rpc-path.php:21
+#: modules/components/rewrite-new_xml-rpc-path.php:71
+#: modules/components/rewrite-new_xml-rpc-path.php:75
 msgid "New XML-RPC Path"
 msgstr ""
 
-#: modules/components/rewrite-new_xml-rpc-path.php:18
+#: modules/components/rewrite-new_xml-rpc-path.php:72
 msgid "The default XML-RPC path is set to xmlrpc.php."
 msgstr ""
 
-#: modules/components/rewrite-new_xml-rpc-path.php:23
+#: modules/components/rewrite-new_xml-rpc-path.php:77
 msgid "As default the path to XML-RPC file is:"
 msgstr ""
 
-#: modules/components/rewrite-new_xml-rpc-path.php:25
+#: modules/components/rewrite-new_xml-rpc-path.php:79
 msgid ""
 "Through this option it can be changed to anything else. This ensure the "
 "protocol will not be called by anyone who don't know the actual path."
 msgstr ""
 
-#: modules/components/rewrite-new_xml-rpc-path.php:30
+#: modules/components/rewrite-new_xml-rpc-path.php:84
 msgid "e.g. my-xml-rpc.php"
 msgstr ""
 
-#: modules/components/rewrite-new_xml-rpc-path.php:39
-#: modules/components/rewrite-new_xml-rpc-path.php:43
+#: modules/components/rewrite-new_xml-rpc-path.php:90
+#: modules/components/rewrite-new_xml-rpc-path.php:93
 msgid "Block default xmlrpc.php"
 msgstr ""
 
-#: modules/components/rewrite-new_xml-rpc-path.php:40
-msgid "Shut down XML-RPC service."
+#: modules/components/rewrite-new_xml-rpc-path.php:91
+msgid "Block the default xmlrpc.php XML-RPC service."
 msgstr ""
 
-#: modules/components/rewrite-new_xml-rpc-path.php:44
+#: modules/components/rewrite-new_xml-rpc-path.php:94
 msgid ""
-"This blocks the default XML-RPC service. The functionality apply if <b>New XML-"
-"RPC Path</b> option is NOT filled in."
+"This blocks the default XML-RPC service. The functionality applies if <b>New "
+"XML-RPC Path</b> option is filled in."
 msgstr ""
 
-#: modules/components/rewrite-new_xml-rpc-path.php:45
+#: modules/components/rewrite-new_xml-rpc-path.php:95
 msgid ""
-"Keep in mind that some plugins like Jetpack use this API, so disabling might "
-"break specific functionality."
+"Keep in mind that some third-party services, like Jetpack, rely on XML-RPC to "
+"connect to WordPress sites for features such as monitoring, statistics, and "
+"site management."
 msgstr ""
 
-#: modules/components/rewrite-new_xml-rpc-path.php:51
-#: modules/components/rewrite-new_xml-rpc-path.php:109
+#: modules/components/rewrite-new_xml-rpc-path.php:100
 msgid ""
 "This can break specific functionality. Some plugins like Jetpack use this API. "
-"Once active test it thoroughly.<br />If not working, set to <b>No</b> to revert."
+"Once active, test it thoroughly.<br />If not working, set to <b>No</b> to "
+"revert."
 msgstr ""
 
-#: modules/components/rewrite-new_xml-rpc-path.php:69
-#: modules/components/rewrite-new_xml-rpc-path.php:73
-msgid "Disable XML-RPC authentication"
+#: modules/components/rewrite-new_xml-rpc-path.php:111
+#: modules/components/rewrite-new_xml-rpc-path.php:114
+msgid "Disable XML-RPC methods requiring authentication"
 msgstr ""
 
-#: modules/components/rewrite-new_xml-rpc-path.php:70
+#: modules/components/rewrite-new_xml-rpc-path.php:112
 msgid ""
-"Filter whether XML-RPC methods requiring authentication, such as for publishing "
+"Filter XML-RPC methods requiring authentication, such as for publishing "
 "purposes, are enabled."
 msgstr ""
 
-#: modules/components/rewrite-new_xml-rpc-path.php:74
+#: modules/components/rewrite-new_xml-rpc-path.php:115
 msgid ""
-"As default it require authentication for the protocol to be used along with a "
-"remote application. Activating the option, no authentication will be required "
-"through a call. Recommended is to be set to No."
+"Activating the option, methods requiring authentication will be blocked through "
+"a call."
 msgstr ""
 
-#: modules/components/rewrite-new_xml-rpc-path.php:80
+#: modules/components/rewrite-new_xml-rpc-path.php:116
 msgid ""
-"Once active test it thoroughly.<br />If not working, set to <b>No</b> to revert."
+"Brute force attacks often target the XML-RPC service. Therefore, it's advisable "
+"to enable this option unless you are using the service for specific purposes, "
+"such as with a remote mobile app."
 msgstr ""
 
-#: modules/components/rewrite-new_xml-rpc-path.php:98
-#: modules/components/rewrite-new_xml-rpc-path.php:102
+#: modules/components/rewrite-new_xml-rpc-path.php:128
+#: modules/components/rewrite-new_xml-rpc-path.php:131
+msgid "Disable XML-RPC service"
+msgstr ""
+
+#: modules/components/rewrite-new_xml-rpc-path.php:129
+msgid ""
+"When the XML-RPC service is deactivated, any calls to it result in the server "
+"returning a default 404 Not Found error page."
+msgstr ""
+
+#: modules/components/rewrite-new_xml-rpc-path.php:132
+msgid ""
+"Before disabling the XML-RPC, ensure the service is not used for any of the "
+"following:"
+msgstr ""
+
+#: modules/components/rewrite-new_xml-rpc-path.php:133
+msgid ""
+"Mobile Apps: XML-RPC allows users to manage their WordPress sites via mobile "
+"apps."
+msgstr ""
+
+#: modules/components/rewrite-new_xml-rpc-path.php:145
+#: modules/components/rewrite-new_xml-rpc-path.php:148
 msgid "Remove pingback"
 msgstr ""
 
-#: modules/components/rewrite-new_xml-rpc-path.php:99
+#: modules/components/rewrite-new_xml-rpc-path.php:146
 msgid "Remove pingback link tag from theme."
 msgstr ""
 
-#: modules/components/rewrite-new_xml-rpc-path.php:103
+#: modules/components/rewrite-new_xml-rpc-path.php:149
 msgid ""
-"A pingback is one of four types of link-back methods for Web authors to request "
-"notification when somebody links to one of their documents. This enables "
-"authors to keep track of who is linking to, or referring to their articles "
-"Using this option this functionality can be removed."
+"This enables removing pingback functionality, which is used to notify authors "
+"of links to their posts."
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:20
+#: modules/components/rewrite-root-files.php:115
 msgid "Block access to license.txt root file"
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:42
+#: modules/components/rewrite-root-files.php:133
 msgid "Block access to readme.html root file"
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:63
-#: modules/components/rewrite-root-files.php:67
+#: modules/components/rewrite-root-files.php:150
+#: modules/components/rewrite-root-files.php:154
 msgid "Block wp-activate.php"
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:64
+#: modules/components/rewrite-root-files.php:151
 msgid "Block access to wp-activate.php file."
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:68
+#: modules/components/rewrite-root-files.php:155
 msgid ""
 "Block access to wp-activate.php file. Through this file new users confirms that "
 "the activation key that is received in the email after signs up for a new blog, "
 "matches the key for that user."
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:69
+#: modules/components/rewrite-root-files.php:156
 msgid "If anyone can register on your site, you should keep this no NO."
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:88
+#: modules/components/rewrite-root-files.php:173
 msgid ""
 "Unable to identify site domain IP, blocking wp-cron.php will stop the site "
 "internal WordPress cron functionality."
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:92
+#: modules/components/rewrite-root-files.php:177
 msgid "Site domain rezolved to IP"
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:92
+#: modules/components/rewrite-root-files.php:177
 msgid ""
 "If blocked, all internal calls to cron will continue to run fine. All calls "
 "from a different IP are blocked, including direct calls."
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:93
+#: modules/components/rewrite-root-files.php:178
 msgid ""
 "On certain servers, different ip's can be used to call the cron internally. If "
 "the Cron service apepars to not trigger anymore, this option should be  "
 "disabled."
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:98
-#: modules/components/rewrite-root-files.php:102
+#: modules/components/rewrite-root-files.php:182
+#: modules/components/rewrite-root-files.php:186
 msgid "Block wp-cron.php"
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:103
+#: modules/components/rewrite-root-files.php:187
 msgid ""
 "The file wp-cron.php is the portion of WordPress that handles scheduled events "
 "within a WordPress site. If remote cron calls not being used this can be set to "
 "Yes.."
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:110
+#: modules/components/rewrite-root-files.php:194
 msgid ""
 "The Cron service is how WordPress handles scheduling time-based tasks in "
 "WordPress. If not working correctly, some core features such as checking for "
 "updates and publishing scheduled will fail."
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:127
-#: modules/components/rewrite-root-files.php:131
+#: modules/components/rewrite-root-files.php:207
+#: modules/components/rewrite-root-files.php:211
 msgid "Block wp-signup.php"
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:128
+#: modules/components/rewrite-root-files.php:208
 msgid "Block default wp-signup.php file."
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:132
+#: modules/components/rewrite-root-files.php:212
 msgid ""
 "The wp-signup.php allow for anyone to register to your site. If the "
 "registration functionality is turned off, is safe to block the  wp-signup.php."
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:150
-#: modules/components/rewrite-root-files.php:154
+#: modules/components/rewrite-root-files.php:225
+#: modules/components/rewrite-root-files.php:229
 msgid "Block wp-register.php"
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:151
+#: modules/components/rewrite-root-files.php:226
 msgid "Block default wp-register.php file."
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:155
+#: modules/components/rewrite-root-files.php:230
 msgid ""
 "This is a deprecated file but still present in many WordPress installs.  When "
 "called the user is redirected to /register page. Is safe to block the wp-"
 "register.php."
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:173
-#: modules/components/rewrite-root-files.php:177
+#: modules/components/rewrite-root-files.php:243
+#: modules/components/rewrite-root-files.php:247
 msgid "Block other wp-*.php files"
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:174
+#: modules/components/rewrite-root-files.php:244
 msgid "Block other wp-*.php files in the root."
 msgstr ""
 
-#: modules/components/rewrite-root-files.php:178
+#: modules/components/rewrite-root-files.php:248
 msgid ""
 "Block other wp-*.php files. E.g. wp-blog-header.php, wp-config.php, wp-cron."
 "php. Those files are used internally, blocking those will not affect any "
@@ -4021,49 +4499,49 @@ msgid ""
 "are ignored, they can be controlled through own setting."
 msgstr ""
 
-#: modules/components/rewrite-search.php:17
-#: modules/components/rewrite-search.php:21
+#: modules/components/rewrite-search.php:53
+#: modules/components/rewrite-search.php:57
 msgid "New Search Path"
 msgstr ""
 
-#: modules/components/rewrite-search.php:18
+#: modules/components/rewrite-search.php:54
 msgid "The default path is set to /search/"
 msgstr ""
 
-#: modules/components/rewrite-search.php:22
+#: modules/components/rewrite-search.php:58
 msgid ""
 "The /search/ is the default slug used to display the results for the search "
 "page. The default URL format is:"
 msgstr ""
 
-#: modules/components/rewrite-search.php:24
+#: modules/components/rewrite-search.php:60
 msgid "By using a value of 'find' this become:"
 msgstr ""
 
-#: modules/components/rewrite-search.php:39
+#: modules/components/rewrite-search.php:72
 msgid "Block default /search/ when using custom one."
 msgstr ""
 
-#: modules/components/rewrite-search.php:43
+#: modules/components/rewrite-search.php:76
 msgid ""
 "After changing the default author, the old url is still accessible, this "
 "provide a way to block it.<br />The functionality apply only if <b>New Search "
 "Path</b> option is filled in."
 msgstr ""
 
-#: modules/components/rewrite-slash.php:16 modules/components/rewrite-slash.php:20
+#: modules/components/rewrite-slash.php:41 modules/components/rewrite-slash.php:45
 msgid "URL's add Slash"
 msgstr ""
 
-#: modules/components/rewrite-slash.php:17
+#: modules/components/rewrite-slash.php:42
 msgid "Add an end slash to all links which does not include one."
 msgstr ""
 
-#: modules/components/rewrite-slash.php:21
+#: modules/components/rewrite-slash.php:46
 msgid "As default the WordPress url's format include an ending slash. "
 msgstr ""
 
-#: modules/components/rewrite-slash.php:22
+#: modules/components/rewrite-slash.php:47
 msgid ""
 "There are situations when this slash is not being append. Turning on this "
 "option, all links will get a slash if not included as default. Disguise the "
@@ -4071,67 +4549,73 @@ msgid ""
 "receive an ending slashed."
 msgstr ""
 
-#: modules/components/rewrite-slash.php:23
+#: modules/components/rewrite-slash.php:48
 msgid "For example the following link:"
 msgstr ""
 
-#: modules/components/rewrite-slash.php:25
+#: modules/components/rewrite-slash.php:50
 msgid "will be redirected to:"
 msgstr ""
 
-#: modules/components/rewrite-slash.php:27
+#: modules/components/rewrite-slash.php:52
 msgid ""
 "On certain servers this can produce a small lag measured in milliseconds, for "
 "each url."
 msgstr ""
 
-#: modules/components/rewrite-slash.php:28
+#: modules/components/rewrite-slash.php:53
 msgid "If produce endless redirects, turn this option off."
 msgstr ""
 
-#: modules/components/rewrite-wp_content_path.php:16
-#: modules/components/rewrite-wp_content_path.php:20
+#: modules/components/rewrite-wp_content_path.php:51
+#: modules/components/rewrite-wp_content_path.php:55
 msgid "New Content Path"
 msgstr ""
 
-#: modules/components/rewrite-wp_content_path.php:17
+#: modules/components/rewrite-wp_content_path.php:52
 msgid "Change default /wp-content/"
 msgstr ""
 
-#: modules/components/rewrite-wp_content_path.php:17
+#: modules/components/rewrite-wp_content_path.php:52
 msgid "Your default wp-content path is set to"
 msgstr ""
 
-#: modules/components/rewrite-wp_content_path.php:23
+#: modules/components/rewrite-wp_content_path.php:56
+msgid ""
+"By default, a WordPress installation includes a 'wp-content' folder that stores "
+"files and resources utilized by themes and plugins. The 'wp-content' directory "
+"serves as a distinctive fingerprint, making it easy for anyone to identify the "
+"site as being built on the WordPress platform."
+msgstr ""
+
+#: modules/components/rewrite-wp_content_path.php:58
 msgid "After filling in this option e.g. data the links become:"
 msgstr ""
 
-#: modules/components/rewrite-wp_content_path.php:28
+#: modules/components/rewrite-wp_content_path.php:63
 msgid "e.g. my_content"
 msgstr ""
 
-#: modules/components/rewrite-wp_content_path.php:38
+#: modules/components/rewrite-wp_content_path.php:69
+#: modules/components/rewrite-wp_content_path.php:73
 msgid "Block wp-content URL"
 msgstr ""
 
-#: modules/components/rewrite-wp_content_path.php:39
+#: modules/components/rewrite-wp_content_path.php:70
 msgid "Block default /wp-content/ path. Your default wp-content path is set to"
 msgstr ""
 
-#: modules/components/rewrite-wp_content_path.php:42
-msgid "New content Path"
-msgstr ""
-
-#: modules/components/rewrite-wp_content_path.php:43
+#: modules/components/rewrite-wp_content_path.php:74
 msgid ""
-"This blocks the default wp-content urls only for non loged-in users.<br />The "
-"functionality apply only if <b>New Content Path</b> option is filled in."
+"This restricts access to the default wp-content URLs exclusively for non-logged-"
+"in users.<br />The functionality apply only if <b>New Content Path</b> option "
+"is filled in."
 msgstr ""
 
-#: modules/components/rewrite-wp_content_path.php:49
+#: modules/components/rewrite-wp_content_path.php:80
 msgid ""
 "This can break the layout if server not supporting the feature. Ensure New "
-"Includes Path options works fine before activate this. Once active test it "
+"Content Path options works fine before activate this. Once active test it "
 "thoroughly.<br />If not working, set to <b>No</b> to revert."
 msgstr ""
 
@@ -4155,10 +4639,6 @@ msgstr ""
 msgid ""
 "Copy the following link to a safe place. You can use it to reset the header "
 "options if something goes wrong:"
-msgstr ""
-
-#: modules/components/security-check_headers.php:30
-msgid "Sample Setup"
 msgstr ""
 
 #: modules/components/security-check_headers.php:31
@@ -4347,7 +4827,6 @@ msgid "Cross-Origin-Embedder-Policy (COEP)"
 msgstr ""
 
 #: modules/components/security-header-cross-origin-embedder-policy.php:23
-#: modules/components/security-header-cross-origin-opener-policy.php:23
 msgid "Cross-Origin-Embedder-Policy"
 msgstr ""
 
@@ -4408,7 +4887,11 @@ msgid "Header Options"
 msgstr ""
 
 #: modules/components/security-header-cross-origin-opener-policy.php:20
-msgid "Cross-Origin-Embedder-Policy (COOP)"
+msgid "Cross-Origin-Opener-Policy (COOP)"
+msgstr ""
+
+#: modules/components/security-header-cross-origin-opener-policy.php:23
+msgid "Cross-Origin-Opener-Policy"
 msgstr ""
 
 #: modules/components/security-header-cross-origin-opener-policy.php:24
@@ -4723,12 +5206,20 @@ msgid ""
 "uses the functionality of the CSP report-uri directive to send a report."
 msgstr ""
 
-#: modules/module-admin.php:45
-msgid "<span class=\"wph-info\">Hide&rarr;</span> Admin"
+#: modules/module-admin.php:44
+msgid "<span class=\"wph-info\">Hide&rarr;</span> Login / Admin"
 msgstr ""
 
-#: modules/module-admin.php:57
+#: modules/module-admin.php:56
 msgid "WP Hide & Security Enhancer - Admin"
+msgstr ""
+
+#: modules/module-captcha.php:43
+msgid "<span class=\"wph-info\">Security&rarr;</span> Captcha"
+msgstr ""
+
+#: modules/module-captcha.php:55
+msgid "WP Hide & Security Enhancer - Login"
 msgstr ""
 
 #: modules/module-cdn.php:43
@@ -4739,11 +5230,11 @@ msgstr ""
 msgid "WP Hide & Security Enhancer - CDN"
 msgstr ""
 
-#: modules/module-general.php:75
+#: modules/module-general.php:78
 msgid "<span class=\"wph-info\">Hide&rarr;</span> General / Html"
 msgstr ""
 
-#: modules/module-general.php:87
+#: modules/module-general.php:90
 msgid "WP Hide & Security Enhancer - General / Html"
 msgstr ""
 

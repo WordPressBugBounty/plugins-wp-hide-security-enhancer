@@ -13,19 +13,7 @@
                 {
                     $this->module_settings[]                  =   array(
                                                                         'id'            =>  'admin_url',
-                                                                        'label'         =>  __('New Admin Url',    'wp-hide-security-enhancer'),
-                                                                        'description'   =>  array(
-                                                                                                    __('Create a new admin url instead default /wp-admin and /login.',  'wp-hide-security-enhancer')
-                                                                                                    ),                                                                        
-                                                                        
-                                                                        'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Admin Url',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("Despite the flexibility of WordPress framework, there are few ways to configure the admin login url customization for making a bit safer against unauthorized access and brute force attempts. All methods are not provided out of the box through WordPress core but require custom code to make it happen.",    'wp-hide-security-enhancer') .
-                                                                                                                                            "<br /><br />". __("This feature provide an easy way to change the default /wp-admin/ to a different slug.",    'wp-hide-security-enhancer') .
-                                                                                                                                            "<br /><br />". __("Once changed, the new url will be used to access all Dashboard sections, from Posts and Pages section to Plugins, Appearance and Settings.",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/admin-change-wp-admin/'
-                                                                                                        ),
-                                                                        
+                                                                                                                                                
                                                                         'input_type'    =>  'text',
                                                                         
                                                                         'sanitize_type' =>  array(array($this->wph->functions, 'sanitize_file_path_name'), array($this, 'sanitize_path_name')),
@@ -35,25 +23,9 @@
                     
                     $this->module_settings[]                  =   array(
                                                                         'id'            =>  'disable_admin_redirect_to_login',
-                                                                        'label'         =>  __('Disable Admin Url redirect to Login page',    'wp-hide-security-enhancer'),
-                                                                        'description'   =>  array(
-                                                                                                    __('Disable the customized Admin Url redirect to Login page',  'wp-hide-security-enhancer')
-                                                                                                    ),
-                                                                        
-                                                                        'help'          =>  array(
-                                                                                                        'title'                     =>  __( 'Help',    'wp-hide-security-enhancer') . ' - ' . __('Block default Admin Url',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __( "The option provides the ability to control the redirection behavior of the customized URL to the login page.",    'wp-hide-security-enhancer') .
-                                                                                                                                        "<br />" . __( "By default, when a non-logged-in user attempts to access the WordPress admin area via the customized URL, they are automatically redirected to the login page for authentication.",    'wp-hide-security-enhancer') . 
-                                                                                                                                        "<br />" . __( "Instead it will be redirected to homepage.",    'wp-hide-security-enhancer') . 
-                                                                                                                                        "<br /><br /><span class='important'>" . __('The option might interfere with specific plugins that use redirects when calling the admin URL.',    'wp-hide-security-enhancer') . '</span>',
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/admin-change-wp-admin/'
-                                                                                                        ),
-                                                                                                                              
+                                                                           
                                                                         'input_type'    =>  'radio',
-                                                                        'options'       =>  array(
-                                                                                                    'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                    'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                    ),
+                                                                  
                                                                         'default_value' =>  'no',
                                                                         
                                                                         'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -64,30 +36,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                         'id'            =>  'block_default_admin_url',
-                                                                        'label'         =>  __('Block default Admin Url',    'wp-hide-security-enhancer'),
-                                                                        'description'   =>  array(
-                                                                                                    __('Block default admin url and files from being accesible.',  'wp-hide-security-enhancer')
-                                                                                                    ),
-                                                                        
-                                                                        'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block default Admin Url',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("If set to Yes, the old admin url will be blocked and a default theme 404 error page will be returned.",    'wp-hide-security-enhancer') .
-                                                                                                                                         "<br /><br /><span class='important'>" . __('Ensure the New Admin Url option works correctly on your server before activate this.',    'wp-hide-security-enhancer') . '</span>',
-                                                                                                        'input_value_extension'     =>  'php',
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/admin-change-wp-admin/'
-                                                                                                        ),
-                                                                        
-                                                                        'advanced_option'   =>  array(
-                                                                        
-                                                                                                        'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break the layour of dashboard admin if server not supporting the feature. Ensure `New Admin Url` option works fine before activate this.<br />If not working, use the recovery link to revert.',    'wp-hide-security-enhancer')
-                                                                                                
-                                                                                                ),
-                                                                        
+                                                                                                                                  
                                                                         'input_type'    =>  'radio',
-                                                                        'options'       =>  array(
-                                                                                                    'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                    'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                    ),
+                                                            
                                                                         'default_value' =>  'no',
                                                                         
                                                                         'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -96,6 +47,95 @@
                                                                         );
                                                                     
                     return $this->module_settings;   
+                }
+                
+                
+            function set_module_components_description( $component_settings )
+                {
+                    
+                    
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'admin_url' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('New Admin Url',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  array(
+                                                                                                                                                            __('Create a new admin url instead default /wp-admin and /login.',  'wp-hide-security-enhancer')
+                                                                                                                                                            ),                                                                        
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Admin Url',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("Despite the flexibility of WordPress framework, there are few ways to configure the admin login url customization for making a bit safer against unauthorized access and brute force attempts. All methods are not provided out of the box through WordPress core but require custom code to make it happen.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                    "<br /><br />". __("This feature provide an easy way to change the default /wp-admin/ to a different slug.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                    "<br /><br />". __("Once changed, the new url will be used to access all Dashboard sections, from Posts and Pages section to Plugins, Appearance and Settings.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/admin-change-wp-admin/'
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'disable_admin_redirect_to_login' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Disable Admin Url redirect to Login page',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  array(
+                                                                                                                                                            __('Disable the customized Admin Url redirect to Login page',  'wp-hide-security-enhancer')
+                                                                                                                                                            ),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __( 'Help',    'wp-hide-security-enhancer') . ' - ' . __('Block default Admin Url',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __( "The option provides the ability to control the redirection behavior of the customized URL to the login page.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br />" . __( "By default, when a non-logged-in user attempts to access the WordPress admin area via the customized URL, they are automatically redirected to the login page for authentication.",    'wp-hide-security-enhancer') . 
+                                                                                                                                                                                                "<br />" . __( "Instead it will be redirected to homepage.",    'wp-hide-security-enhancer') . 
+                                                                                                                                                                                                "<br /><br /><span class='important'>" . __('The option might interfere with specific plugins that use redirects when calling the admin URL.',    'wp-hide-security-enhancer') . '</span>',
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/admin-change-wp-admin/'
+                                                                                                                                                                ),
+
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'block_default_admin_url' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Block default Admin Url',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  array(
+                                                                                                                                                            __('Block default admin url and files from being accesible.',  'wp-hide-security-enhancer')
+                                                                                                                                                            ),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block default Admin Url',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("If set to Yes, the old admin url will be blocked and a default theme 404 error page will be returned.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                 "<br /><br /><span class='important'>" . __('Ensure the New Admin Url option works correctly on your server before activate this.',    'wp-hide-security-enhancer') . '</span>',
+                                                                                                                                                                'input_value_extension'     =>  'php',
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/admin-change-wp-admin/'
+                                                                                                                                                                ),
+                                                                                                                                
+                                                                                                                                'advanced_option'   =>  array(
+                                                                                                                                
+                                                                                                                                                                'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break the layour of dashboard admin if server not supporting the feature. Ensure `New Admin Url` option works fine before activate this.<br />If not working, use the recovery link to revert.',    'wp-hide-security-enhancer')
+                                                                                                                                                        
+                                                                                                                                                        ),
+                                                                                                         
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                    
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
                 }
                 
                 

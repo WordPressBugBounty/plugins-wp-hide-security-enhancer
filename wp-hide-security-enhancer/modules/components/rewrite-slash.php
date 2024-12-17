@@ -13,29 +13,9 @@
                 {
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'add_slash',
-                                                                    'label'         =>  __('URL\'s add Slash',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Add an end slash to all links which does not include one.',    'wp-hide-security-enhancer'). '<br /> ',
-
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('URL\'s add Slash',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("As default the WordPress url's format include an ending slash. ",    'wp-hide-security-enhancer') .
-                                                                                                                                            "<br /><br />" . __("There are situations when this slash is not being append. Turning on this option, all links will get a slash if not included as default. Disguise the existence of files and folders, since they will not be slashed as deafault, all receive an ending slashed.",    'wp-hide-security-enhancer') .
-                                                                                                                                            "<br />" . __("For example the following link:" ,    'wp-hide-security-enhancer') .
-                                                                                                                                            "<br /><code>https://-domain-name-/map/data</code>
-                                                                                                                                            <br />" . __("will be redirected to:",    'wp-hide-security-enhancer') .
-                                                                                                                                            "<br /><code>https://-domain-name-/map/data/</code>
-                                                                                                                                            <br /><br />" . __('On certain servers this can produce a small lag measured in milliseconds, for each url.',    'wp-hide-security-enhancer') .
-                                                                                                                                            "<br /><br />" . __('If produce endless redirects, turn this option off.',    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-url-slash/',
-                                                                                                        'input_value_extension'     =>  'php'
-                                                                                                        ),
-                                                                                                
+                                                                                                                                                     
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
-                                                                    
+                                                                                                                              
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -43,6 +23,53 @@
                                                                     );
                                                                     
                     return $this->module_settings;   
+                }
+            
+            
+            function set_module_components_description( $component_settings )
+                {
+                    
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'add_slash' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('URL\'s add Slash',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Add an end slash to all links which does not include one.',    'wp-hide-security-enhancer'). '<br /> ',
+
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('URL\'s add Slash',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("As default the WordPress url's format include an ending slash. ",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                        "<br /><br />" . __("There are situations when this slash is not being append. Turning on this option, all links will get a slash if not included as default. Disguise the existence of files and folders, since they will not be slashed as deafault, all receive an ending slashed.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                        "<br />" . __("For example the following link:" ,    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                        "<br /><code>https://-domain-name-/map/data</code>
+                                                                                                                                                                                                        <br />" . __("will be redirected to:",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                        "<br /><code>https://-domain-name-/map/data/</code>
+                                                                                                                                                                                                        <br /><br />" . __('On certain servers this can produce a small lag measured in milliseconds, for each url.',    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                        "<br /><br />" . __('If produce endless redirects, turn this option off.',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-url-slash/',
+                                                                                                                                                                    'input_value_extension'     =>  'php'
+                                                                                                                                                                    ),
+                                                                                                                                                            
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+    
+                                    
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
                 }
                 
             

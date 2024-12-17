@@ -14,19 +14,7 @@
                 {
                     $this->module_settings[]                  =   array(
                                                                         'id'            =>  'search',
-                                                                        'label'         =>  __('New Search Path',    'wp-hide-security-enhancer'),
-                                                                        'description'   =>  __('The default path is set to /search/',    'wp-hide-security-enhancer'),
-                                                                        
-                                                                        'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Search Path',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("The /search/ is the default slug used to display the results for the search page. The default URL format is:",    'wp-hide-security-enhancer') . "<br />  <br />
-                                                                                                                                            <code>https://-domain-name-/search/search-word/</code>
-                                                                                                                                            <br /><br /> ". __("By using a value of 'find' this become:",    'wp-hide-security-enhancer') . "<br />
-                                                                                                                                            <code>https://-domain-name-/find/search-word/</code>",
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-search/'
-                                                                                                        ),
-                                                                        
-                                                                        'value_description' =>  'e.g. find',
+                                                               
                                                                         'input_type'    =>  'text',
                                                                         
                                                                         'sanitize_type' =>  array(array($this->wph->functions, 'sanitize_file_path_name')),
@@ -35,20 +23,9 @@
                                                                         
                     $this->module_settings[]                  =   array(
                                                                         'id'            =>  'search_block_default',
-                                                                        'label'         =>  __('Block default',    'wp-hide-security-enhancer'),
-                                                                        'description'   =>  __('Block default /search/ when using custom one.',    'wp-hide-security-enhancer') . '<br />'.__('Apply only if ',    'wp-hide-security-enhancer') . '<b>New Search Path</b> ' . __('is not empty.',    'wp-hide-security-enhancer'),
-                                                                        
-                                                                        'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block default',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("After changing the default author, the old url is still accessible, this provide a way to block it.<br />The functionality apply only if <b>New Search Path</b> option is filled in.",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-search/'
-                                                                                                        ),
                                                                         
                                                                         'input_type'    =>  'radio',
-                                                                        'options'       =>  array(
-                                                                                                    'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                    'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                    ),
+                                                                
                                                                         'default_value' =>  'no',
                                                                         
                                                                         'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -60,6 +37,62 @@
                 }
                 
             
+            
+            function set_module_components_description( $component_settings )
+                {
+                    
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'search' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('New Search Path',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('The default path is set to /search/',    'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Search Path',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("The /search/ is the default slug used to display the results for the search page. The default URL format is:",    'wp-hide-security-enhancer') . "<br />  <br />
+                                                                                                                                                                                                    <code>https://-domain-name-/search/search-word/</code>
+                                                                                                                                                                                                    <br /><br /> ". __("By using a value of 'find' this become:",    'wp-hide-security-enhancer') . "<br />
+                                                                                                                                                                                                    <code>https://-domain-name-/find/search-word/</code>",
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-search/'
+                                                                                                                                                                ),
+                                                                                                                                
+                                                                                                                                'value_description' =>  'e.g. find',
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'search_block_default' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Block default',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Block default /search/ when using custom one.',    'wp-hide-security-enhancer') . '<br />'.__('Apply only if ',    'wp-hide-security-enhancer') . '<b>New Search Path</b> ' . __('is not empty.',    'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block default',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("After changing the default author, the old url is still accessible, this provide a way to block it.<br />The functionality apply only if <b>New Search Path</b> option is filled in.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-search/'
+                                                                                                                                                                ),
+                                                                                                                                
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                    
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
+                }
+                
             
             function _init_search( $saved_field_data )
                 {

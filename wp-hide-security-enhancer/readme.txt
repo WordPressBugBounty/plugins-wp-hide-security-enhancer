@@ -4,7 +4,7 @@ Donate link: https://www.nsp-code.com/
 Tags: wordpress hide, wp hide, security, security headers, login
 Requires at least: 2.8
 Tested up to: 6.7.1
-Stable tag: 2.5.4
+Stable tag: 2.5.6
 License: GPLv2 or later
 
 Secure your site by hiding exploitable WordPress traces ( plugins, themes, wp-content, wp-includes, wp-admin, login URL). Enhanced Security Headers.
@@ -416,6 +416,12 @@ Please get in touch with us and we’ll do our best to include it inthe next ver
 2. Sample front html code.
 
 == Changelog ==
+
+= 2.5.6 =
+* Add separate components description texts, for the translations to be available, after init action ( changed in the WordPress 6.5 )
+* Update the Components classes ( rewrites ) to use separate description. 
+* Updated the translation PO file.
+* Fix: Check if $all_themes has the key, before retrieve the value in is_child_theme()
 
 = 2.5.4 =
 * Fix: Remove the protocol from URLs in the theme's style file module, to prevent issues when the site's protocol is inconsistent (e.g., using both HTTP and HTTPS).

@@ -13,18 +13,7 @@
                 {
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'cdn_url',
-                                                                    'label'         =>  __('CDN Url',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Some CDN providers (like stackpath.com ) replace site assets with custom url, enter here such url. Otherwise this option should stay empty.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('CDN Url',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("A Content Delivery Network - CDN - is a network of servers located around the globe in fundamental spots with fast access. It takes a while for a web page to load especially if the server is located far away from the user. So they are designed to host and deliver copies of your site's static and dynamic content such as images, CSS, JavaScript, audio and video streams.",    'wp-hide-security-enhancer') .
-                                                                                                                                            "<br /><br />" . __('Sample CDN url:',    'wp-hide-security-enhancer') .
-                                                                                                                                            "<br /><code>cdnjs.cloudflare.com</code><br /><br />" .
-                                                                                                                                            __('Enter a CDN Url to allow the plugin to process assets provided through CDN service.',    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/cdn-cdn-url/'
-                                                                                                        ),
-                                                                    
+                                                                                                               
                                                                     'input_type'    =>  'text',
                                                          
                                                                     
@@ -33,6 +22,43 @@
                                                                     );
                                                                     
                     return $this->module_settings;   
+                }
+                
+            function set_module_components_description( $component_settings )
+                {
+                    
+                    
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'cdn_url' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('CDN Url',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Some CDN providers (like stackpath.com ) replace site assets with custom url, enter here such url. Otherwise this option should stay empty.', 'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('CDN Url',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("A Content Delivery Network - CDN - is a network of servers located around the globe in fundamental spots with fast access. It takes a while for a web page to load especially if the server is located far away from the user. So they are designed to host and deliver copies of your site's static and dynamic content such as images, CSS, JavaScript, audio and video streams.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                        "<br /><br />" . __('Sample CDN url:',    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                        "<br /><code>cdnjs.cloudflare.com</code><br /><br />" .
+                                                                                                                                                                                                        __('Enter a CDN Url to allow the plugin to process assets provided through CDN service.',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/cdn-cdn-url/'
+                                                                                                                                                                    ),
+                                                                                                                                ) );
+                                                                break;
+     
+                                    
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
                 }
                 
                 

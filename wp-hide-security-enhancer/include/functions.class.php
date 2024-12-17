@@ -3088,8 +3088,10 @@
             */
             function is_child_theme($theme_slug, $all_themes)
                 {
-                    
-                    $theme_data =   $all_themes[$theme_slug];
+                    if ( ! isset ( $all_themes[ $theme_slug ] ) )
+                        return FALSE;
+                        
+                    $theme_data =   $all_themes[ $theme_slug ];
                         
                     if( isset($theme_data['headers']['Template']) &&  !empty($theme_data['headers']['Template']))
                         return TRUE;

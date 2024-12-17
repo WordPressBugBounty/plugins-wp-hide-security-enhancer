@@ -41,7 +41,7 @@
                 {
                     $this->functions    =   new WPH_functions();
                       
-                    $plugin_data    =   $this->functions->get_plugin_data( WPH_PATH . '/wp-hide.php', $markup = true, $translate = true );
+                    $plugin_data    =   $this->functions->get_plugin_data( WPH_PATH . '/wp-hide.php', $markup = true, false );
                     
                     define('WPH_CORE_VERSION',              $plugin_data['Version']);
                     
@@ -114,8 +114,9 @@
                     /**
                     * Filters
                     */
-                    add_action( 'activated_plugin',                 array($this, 'activated_plugin'), 999, 2 );
+                    add_action( 'activated_plugin',                 array($this,    'activated_plugin'), 999, 2 );
                     
+                    add_action('init',                              array($this,    '_modules_components_add_options_description'), -1);
                       
                     //change any links within email message
                     add_filter('wp_mail',                           array($this,    'apply_for_wp_mail') , 999);
@@ -316,6 +317,35 @@
                     
                 }
 
+                
+                
+            /**
+            * Load the components description
+            * 
+            */
+            function _modules_components_add_options_description()
+                {
+                    $_callback   =   'set_module_components_description';
+                    
+                    $all_components  =   array ();
+                    foreach( $this->modules  as  $modules_key    =>  $module )
+                        {
+                            //process the module fields
+                            $module_components  =   $this->functions->filter_settings(   $module->get_module_components_settings(), TRUE    );
+                            
+                            foreach ( $module->components    as $component_key =>  $component )
+                                {
+                                    
+                                    if (method_exists( $component, $_callback )   && is_callable ( array ( $component, $_callback ) ) )
+                                        {
+                                            $component->module_settings  =   call_user_func( array ( $component, $_callback ), $component->module_settings );
+                                            
+                                            $this->modules[ $modules_key ]->components[ $component_key ]->module_settings    =   $component->module_settings;   
+                                        }
+                                }
+                        }   
+                }
+                
                 
             /**
             * run on admin_init action

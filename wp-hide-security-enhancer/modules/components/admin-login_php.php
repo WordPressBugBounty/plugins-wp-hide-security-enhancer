@@ -26,27 +26,7 @@
                 {
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'new_wp_login_php',
-                                                                    'label'         =>  __('New wp-login.php',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  array(
-                                                                                                __('Map a new wp-login.php instead default.',  'wp-hide-security-enhancer')
-                                                                                                ),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New wp-login.php',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("There are a lot of security issues that come from having your login page open to the public. Most specifically, brute force attacks. Because of the ubiquity of WordPress, these kinds of attacks are becoming more and more common.",    'wp-hide-security-enhancer') .
-                                                                                                                                            "<br /><br />" . __("Map a new wp-login.php instead default prevent hackers boot to attempt to brute force a site login. Being known only by the site owner, the url itself becomes private.",    'wp-hide-security-enhancer') .
-                                                                                                                                            "<br /><br /><span class='important'>" . __("Make sure you keep the new login url to a safe place, in case to forget.",    'wp-hide-security-enhancer') . "</span>",
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/admin-change-wp-login-php/'
-                                                                                                        ),
-                                                                    
-                                                                    
-                                                                    'options_pre'   =>  '<div class="icon">
-                                                                                                <img src="' . WPH_URL . '/assets/images/warning.png" />
-                                                                                            </div>
-                                                                                            <div class="text">
-                                                                                                <p>' . __('Make sure your log-in url is not already modified by another plugin or theme. In such case, you should disable other code and take advantage of these features.',  'wp-hide-security-enhancer') .'</p>
-                                                                                            </div>' ,
-                                         
+                                                                                                             
                                                                     'input_type'    =>  'text',
                                                                     
                                                                     'sanitize_type' =>  array(array($this->wph->functions, 'sanitize_file_path_name')),
@@ -56,27 +36,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'block_default_wp_login_php',
-                                                                    'label'         =>  __('Block default wp-login.php',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Block default wp-login.php file from being accesible.',  'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block default wp-login.php',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("If set to Yes, the old login url will be blocked and a default theme 404 error page will be returned.",    'wp-hide-security-enhancer') .
-                                                                                                                                         "<br /><br /><span class='important'>" . __('Ensure the New wp-login.php option works correctly on your server before activate this.',    'wp-hide-security-enhancer') . '</span>',
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/admin-change-wp-login-php/'
-                                                                                                        ),
-                                                                    
-                                                                    'advanced_option'   =>  array(
-                                                                        
-                                                                                                        'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break the login page if server not supporting the feature. Ensure `New wp-login.php` option works fine before activate this.<br />If not working, use the recovery link to revert.',    'wp-hide-security-enhancer')
-                                                                                                
-                                                                                                ),
-                                                                    
+                                                                                                                          
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                            
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -86,18 +48,7 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'custom_login_logo',
-                                                                    'label'         =>  __('Custom Login page Logo',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  array(
-                                                                                                __('Change the default WordPress login page Logo.',  'wp-hide-security-enhancer')
-                                                                                                ),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Custom Login Logo',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("The feature in the WP Hide plugin allows you to replace the standard WordPress login page logo with a custom image of your choice. This customization enhances your site's branding by displaying your logo on the login page, admin dashboard, and other areas where the default logo appears. To use this feature, simply upload your desired logo in the WP Hide settings and save the changes. Your new logo will be displayed immediately, providing a more personalized and professional appearance for your WordPress site.",    'wp-hide-security-enhancer') . "</span>" .
-                                                                                                                                        "<br />" . __("Recommended width size is 320px.",    'wp-hide-security-enhancer') . "</span>",
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/admin-change-wp-login-php/'
-                                                                                                        ),
-                                                                                     
+                                                                                                                                                     
                                                                     'input_type'    =>  'custom',
                                                                     
                                                                     'module_option_html_render' =>  array( $this, '_custom_login_logo_module_option_html' ),
@@ -110,6 +61,93 @@
                     
                                                                     
                     return $this->module_settings;   
+                }
+                
+                
+            function set_module_components_description( $component_settings )
+                {
+                    
+                    
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'new_wp_login_php' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('New wp-login.php',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  array(
+                                                                                                                                                            __('Map a new wp-login.php instead default.',  'wp-hide-security-enhancer')
+                                                                                                                                                            ),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New wp-login.php',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("There are a lot of security issues that come from having your login page open to the public. Most specifically, brute force attacks. Because of the ubiquity of WordPress, these kinds of attacks are becoming more and more common.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                        "<br /><br />" . __("Map a new wp-login.php instead default prevent hackers boot to attempt to brute force a site login. Being known only by the site owner, the url itself becomes private.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                        "<br /><br /><span class='important'>" . __("Make sure you keep the new login url to a safe place, in case to forget.",    'wp-hide-security-enhancer') . "</span>",
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/admin-change-wp-login-php/'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                
+                                                                                                                                'options_pre'   =>  '<div class="icon">
+                                                                                                                                                            <img src="' . WPH_URL . '/assets/images/warning.png" />
+                                                                                                                                                        </div>
+                                                                                                                                                        <div class="text">
+                                                                                                                                                            <p>' . __('Make sure your log-in url is not already modified by another plugin or theme. In such case, you should disable other code and take advantage of these features.',  'wp-hide-security-enhancer') .'</p>
+                                                                                                                                                        </div>' ,
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'block_default_wp_login_php' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Block default wp-login.php',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Block default wp-login.php file from being accesible.',  'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block default wp-login.php',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("If set to Yes, the old login url will be blocked and a default theme 404 error page will be returned.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                     "<br /><br /><span class='important'>" . __('Ensure the New wp-login.php option works correctly on your server before activate this.',    'wp-hide-security-enhancer') . '</span>',
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/admin-change-wp-login-php/'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'advanced_option'   =>  array(
+                                                                                                                                    
+                                                                                                                                                                    'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break the login page if server not supporting the feature. Ensure `New wp-login.php` option works fine before activate this.<br />If not working, use the recovery link to revert.',    'wp-hide-security-enhancer')
+                                                                                                                                                            
+                                                                                                                                                            ),
+                                                                                                                                
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'custom_login_logo' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Custom Login page Logo',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  array(
+                                                                                                                                                            __('Change the default WordPress login page Logo.',  'wp-hide-security-enhancer')
+                                                                                                                                                            ),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Custom Login Logo',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("The feature in the WP Hide plugin allows you to replace the standard WordPress login page logo with a custom image of your choice. This customization enhances your site's branding by displaying your logo on the login page, admin dashboard, and other areas where the default logo appears. To use this feature, simply upload your desired logo in the WP Hide settings and save the changes. Your new logo will be displayed immediately, providing a more personalized and professional appearance for your WordPress site.",    'wp-hide-security-enhancer') . "</span>" .
+                                                                                                                                                                                                    "<br />" . __("Recommended width size is 320px.",    'wp-hide-security-enhancer') . "</span>",
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/admin-change-wp-login-php/'
+                                                                                                                                                                    ),
+                                                                                                                                ) );
+                                                                break;
+                                    
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
                 }
                 
                 

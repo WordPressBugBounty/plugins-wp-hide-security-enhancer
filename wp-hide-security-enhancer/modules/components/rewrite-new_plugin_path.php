@@ -4,7 +4,7 @@
     
     class WPH_module_rewrite_new_plugin_path extends WPH_module_component
         {
-            
+                       
             function get_component_title()
                 {
                     return "Plugins";
@@ -14,17 +14,7 @@
                 {
                     $this->module_settings[]                  =   array(
                                                                         'id'            =>  'new_plugin_path',
-                                                                        'label'         =>  __('New Plugins Path',    'wp-hide-security-enhancer'),
-                                                                        'description'   =>  __('The default plugins path is set to',    'wp-hide-security-enhancer') . ' <strong>'. str_replace(get_bloginfo('wpurl'), '' ,$this->wph->default_variables['plugins_url'])  .'</strong>',
                                                                         
-                                                                        'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Plugins Path',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("Use any alphanumeric symbols for this field which will be used as the new slug for the plugins folder. Presuming the `apps` slug is being used, all plugins urls become to something like this:",    'wp-hide-security-enhancer') . "<br />  <br />
-                                                                                                                                            <code>http://-domain-name-/apps/jetpack/</code>",
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-plugins/'
-                                                                                                        ),
-                                                                        
-                                                                        'value_description' =>  'e.g. apps',
                                                                         'input_type'    =>  'text',
                                                                         
                                                                         'sanitize_type' =>  array(array($this->wph->functions, 'sanitize_file_path_name')),
@@ -33,26 +23,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                         'id'            =>  'block_plugins_url',
-                                                                        'label'         =>  __('Block plugins URL',    'wp-hide-security-enhancer'),
-                                                                        'description'   =>  __('Block default /wp-content/plugins/ files from being accesible through default urls.',    'wp-hide-security-enhancer'),
-                                                                        
-                                                                        'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block plugins URL',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("This blocks the default wp-content/plugins/ url.<br />The functionality apply only if <b>New Plugins Path</b> option is filled in.",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-plugins/'
-                                                                                                        ),
-                                                                        
-                                                                        'advanced_option'   =>  array(
-                                                                            
-                                                                                                            'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break the layout if server not supporting the feature. Ensure `New Plugins Path` option works fine before activate this. Once active test it thoroughly.<br />If not working, set to <b>No</b> to revert.',    'wp-hide-security-enhancer')
-                                                                                                    
-                                                                                                    ),
-                                                                        
+                                                         
                                                                         'input_type'    =>  'radio',
-                                                                        'options'       =>  array(
-                                                                                                    'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                    'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                    ),
+                                                         
                                                                         'default_value' =>  'no',
                                                                         
                                                                         'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -85,17 +58,7 @@
                                                                             
                             $this->module_settings[]                  =   array(
                                                                                 'id'            =>  'new_plugin_path_' . $plugin_slug,
-                                                                                'label'         =>  __('New Path for',    'wp-hide-security-enhancer') . " <i>" . $pluding_data['Name'] ."</i> ". __('plugin',    'wp-hide-security-enhancer'),
-                                                                                'description'   =>  __('This setting if set, overwrites the',    'wp-hide-security-enhancer') . ' ' . __('New Plugin Path',    'wp-hide-security-enhancer') . ' ' . __('value for this plugin.',    'wp-hide-security-enhancer'),
                                                                                 
-                                                                                'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Path for',    'wp-hide-security-enhancer') . " <i>" . $pluding_data['Name'] ."</i> ",
-                                                                                                        'description'               =>  "Use any alphanumeric symbols for this field which will be used as the new slug for the plugin folder. Presuming the `module_name` slug is being used, this particular plugin urls become to:<br />  <br />
-                                                                                                                                            <code>http://-domain-name-/module_name/</code>",
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-plugins/'
-                                                                                                        ),
-                                                                                
-                                                                                'value_description' =>  'e.g. modules/module_name',
                                                                                 'input_type'    =>  'text',
                                                                                 
                                                                                 'sanitize_type' =>  array(array($this->wph->functions, 'sanitize_file_path_name')),
@@ -108,6 +71,109 @@
                     return $this->module_settings;   
                 }
                 
+            
+            function set_module_components_description( $component_settings )
+                {
+                    
+                    $all_plugins = $this->wph->functions->get_plugins();
+                    
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'new_plugin_path' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('New Plugins Path',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('The default plugins path is set to',    'wp-hide-security-enhancer') . ' <strong>'. str_replace(get_bloginfo('wpurl'), '' ,$this->wph->default_variables['plugins_url'])  .'</strong>',
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Plugins Path',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("Use any alphanumeric symbols for this field which will be used as the new slug for the plugins folder. Presuming the `apps` slug is being used, all plugins urls become to something like this:",    'wp-hide-security-enhancer') . "<br />  <br />
+                                                                                                                                                                                                    <code>http://-domain-name-/apps/jetpack/</code>",
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-plugins/'
+                                                                                                                                                                ),
+                                                                                                                                
+                                                                                                                                'value_description' =>  'e.g. apps',
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'block_plugins_url' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Block plugins URL',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Block default /wp-content/plugins/ files from being accesible through default urls.',    'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block plugins URL',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("This blocks the default wp-content/plugins/ url.<br />The functionality apply only if <b>New Plugins Path</b> option is filled in.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-plugins/'
+                                                                                                                                                                ),
+                                                                                                                                
+                                                                                                                                'advanced_option'   =>  array(
+                                                                                                                                    
+                                                                                                                                                                    'description'               =>  '<b>' . __('This is an advanced option !',    'wp-hide-security-enhancer') . '</b><br />' . __('This can break the layout if server not supporting the feature. Ensure `New Plugins Path` option works fine before activate this. Once active test it thoroughly.<br />If not working, set to <b>No</b> to revert.',    'wp-hide-security-enhancer')
+                                                                                                                                                            
+                                                                                                                                                            ),
+                                                                                                                                
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case preg_match('/^new_plugin_path_[\w-]+$/', $component_setting['id'] ) === 1 :
+                                    
+                                                                $all_plugins = $this->wph->functions->get_plugins();
+                    
+                                                                //get active plugins
+                                                                $active_plugins = (array) get_option( 'active_plugins', array() );
+                                                                foreach( $active_plugins as  $active_plugin )
+                                                                    {
+                                                                        //exclude this plugins
+                                                                        if( in_array($active_plugin, array('wp-hide-security-enhancer/wp-hide.php', 'wp-hide-security-enhancer-pro/wp-hide.php')) )
+                                                                            continue; 
+                                                                        
+                                                                        $plugin_slug    =   sanitize_title($active_plugin);
+                                                                        
+                                                                        if(!isset($all_plugins[$active_plugin]))
+                                                                            continue; 
+                                                                        
+                                                                        if ( 'new_plugin_path_' . $plugin_slug  !== $component_setting['id'] )
+                                                                            continue;
+                                                                            
+                                                                        $pluding_data   =   $all_plugins[$active_plugin];
+                                                                                                                        
+                                                                        $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                            'label'         =>  __('New Path for',    'wp-hide-security-enhancer') . " <i>" . $pluding_data['Name'] ."</i> ". __('plugin',    'wp-hide-security-enhancer'),
+                                                                                                                            'description'   =>  __('This setting if set, overwrites the',    'wp-hide-security-enhancer') . ' ' . __('New Plugin Path',    'wp-hide-security-enhancer') . ' ' . __('value for this plugin.',    'wp-hide-security-enhancer'),
+                                                                                                                            
+                                                                                                                            'help'          =>  array(
+                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Path for',    'wp-hide-security-enhancer') . " <i>" . $pluding_data['Name'] ."</i> ",
+                                                                                                                                                    'description'               =>  "Use any alphanumeric symbols for this field which will be used as the new slug for the plugin folder. Presuming the `module_name` slug is being used, this particular plugin urls become to:<br />  <br />
+                                                                                                                                                                                        <code>http://-domain-name-/module_name/</code>",
+                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-plugins/'
+                                                                                                                                                    ),
+                                                                                                                            
+                                                                                                                            'value_description' =>  'e.g. modules/module' . rand( 100,999 ),
+                                                                                                                 
+                                                                                                                            ));
+                                                                                                                    
+                                                                    }
+                                                                
+                                    
+                                                                break;
+                                }
+
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
+                }
                 
                 
             function _init_new_plugin_path($saved_field_data)

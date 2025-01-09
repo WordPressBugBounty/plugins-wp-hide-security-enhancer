@@ -17,13 +17,7 @@
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'cross_origin_resource_policy',
-                                                                    'label'         =>  __('Cross-Origin-Resource-Policy (CORP)',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Cross-Origin-Resource-Policy',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("The HTTP Content-Security-Policy response header allows web site administrators to control resources the user agent is allowed to load for a given page. With a few exceptions, policies mostly involve specifying server origins and script endpoints. This helps guard against cross-site scripting attacks (Cross-site_scripting). ",    'wp-hide-security-enhancer') 
-                                                                                                ),
-                                                                                                                 
+                                                                                                                                                           
                                                                     'input_type'    =>  'custom',
                                                                                                  
                                                                     'module_option_html_render' =>  array( $this, '_module_option_html' ),
@@ -38,6 +32,37 @@
                                                                     
                     return $this->module_settings;   
                 }
+                
+                
+        function set_module_components_description( $component_settings )
+                {
+
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'cross_origin_resource_policy' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Cross-Origin-Resource-Policy (CORP)',    'wp-hide-security-enhancer'),
+                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Cross-Origin-Resource-Policy',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("The HTTP Content-Security-Policy response header allows web site administrators to control resources the user agent is allowed to load for a given page. With a few exceptions, policies mostly involve specifying server origins and script endpoints. This helps guard against cross-site scripting attacks (Cross-site_scripting). ",    'wp-hide-security-enhancer') 
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                                     
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
+                } 
                 
             function _get_default_options()
                 {

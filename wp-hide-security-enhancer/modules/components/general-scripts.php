@@ -13,25 +13,9 @@
                 {
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'scripts_remove_version',
-                                                                    'label'         =>  __('Remove Version',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Remove version number from enqueued script files.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove Version',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("This provide a method to remove the JavaScript version number which is being append at the end of every script file. Generally this is intended to be a plain information upon the JavaScript code version, however not being used within any functionality or code run.",    'wp-hide-security-enhancer') .
-                                                                                                                                    "<br /><br />" . __("Keeping version number for scripts provide additional information to hackers which try to identify specific JavaScript code and version which know as being vulnerable.",    'wp-hide-security-enhancer') .
-                                                                                                                                    "<br /><br />" . __("Sample tag:",    'wp-hide-security-enhancer') .
-                                                                                                                                    "<br /><code>&lt;script type='text/javascript' src='https://-domain-name-/wp-includes/js/jquery/jquery.js?ver=1.12.4'&gt;&lt;/script&gt;</code>
-                                                                                                                                    <br />" . __("Once option set to Yes the tag becomes:",    'wp-hide-security-enhancer') .
-                                                                                                                                    "<br /><code>&lt;script type='text/javascript' src='https://-domain-name-/wp-includes/js/jquery/jquery.js'&gt;&lt;/script&gt;</code>",
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-html-scripts/'
-                                                                                                ),
-                                                                    
+                                                                                                          
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                       
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower')
@@ -41,7 +25,49 @@
                     return $this->module_settings;   
                 }
                 
-                
+            
+        function set_module_components_description( $component_settings )
+                {
+
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'scripts_remove_version' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Remove Version',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Remove version number from enqueued script files.', 'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove Version',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("This provide a method to remove the JavaScript version number which is being append at the end of every script file. Generally this is intended to be a plain information upon the JavaScript code version, however not being used within any functionality or code run.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                    "<br /><br />" . __("Keeping version number for scripts provide additional information to hackers which try to identify specific JavaScript code and version which know as being vulnerable.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                    "<br /><br />" . __("Sample tag:",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                    "<br /><code>&lt;script type='text/javascript' src='https://-domain-name-/wp-includes/js/jquery/jquery.js?ver=1.12.4'&gt;&lt;/script&gt;</code>
+                                                                                                                                                                                                    <br />" . __("Once option set to Yes the tag becomes:",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                    "<br /><code>&lt;script type='text/javascript' src='https://-domain-name-/wp-includes/js/jquery/jquery.js'&gt;&lt;/script&gt;</code>",
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-html-scripts/'
+                                                                                                                                                                ),
+
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                                     
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
+                }
+                    
                 
             function _init_scripts_remove_version($saved_field_data)
                 {

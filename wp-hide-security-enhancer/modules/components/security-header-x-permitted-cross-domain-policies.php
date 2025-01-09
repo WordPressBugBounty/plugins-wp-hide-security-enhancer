@@ -17,20 +17,6 @@
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'x_permitted_cross_domain_policies',
-                                                                    'label'         =>  __('X-Permitted-Cross-Domain-Policies',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('X-Permitted-Cross-Domain-Policies',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("A cross-domain policy file is an XML document that grants a web client, such as Adobe Flash Player or Adobe Acrobat (though not necessarily limited to these), permission to handle data across domains.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br />" . __("When clients request content hosted on a particular source domain and that content makes requests directed towards a domain other than its own, the remote domain needs to host a cross-domain policy file that grants access to the source domain, allowing the client to continue the transaction.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br />" . __("Normally a meta-policy is declared in the master policy file, but for those who can’t write to the root directory, they can also declare a meta-policy using the X-Permitted-Cross-Domain-Policies HTTP response header.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><br />"  . __("Options:",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>none</b> - "  . __("No policy files are allowed anywhere on the target server, including this master policy file.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>master-only</b> - "  . __("Only this master policy file is allowed.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>by-content-type</b> - "  . __("[HTTP/HTTPS only] Only policy files served with Content-Type: text/x-cross-domain-policy are allowed.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>by-ftp-filename</b> - "  . __("[FTP only] Only policy files whose file names are crossdomain.xml (i.e. URLs ending in /crossdomain.xml) are allowed.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>all</b> - "  . __("All policy files on this target domain are allowed.",    'wp-hide-security-enhancer')
-                                                                                                ),
                                                                                                    
                                                                     'input_type'    =>  'custom',
                                                                                                  
@@ -41,10 +27,46 @@
                   
                                                                     
                     return $this->module_settings; 
-                 
-                    
+  
+                }
+                
+                
+        function set_module_components_description( $component_settings )
+                {
+
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'x_permitted_cross_domain_policies' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('X-Permitted-Cross-Domain-Policies',    'wp-hide-security-enhancer'),
                                                                     
-                    return $this->module_settings;   
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('X-Permitted-Cross-Domain-Policies',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("A cross-domain policy file is an XML document that grants a web client, such as Adobe Flash Player or Adobe Acrobat (though not necessarily limited to these), permission to handle data across domains.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br />" . __("When clients request content hosted on a particular source domain and that content makes requests directed towards a domain other than its own, the remote domain needs to host a cross-domain policy file that grants access to the source domain, allowing the client to continue the transaction.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br />" . __("Normally a meta-policy is declared in the master policy file, but for those who can’t write to the root directory, they can also declare a meta-policy using the X-Permitted-Cross-Domain-Policies HTTP response header.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><br />"  . __("Options:",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>none</b> - "  . __("No policy files are allowed anywhere on the target server, including this master policy file.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>master-only</b> - "  . __("Only this master policy file is allowed.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>by-content-type</b> - "  . __("[HTTP/HTTPS only] Only policy files served with Content-Type: text/x-cross-domain-policy are allowed.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>by-ftp-filename</b> - "  . __("[FTP only] Only policy files whose file names are crossdomain.xml (i.e. URLs ending in /crossdomain.xml) are allowed.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>all</b> - "  . __("All policy files on this target domain are allowed.",    'wp-hide-security-enhancer')
+                                                                                                                                                                ), 
+                                                                                                                                ) );
+                                                                break;
+                                                     
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
                 }
             
             function _get_default_options()

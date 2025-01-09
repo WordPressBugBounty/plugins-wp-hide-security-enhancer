@@ -20,6 +20,13 @@
                     $this->wph  =   $wph;
                     
                     $this->module_settings  =   $this->get_module_settings();
+                    
+                    $this->init();
+                }
+                
+            function init()
+                {
+                    
                 }
             
             function get_component_id()

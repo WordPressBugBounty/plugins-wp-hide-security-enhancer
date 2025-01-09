@@ -20,6 +20,9 @@
                     
                     $wp_roles   =   get_option( $wpdb->base_prefix . 'user_roles');
                     
+                    if ( ! is_array ( $wp_roles ) )
+                        return $this->module_settings;
+                    
                     $first  =   TRUE;
                     foreach  ( $wp_roles     as  $role_slug  =>  $role )
                         {
@@ -34,29 +37,11 @@
             
             function _prepare_modle_setting( $role_slug, $role_name, $first )
                 {
-                    $help_description   =   '';
-                    
-                    if  ( $first )
-                        $help_description   =   'The admin bar is a floating bar that contains useful administration screen links such as add a new post, see pending comments, edit your profile etc. It can be extended by plugins to add additional functionality for example SEO and more. <br /><br />';
-                        
-                    $help_description   .=  __('Remove WordPress Admin Bar for ',    'wp-hide-security-enhancer') . $role_name . ' ' .  __('role' ,    'wp-hide-security-enhancer');
-                    
                     $module_setting     =   array(
                                                                     'id'                    =>  'remove_admin_bar_' . $role_slug,
-                                                                    'label'                 =>  __('Remove Admin Bar for ',    'wp-hide-security-enhancer') . $role_name,
-                                                                    'description'           =>  __('Remove WordPress Admin Bar for ',    'wp-hide-security-enhancer') . $role_name . ' ' .  __('role, which is being displayed by default on front side of your website.',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove Admin Bar for ',    'wp-hide-security-enhancer') . $role_name . ' ' .  __('role.',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  $help_description,
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-html-admin-bar/'
-                                                                                                ),
                                                                     
                                                                     'input_type'            =>  'radio',
-                                                                    'options'               =>  array(
-                                                                                                        'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                        'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                        ),
+                                                    
                                                                     'default_value'         =>  'no',
                                                                     
                                                                     'sanitize_type'         =>  array('sanitize_title', 'strtolower'),
@@ -66,7 +51,66 @@
                                                                     
                                                                     );
                     
-                    return $module_setting;   
+                    return $module_setting; 
+         
+                }
+                
+                
+            /**
+            * Add the descriptin options to the component
+            * 
+            * @param mixed $component_settings
+            */
+            function set_module_components_description( $component_settings )
+                {
+                    global $wpdb;
+                    
+                    $wp_roles   =   get_option( $wpdb->prefix . 'user_roles');
+                    
+                    $first  =   TRUE;
+                    
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                    
+                            foreach  ( $wp_roles     as  $role_slug  =>  $role )
+                                {
+                                    if ( strcmp( 'remove_admin_bar_' . $role_slug , $component_setting['id'] ) !== 0 )
+                                        continue;
+                                    
+                                    $help_description   =   '';
+                    
+                                    if  ( $first )
+                                        $help_description   =   __( 'The admin bar is a floating bar that contains useful administration screen links such as add a new post, see pending comments, edit your profile etc. It can be extended by plugins to add additional functionality for example SEO and more.',    'wp-hide-security-enhancer') . ' <br /><br />';
+                                        
+                                    $help_description   .=  __('Remove WordPress Admin Bar for ',    'wp-hide-security-enhancer') . $role['name'] . ' ' .  __('role' ,    'wp-hide-security-enhancer');
+                                    
+                                    
+                                    $component_setting =   array_merge ( $component_setting , array(
+                                                                                                        'label'                 =>  __('Remove Admin Bar for ',    'wp-hide-security-enhancer') . $role['name'],
+                                                                                                        'description'           =>  __('Remove WordPress Admin Bar for ',    'wp-hide-security-enhancer') . $role['name'] . ' ' .  __('role, which is being displayed by default on front side of your website.',    'wp-hide-security-enhancer'),
+                                                                                                        
+                                                                                                        'help'          =>  array(
+                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove Admin Bar for ',    'wp-hide-security-enhancer') . $role['name'] . ' ' .  __('role.',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'               =>  $help_description,
+                                                                                                                                    'option_documentation_url'  =>  'https://www.wp-hide.com/documentation/general-html-admin-bar/'
+                                                                                                                                    ),
+                                                                                                        
+                                                                                                        'options'               =>  array(
+                                                                                                                                            'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                            'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                            ),                        
+                                                                                                                                ) );
+                                                                                                                                
+                                    $component_settings[ $component_key ]   =   $component_setting;
+                                    
+                                    $first  =   FALSE;
+                                    
+                                    break;
+                                }
+                        }    
+                    
+                    return $component_settings;
+                    
                 }
                 
                 

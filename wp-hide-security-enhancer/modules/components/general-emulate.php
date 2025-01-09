@@ -13,35 +13,9 @@
                 {
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'emulate_cms',
-                                                                    'label'         =>  __('Emulate CMS',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Use the option to output specific CMSs HTML traces to mislead any peculiar check.',  'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Emulate CMS',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("Using the option the system try to misguide the used WordPress by outputting the wrong traces, of the selected CMS.",    'wp-hide-security-enhancer') . "<br />" .
-                                                                                                                                __("Misleading and making a false lead provides an extra security, as the attacker search and attempt to hack something which not exist.",    'wp-hide-security-enhancer') . "<br />" .
-                                                                                                                                __("The plugin can emulate systems like:",    'wp-hide-security-enhancer') . "<br />" .
-                                                                                                                                __("- Drupal",    'wp-hide-security-enhancer') . "<br />" . 
-                                                                                                                                __("- Ghost",    'wp-hide-security-enhancer') . "<br />" .
-                                                                                                                                __("- HubSpot",    'wp-hide-security-enhancer') . "<br />" .
-                                                                                                                                __("- Joomla",    'wp-hide-security-enhancer') . "<br />" .
-                                                                                                                                __("- TYPO3",    'wp-hide-security-enhancer') . "<br />" .
-                                                                                                                                __("- Wix",    'wp-hide-security-enhancer') . "<br />" ,
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-emulate-cms/'
-                                                                                                ),
-                                                                    
+                                     
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'            =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'drupal_8'      =>  __('Drupal 8',    'wp-hide-security-enhancer'),
-                                                                                                'drupal_9'      =>  __('Drupal 9',    'wp-hide-security-enhancer'),
-                                                                                                'ghost_4_15'    =>  __('Ghost 4.15',    'wp-hide-security-enhancer'),
-                                                                                                'ghost_4_31'    =>  __('Ghost 4.31',    'wp-hide-security-enhancer'),
-                                                                                                'hubspot'       =>  __('HubSpot',    'wp-hide-security-enhancer'),
-                                                                                                'joomla'        =>  __('Joomla',    'wp-hide-security-enhancer'),
-                                                                                                'typo3'         =>  __('TYPO3',    'wp-hide-security-enhancer'),
-                                                                                                'wix'           =>  __('Wix',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                            
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower')
@@ -50,6 +24,59 @@
                   
                                                                     
                     return $this->module_settings;   
+                }
+                
+                
+        function set_module_components_description( $component_settings )
+                {
+
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'emulate_cms' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Emulate CMS',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Use the option to output specific CMSs HTML traces to mislead any peculiar check.',  'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Emulate CMS',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("Using the option the system try to misguide the used WordPress by outputting the wrong traces, of the selected CMS.",    'wp-hide-security-enhancer') . "<br />" .
+                                                                                                                                                                                                __("Misleading and making a false lead provides an extra security, as the attacker search and attempt to hack something which not exist.",    'wp-hide-security-enhancer') . "<br />" .
+                                                                                                                                                                                                __("The plugin can emulate systems like:",    'wp-hide-security-enhancer') . "<br />" .
+                                                                                                                                                                                                __("- Drupal",    'wp-hide-security-enhancer') . "<br />" . 
+                                                                                                                                                                                                __("- Ghost",    'wp-hide-security-enhancer') . "<br />" .
+                                                                                                                                                                                                __("- HubSpot",    'wp-hide-security-enhancer') . "<br />" .
+                                                                                                                                                                                                __("- Joomla",    'wp-hide-security-enhancer') . "<br />" .
+                                                                                                                                                                                                __("- TYPO3",    'wp-hide-security-enhancer') . "<br />" .
+                                                                                                                                                                                                __("- Wix",    'wp-hide-security-enhancer') . "<br />" ,
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-emulate-cms/'
+                                                                                                                                                                ),
+                                                                                                                                    
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'            =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'drupal_8'      =>  __('Drupal 8',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'drupal_9'      =>  __('Drupal 9',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'ghost_4_15'    =>  __('Ghost 4.15',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'ghost_4_31'    =>  __('Ghost 4.31',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'hubspot'       =>  __('HubSpot',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'joomla'        =>  __('Joomla',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'typo3'         =>  __('TYPO3',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'wix'           =>  __('Wix',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                                     
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
                 }
                 
                 

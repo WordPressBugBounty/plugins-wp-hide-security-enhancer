@@ -18,20 +18,9 @@
                 {
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'remove_html_comments',
-                                                                    'label'         =>  __('Remove Comments',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Remove comments from HTML source code.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove Comments',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("The HTML source code usually contain many comment lines, however there is no use for that, unless debugging. Remove all HTML Comments, which usually specify Plugins Name and Version. Any Internet Explorer conditional tags are preserved.",    'wp-hide-security-enhancer'),
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/remove-classes-from-html/'
-                                                                                                ),
-                                                                    
+                                                                                                                              
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                           
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -40,30 +29,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'remove_html_new_lines',
-                                                                    'label'         =>  __('Minify',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Minify HTML, Inline Styles, Inline JavaScripts.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Minify',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("When you minify HTML it removes the unnecessary characters and lines in the source code. Indentation, comments, empty lines, etc. are not required in HTML. They just make the file easier to read. Cutting out all this unnecessary stuff can shave down your file size considerably. When you minify HTML code on your website, the server will send a much smaller page to the client making your website load quicker.",    'wp-hide-security-enhancer') .
-                                                                                                                                    "<br /><br />" . __("The Minify component include multiple options:",    'wp-hide-security-enhancer') . 
-                                                                                                                                    "<br />Html
-                                                                                                                                      <br />Html & Css
-                                                                                                                                      <br />Html & JavaScript
-                                                                                                                                      <br />All
-                                                                                                                                      <br /><span class='important'>" . __("Minify JavaScript might produce errors for specific plugins.",    'wp-hide-security-enhancer') . "</span>",
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/remove-classes-from-html/'
-                                                                                                ),
-                                                                    
                                                                     
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'                =>  __('No',                'wp-hide-security-enhancer'),
-                                                                                                'html'              =>  __('Html',              'wp-hide-security-enhancer'),
-                                                                                                'html_css'          =>  __('Html & Css',        'wp-hide-security-enhancer'),
-                                                                                                'html_js'           =>  __('Html & JavaScript', 'wp-hide-security-enhancer'),
-                                                                                                'all'               =>  __('All',               'wp-hide-security-enhancer'),
-                                                                                                ),
+                                        
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -73,21 +41,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'clean_body_classes',
-                                                                    'label'         =>  __('Remove general classes from body tag',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Remove general classes from body tag.', 'wp-hide-security-enhancer'),                                                                    
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove general classes from body tag',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("Remove general classes from body tag.",    'wp-hide-security-enhancer') .
-                                                                                                                                    "<br /><span class='important'>" . __('This can produce layout issues with certain themes, if something break this should be turned off.', 'wp-hide-security-enhancer') ."</span>",
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/remove-classes-from-html/'
-                                                                                                ),
-                                                                    
+                                                                                                            
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                           
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -96,21 +52,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'clean_menu_items_id',
-                                                                    'label'         =>  __('Remove ID from Menu items',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Remove ID attribute from all menu items.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove ID from Menu items',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("Remove ID attribute from all menu items.",    'wp-hide-security-enhancer') . 
-                                                                                                                                    "<br /><span class='important'>" . __('This can produce layout issues with certain themes, if something break this should be turned off.', 'wp-hide-security-enhancer') ."</span>",
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/remove-classes-from-html/'
-                                                                                                ),
-                                                                                                
+                                                        
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                       
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -119,21 +63,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'clean_menu_items_classes',
-                                                                    'label'         =>  __('Remove class from Menu items',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Remove class attribute from all menu items.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove class from Menu items',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("Remove class attribute from all menu items. Any classes which include a 'current' prefix or contain 'has-children' will be preserved.",    'wp-hide-security-enhancer') . 
-                                                                                                                                    "<br /><span class='important'>" . __('This can produce layout issues with certain themes, if something break this should be turned off.', 'wp-hide-security-enhancer') ."</span>",
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/remove-classes-from-html/'
-                                                                                                ),
-                                                                    
+                                               
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                        
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -142,21 +74,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'clean_post_classes',
-                                                                    'label'         =>  __('Remove class from Menu items',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Remove general classes from post.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove class from Menu items',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("Remove general classes from post.",    'wp-hide-security-enhancer') . 
-                                                                                                                                    "<br /><span class='important'>" . __('This can produce layout issues with certain themes, if something break this should be turned off.', 'wp-hide-security-enhancer') ."</span>",
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/remove-classes-from-html/'
-                                                                                                ),
-                                                                    
+                                        
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                     
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -165,21 +85,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'clean_image_classes',
-                                                                    'label'         =>  __('Remove general classes from images',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Remove general classes from media tags.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove general classes from images',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("Remove general classes from media tags.",    'wp-hide-security-enhancer') . 
-                                                                                                                                    "<br /><span class='important'>" . __('This can produce layout issues with certain themes, if something break this should be turned off.', 'wp-hide-security-enhancer') ."</span>",
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/remove-classes-from-html/'
-                                                                                                ),
-                                                                                                
+                                                                                                                                             
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                        
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -188,8 +96,166 @@
                                                                     
                     return $this->module_settings;   
                 }
+        
                 
-                
+        function set_module_components_description( $component_settings )
+                {
+
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'remove_html_comments' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Remove Comments',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Remove comments from HTML source code.', 'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove Comments',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("The HTML source code usually contain many comment lines, however there is no use for that, unless debugging. Remove all HTML Comments, which usually specify Plugins Name and Version. Any Internet Explorer conditional tags are preserved.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/remove-classes-from-html/'
+                                                                                                                                                                ),
+                                                                                                                                    
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                    
+                                    case 'remove_html_new_lines' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Minify',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Minify HTML, Inline Styles, Inline JavaScripts.', 'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Minify',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("When you minify HTML it removes the unnecessary characters and lines in the source code. Indentation, comments, empty lines, etc. are not required in HTML. They just make the file easier to read. Cutting out all this unnecessary stuff can shave down your file size considerably. When you minify HTML code on your website, the server will send a much smaller page to the client making your website load quicker.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                    "<br /><br />" . __("The Minify component include multiple options:",    'wp-hide-security-enhancer') . 
+                                                                                                                                                                                                    "<br />Html
+                                                                                                                                                                                                      <br />Html & Css
+                                                                                                                                                                                                      <br />Html & JavaScript
+                                                                                                                                                                                                      <br />All
+                                                                                                                                                                                                      <br /><span class='important'>" . __("Minify JavaScript might produce errors for specific plugins.",    'wp-hide-security-enhancer') . "</span>",
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/remove-classes-from-html/'
+                                                                                                                                                                ),
+                                                                                                                                    
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'                =>  __('No',                'wp-hide-security-enhancer'),
+                                                                                                                                                                'html'              =>  __('Html',              'wp-hide-security-enhancer'),
+                                                                                                                                                                'html_css'          =>  __('Html & Css',        'wp-hide-security-enhancer'),
+                                                                                                                                                                'html_js'           =>  __('Html & JavaScript', 'wp-hide-security-enhancer'),
+                                                                                                                                                                'all'               =>  __('All',               'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'clean_body_classes' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Remove general classes from body tag',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Remove general classes from body tag.', 'wp-hide-security-enhancer'),                                                                    
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove general classes from body tag',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("Remove general classes from body tag.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                    "<br /><span class='important'>" . __('This can produce layout issues with certain themes, if something break this should be turned off.', 'wp-hide-security-enhancer') ."</span>",
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/remove-classes-from-html/'
+                                                                                                                                                                ),
+                                                                                                                                    
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'clean_menu_items_id' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Remove ID from Menu items',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Remove ID attribute from all menu items.', 'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove ID from Menu items',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("Remove ID attribute from all menu items.",    'wp-hide-security-enhancer') . 
+                                                                                                                                                                                                    "<br /><span class='important'>" . __('This can produce layout issues with certain themes, if something break this should be turned off.', 'wp-hide-security-enhancer') ."</span>",
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/remove-classes-from-html/'
+                                                                                                                                                                ),
+                                                                                                                                                                
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'clean_menu_items_classes' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Remove class from Menu items',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Remove class attribute from all menu items.', 'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove class from Menu items',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("Remove class attribute from all menu items. Any classes which include a 'current' prefix or contain 'has-children' will be preserved.",    'wp-hide-security-enhancer') . 
+                                                                                                                                                                                                    "<br /><span class='important'>" . __('This can produce layout issues with certain themes, if something break this should be turned off.', 'wp-hide-security-enhancer') ."</span>",
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/remove-classes-from-html/'
+                                                                                                                                                                ),
+
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'clean_post_classes' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Remove class from Menu items',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Remove general classes from post.', 'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove class from Menu items',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("Remove general classes from post.",    'wp-hide-security-enhancer') . 
+                                                                                                                                                                                                    "<br /><span class='important'>" . __('This can produce layout issues with certain themes, if something break this should be turned off.', 'wp-hide-security-enhancer') ."</span>",
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/remove-classes-from-html/'
+                                                                                                                                                                ),
+
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'clean_image_classes' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Remove general classes from images',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Remove general classes from media tags.', 'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove general classes from images',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("Remove general classes from media tags.",    'wp-hide-security-enhancer') . 
+                                                                                                                                                                                                    "<br /><span class='important'>" . __('This can produce layout issues with certain themes, if something break this should be turned off.', 'wp-hide-security-enhancer') ."</span>",
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/remove-classes-from-html/'
+                                                                                                                                                                ),
+                                                                                                                                                                
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;                                                                                                                                                             
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
+                }
+                    
                 
             function _init_remove_html_comments($saved_field_data)
                 {

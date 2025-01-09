@@ -17,17 +17,6 @@
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'x_xss_protection',
-                                                                    'label'         =>  __('X-XSS-Protection',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('X-XSS-Protection',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("The HTTP X-XSS-Protection response header is a feature of Internet Explorer, Chrome and Safari that stops pages from loading when they detect reflected cross-site scripting (XSS) attacks. These protections are largely unnecessary in modern browsers when sites implement a strong Content-Security-Policy that disables the use of inline JavaScript ('unsafe-inline').",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><br />"  . __("Options:",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>0</b> - "  . __("Disables XSS filtering.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>1</b> - "  . __("Enables XSS filtering (usually default in browsers). If a cross-site scripting attack is detected, the browser will sanitize the page (remove the unsafe parts).",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>1; mode=block</b> - "  . __("Enables XSS filtering. Rather than sanitizing the page, the browser will prevent rendering of the page if an attack is detected.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>1; report=</b> - "  . __("Chromium only. Enables XSS filtering. If a cross-site scripting attack is detected, the browser will sanitize the page and report the violation. This uses the functionality of the CSP report-uri directive to send a report.",    'wp-hide-security-enhancer')
-                                                                                                ),
                                                                                                    
                                                                     'input_type'    =>  'custom',
                                                                                                  
@@ -40,6 +29,43 @@
                     return $this->module_settings; 
 
                 }
+                
+                
+        function set_module_components_description( $component_settings )
+                {
+
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'x_xss_protection' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('X-XSS-Protection',    'wp-hide-security-enhancer'),
+                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('X-XSS-Protection',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("The HTTP X-XSS-Protection response header is a feature of Internet Explorer, Chrome and Safari that stops pages from loading when they detect reflected cross-site scripting (XSS) attacks. These protections are largely unnecessary in modern browsers when sites implement a strong Content-Security-Policy that disables the use of inline JavaScript ('unsafe-inline').",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><br />"  . __("Options:",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>0</b> - "  . __("Disables XSS filtering.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>1</b> - "  . __("Enables XSS filtering (usually default in browsers). If a cross-site scripting attack is detected, the browser will sanitize the page (remove the unsafe parts).",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>1; mode=block</b> - "  . __("Enables XSS filtering. Rather than sanitizing the page, the browser will prevent rendering of the page if an attack is detected.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>1; report=</b> - "  . __("Chromium only. Enables XSS filtering. If a cross-site scripting attack is detected, the browser will sanitize the page and report the violation. This uses the functionality of the CSP report-uri directive to send a report.",    'wp-hide-security-enhancer')
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                                     
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
+                }
+                
             
             function _get_default_options()
                 {

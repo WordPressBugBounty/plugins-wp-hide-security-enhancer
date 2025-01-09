@@ -13,55 +13,85 @@
                 {
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'disable_wpemojia',
-                                                                    'label'         =>  __('Disable Emoji',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Disable the Emoji icon library from being loaded.',  'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable Emoji',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("Not everyone use Emoji. Since WordPress load the dependencies as default, it decrease the overall site speed. Disabling this will remove any code and related resources from being loaded on front side.",    'wp-hide-security-enhancer'),
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-html-emoji/'
-                                                                                                ),
-                                                                    
+                                                                                                          
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                           
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower')
                                                                     
                                                                     ); 
           
-                  $this->module_settings[]                  =   array(
+                    $this->module_settings[]                  =   array(
                                                                     'id'            =>  'disable_tinymce_wpemojia',
-                                                                    'label'         =>  __('Disable TinyMCE Emoji',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Disable the TinyMCE Emoji icons library from being loaded into TinyMC.',  'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable TinyMCE Emoji',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("Disable TinyMCE Emoji This is also loaded along the WordPress default TinyMCE editor, but it can be disabled through this option.",    'wp-hide-security-enhancer'),
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-html-emoji/'
-                                                                                                ),
-                                                                    
-                                                                    
+                                      
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                            
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower')
                                                                     
                                                                     ); 
-                  
-                  
+
+
                                                                     
                     return $this->module_settings;   
                 }
                 
-                
+            
+        function set_module_components_description( $component_settings )
+                {
+
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'disable_wpemojia' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Disable Emoji',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Disable the Emoji icon library from being loaded.',  'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable Emoji',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("Not everyone use Emoji. Since WordPress load the dependencies as default, it decrease the overall site speed. Disabling this will remove any code and related resources from being loaded on front side.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-html-emoji/'
+                                                                                                                                                                ),
+
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                    
+                                    case 'disable_tinymce_wpemojia' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Disable TinyMCE Emoji',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Disable the TinyMCE Emoji icons library from being loaded into TinyMC.',  'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable TinyMCE Emoji',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("Disable TinyMCE Emoji This is also loaded along the WordPress default TinyMCE editor, but it can be disabled through this option.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-html-emoji/'
+                                                                                                                                                                ),
+
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;                 
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
+                }    
                 
             function _init_disable_wpemojia($saved_field_data)
                 {

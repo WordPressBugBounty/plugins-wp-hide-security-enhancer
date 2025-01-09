@@ -37,6 +37,11 @@
                     
                     return FALSE;   
                 }
+                
+            function get_interface_menu_position()
+                {
+                    return 10;
+                }
             
             /**
             * Return module components settings

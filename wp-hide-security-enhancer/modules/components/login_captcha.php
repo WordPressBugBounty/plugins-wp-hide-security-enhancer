@@ -69,18 +69,7 @@
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'captcha_type',
-                                                                    'label'         =>  __('Captcha Type',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  array(
-                                                                                                __('Select the required CAPTCHA type to protect the Login, Registration page, Password Forget etc.',  'wp-hide-security-enhancer')
-                                                                                                ),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Captcha Type',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __('CAPTCHA, short for "Completely Automated Public Turing test to tell Computers and Humans Apart," is a critical cybersecurity tool. It distinguishes human users from automated bots by presenting challenges like distorted characters or image recognition tasks. CAPTCHA safeguards websites, login pages, and online services from unwanted intrusion, spam, and fraud. Its evolution includes advanced variants and innovations like reCAPTCHA, continually enhancing digital security.',  'wp-hide-security-enhancer') . "<br />" .
-                                                                                                                                        __('While it\'s a robust defense, adversaries are adapting, making CAPTCHA\'s ongoing development crucial in the fight against online threats.',  'wp-hide-security-enhancer') ,
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-emulate-cms/'
-                                                                                                        ),
-                                                                    
+                                                                                                                                        
                                                                     'interface_help_split'  =>  FALSE,
                                                                     
                                                                     'input_type'    =>  'custom',
@@ -92,8 +81,43 @@
                                                                     
                     return $this->module_settings;   
                 }
+            
                 
-                
+            function set_module_components_description( $component_settings )
+                {
+
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'captcha_type' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Captcha Type',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  array(
+                                                                                                                                                                __('Select the required CAPTCHA type to protect the Login, Registration page, Password Forget etc.',  'wp-hide-security-enhancer')
+                                                                                                                                                                ),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Captcha Type',    'wp-hide-security-enhancer'),
+                                                                                                                                                                        'description'               =>  __('CAPTCHA, short for "Completely Automated Public Turing test to tell Computers and Humans Apart," is a critical cybersecurity tool. It distinguishes human users from automated bots by presenting challenges like distorted characters or image recognition tasks. CAPTCHA safeguards websites, login pages, and online services from unwanted intrusion, spam, and fraud. Its evolution includes advanced variants and innovations like reCAPTCHA, continually enhancing digital security.',  'wp-hide-security-enhancer') . "<br />" .
+                                                                                                                                                                                                        __('While it\'s a robust defense, adversaries are adapting, making CAPTCHA\'s ongoing development crucial in the fight against online threats.',  'wp-hide-security-enhancer') ,
+                                                                                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-emulate-cms/'
+                                                                                                                                                                        ),
+                                                                                                                                ) );
+                                                                break;
+                                                     
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
+                } 
+                   
                 
             function _init_captcha_type ( $saved_field_data )
                 {

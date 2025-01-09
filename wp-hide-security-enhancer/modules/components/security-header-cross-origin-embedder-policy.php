@@ -17,17 +17,7 @@
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'cross_origin_embedder_policy',
-                                                                    'label'         =>  __('Cross-Origin-Embedder-Policy (COEP)',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Cross-Origin-Embedder-Policy',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("The HTTP Cross-Origin-Embedder-Policy (COEP) response header prevents a document from loading any cross-origin resources that don't explicitly grant the document permission (using CORP or CORS).",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><br />"  . __("Options:",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>unsafe-none</b> - "  . __("This is the default value. Allows the document to fetch cross-origin resources without giving explicit permission through the CORS protocol or the Cross-Origin-Resource-Policy header.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>require-corp</b> - "  . __("A document can only load resources from the same origin, or resources explicitly marked as loadable from another origin. If a cross origin resource supports CORS, the crossorigin attribute or the Cross-Origin-Resource-Policy header must be used to load it without being blocked by COEP.",    'wp-hide-security-enhancer') ,
-                                                                                                'option_documentation_url'  =>  'https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Embedder-Policy'
-                                                                                                ),
-                                        
+                                                                                                            
                                                                     'input_type'    =>  'custom',
                                                                                                  
                                                                     'module_option_html_render' =>  array( $this, '_module_option_html' ),
@@ -38,6 +28,40 @@
                                                                     
                     return $this->module_settings; 
     
+                }
+            
+        function set_module_components_description( $component_settings )
+                {
+
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'cross_origin_embedder_policy' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Cross-Origin-Embedder-Policy (COEP)',    'wp-hide-security-enhancer'),
+                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Cross-Origin-Embedder-Policy',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("The HTTP Cross-Origin-Embedder-Policy (COEP) response header prevents a document from loading any cross-origin resources that don't explicitly grant the document permission (using CORP or CORS).",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><br />"  . __("Options:",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>unsafe-none</b> - "  . __("This is the default value. Allows the document to fetch cross-origin resources without giving explicit permission through the CORS protocol or the Cross-Origin-Resource-Policy header.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>require-corp</b> - "  . __("A document can only load resources from the same origin, or resources explicitly marked as loadable from another origin. If a cross origin resource supports CORS, the crossorigin attribute or the Cross-Origin-Resource-Policy header must be used to load it without being blocked by COEP.",    'wp-hide-security-enhancer') ,
+                                                                                                                                                                'option_documentation_url'  =>  'https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Embedder-Policy'
+                                                                                                                                                                ), 
+                                                                                                                                ) );
+                                                                break;
+                                                     
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
                 }
                 
             function _get_default_options()

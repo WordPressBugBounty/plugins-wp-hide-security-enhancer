@@ -13,24 +13,9 @@
                 {
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'remove_feed_links',
-                                                                    'label'         =>  __('Remove feed|rdf|rss|rss2|atom links',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Remove feed|rdf|rss|rss2|atom links within head. Also block such content functionality.',  'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove feed|rdf|rss|rss2|atom links',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("A feed is a function of special software that allows feedreaders to access a site, automatically looking for new content and then posting the information about new content and updates to another site. This provides a way for users to keep up with the latest and hottest information posted on different blogging sites.",    'wp-hide-security-enhancer') . 
-                                                                                                                                "<br />" . __("There are several different kinds of feeds, read by different feedreaders. Some feeds include RSS (alternately defined as 'Rich Site Summary' or 'Really Simple Syndication'), Atom or RDF files.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><br/>" . __("Sample tag:",    'wp-hide-security-enhancer') .  
-                                                                                                                                "<br /><code>&lt;link rel=&quot;alternate&quot; type=&quot;application/rss+xml&quot; title=&quot;WP Hide Demo Feed&quot; href=&quot;http://-domain-name-/feed/&quot; /&gt;</code>
-                                                                                                                                <br /><br/>" . __("Set this option to Yes also disable the feed service.",   'wp-hide-security-enhancer'),
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-html-feed/'
-                                                                                                ),
-                                                                    
+                                                                                                                 
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                           
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower')
@@ -39,6 +24,48 @@
                   
                                                                     
                     return $this->module_settings;   
+                }
+                
+
+        function set_module_components_description( $component_settings )
+                {
+
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'remove_feed_links' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Remove feed|rdf|rss|rss2|atom links',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Remove feed|rdf|rss|rss2|atom links within head. Also block such content functionality.',  'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove feed|rdf|rss|rss2|atom links',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("A feed is a function of special software that allows feedreaders to access a site, automatically looking for new content and then posting the information about new content and updates to another site. This provides a way for users to keep up with the latest and hottest information posted on different blogging sites.",    'wp-hide-security-enhancer') . 
+                                                                                                                                                                                                "<br />" . __("There are several different kinds of feeds, read by different feedreaders. Some feeds include RSS (alternately defined as 'Rich Site Summary' or 'Really Simple Syndication'), Atom or RDF files.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><br/>" . __("Sample tag:",    'wp-hide-security-enhancer') .  
+                                                                                                                                                                                                "<br /><code>&lt;link rel=&quot;alternate&quot; type=&quot;application/rss+xml&quot; title=&quot;WP Hide Demo Feed&quot; href=&quot;http://-domain-name-/feed/&quot; /&gt;</code>
+                                                                                                                                                                                                <br /><br/>" . __("Set this option to Yes also disable the feed service.",   'wp-hide-security-enhancer'),
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-html-feed/'
+                                                                                                                                                                ),
+                                                                                                                                    
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                                     
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
                 }
                 
                 

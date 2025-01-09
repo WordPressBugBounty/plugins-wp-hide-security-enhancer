@@ -72,6 +72,11 @@
                     
                     return $interface_data;
                 }
+                
+            function get_interface_menu_position()
+                {
+                    return 70;
+                }
     
             function get_interface_data()
                 {

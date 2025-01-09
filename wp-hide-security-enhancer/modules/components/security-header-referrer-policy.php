@@ -17,23 +17,7 @@
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'referrer_policy',
-                                                                    'label'         =>  __('Referrer-Policy',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Referrer-Policy',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("The Referrer-Policy HTTP header determines the amount of referral information (sent through the Referer header) that should accompany requests. In addition to the HTTP header, this policy can also be set in HTML",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><br />"  . __("Options:",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>no-referrer</b> - "  . __("The Referer header will be omitted: sent requests do not include any referrer information.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>no-referrer-when-downgrade</b> - "  . __("Send the origin, path, and querystring in Referer when the protocol security level stays the same or improves (HTTP→HTTP, HTTP→HTTPS, HTTPS→HTTPS). Don't send the Referer header for requests to less secure destinations (HTTPS→HTTP, HTTPS→file).",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>origin</b> - "  . __("Send only the origin in the Referer header. For example, a document at https://example.com/page.html will send the referrer https://example.com/.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>origin-when-cross-origin</b> - "  . __("When performing a same-origin request to the same protocol level (HTTP→HTTP, HTTPS→HTTPS), send the origin, path, and query string. Send only the origin for cross origin requests and requests to less secure destinations (HTTPS→HTTP).",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>same-origin</b> - "  . __("Send the origin, path, and query string for same-origin requests. Don't send the Referer header for cross-origin requests.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>strict-origin</b> - "  . __("Send only the origin when the protocol security level stays the same (HTTPS→HTTPS). Don't send the Referer header to less secure destinations (HTTPS→HTTP).",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>strict-origin-when-cross-origin (default)</b> - "  . __("Send the origin, path, and querystring when performing a same-origin request. For cross-origin requests send the origin (only) when the protocol security level stays same (HTTPS→HTTPS). Don't send the Referer header to less secure destinations (HTTPS→HTTP).",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>unsafe-url</b> - "  . __("Send the origin, path, and query string when performing any request, regardless of security.",    'wp-hide-security-enhancer') ,
-                                                                                                'option_documentation_url'  =>  'https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy'
-                                                                                                ),
-                                        
+                                                                                                            
                                                                     'input_type'    =>  'custom',
                                                                                                  
                                                                     'module_option_html_render' =>  array( $this, '_module_option_html' ),
@@ -44,6 +28,47 @@
                                                                     
                     return $this->module_settings; 
     
+                }
+                
+                
+        function set_module_components_description( $component_settings )
+                {
+
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'referrer_policy' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Referrer-Policy',    'wp-hide-security-enhancer'),
+                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Referrer-Policy',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("The Referrer-Policy HTTP header determines the amount of referral information (sent through the Referer header) that should accompany requests. In addition to the HTTP header, this policy can also be set in HTML",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><br />"  . __("Options:",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>no-referrer</b> - "  . __("The Referer header will be omitted: sent requests do not include any referrer information.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>no-referrer-when-downgrade</b> - "  . __("Send the origin, path, and querystring in Referer when the protocol security level stays the same or improves (HTTP→HTTP, HTTP→HTTPS, HTTPS→HTTPS). Don't send the Referer header for requests to less secure destinations (HTTPS→HTTP, HTTPS→file).",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>origin</b> - "  . __("Send only the origin in the Referer header. For example, a document at https://example.com/page.html will send the referrer https://example.com/.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>origin-when-cross-origin</b> - "  . __("When performing a same-origin request to the same protocol level (HTTP→HTTP, HTTPS→HTTPS), send the origin, path, and query string. Send only the origin for cross origin requests and requests to less secure destinations (HTTPS→HTTP).",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>same-origin</b> - "  . __("Send the origin, path, and query string for same-origin requests. Don't send the Referer header for cross-origin requests.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>strict-origin</b> - "  . __("Send only the origin when the protocol security level stays the same (HTTPS→HTTPS). Don't send the Referer header to less secure destinations (HTTPS→HTTP).",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>strict-origin-when-cross-origin (default)</b> - "  . __("Send the origin, path, and querystring when performing a same-origin request. For cross-origin requests send the origin (only) when the protocol security level stays same (HTTPS→HTTPS). Don't send the Referer header to less secure destinations (HTTPS→HTTP).",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>unsafe-url</b> - "  . __("Send the origin, path, and query string when performing any request, regardless of security.",    'wp-hide-security-enhancer') ,
+                                                                                                                                                                'option_documentation_url'  =>  'https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy'
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                                     
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
                 }
                 
             function _get_default_options()

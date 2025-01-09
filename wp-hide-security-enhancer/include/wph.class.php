@@ -229,8 +229,7 @@
                             //action available for mu-plugins
                             do_action('wp-hide/loaded_module', $module);
                             
-                            $interface_menu_data    =   $module->get_interface_menu_data();
-                            $menu_position          =   $interface_menu_data['menu_position'];
+                            $menu_position    =   $module->get_interface_menu_position();
                             
                             $this->modules[$menu_position]        =   $module;
 
@@ -719,8 +718,12 @@
             */
             function ob_start_callback( $buffer )
                 {
+                    if ( ! function_exists( 'do_action' ) )
+                        return $buffer;
+                            
+                    do_action( 'wp-hide/before_ob_start_callback', $buffer );
                     
-                    if($this->disable_ob_start_callback === TRUE)
+                    if( $this->disable_ob_start_callback === TRUE )
                         return $buffer;
                     
                     $response_headers   =   array();
@@ -743,6 +746,10 @@
                             
                             return $buffer;
                         }
+                    
+                    //provide a filter to disable the buffer processing
+                    if  ( apply_filters('wp-hide/ignore_ob_start_callback', FALSE, $buffer )     ===    TRUE   )
+                        return $buffer;
                         
                     //check for xml content tupe 
                     $headers_content_type   =   array();
@@ -750,26 +757,25 @@
                         $headers_content_type    =   $this->functions->get_headers_list_content_type();
                     if ( in_array( $headers_content_type , array( 'text/xml', 'application/rss+xml' ) )    &&  ! is_null ( $this->functions ) )
                         {
-
+                            $buffer =   apply_filters( 'wp-hide/ob_start_callback/pre_replacements',  $buffer );
+                            
                             //do only url replacements
                             $replacement_list   =   $this->functions->get_replacement_list();
                     
                             //replace the urls
                             $buffer =   $this->functions->content_urls_replacement($buffer,  $replacement_list );
                             
-                            //if html comments remove is on, run a regex
-                            $option_remove_html_comments =   $this->functions->get_module_item_setting( 'remove_html_comments' );
-                            if ( ! empty ( $option_remove_html_comments )   &&  $option_remove_html_comments    ==  'yes' )
-                                $buffer =   WPH_module_general_html::remove_html_comments( $buffer );    
+                            //if html comments remove is on, run a regex, unless is application/json
+                            if ( ! in_array( $headers_content_type , array( 'application/json' ) ) )
+                                {
+                                    $option_remove_html_comments =   $this->functions->get_module_item_setting( 'remove_html_comments' );
+                                    if ( ! empty ( $option_remove_html_comments )   &&  $option_remove_html_comments    ==  'yes' )
+                                        $buffer =   WPH_module_general_html::remove_html_comments( $buffer );;    
+                                }    
                             
                             return $buffer;   
                         }   
-                    
-                        
-                    //provide a filter to disable the replacements
-                    if  ( apply_filters('wp-hide/ignore_ob_start_callback', FALSE, $buffer)     === TRUE   )
-                        return $buffer;
-                        
+                          
                     //check headers fir content-encoding
                     if(function_exists('apache_response_headers'))
                         {

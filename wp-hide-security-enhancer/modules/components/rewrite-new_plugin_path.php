@@ -124,11 +124,11 @@
                                                                                                                                 ) );
                                                                 break;
                                                                 
+                                                                
                                     case preg_match('/^new_plugin_path_[\w-]+$/', $component_setting['id'] ) === 1 :
                                     
-                                                                $all_plugins = $this->wph->functions->get_plugins();
-                    
-                                                                //get active plugins
+                                    
+                                                                 //get active plugins
                                                                 $active_plugins = (array) get_option( 'active_plugins', array() );
                                                                 foreach( $active_plugins as  $active_plugin )
                                                                     {
@@ -162,9 +162,9 @@
                                                                                                                             ));
                                                                                                                     
                                                                     }
-                                                                
                                     
                                                                 break;
+                                                                
                                 }
 
                                 

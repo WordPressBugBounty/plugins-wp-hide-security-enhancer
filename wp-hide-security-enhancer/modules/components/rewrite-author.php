@@ -14,18 +14,7 @@
                 {
                     $this->module_settings[]                  =   array(
                                                                         'id'            =>  'author',
-                                                                        'label'         =>  __('New Author Path',    'wp-hide-security-enhancer'),
-                                                                        'description'   =>  __('The default path is set to /author/',    'wp-hide-security-enhancer'),
-                                                                        
-                                                                        'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Author Path',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("An author URL display all posts associated to a particular author. The default URL format is:",    'wp-hide-security-enhancer') ."<br />  <br />
-                                                                                                                                            <code>https://-domain-name-/author/author-name/</code>
-                                                                                                                                            <br /><br /> " . __("By using a value of 'contributor' this become:",    'wp-hide-security-enhancer') ."<br />
-                                                                                                                                            <code>https://-domain-name-/contributor/author-name/</code>",
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-author/',
-                                                                                                        ),
-                                                                        
+                                                                                                                                 
                                                                         'value_description' =>  'e.g. contributor',
                                                                         'input_type'    =>  'text',
                                                                         
@@ -35,20 +24,9 @@
                                                                         
                     $this->module_settings[]                  =   array(
                                                                         'id'            =>  'author_block_default',
-                                                                        'label'         =>  __('Block default',    'wp-hide-security-enhancer'),
-                                                                        'description'   =>  __('Block default /author/ when using custom one.',    'wp-hide-security-enhancer') . '<br />'.__('Apply only if ',    'wp-hide-security-enhancer') . '<b>New Author Path</b> ' . __('is not empty.',    'wp-hide-security-enhancer'),
-                                                                        
-                                                                        'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block default',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("After changing the default author, the old url is still accessible, this provide a way to block it.<br />The functionality apply only if <b>New Author Path</b> option is filled in.",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-author/'
-                                                                                                        ),
-                                                                        
+                                                  
                                                                         'input_type'    =>  'radio',
-                                                                        'options'       =>  array(
-                                                                                                    'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                    'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                    ),
+                                                             
                                                                         'default_value' =>  'no',
                                                                         
                                                                         'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -60,7 +38,61 @@
                 }
                 
             
-            
+        function set_module_components_description( $component_settings )
+                {
+
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'author' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('New Author Path',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('The default path is set to /author/',    'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New Author Path',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("An author URL display all posts associated to a particular author. The default URL format is:",    'wp-hide-security-enhancer') ."<br />  <br />
+                                                                                                                                                                                                        <code>https://-domain-name-/author/author-name/</code>
+                                                                                                                                                                                                        <br /><br /> " . __("By using a value of 'contributor' this become:",    'wp-hide-security-enhancer') ."<br />
+                                                                                                                                                                                                        <code>https://-domain-name-/contributor/author-name/</code>",
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-author/',
+                                                                                                                                                                    ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                                                
+                                    case 'author_block_default' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Block default',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Block default /author/ when using custom one.',    'wp-hide-security-enhancer') . '<br />'.__('Apply only if ',    'wp-hide-security-enhancer') . '<b>New Author Path</b> ' . __('is not empty.',    'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block default',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("After changing the default author, the old url is still accessible, this provide a way to block it.<br />The functionality apply only if <b>New Author Path</b> option is filled in.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-author/'
+                                                                                                                                                                    ),
+
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                                     
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
+                }
+                
+                
             function _init_author( $saved_field_data )
                 {
                     add_filter('author_rewrite_rules',      array( $this, 'author_rewrite_rules'), 999);

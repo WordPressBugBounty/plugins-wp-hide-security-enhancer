@@ -17,17 +17,7 @@
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'x_content_type_options',
-                                                                    'label'         =>  __('X-Content-Type-Options',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('X-Content-Type-Options',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("The X-Content-Type-Options response HTTP header is a marker used by the server to indicate that the MIME types advertised in the Content-Type headers should be followed and not be changed. The header allows you to avoid MIME type sniffing by saying that the MIME types are deliberately configured.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br />" . __("This header was introduced by Microsoft in IE 8 as a way for webmasters to block content sniffing that was happening and could transform non-executable MIME types into executable MIME types. Since then, other browsers have introduced it, even if their MIME sniffing algorithms were less aggressive.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br />" . __("Starting with Firefox 72, top-level documents also avoid MIME sniffing (if Content-type is provided). This can cause HTML web pages to be downloaded instead of being rendered when they are served with a MIME type other than text/html. Make sure to set both headers correctly.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><br />"  . __("Options:",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>nosniff</b> - "  . __("Blocks a request if the request destination is of type style and the MIME type is not text/css, or of type script and the MIME type is not a JavaScript MIME type.",    'wp-hide-security-enhancer')
-                                                                                                ),
-                                                                                                              
+                                                                                                                                                                 
                                                                     'input_type'    =>  'custom',
                                                                                                  
                                                                     'module_option_html_render' =>  array( $this, '_module_option_html' ),
@@ -37,10 +27,42 @@
                   
                                                                     
                     return $this->module_settings; 
-                 
-                    
+  
+                }
+                
+                
+        function set_module_components_description( $component_settings )
+                {
+
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'x_content_type_options' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('X-Content-Type-Options',    'wp-hide-security-enhancer'),
                                                                     
-                    return $this->module_settings;   
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('X-Content-Type-Options',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("The X-Content-Type-Options response HTTP header is a marker used by the server to indicate that the MIME types advertised in the Content-Type headers should be followed and not be changed. The header allows you to avoid MIME type sniffing by saying that the MIME types are deliberately configured.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br />" . __("This header was introduced by Microsoft in IE 8 as a way for webmasters to block content sniffing that was happening and could transform non-executable MIME types into executable MIME types. Since then, other browsers have introduced it, even if their MIME sniffing algorithms were less aggressive.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br />" . __("Starting with Firefox 72, top-level documents also avoid MIME sniffing (if Content-type is provided). This can cause HTML web pages to be downloaded instead of being rendered when they are served with a MIME type other than text/html. Make sure to set both headers correctly.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><br />"  . __("Options:",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>nosniff</b> - "  . __("Blocks a request if the request destination is of type style and the MIME type is not text/css, or of type script and the MIME type is not a JavaScript MIME type.",    'wp-hide-security-enhancer')
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                                     
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
                 }
             
             function _get_default_options()

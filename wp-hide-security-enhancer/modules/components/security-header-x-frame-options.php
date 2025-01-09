@@ -17,18 +17,7 @@
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'x_frame_options',
-                                                                    'label'         =>  __('X-Frame-Options (XFO)',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('X-Frame-Options',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("The X-Frame-Options HTTP response header can be used to indicate whether or not a browser should be allowed to render a page in a &#60;frame&#62;, &#60;iframe&#62;, &#60;embed&#62; or &#60;object&#62;. Sites can use this to avoid click-jacking attacks, by ensuring that their content is not embedded into other sites.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br />" . __("The added security is provided only if the user accessing the document is using a browser that supports X-Frame-Options.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><br />"  . __("Options:",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>DENY</b> - "  . __("The page cannot be displayed in a frame, regardless of the site attempting to do so.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><b>SAMEORIGIN</b> - "  . __("The page can only be displayed in a frame on the same origin as the page itself. The spec leaves it up to browser vendors to decide whether this option applies to the top level, the parent, or the whole chain, although it is argued that the option is not very useful unless all ancestors are also in the same origin.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br />&nbsp;<br /><br />" . __("If you specify DENY, not only will the browser attempt to load the page in a frame fail when loaded from other sites, attempts to do so will fail when loaded from the same site. On the other hand, if you specify SAMEORIGIN, you can still use the page in a frame as long as the site including it in a frame is the same as the one serving the page.",    'wp-hide-security-enhancer')
-                                                                                                ),
-                                                                                                                    
+                                                                                                                                                                                        
                                                                     'input_type'    =>  'custom',
                                                                                                  
                                                                     'module_option_html_render' =>  array( $this, '_module_option_html' ),
@@ -43,6 +32,43 @@
                                                                     
                     return $this->module_settings;   
                 }
+            
+            
+        function set_module_components_description( $component_settings )
+                {
+
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'x_frame_options' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('X-Frame-Options (XFO)',    'wp-hide-security-enhancer'),
+                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('X-Frame-Options',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("The X-Frame-Options HTTP response header can be used to indicate whether or not a browser should be allowed to render a page in a &#60;frame&#62;, &#60;iframe&#62;, &#60;embed&#62; or &#60;object&#62;. Sites can use this to avoid click-jacking attacks, by ensuring that their content is not embedded into other sites.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br />" . __("The added security is provided only if the user accessing the document is using a browser that supports X-Frame-Options.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><br />"  . __("Options:",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>DENY</b> - "  . __("The page cannot be displayed in a frame, regardless of the site attempting to do so.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><b>SAMEORIGIN</b> - "  . __("The page can only be displayed in a frame on the same origin as the page itself. The spec leaves it up to browser vendors to decide whether this option applies to the top level, the parent, or the whole chain, although it is argued that the option is not very useful unless all ancestors are also in the same origin.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br />&nbsp;<br /><br />" . __("If you specify DENY, not only will the browser attempt to load the page in a frame fail when loaded from other sites, attempts to do so will fail when loaded from the same site. On the other hand, if you specify SAMEORIGIN, you can still use the page in a frame as long as the site including it in a frame is the same as the one serving the page.",    'wp-hide-security-enhancer')
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                                     
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
+                }
+            
             
             function _get_default_options()
                 {

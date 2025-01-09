@@ -24,8 +24,10 @@
                 
             function init()
                 {
-                    if ( is_admin() &&  current_user_can ( 'manage_options' ) )
+                    if ( is_admin() )
                         $this->run();
+                    if ( is_admin() &&  current_user_can ( 'manage_options' ) )
+                        $this->scan_ajax();
                 }
             
             function get_scan_items()
@@ -136,12 +138,15 @@
                         }
   
                     add_action( 'admin_notice',                     array ( $this, 'admin_notices' ) );  
-                    
+                }
+                
+                
+            function scan_ajax()
+                {
                     add_action( 'wp_ajax_wph_site_scan',            array ( $this, 'wp_ajax_wph_site_scan' ) );
                     add_action( 'wp_ajax_wph_site_scan_progress',   array ( $this, 'wp_ajax_wph_site_scan_progress' ) );
                     add_action( 'wp_ajax_wph_site_scan_ignore',     array ( $this, 'wp_ajax_wph_site_scan_ignore' ) ); 
                     add_action( 'wp_ajax_wph_site_scan_restore',    array ( $this, 'wp_ajax_wph_site_scan_restore' ) );
-                    
                 }
                
             function admin_print_styles()

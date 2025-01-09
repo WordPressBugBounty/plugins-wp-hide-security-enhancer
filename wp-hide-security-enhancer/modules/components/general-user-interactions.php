@@ -21,21 +21,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'disable_mouse_right_click',
-                                                                    'label'         =>  __('Disable Mouse right click',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Disable mouse right click on your pages.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable right Mouse click',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("Disable right mouse click on your pages can protect your site content from being copied.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br />" . __("Some plugins, mainly visual editors, use mouse right-click, if use such code this option should be set to No.",    'wp-hide-security-enhancer'),
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/user-interactions/'
-                                                                                                ),
-                                                                    
+                                                                                                                     
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                            
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -44,21 +32,9 @@
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'disable_text_selection',
-                                                                    'label'         =>  __('Disable Text Selection',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Disable Text Selection on your pages.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable Text Selection',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("When the option is active, the text selection on pages is not possible.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br />" . __("This is useful when don't want the site texts to be copied.",    'wp-hide-security-enhancer'),
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/user-interactions/'
-                                                                                                ),
-                                                                    
+                                         
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                          
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -67,20 +43,9 @@
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'disable_copy',
-                                                                    'label'         =>  __('Disable Copy',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Disable text copy on your pages.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable Copy',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("Through this option, the browser copy functionality is disabled.",    'wp-hide-security-enhancer') ,
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/user-interactions/'
-                                                                                                ),
-                                                                    
+                                              
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                         
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -89,20 +54,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'disable_cut',
-                                                                    'label'         =>  __('Disable Cut',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Disable text cut on your pages.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable Cut',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("Through this option, the browser cut functionality is disabled.",    'wp-hide-security-enhancer') ,
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/user-interactions/'
-                                                                                                ),
-                                                                    
+                                                        
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                     
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -111,20 +65,9 @@
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'disable_paste',
-                                                                    'label'         =>  __('Disable Paste',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Disable text paste on your pages.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable Paste',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("Through this option, the browser paste functionality is disabled.",    'wp-hide-security-enhancer') ,
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/user-interactions/'
-                                                                                                ),
-                                                                    
+                                              
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                             
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -133,20 +76,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'disable_print',
-                                                                    'label'         =>  __('Disable Print',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Disable Print function on your pages.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable Print',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("When using the option, the browser Print dialogue is not available so a site print is disabled.",    'wp-hide-security-enhancer'),
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/user-interactions/'
-                                                                                                ),
-                                                                    
+                                       
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                    
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -155,21 +87,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'disable_print_screen',
-                                                                    'label'         =>  __('Disable Print Screen',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Disable Print Screen function on your pages.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable Print Screen',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("The Print Screen function captures an image of the entire screen and copies it to the Clipboard in the computer's memory.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br />" . __("If the functionality is not required, the option helps to disable it.",    'wp-hide-security-enhancer'),
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/user-interactions/'
-                                                                                                ),
-                                                                    
+                                                                                                              
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                 
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -178,21 +98,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'disable_developer_tools',
-                                                                    'label'         =>  __('Disable Developer Tools',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Disable the browser Developr Tools on your pages.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable Developer Tools',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("Every modern web browser includes a powerful tool called Developer Tools. Through the application, a user can inspect currently-loaded HTML, CSS and JavaScript.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br />" . __("To prevent the user from deeply checking into your site architecture, the browser Inspect can be disabled through this option. ",    'wp-hide-security-enhancer'),
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/user-interactions/'
-                                                                                                ),
-                                                                    
+                                           
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                       
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -201,20 +109,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'disable_view_source',
-                                                                    'label'         =>  __('Disable View Source',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Disable the browser view source on your pages.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable View Source',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("The page source is an HTML set of tags code. An HTML tag is an element that, along with CSS and JavaScript, tells the Web browser what to do and how to display the text and images.",    'wp-hide-security-enhancer') ,
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/user-interactions/'
-                                                                                                ),
-                                                                    
+                                        
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                      
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -223,20 +120,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'disable_drag_drop',
-                                                                    'label'         =>  __('Disable Drag / Drop',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Disable the browser drag and drop for images on your pages.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable Drag / Drop',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("The Drag and Drop operation describes the action o selecting an object or text on the page and moving it to a different area.",    'wp-hide-security-enhancer'),
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/user-interactions/'
-                                                                                                ),
-                                                                    
+                                                                                                                      
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -247,7 +133,209 @@
                 }
                 
           
-            
+        function set_module_components_description( $component_settings )
+                {
+
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'disable_mouse_right_click' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Disable Mouse right click',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Disable mouse right click on your pages.', 'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable right Mouse click',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("Disable right mouse click on your pages can protect your site content from being copied.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br />" . __("Some plugins, mainly visual editors, use mouse right-click, if use such code this option should be set to No.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/user-interactions/'
+                                                                                                                                                                ),
+
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                    
+                                    case 'disable_text_selection' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Disable Text Selection',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Disable Text Selection on your pages.', 'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable Text Selection',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("When the option is active, the text selection on pages is not possible.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br />" . __("This is useful when don't want the site texts to be copied.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/user-interactions/'
+                                                                                                                                                                ),
+
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ), 
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'disable_copy' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Disable Copy',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Disable text copy on your pages.', 'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable Copy',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("Through this option, the browser copy functionality is disabled.",    'wp-hide-security-enhancer') ,
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/user-interactions/'
+                                                                                                                                                                ),
+
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                    
+                                    case 'disable_cut' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Disable Cut',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Disable text cut on your pages.', 'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable Cut',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("Through this option, the browser cut functionality is disabled.",    'wp-hide-security-enhancer') ,
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/user-interactions/'
+                                                                                                                                                                ),
+                                                                                                                                    
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'disable_paste' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Disable Paste',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Disable text paste on your pages.', 'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable Paste',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("Through this option, the browser paste functionality is disabled.",    'wp-hide-security-enhancer') ,
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/user-interactions/'
+                                                                                                                                                                ),
+
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                    
+                                    case 'disable_print' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Disable Print',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Disable Print function on your pages.', 'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable Print',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("When using the option, the browser Print dialogue is not available so a site print is disabled.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/user-interactions/'
+                                                                                                                                                                ),
+
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ), 
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'disable_print_screen' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Disable Print Screen',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Disable Print Screen function on your pages.', 'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable Print Screen',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("The Print Screen function captures an image of the entire screen and copies it to the Clipboard in the computer's memory.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br />" . __("If the functionality is not required, the option helps to disable it.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/user-interactions/'
+                                                                                                                                                                ),
+
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                    
+                                    case 'disable_developer_tools' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Disable Developer Tools',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Disable the browser Developr Tools on your pages.', 'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable Developer Tools',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("Every modern web browser includes a powerful tool called Developer Tools. Through the application, a user can inspect currently-loaded HTML, CSS and JavaScript.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br />" . __("To prevent the user from deeply checking into your site architecture, the browser Inspect can be disabled through this option. ",    'wp-hide-security-enhancer'),
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/user-interactions/'
+                                                                                                                                                                ),
+
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ), 
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'disable_view_source' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Disable View Source',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Disable the browser view source on your pages.', 'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable View Source',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("The page source is an HTML set of tags code. An HTML tag is an element that, along with CSS and JavaScript, tells the Web browser what to do and how to display the text and images.",    'wp-hide-security-enhancer') ,
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/user-interactions/'
+                                                                                                                                                                ),
+
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                    'default_value' =>  'no',
+                                                                                                                                ) );
+                                                                break;
+                                    
+                                    case 'disable_drag_drop' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Disable Drag / Drop',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Disable the browser drag and drop for images on your pages.', 'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable Drag / Drop',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("The Drag and Drop operation describes the action o selecting an object or text on the page and moving it to a different area.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/user-interactions/'
+                                                                                                                                                                ),
+                                                                                                                                    
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
+                }
+                
             
             function _init_disable_mouse_right_click( $saved_field_data )
                 {

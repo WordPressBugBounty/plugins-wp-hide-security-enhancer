@@ -17,13 +17,7 @@
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'x_download_options',
-                                                                    'label'         =>  __('X-Download-Options',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('X-Download-Options',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("The X-Download-Options is specific to IE 8, and is related to how IE 8 handles downloaded HTML files. Turns out if you download an HTML file from a web page and chooses to \"Open\" it in IE, it will execute in the context of the web site. That means that any scripts in that file will also execute with the origin of the web site.",    'wp-hide-security-enhancer') 
-                                                                                                ),
-                                                                    
+                                                                                                                
                                                                     'input_type'    =>  'custom',
                                                                                                  
                                                                     'module_option_html_render' =>  array( $this, '_module_option_html' ),
@@ -33,11 +27,40 @@
                   
                                                                     
                     return $this->module_settings; 
-                 
-                    
-                                                                    
-                    return $this->module_settings;   
+   
                 }
+                
+                
+        function set_module_components_description( $component_settings )
+                {
+
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'x_download_options' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('X-Download-Options',    'wp-hide-security-enhancer'),
+                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('X-Download-Options',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("The X-Download-Options is specific to IE 8, and is related to how IE 8 handles downloaded HTML files. Turns out if you download an HTML file from a web page and chooses to \"Open\" it in IE, it will execute in the context of the web site. That means that any scripts in that file will also execute with the origin of the web site.",    'wp-hide-security-enhancer') 
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                                     
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
+                }
+                
             
             function _get_default_options()
                 {

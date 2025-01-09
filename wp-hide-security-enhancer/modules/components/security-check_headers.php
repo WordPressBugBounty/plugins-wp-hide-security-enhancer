@@ -7,6 +7,11 @@
             
             public $headers = array ();
             
+            function init()
+                {
+                    add_action('init', array ( $this, 'set_headers' ) );
+                }
+            
             function get_component_title()
                 {
                     return "Check Headers";
@@ -14,29 +19,10 @@
                                     
             function get_module_settings()
                 {
-                    
-                    $this->_set_headers();
-                    
+                                        
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'check_headers',
-                                                                    'label'         =>  __('Check Headers',    'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'description'               =>  '<h4 class="important">'. __("HTTP Response Headers are a powerful tool to Harden Your Website.<br />Misusing the headers, can easily break the site layout and functionality. Ensure you understand the proper usage for each option before configuring. Once the Headers setup completed, a thorough check for the front side is recommended.",    'wp-hide-security-enhancer') . '</h4>' .
-                                                                                                                                
-                                                                                                                                "<div class='help-section'><h4>" . __( "Recovery", 'wp-hide-security-enhancer' ) . '</h4>' .
-                                                                                                                                '<p class="important"><span class="dashicons dashicons-warning important" alt="f534"></span> ' . __('Copy the following link to a safe place. You can use it to reset the header options if something goes wrong:',    'wp-hide-security-enhancer') . '</p><p> <b><span id="wph-recovery-link" onClick="WPH.selectText( \'wph-recovery-link\' )">' . trailingslashit ( home_url() ) . '?wph-recovery=' . $this->wph->functions->get_recovery_code() .'&reset_headers=1&rand=' . rand( 10000,9999999) .'</span></b></p></div>' .    
-                                                                                                                                
-                                                                                                                                "<div class='help-section'><h4>" . __( "Sample Setup", 'wp-hide-security-enhancer' ) . '</h4>' .
-                                                                                                                                '<p>' . __('Create a sample setup for Headers. That will overwrite any Headers settings previously created through the plugin options. The sample setup creates a basic Headers implementation that is commonly safe on any site. For better performances, further manual adjustments are necesarelly.',    'wp-hide-security-enhancer') .'</p><p><input type="hidden" name="wph-headers-sample-setup" value="true" /><input type="button" class="button-secondary" value="' . __('Create Sample Setup',    'wp-hide-security-enhancer') .'" onclick="WPH.runSampleHeaders();"></p></div>' .
-                                                                                                                                
-                                                                                                                                "<br /><br />" .__("The Hypertext Transfer Protocol (HTTP) is based on a client-server architecture, in which the client ( typically a web browser application ) establishes a connection with the server through a destination URL and waits for a response.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><br />" .__("The HTTP Headers allow the client and the server send additional pieces of information with the HTTP request or response.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><br />" .__("The HTTP Headers are categorised by their purpose: Authentication, Caching, Client hints, Conditionals, Connection management, Content negotiation, Controls, Cookies, CORS, Downloads, Message body information, Proxies, Redirects, Request context, Response context, Range requests, <b>Security</b>, Server-sent events, Transfer coding, WebSockets, Other",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><br />" . __("This area provides support for the <b>",    'wp-hide-security-enhancer').  '<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers#security" target="_blank">Security Headers</b></a>' . __(" type. Those are the ones responsible for the security implementation for any page.",    'wp-hide-security-enhancer') ,
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/harden-your-website-using-security-headers/'
-                                                                                                ),
-                                                                    
+                                                                                                                                        
                                                                     'interface_help_split'  =>  FALSE,
                                                                     
                                                                     'require_save'          =>  FALSE,
@@ -55,7 +41,7 @@
                 }
                 
             
-            private function _set_headers()
+            function set_headers()
                 {
                     $this->headers['cross-origin-embedder-policy']    =   array ( 
                                                                                 'title'         =>  'Cross-Origin-Embedder-Policy',
@@ -135,6 +121,49 @@
                                                                                 'link'          =>  'https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers#security',
                                                                                 'availability'  =>  'all'
                                                                                 );
+                }
+                
+                
+            function set_module_components_description( $component_settings )
+                {
+
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'check_headers' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Check Headers',    'wp-hide-security-enhancer'),
+                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'description'               =>  '<h4 class="important">'. __("HTTP Response Headers are a powerful tool to Harden Your Website.<br />Misusing the headers, can easily break the site layout and functionality. Ensure you understand the proper usage for each option before configuring. Once the Headers setup completed, a thorough check for the front side is recommended.",    'wp-hide-security-enhancer') . '</h4>' .
+                                                                                                                                                                                                
+                                                                                                                                                                                                "<div class='help-section'><h4>" . __( "Recovery", 'wp-hide-security-enhancer' ) . '</h4>' .
+                                                                                                                                                                                                '<p class="important"><span class="dashicons dashicons-warning important" alt="f534"></span> ' . __('Copy the following link to a safe place. You can use it to reset the header options if something goes wrong:',    'wp-hide-security-enhancer') . '</p><p> <b><span id="wph-recovery-link" onClick="WPH.selectText( \'wph-recovery-link\' )">' . trailingslashit ( home_url() ) . '?wph-recovery=' . $this->wph->functions->get_recovery_code() .'&reset_headers=1&rand=' . rand( 10000,9999999) .'</span></b></p></div>' .    
+                                                                                                                                                                                                
+                                                                                                                                                                                                "<div class='help-section'><h4>" . __( "Sample Setup", 'wp-hide-security-enhancer' ) . '</h4>' .
+                                                                                                                                                                                                '<p>' . __('Create a sample setup for Headers. That will overwrite any Headers settings previously created through the plugin options. The sample setup creates a basic Headers implementation that is commonly safe on any site. For better performances, further manual adjustments are necesarelly.',    'wp-hide-security-enhancer') .'</p><p><input type="hidden" name="wph-headers-sample-setup" value="true" /><input type="button" class="button-secondary" value="' . __('Create Sample Setup',    'wp-hide-security-enhancer') .'" onclick="WPH.runSampleHeaders();"></p></div>' .
+                                                                                                                                                                                                
+                                                                                                                                                                                                "<br /><br />" .__("The Hypertext Transfer Protocol (HTTP) is based on a client-server architecture, in which the client ( typically a web browser application ) establishes a connection with the server through a destination URL and waits for a response.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><br />" .__("The HTTP Headers allow the client and the server send additional pieces of information with the HTTP request or response.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><br />" .__("The HTTP Headers are categorised by their purpose: Authentication, Caching, Client hints, Conditionals, Connection management, Content negotiation, Controls, Cookies, CORS, Downloads, Message body information, Proxies, Redirects, Request context, Response context, Range requests, <b>Security</b>, Server-sent events, Transfer coding, WebSockets, Other",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><br />" . __("This area provides support for the <b>",    'wp-hide-security-enhancer').  '<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers#security" target="_blank">Security Headers</b></a>' . __(" type. Those are the ones responsible for the security implementation for any page.",    'wp-hide-security-enhancer') ,
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/harden-your-website-using-security-headers/'
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                    
+                                                     
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
                 }
             
             

@@ -4,7 +4,7 @@ Donate link: https://www.nsp-code.com/
 Tags: wordpress hide, wp hide, security, security headers, login
 Requires at least: 2.8
 Tested up to: 6.7.1
-Stable tag: 2.5.6
+Stable tag: 2.5.8
 License: GPLv2 or later
 
 Secure your site by hiding exploitable WordPress traces ( plugins, themes, wp-content, wp-includes, wp-admin, login URL). Enhanced Security Headers.
@@ -416,6 +416,15 @@ Please get in touch with us and we’ll do our best to include it inthe next ver
 2. Sample front html code.
 
 == Changelog ==
+
+= 2.5.8 =
+* Separate all module components settings from the components settings description, to ensure the __() and _e() translation functions trigger after the init action. 
+* Relocate the filter wp-hide/ignore_ob_start_callback higher in the ob_start_callback method, to allow by-passing the buffer processing. 
+* Ignore the comments removal when the content type is application/json
+* Use module separate method get_interface_menu_position for setting up the position hierarchy in the menus. 
+* Fix: Ensure the security widget is loading the correct data for any users that has access to the dashboard. 
+* Fix: avoid calling the get_plugins() as it triggers a rare issue on ceertain servers, when loading over HTTP protocol. 
+
 
 = 2.5.6 =
 * Add separate components description texts, for the translations to be available, after init action ( changed in the WordPress 6.5 )

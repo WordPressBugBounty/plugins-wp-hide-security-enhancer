@@ -13,21 +13,9 @@
                 {
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'styles_remove_version',
-                                                                    'label'         =>  __('Remove Version',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Remove version number from enqueued style files.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove Version',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("This provide a method to remove the Style file version number which is being append at the end of every style tag. Generally this is intended to be a plain information upon the style code version, however not being used within any functionality or code run.",    'wp-hide-security-enhancer') .
-                                                                                                                                "<br /><br />" . __("Keeping version number for styles provide additional information to hackers which try to identify specific code and version which know as being vulnerable.",    'wp-hide-security-enhancer'),
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-html-styles/'
-                                                                                                ),
-                                                                    
+                                                
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower')
@@ -36,20 +24,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'styles_remove_id_attribute',
-                                                                    'label'         =>  __('Remove ID from link tags',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Remove ID attribute from all link tags which include a stylesheet.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove ID from link tags',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("This provide a method to remove the Style file ID attribute which generally has no usage.",    'wp-hide-security-enhancer'),
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-html-styles/'
-                                                                                                ),
-                                                                    
+                                                                                                                        
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                                       
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower')
@@ -59,7 +36,63 @@
                     return $this->module_settings;   
                 }
                 
-                
+            
+        function set_module_components_description( $component_settings )
+                {
+
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'styles_remove_version' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Remove Version',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Remove version number from enqueued style files.', 'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove Version',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("This provide a method to remove the Style file version number which is being append at the end of every style tag. Generally this is intended to be a plain information upon the style code version, however not being used within any functionality or code run.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                "<br /><br />" . __("Keeping version number for styles provide additional information to hackers which try to identify specific code and version which know as being vulnerable.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-html-styles/'
+                                                                                                                                                                ),
+
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'styles_remove_id_attribute' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Remove ID from link tags',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Remove ID attribute from all link tags which include a stylesheet.', 'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove ID from link tags',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("This provide a method to remove the Style file ID attribute which generally has no usage.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-html-styles/'
+                                                                                                                                                                ),
+
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                                     
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
+                }
+                    
                 
             function _init_styles_remove_version($saved_field_data)
                 {

@@ -77,9 +77,13 @@
                     
                     $interface_data['menu_title']       =   __('<span class="wph-info">Hide&rarr;</span> General / Html',    'wp-hide-security-enhancer');
                     $interface_data['menu_slug']        =   self::get_module_slug();
-                    $interface_data['menu_position']    =   20;
                     
                     return $interface_data;
+                }
+                
+            function get_interface_menu_position()
+                {
+                    return 20;
                 }
     
             function get_interface_data()

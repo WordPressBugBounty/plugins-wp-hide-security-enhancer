@@ -14,19 +14,7 @@
                 {
                     $this->module_settings[]                  =   array(
                                                                         'id'            =>  'new_wp_comments_post',
-                                                                        'label'         =>  __('New wp-comments-post.php',    'wp-hide-security-enhancer'),
-                                                                        'description'   =>  __('The default path is set to wp-comments-post.php',    'wp-hide-security-enhancer'),
-                                                                        
-                                                                        'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New wp-comments-post.php',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("As default the form data is being sent and processed at:",    'wp-hide-security-enhancer') ." <br />  <br />
-                                                                                                                                            <code>https://-domain-name-/wp-comments-post.php</code>
-                                                                                                                                            <br /><br /> " . __("This makes it easy to recognise as WordPress form. Boots always search for such file ( wp-comments-post.php ) and automatically submit spam messages.",    'wp-hide-security-enhancer') .
-                                                                                                                                            __("Though this option a new file slug can replace the default.",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-comments/',
-                                                                                                        'input_value_extension'     =>  'php'
-                                                                                                        ),
-                                                                        
+                                                                                                                                                
                                                                         'value_description' =>  'e.g. user-input.php',
                                                                         'input_type'    =>  'text',
                                                                         
@@ -36,20 +24,9 @@
                                                                     
                     $this->module_settings[]                  =   array(
                                                                         'id'            =>  'block_wp_comments_post_url',
-                                                                        'label'         =>  __('Block wp-comments-post.php',    'wp-hide-security-enhancer'),
-                                                                        'description'   =>  __('Block default wp-comments-post.php.',    'wp-hide-security-enhancer'),
-                                                                        
-                                                                        'help'          =>  array(
-                                                                                                        'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block wp-comments-post.php',    'wp-hide-security-enhancer'),
-                                                                                                        'description'               =>  __("After changing the default wp-comments-post.php, the old url is still accessible, this provide a way to block the old.<br />The functionality apply only if <b>New wp-comments-post.php</b> option is filled in.",    'wp-hide-security-enhancer'),
-                                                                                                        'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-comments/'
-                                                                                                        ),
-                                                                                                                           
+                                                                 
                                                                         'input_type'    =>  'radio',
-                                                                        'options'       =>  array(
-                                                                                                    'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                    'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                    ),
+                                                    
                                                                         'default_value' =>  'no',
                                                                         
                                                                         'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -62,6 +39,59 @@
                 }
                 
             
+        function set_module_components_description( $component_settings )
+                {
+
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'new_wp_comments_post' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('New wp-comments-post.php',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('The default path is set to wp-comments-post.php',    'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('New wp-comments-post.php',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("As default the form data is being sent and processed at:",    'wp-hide-security-enhancer') ." <br />  <br />
+                                                                                                                                                                                                        <code>https://-domain-name-/wp-comments-post.php</code>
+                                                                                                                                                                                                        <br /><br /> " . __("This makes it easy to recognise as WordPress form. Boots always search for such file ( wp-comments-post.php ) and automatically submit spam messages.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                        __("Though this option a new file slug can replace the default.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-comments/',
+                                                                                                                                                                    'input_value_extension'     =>  'php'
+                                                                                                                                                                    ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'block_wp_comments_post_url' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Block wp-comments-post.php',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Block default wp-comments-post.php.',    'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block wp-comments-post.php',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  __("After changing the default wp-comments-post.php, the old url is still accessible, this provide a way to block the old.<br />The functionality apply only if <b>New wp-comments-post.php</b> option is filled in.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-comments/'
+                                                                                                                                                                    ),
+
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ), 
+                                                                                                                                ) );
+                                                                break;
+                                                     
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
+                }
             
             function _init_new_wp_comments_post($saved_field_data)
                 {

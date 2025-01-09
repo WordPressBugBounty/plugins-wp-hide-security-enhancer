@@ -14,27 +14,9 @@
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  'block_detectors',
-                                                                    'label'         =>  __('Block Theme / Plugin detectors.',    'wp-hide-security-enhancer'),
-                                                                    'description'   =>  __('Block common Theme / Plugin detectors and scanners.', 'wp-hide-security-enhancer'),
-                                                                    
-                                                                    'help'          =>  array(
-                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block Theme / Plugin detectors',    'wp-hide-security-enhancer'),
-                                                                                                'description'               =>  __("Enhance your website's privacy and security with the Block Theme Detectors feature. This tool prevents known user agents and IP addresses associated with popular theme detectors from accessing your site's design and theme-related information. By doing so, it keeps your creative choices private and reduces the risk of targeted attacks exploiting specific theme vulnerabilities." , 'wp-hide-security-enhancer')
-                                                                                                                                . "<br /><strong>" . __( "Key Benefits", 'wp-hide-security-enhancer') . ":</strong>
-                                                                                                                                        <ul>
-                                                                                                                                             <li>" . __(  "Privacy: Protect your website's theme details from being copied or analyzed", 'wp-hide-security-enhancer') . "</li>
-                                                                                                                                             <li>" . __('Security: Minimize exposure to potential threats',    'wp-hide-security-enhancer') .".</li>
-                                                                                                                                             <li>" . __('Performance: Optimize server resources by blocking unnecessary traffic',    'wp-hide-security-enhancer') .".</li>
-                                                                                                                                             <li>" . __('Competitive Edge: Maintain a unique brand identity',    'wp-hide-security-enhancer') .".</li>
-                                                                                                                                        </ul>",
-                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/block-theme-plugin-detectors/'
-                                                                                                ),
                                                                     
                                                                     'input_type'    =>  'radio',
-                                                                    'options'       =>  array(
-                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
-                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
-                                                                                                ),
+                                             
                                                                     'default_value' =>  'no',
                                                                     
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
@@ -45,6 +27,52 @@
                                                                     
                     return $this->module_settings;   
                 }
+                
+            
+            function set_module_components_description( $component_settings )
+                {
+
+                    foreach ( $component_settings   as  $component_key  =>  $component_setting )
+                        {
+                            if ( ! isset ( $component_setting['id'] ) )
+                                continue;
+                            
+                            switch ( $component_setting['id'] )
+                                {
+                                    case 'block_detectors' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                    'label'         =>  __('Block Theme / Plugin detectors.',    'wp-hide-security-enhancer'),
+                                                                                                                                    'description'   =>  __('Block common Theme / Plugin detectors and scanners.', 'wp-hide-security-enhancer'),
+                                                                                                                                    
+                                                                                                                                    'help'          =>  array(
+                                                                                                                                                                'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Block Theme / Plugin detectors',    'wp-hide-security-enhancer'),
+                                                                                                                                                                'description'               =>  __("Enhance your website's privacy and security with the Block Theme Detectors feature. This tool prevents known user agents and IP addresses associated with popular theme detectors from accessing your site's design and theme-related information. By doing so, it keeps your creative choices private and reduces the risk of targeted attacks exploiting specific theme vulnerabilities." , 'wp-hide-security-enhancer')
+                                                                                                                                                                                                . "<br /><strong>" . __( "Key Benefits", 'wp-hide-security-enhancer') . ":</strong>
+                                                                                                                                                                                                        <ul>
+                                                                                                                                                                                                             <li>" . __(  "Privacy: Protect your website's theme details from being copied or analyzed", 'wp-hide-security-enhancer') . "</li>
+                                                                                                                                                                                                             <li>" . __('Security: Minimize exposure to potential threats',    'wp-hide-security-enhancer') .".</li>
+                                                                                                                                                                                                             <li>" . __('Performance: Optimize server resources by blocking unnecessary traffic',    'wp-hide-security-enhancer') .".</li>
+                                                                                                                                                                                                             <li>" . __('Competitive Edge: Maintain a unique brand identity',    'wp-hide-security-enhancer') .".</li>
+                                                                                                                                                                                                        </ul>",
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/block-theme-plugin-detectors/'
+                                                                                                                                                                ),
+                                                                                                                                    
+                                                                                                                                    'options'       =>  array(
+                                                                                                                                                                'no'        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                                'yes'       =>  __('Yes',    'wp-hide-security-enhancer'),
+                                                                                                                                                                ),
+                                                                                                                                ) );
+                                                                break;
+                                                     
+                                }
+                                
+                            $component_settings[ $component_key ]   =   $component_setting;
+                        }
+                    
+                    return $component_settings;
+                    
+                }
+                
                 
             function _callback_saved_block_detectors ( $saved_field_data )
                 {

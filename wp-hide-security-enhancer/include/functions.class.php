@@ -3107,13 +3107,12 @@
             * @param mixed $theme_slug
             * @param mixed $all_themes
             */
-            function get_main_theme_directory($theme_slug, $all_themes)
+            function get_main_theme_directory( $theme_slug, $all_themes )
                 {
-                      
-                    $theme_data         =   $all_themes[$theme_slug];
+                    $theme_data         =   isset ( $all_themes[$theme_slug] )  ?   $all_themes[$theme_slug]    :   FALSE;
                     $theme_directory    =   $theme_slug;
                     
-                    if( isset($theme_data['headers']['Template']) &&  !empty($theme_data['headers']['Template']))
+                    if ( is_array ( $theme_data )   &&  isset ( $theme_data['headers']['Template'] ) &&  ! empty ( $theme_data['headers']['Template'] ) )
                         {
                             $theme_directory    =   $theme_data['headers']['Template'];
                         }        

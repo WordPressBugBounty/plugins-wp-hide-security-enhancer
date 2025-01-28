@@ -4,7 +4,7 @@ Donate link: https://www.nsp-code.com/
 Tags: wordpress hide, wp hide, security, security headers, login
 Requires at least: 2.8
 Tested up to: 6.7.1
-Stable tag: 2.5.8
+Stable tag: 2.6
 License: GPLv2 or later
 
 Secure your site by hiding exploitable WordPress traces ( plugins, themes, wp-content, wp-includes, wp-admin, login URL). Enhanced Security Headers.
@@ -26,7 +26,7 @@ The plugin not only allows you to change default URLs of you WordPress, but it a
 
 You can change the default WordPress login URL from wp-admin and wp-login.php to something totally arbitrary. No one will ever know where to try to guess a login and hack into your site. It becomes totally invisible.
 
-[vimeo http://vimeo.com/185046480]
+[youtube https://www.youtube.com/watch?v=PJstAU34SlQ]
 
 <br />Full plugin documentation available at <a target="_blank" href="https://wp-hide.com/documentation/">WordPress Hide and Security Enhancer Documentation</a>
 
@@ -49,6 +49,7 @@ Once configured, you need to **clear server cache data and/or any cache plugins*
 * Blocks default admin URL
 * Blocks any direct folder access to completely hide the structure
 * Customize wp-login.php filename
+* 2FA - Two-factor Authentication
 * Google Captcha 
 * Blocks default wp-login.php
 * Blocks default wp-signup.php
@@ -265,6 +266,24 @@ Since version 1.2, WP-Hide change individual plugin URLs and made them unrecogni
 * Disable customized Admin Url redirect to the Login page
 * Block default Admin Url – Blocks default admin URL and files from being accessible
 
+**Security -> 2FA**
+
+* Enable 2FA
+* Enforce User to Configure 2FA
+* Primary option for Two-Factor
+
+**Security -> 2FA Email**
+
+* Activate 2FA Email
+
+**Security -> 2FA Auth App**
+
+* Activate Authenticator app (TOTP)
+
+**Security -> 2FA Recovery Codes**
+
+* Activate 2FA Recovery Codes
+
 **Security -> Captcha**
 
 * Google Captcha V2
@@ -312,99 +331,103 @@ HTTP Response Headers are a powerful tool to Harden Your Website Security.
 
 Feel free to contact us at contact@wp-hide.com for fast support.
 
-= Does the plugin change anything on my server?  =
+= Will the Plugin Alter Anything on My Server? =
 
-Absolutely Nothing! 
-No files and directories will be changed on your server, since everything is processed virtually. The plugin code use URL rewrite techniques and WordPress filters to apply all internal functionalities and features.
+Absolutely Nothing!
+The plugin does not modify any files or directories on your server. All processes are handled virtually using URL rewrite techniques and WordPress filters to seamlessly integrate its functionalities and features. Your server remains completely untouched!
 
-= Since I have no PHP knowledge at all, is this plugin for me? =
+= Is This Plugin Suitable for Someone Without PHP Knowledge? =
 
-There is no requirement for php knowledge. All plugin features and functionalities are applied automatically, controlled through a descriptive admin interface.
+Absolutely! No PHP knowledge is required. The plugin’s features and functionalities are applied automatically and can be easily managed through a user-friendly, descriptive admin interface.
 
-= Is there any demo I can check? =
+= Is There a Demo Available to Explore? =
 
-A demo instance can be found at <a target="_blank" href="https://demo.wp-hide.com/">https://demo.wp-hide.com/</a> or our own website <a target="_blank" href="https://wp-hide.com/">WP Hide and Security Enhancer</a>
+Yes, you can check out a live demo at <a target="_blank" href="https://demo.wp-hide.com/">https://demo.wp-hide.com/</a>. Additionally, you can visit our official website, <a target="_blank" href="https://wp-hide.com/">WP Hide and Security Enhancer</a>, for more information.
 
-= Can I use the plugin on my Nginx server?  =
+= Can I Use the Plugin on an Nginx Server? =
 
-If the server runs full-stack Nginx, the free plugin can’t generate the required format Nginx rewrite rules. It works with Apache, LiteSpeed, IIS, Nginx as a reverse proxy and compatible.
+The free version of the plugin cannot generate the required Nginx rewrite rules for full-stack Nginx servers. However, it is fully compatible with Apache, LiteSpeed, IIS, and Nginx when used as a reverse proxy.
+For Nginx conside  <a target="_blank" href="https://wp-hide.com">WP Hide PRO</a>.
 
-= Can I still update WordPress, my plugins and themes?  =
+= Can I Still Update WordPress, Plugins, and Themes? =
 
-Everything works as before, no functionality is being broken. You can run updates at any time.
+Yes, everything works as usual. The plugin does not interfere with your ability to update WordPress core, plugins, or themes. You can run updates at any time without any issues.
 
-= Does the plugin affect the SEO aspects of my website?  =
+= Does the Plugin Affect My Website’s SEO? =
 
-No, the plugin changes only asset links (CSS, JavaScript, media files),but not actual content URLs. There will be no negative impact from SEO perspective, whatsoever.
+Not at all. The plugin only modifies asset links (such as CSS, JavaScript, and media files) and does not alter actual content URLs. There is no negative impact on SEO whatsoever.
 
-= Does the plugin work with my site cache?  =
+= Is the Plugin Compatible with My Site’s Cache? =
 
-Yes, the plugin works with any cache plugin deployed on your site.
+Yes, the plugin works seamlessly with any caching plugin installed on your site.
 
-= What are HTTP Security Headers?  =
+= What Are HTTP Security Headers? =
 
-HTTP Response Headers are a powerful tool to Harden Your Website Security. The plugin provides an easy way to add Security Response Headers through a graphical interface. No additional codding and file editing is necessary.
+HTTP Security Headers are a powerful tool to enhance your website’s security. The plugin simplifies the process of adding these headers through an intuitive graphical interface—no coding or manual file editing required.
 
-= What servers this plugin can work with? =
+= Which Servers Are Compatible with This Plugin? =
 
-This free code/WP-Hide can work with Apache, IIS server types and any other set-up which rely on .htaccess usage.
-For all other cases, check the PRO version at  <a target="_blank" href="https://wp-hide.com">WP Hide PRO</a>
+The free version of WP-Hide works seamlessly with Apache and IIS servers, as well as any setup that relies on .htaccess for configuration. For other server types, consider upgrading to the <a target="_blank" href="https://wp-hide.com">WP Hide PRO</a> version.
 
-= How to make it work with my OpenLiteSpeed server? =
+= How Can I Use the Plugin with My OpenLiteSpeed Server? =
 
-There are few things to consider when you run on litespeed servers:
+If you’re running OpenLiteSpeed, here are a few steps to ensure compatibility:
 
-* Ensure the liteserveractually processes the .htaccess file, where the rewrite data is being saved. Check with the following topic regarding this issue  <a target="_blank" href="https://www.litespeedtech.com/support/forum/threads/htaccess-is-ignored.15500/">Post</a>
+* Verify that your server processes the .htaccess file, where rewrite rules are stored. For more details, refer to this <a target="_blank" href="https://www.litespeedtech.com/support/forum/threads/htaccess-is-ignored.15500/">support thread</a>.
 
-* If you use Litespeed Cache plugin, in the Optimization Settings area, disable the CSS / JS Minify
+* If you’re using the LiteSpeed Cache plugin, disable the CSS/JS Minify option in the Optimization Settings.
 
-* If your litespeed server requires to place the rewrite lines in a different file,e.g. config file or interface, consider upgrading to PRO version which includes a Setup page where you can get the rewrite code <a href="https://wp-hide.com/wp-hide-pro-now-available/">WP Hide PRO</a>.
+* If your server requires rewrite rules to be placed in a different file (e.g., a config file), consider upgrading to the <a target="_blank" href="https://wp-hide.com/wp-hide-pro-now-available/">WP Hide PRO</a> version, which includes a Setup page for generating the necessary rewrite code.
 
+= How Do I Use the Plugin on a Bitnami Setup? =
+By default, Bitnami LAMP setups do not process .htaccess files, so rewrites won’t work. To resolve this:
 
-= How to use on my Bitnami setup? =
-As default, on Bitnami LAMP set-ups, the system will not process the .htaccess file, so none of the rewrites will work. You can change this behavior by updating the main config file located at /opt/bitnami/apps/APPNAME/conf/httpd-app.conf , update the line
+* Update the main config file located at /opt/bitnami/apps/APPNAME/conf/httpd-app.conf.
+
 <pre><code>AllowOverride None</code></pre>
 to
-<pre><code>AllowOverride All</code></pre>
-Restart the Apache service through SSH
+<pre><code>AllowOverride All</code></pre>  
+
+* Restart the Apache service through SSH:
 <pre><code>sudo /opt/bitnami/ctlscript.sh restart</code></pre>
-More details can be found at <a href="https://docs.bitnami.com/general/apps/redmine/administration/use-htaccess/">Bitnami Default .Htaccess
-</a>
 
-You can still keep the configuration as it is using the <a target="_blank" href="https://wp-hide.com">WP Hide PRO</a>, more details at <a href="https://wp-hide.com/documentation/setup-the-plugin-on-bitnami-wordpress-lamp-stack/">Setup the plugin on Bitnami WordPress LAMP stack
-</a>
+For more details, refer to the <a href="https://docs.bitnami.com/general/apps/redmine/administration/use-htaccess/">Bitnami documentation</a>.
 
+You can still keep the configuration as it is using the <a target="_blank" href="https://wp-hide.com">WP Hide PRO</a>, more details at <a href="https://wp-hide.com/documentation/setup-the-plugin-on-bitnami-wordpress-lamp-stack/">Setup the plugin on Bitnami WordPress LAMP stack</a>
 
-= .htaccess file writing error – Unable to write custom rules to your .htaccess. Is this file writable? =
+= .htaccess File Writing Error – Unable to Write Custom Rules =
+If you see the error “Unable to write custom rules to your .htaccess. Is this file writable?”, follow these steps:
 
-I’m seeing this error “Unable to write custom rules to your .htaccess. Is this file writable”? What does it mean?
-The error appears when the plugin is not able to write to .htaccess file located in your WordPress root directory. You can try the followings to make a fix:
+* Ensure the .htaccess file is writable (typically rw-rw-r– / 0664 permissions) and owned by the same group as PHP.
 
-* Check if your .htaccess file is writable. This can be different from server to server, but usually require rw-rw-r– / 0664. Also ensure the file owner is the same group as php.
+* Other plugins or themes might interfere with rewrite rules. Temporarily disable them to identify the culprit.
 
-* Sometimes the other codes wrongly use the flush_rules() which hijack the default filters for rewrite. Try to disable the other plugins and theme to figure out which ones produce the issue.
+* Deactivate and reactivate the WP Hide plugin—this has resolved the issue for some users.
 
-* De-activate and RE-activate the plugin, apparently worked for some users.
+* Create a backup of your .htaccess file, delete it, and go to Settings > Permalinks to regenerate it. Then, update WP Hide settings to rewrite the .htaccess file.
 
-* Create a backup of .htaccess, then delete it from the server. Go to Settings > Permalinks > update once, this should create the file again on the WordPress root. If so, try to change any WP Hide options which will update the .htaccess content accordingly.
+= Something Went Wrong – How Can I Recover My Site? =
+Don’t worry—your site will not be harmed. Here’s how to troubleshoot:
 
-= Something is wrong, what can I do? How can I recover my site? =
+* Log in to your admin dashboard and adjust plugin settings to identify the issue. Report the problem on our forum or contact us for assistance.
 
-* There will be no harm.
-* Go to admin and change some of the plugin options to see which one causes the problem. Then report it to the forum or get in touch with us to fix it.
-* If you can’t log in to admin, use the Recovery Link which has been sent to your e-mail. This will reset the login to default.
-* If you can’t find the recovery link or none of the above worked, delete the plugin from your wp-content/plugins directory. Then remove any lines in your .htaccess file between: 
+* If you can’t access the admin area, use the Recovery Link sent to your email to reset the login to default.
+
+* If the Recovery Link doesn’t work or you can’t find it, delete the plugin from the wp-content/plugins directory and remove any lines in your .htaccess file between:
  BEGIN WP Hide & Security Enhancer
 ..
  END WP Hide & Security Enhancer 
+ 
+ * Your site should now function as before. If issues persist, contact us at contact@wp-hide.com, and we’ll help you resolve it quickly.
 
-* At this point, the site should run as before. If for some reason still not working, you missed something, please get in touch with us at contact@wp-hide.com and we’ll fix it for you in no time!
+= How Do I Use the Recovery Link? =
+The Recovery Link resets all plugin options and restores your site to its default state. To use it:
 
-= How to use the Recovery Link? =
+* Enter the link into your browser’s URL bar.
 
-The Recovery Link can be used to reset all plugin options and restore the site to the default state.
-The link should be entered into the browser URL bar. After the operation is completed, a system message will show “The plugin options have been reset successfully”.
-If the message does not show, there is a cache on your site that prevents the code to run. Locate your cache data, usually at /wp-content/cache/ and remove the files. Then re-load the recovery link.
+* After the process completes, you’ll see a message: “The plugin options have been reset successfully.”
+
+* If the message doesn’t appear, clear your site’s cache (usually located in /wp-content/cache/) and reload the Recovery Link.
 
 = What to do if I can’t find a functionality that I’m looking for? =
 
@@ -416,6 +439,15 @@ Please get in touch with us and we’ll do our best to include it inthe next ver
 2. Sample front html code.
 
 == Changelog ==
+
+= 2.6 =
+* New feature - 2FA - Two-Factor Authentication
+* 2FA - Email
+* 2FA - Auth APP
+* 2FA - Recovery Codes
+* Minor bug fixes
+* Readme content text description updates
+* Readme video demo update
 
 = 2.5.8 =
 * Separate all module components settings from the components settings description, to ensure the __() and _e() translation functions trigger after the init action. 

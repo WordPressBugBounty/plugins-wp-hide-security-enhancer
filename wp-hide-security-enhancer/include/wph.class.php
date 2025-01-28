@@ -213,6 +213,7 @@
                                             'module-general.php',
                                             'module-admin.php',
                                             'module-captcha.php',
+                                            'module-2fa.php',
                                             'module-cdn.php',
                                             'module-security_headers.php'
                                             );

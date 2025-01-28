@@ -5,7 +5,7 @@
 * Description: Hide and increase Security for your WordPress website instance using smart techniques. No files are changed on your server.
 * Author: Nsp Code
 * Author URI: http://www.nsp-code.com 
-* Version: 2.5.8
+* Version: 2.6
 * Text Domain: wp-hide-security-enhancer
 * Domain Path: /languages/
 * Requires at least: 4.0

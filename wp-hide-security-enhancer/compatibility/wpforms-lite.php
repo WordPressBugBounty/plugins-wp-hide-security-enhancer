@@ -42,7 +42,7 @@
             static function do_superglobal_variables_replacements( $do_replace, $key, $superglobal_type ) 
                 {
                     //Ignore the _wp_http_referer to avoid fails when conpare between the urls 
-                    if ( $key == '_wp_http_referer' )
+                    if ( $key === '_wp_http_referer' )
                         return FALSE;
                         
                     return $do_replace;      

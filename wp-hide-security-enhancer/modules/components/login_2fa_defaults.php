@@ -11,6 +11,10 @@
                                         
             function get_module_settings()
                 {
+                    add_filter( 'wp-hide/get_module_item_setting', array ( $this, '_2fa_enable_for_roles_module_saved_value'), 99, 2 );
+
+                    $option_roles   =   $this->get_site_roles();
+                    
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  '2fa_enabled',
@@ -22,6 +26,20 @@
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
                                                                     'processing_order'  =>  70
                                                                     );
+                                                                    
+                    $this->module_settings[]                  =   array(
+                                                                            'id'                        =>  '2fa_enable_for_roles',
+                                                                                                                                     
+                                                                            'input_type'                =>  'checkbox',
+                                                                            'options'                   =>  $option_roles,
+                                                                            'default_value'             =>  array ( ),
+                                                                            
+                                                                            'module_option_html_render' =>  array( $this, '_2fa_enable_for_roles_option_html'),
+                                                                            'module_option_processing'  =>  array( $this, '_2fa_enable_for_roles_option_processing' ),
+                                                                            
+                                                                            'sanitize_type'             =>  array( array ( $this->wph->functions, 'sanitize_array' ) ),
+                                                                            'processing_order'          =>  80
+                                                                            );
                     
                     $this->module_settings[]                  =   array(
                                                                     'id'            =>  '2fa_require_setup',
@@ -88,7 +106,19 @@
                                                                                                                                 ) );
                                                                 break;
                                                                 
-                                                                
+                                    case '2fa_enable_for_roles' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Enable the 2FA for specific roles',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>  __('Enable the 2FA functions for the specified roles.', 'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                            'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Enable the 2FA for specific roles',    'wp-hide-security-enhancer'),
+                                                                                                                                                            'description'               =>  __("This option allows you to enforce Two-Factor Authentication (2FA) for selected user roles within your WordPress site. By enabling this feature, users assigned to the specified roles must authenticate using an additional verification step, enhancing account security. You can define which roles require 2FA, ensuring an extra layer of protection for administrators, editors, or other user groups as needed.",    'wp-hide-security-enhancer'),
+                                                                                                                                                            'option_documentation_url'  =>  'https://wp-hide.com/documentation/2fa-two-factor-authentication/'
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                                                                            
                                     case '2fa_require_setup' :
                                                                 $component_setting =   array_merge ( $component_setting , array(
                                                                                                                                 'label'         =>  __('Enforce User to Configure 2FA',    'wp-hide-security-enhancer'),
@@ -146,6 +176,85 @@
                     
                     return $component_settings;
                     
+                }
+                
+                
+            function _2fa_enable_for_roles_option_html( $module_setting )
+                {
+                    $values =   $this->wph->functions->get_module_item_setting( $module_setting['id'] );
+                       
+                    ?>
+                        <fieldset>
+                            <?php  
+                            
+                                foreach($module_setting['options']  as  $option_value  =>  $option_title )
+                                    {
+                                        ?><label><input type="checkbox" class="setting-value checkbox" <?php 
+                                            if ( array_search ( $option_value, $values )    !== FALSE )
+                                                echo 'checked="checked"';
+                                            ?> value="<?php echo $option_value ?>" name="<?php echo $module_setting['id'] ?>[]"> <span><?php echo esc_html( $option_title ) ?></span></label><?php
+                                    }
+                            
+                            ?>
+
+                            <input style="display: none" type="checkbox" class="setting-value checkbox" checked="checked" value="--none--" name="<?php echo $module_setting['id'] ?>[]">
+
+                        </fieldset>
+                    <?php    
+                }
+                
+                
+            function _2fa_enable_for_roles_option_processing( $component_item_settings )
+                {
+                    $results     =   array();
+                    
+                    $values      =   array();
+                    if ( isset ( $_POST[ $component_item_settings['id'] ] ) )
+                        {
+                            $data  =   $_POST[ $component_item_settings['id'] ];
+                            foreach ( $data    as  $key    =>  $role_name ) 
+                                $values[ $key ]  =   preg_replace( '/[^0-9a-zA-Z-_]/' , "", $role_name );
+                        }
+                    
+                    if ( is_array ( $values ) )
+                        $values =   array_filter ( $values );
+                        else
+                        $values[] =   '--none--';
+                    
+                    $results['value']   =   $values;  
+                    
+                    return $results;    
+                }
+                
+            function _2fa_enable_for_roles_module_saved_value( $value, $option_id )
+                {
+                    if ( $option_id !== '2fa_enable_for_roles' )
+                        return $value;
+                    
+                    if ( empty ( $value ) )
+                        {
+                            $value      =   $this->get_site_roles();
+                            $value      =   array_keys ( $value );
+                        }
+                        
+                    return $value;
+                }
+                
+            
+            /**
+            * Retrieve the site roles
+            *     
+            */
+            private function get_site_roles()
+                {
+                    global $wpdb;
+                    
+                    $wp_roles       =   get_option( $wpdb->prefix . 'user_roles');
+                    $option_roles   =   array ();
+                    foreach  ( $wp_roles     as  $role_slug  =>  $role )
+                        $option_roles[$role_slug]   =   $role['name'];
+                        
+                    return $option_roles;
                 }
                 
           

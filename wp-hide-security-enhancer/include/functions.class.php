@@ -1747,7 +1747,29 @@
                     
                     $settings   =   wp_parse_args( $settings, $defaults );
                     
+                    $_do_update_settings =   FALSE;
+                    
+                    //make sure all options exists within modules settings
+                    foreach ( $this->wph->modules   as  $module )
+                        {
+                            $module_components    =   $this->filter_settings(   $module->get_module_components_settings(), TRUE    );
+                            
+                            foreach ( $module_components as $module_component )
+                                {
+                                    $default_value  =   $module_component['default_value'];
+                                    
+                                    if( ! isset ( $settings['module_settings'][ $module_component['id'] ] ) )
+                                        {
+                                            $settings['module_settings'][ $module_component['id'] ]   =   $default_value;
+                                            $_do_update_settings    =   TRUE;
+                                        }
+                                }
+                        } 
+                    
                     $settings   =   apply_filters('wp-hide/get_settings', $settings);
+                    
+                    if ( $_do_update_settings )
+                        $this->update_settings( $settings );
                     
                     return $settings;
                     
@@ -1762,8 +1784,10 @@
             */
             function get_module_item_setting( $item_id )
                 {
-                    
-                    $settings   =   $this->get_settings();
+                    if ( $this->wph->settings['module_settings'] && ! empty ( $this->wph->settings['module_settings'] ) )
+                        $settings   =   $this->wph->settings;
+                        else
+                        $settings   =   $this->get_settings();
                     
                     $value      =   isset($settings['module_settings'][ $item_id ])  ?   $settings['module_settings'][ $item_id] :   '';
                     
@@ -2229,8 +2253,11 @@
             */
             function get_recovery_code()
                 {
-                    
-                    $settings   =   $this->get_settings();
+                    if ( $this->wph->settings['module_settings'] && ! empty ( $this->wph->settings['module_settings'] ) )
+                        $settings   =   $this->wph->settings;
+                        else
+                        $settings   =   $this->get_settings();
+
                     if(!isset($settings['recovery_code'])   ||  empty($settings['recovery_code']))
                         {
                             $recovery_code  =   $this->generate_recovery_code();

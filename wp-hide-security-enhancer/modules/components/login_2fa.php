@@ -23,11 +23,6 @@
                     add_action( 'personal_options_update',      array( $this, 'profile_2fa_options_update' ) );
                     add_action( 'edit_user_profile_update',     array( $this, 'profile_2fa_options_update' ) );
                     
-                    $_2fa_enabled =   $this->wph->functions->get_module_item_setting('2fa_enabled');
-                    if ( $_2fa_enabled !== 'yes' )
-                        return;
-                    
-                    
                     add_action( 'wp_login',                     array( $this, 'wp_login' ),                     10, 2 );
                     
                     add_action( 'set_auth_cookie',              array( $this, 'store_auth_token' ) );
@@ -65,10 +60,26 @@
             
             
             /**
-            * Check if using a 2FA option
+            * Check if using a 2FA
             * 
             */
             function is_using_2fa()
+                {
+                    $_2fa_enabled           =   $this->wph->functions->get_module_item_setting('2fa_enabled');
+                    if ( $_2fa_enabled !== 'yes' )
+                        return FALSE;
+                        
+                    return TRUE;
+                    
+                }
+                
+                
+            
+            /**
+            * Check if using a 2FA option
+            * 
+            */
+            function is_using_2fa_option()
                 {
                     if  ( count ( $this->active_2fa_options ) > 0 )
                         return TRUE;
@@ -80,12 +91,37 @@
                 
             
             /**
+            * Check if the 2fa is active for the current user role
+            * 
+            */
+            function is_active_for_role( $user  )
+                {
+                    $_2fa_enable_for_roles  =   $this->wph->functions->get_module_item_setting('2fa_enable_for_roles');
+                    
+                    if ( ! $user instanceof WP_User )
+                        return FALSE;
+                    
+                    if ( ! is_array ( $_2fa_enable_for_roles )  ||  ! is_array ( $user->roles ) )
+                        return FALSE;
+                    
+                    $user_roles =   $user->roles;
+                    
+                    foreach ( $user_roles   as  $user_role )     
+                        {
+                            if ( array_search ( $user_role, $_2fa_enable_for_roles )    !== FALSE )
+                                return TRUE;
+                        }
+                    
+                    return FALSE;   
+                }
+                
+            /**
             * Interact with the login action
             *     
             */
             function wp_login( $user_login, $user )
                 {
-                    if ( ! $this->is_using_2fa() )   
+                    if ( ! $this->is_using_2fa() ||  ! $this->is_using_2fa_option() || ! $this->is_active_for_role( $user ) )    
                         return;
                     
                     $this->remove_user_session( $user );
@@ -293,7 +329,10 @@
             */
             function login_form_validate_2fa() 
                 {
-                    $_2fa_user_id       = ! empty( $_REQUEST['2fa_user_id'] )   ? preg_replace( '/[^0-9]/' , "",       $_REQUEST['2fa_user_id'] )          : 0;
+                    if ( ! $this->is_using_2fa() )
+                        return;
+                    
+                    $_2fa_user_id       = ! empty( $_REQUEST['2fa_user_id'] )   ? preg_replace( '/[^0-9a-zA-Z]/' , "",       $_REQUEST['2fa_user_id'] )          : 0;
                     $_2fa_nonce         = ! empty( $_REQUEST['2fa_nonce'] )     ? preg_replace( '/[^0-9a-zA-Z]/' , "", $_REQUEST['2fa_nonce'] )            : '';
                     $_2fa_id            = ! empty( $_REQUEST['2fa_id'] )        ? preg_replace( '/[^0-9a-zA-Z_]/' , "", $_REQUEST['2fa_id'] )              : '';
                     $redirect_to        = ! empty( $_REQUEST['redirect_to'] )   ? wp_unslash( $_REQUEST['redirect_to'] )                                : '';
@@ -522,6 +561,9 @@
             */
             function store_auth_token( $cookie ) 
                 {
+                    if ( ! $this->is_using_2fa() )
+                        return;
+                    
                     $parsed = wp_parse_auth_cookie( $cookie );
 
                     if ( ! empty( $parsed['token'] )    &&  array_search ( $parsed['token'], $this->core_auth_tokens ) ===  FALSE ) 
@@ -533,7 +575,7 @@
                 
             function authenticate_block_cookies( $user ) 
                 {
-                    if ( $user instanceof WP_User && $this->is_using_2fa() && did_action( 'login_init' ) )
+                    if ( $user instanceof WP_User && $this->is_using_2fa() && $this->is_using_2fa_option() && $this->is_active_for_role( $user  ) && did_action( 'login_init' ) )
                         add_filter( 'send_auth_cookies', '__return_false', PHP_INT_MAX );
 
                     return $user;

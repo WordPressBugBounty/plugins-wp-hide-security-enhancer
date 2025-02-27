@@ -3,8 +3,8 @@ Contributors: nsp-code, tdgu
 Donate link: https://www.nsp-code.com/
 Tags: wordpress hide, wp hide, security, security headers, login, 2fa
 Requires at least: 2.8
-Tested up to: 6.7.1
-Stable tag: 2.6.1
+Tested up to: 6.7.2
+Stable tag: 2.6.2
 License: GPLv2 or later
 
 Protect your website by concealing vulnerable WordPress traces, plugins, themes, login/admin url. 2FA, Captcha, Firewall, Security Headers etc.
@@ -50,6 +50,9 @@ Once configured, you need to **clear server cache data and/or any cache plugins*
 * Blocks any direct folder access to completely hide the structure
 * Customize wp-login.php filename
 * 2FA - Two-factor Authentication
+* 2FA - Two-factor Authentication - Email Verification Code
+* 2FA - Two-factor Authentication - Authenticator App
+* 2FA - Two-factor Authentication - Recovery Codes
 * Google Captcha 
 * Blocks default wp-login.php
 * Blocks default wp-signup.php
@@ -269,6 +272,7 @@ Since version 1.2, WP-Hide change individual plugin URLs and made them unrecogni
 **Security -> 2FA**
 
 * Enable 2FA
+* Enable the 2FA for specific roles
 * Enforce User to Configure 2FA
 * Primary option for Two-Factor
 
@@ -438,7 +442,14 @@ Please get in touch with us and we’ll do our best to include it inthe next ver
 1. Admin Interface.
 2. Sample front html code.
 
-== Changelog ==
+== Changelog == 
+
+= 2.6.2 =
+* New feature - Enable the 2FA for specific roles. Choose the roles for which the 2FA feature will trigger.
+* Fill the missing options with the component default value.
+* Avoid re-loading the settings if they exists in the WPH class.
+* Update the GoogleAuthenticator.php
+* Fix: Creation of dynamic property WPH::$_2fa is deprecated
 
 = 2.6.1 =
 * Comparison fix within WPForms Lite compatibility file.

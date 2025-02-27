@@ -6,7 +6,7 @@
         {            
             function get_component_title()
                 {
-                    return "Recovery Codes";
+                    return "2FA - Recovery Codes";
                 }
                                         
             function get_module_settings()
@@ -52,7 +52,8 @@
                                                                                                                                                                                                     "<br />&nbsp;".
                                                                                                                                                                                                     "<br />" . __("The 2FA Recovery Codes method generates 10 unique, one-time-use codes that act as a secure backup for accessing your dashboard. These codes provide an alternative way to authenticate your login if you are unable to use your primary 2FA method, such as an email code or authenticator app. Each code can only be used once, ensuring added security and preventing unauthorized access. It is crucial to store these recovery codes in a safe and secure location, such as an encrypted password manager or physical safe, to avoid loss or misuse.",    'wp-hide-security-enhancer') .
                                                                                                                                                                                                     "<br />&nbsp;".
-                                                                                                                                                                                                    "<br />" . __("While this method is primarily intended as a backup solution, it can also be used as the primary 2FA method if necessary. Recovery codes offer a reliable and easy-to-use fallback, ensuring you can always regain access to your account when needed, even if other 2FA options are unavailable.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                                                    "<br />" . __("While this method is primarily intended as a backup solution, it can also be used as the primary 2FA method if necessary. Recovery codes offer a reliable and easy-to-use fallback, ensuring you can always regain access to your account when needed, even if other 2FA options are unavailable.",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                    "<br /><br />" . __("Users can manage this option in the Profile section of their account.",    'wp-hide-security-enhancer'),
                                                                                                                                                                     'option_documentation_url'  =>  'https://wp-hide.com/documentation/2fa-recovery-codes/'
                                                                                                                                                                     ),
                                                                                                                                 

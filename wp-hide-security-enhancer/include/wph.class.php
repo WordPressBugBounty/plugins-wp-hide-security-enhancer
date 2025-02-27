@@ -36,6 +36,8 @@
             
             var $security_scan              =   FALSE;
             var $admin_interface            =   FALSE;
+            
+            var $_2fa                       =   FALSE;
                
             function __construct()
                 {
@@ -56,8 +58,6 @@
                 
             function init()
                 {
-                            
-                    $this->settings     =   $this->functions->get_settings();
                     
                     //set the urls_replacement priority blocks
                     $this->urls_replacement['high']     =   array();
@@ -85,6 +85,8 @@
                     
                     $this->_load_modules();
                     
+                    $this->settings     =   $this->functions->get_settings();
+                    
                     $this->is_initialised       =   TRUE;
                     do_action('wp-hide/is_initialised');
 
@@ -109,7 +111,6 @@
                     
                     //check for plugin update
                     $this->update();
-                    
                     
                     /**
                     * Filters

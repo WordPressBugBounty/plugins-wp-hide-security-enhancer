@@ -6,7 +6,7 @@
         {            
             function get_component_title()
                 {
-                    return "Auth App";
+                    return "2FA - Auth App";
                 }
                                         
             function get_module_settings()
@@ -60,7 +60,8 @@
                                                                                                                                                                                                          <li>" . __("<b>Duo Mobile</b>",    'wp-hide-security-enhancer'). "</li>
                                                                                                                                                                                                          <li>" . __("<b>Authy</b>",    'wp-hide-security-enhancer'). "</li>
                                                                                                                                                                                                          <li>" . __("<b>LastPass Authenticator</b>",    'wp-hide-security-enhancer'). "</li>
-                                                                                                                                                                                                    </ul><br />" . __("These apps are available for download on both Android and iOS devices, ensuring users can securely authenticate their logins from their smartphones. ",    'wp-hide-security-enhancer'),
+                                                                                                                                                                                                    </ul><br />" . __("These apps are available for download on both Android and iOS devices, ensuring users can securely authenticate their logins from their smartphones. ",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                    "<br /><br />" . __("Users can manage this option in the Profile section of their account.",    'wp-hide-security-enhancer'),
                                                                                                                                                                     'option_documentation_url'  =>  'https://wp-hide.com/documentation/2fa-authenticator-app/'
                                                                                                                                                                     ),
                                                                                                                                 

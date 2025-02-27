@@ -12,9 +12,8 @@
                     if ( isset ( $_GET['page'] ) && $_GET['page']   ==  'wp-hide-admin' )
                         add_action ( 'admin_enqueue_scripts', 'wp_enqueue_media' );
                     
-                    $custom_logo_image_id =   $this->wph->functions->get_module_item_setting('custom_login_logo');
-                    if ( ! empty ( $custom_logo_image_id ) )
-                        add_action( 'login_footer', array ( $this, 'custom_login_logo' ) );
+                    add_action( 'login_footer', array ( $this, 'custom_login_logo' ) );
+                    
                 }
             
             function get_component_title()
@@ -444,10 +443,9 @@
             function custom_login_logo()
                 {
                     $custom_logo_image_id =   $this->wph->functions->get_module_item_setting('custom_login_logo');
-                    
-                    if ( empty ( $custom_logo_image_id ) )
+                    if ( ! empty ( $custom_logo_image_id ) )
                         return;
-                        
+                             
                     $image_url = wp_get_attachment_url( $custom_logo_image_id );
                     if ( empty ( $image_url ) )
                         return;

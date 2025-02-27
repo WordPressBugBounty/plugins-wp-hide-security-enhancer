@@ -6,7 +6,7 @@
         {            
             function get_component_title()
                 {
-                    return "Email";
+                    return "2FA - Email";
                 }
                                         
             function get_module_settings()
@@ -52,7 +52,8 @@
                                                                                                                                                                                                     "<br />&nbsp;".
                                                                                                                                                                                                     "<br />" . __("Upon reaching the 2FA step during login, the user will receive a unique, time-sensitive code in their inbox. This code must be entered promptly to verify the user's identity and gain access to their account. The email-based authentication method offers an added layer of security by ensuring that only users with access to the registered email can proceed. It is a reliable method for users who prefer not to rely on third-party applications for authentication.",    'wp-hide-security-enhancer').
                                                                                                                                                                                                     "<br />&nbsp;".
-                                                                                                                                                                                                    "<br />" . __("For the best experience with the Two-Factor Authentication (2FA) - Email option, it is highly recommended to use an SMTP plugin. An SMTP (Simple Mail Transfer Protocol) plugin ensures that authentication messages are sent securely and reliably from your server, helping to avoid issues with email delivery. By configuring an SMTP plugin, you can improve the chances of the 2FA email reaching the user's inbox instead of being mistakenly filtered into the spam or bulk folders. .",    'wp-hide-security-enhancer'),
+                                                                                                                                                                                                    "<br />" . __("For the best experience with the Two-Factor Authentication (2FA) - Email option, it is highly recommended to use an SMTP plugin. An SMTP (Simple Mail Transfer Protocol) plugin ensures that authentication messages are sent securely and reliably from your server, helping to avoid issues with email delivery. By configuring an SMTP plugin, you can improve the chances of the 2FA email reaching the user's inbox instead of being mistakenly filtered into the spam or bulk folders. .",    'wp-hide-security-enhancer') .
+                                                                                                                                                                                                    "<br /><br />" . __("Users can manage this option in the Profile section of their account.",    'wp-hide-security-enhancer'),
                                                                                                                                                                     'option_documentation_url'  =>  'https://wp-hide.com/documentation/2fa-email/'
                                                                                                                                                                     ),
                                                                                                                                 

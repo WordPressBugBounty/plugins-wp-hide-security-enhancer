@@ -443,7 +443,7 @@
             function custom_login_logo()
                 {
                     $custom_logo_image_id =   $this->wph->functions->get_module_item_setting('custom_login_logo');
-                    if ( ! empty ( $custom_logo_image_id ) )
+                    if ( empty ( $custom_logo_image_id ) )
                         return;
                              
                     $image_url = wp_get_attachment_url( $custom_logo_image_id );

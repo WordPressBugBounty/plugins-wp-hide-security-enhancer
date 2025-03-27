@@ -4,7 +4,7 @@ Donate link: https://www.nsp-code.com/
 Tags: wordpress hide, wp hide, security, security headers, login, 2fa
 Requires at least: 2.8
 Tested up to: 6.7.2
-Stable tag: 2.6.2
+Stable tag: 2.6.3
 License: GPLv2 or later
 
 Protect your website by concealing vulnerable WordPress traces, plugins, themes, login/admin url. 2FA, Captcha, Firewall, Security Headers etc.
@@ -443,6 +443,9 @@ Please get in touch with us and we’ll do our best to include it inthe next ver
 2. Sample front html code.
 
 == Changelog == 
+
+= 2.6.3 = 
+* Fix: Custom login page logo ( remove negate empty on $custom_logo_image_id )
 
 = 2.6.2 =
 * New feature - Enable the 2FA for specific roles. Choose the roles for which the 2FA feature will trigger.

@@ -114,6 +114,8 @@
                     
                     return FALSE;   
                 }
+            
+            
                 
             /**
             * Interact with the login action
@@ -122,6 +124,10 @@
             function wp_login( $user_login, $user )
                 {
                     if ( ! $this->is_using_2fa() ||  ! $this->is_using_2fa_option() || ! $this->is_active_for_role( $user ) )    
+                        return;
+                        
+                    //allow other codes to bypass (e.g. Temporary Login Without Password)
+                    if ( ! apply_filters( 'wp-hide/2fa/process_wp_login', TRUE, $user ) )
                         return;
                     
                     $this->remove_user_session( $user );

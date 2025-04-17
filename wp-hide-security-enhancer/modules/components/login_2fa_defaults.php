@@ -62,6 +62,17 @@
                                                                     'sanitize_type' =>  array('sanitize_title', 'strtolower'),
                                                                     'processing_order'  =>  70
                                                                     );
+                                                                    
+                    $this->module_settings[]                  =   array(
+                                                                    'id'            =>  'temporary_login_2fa_bypass',
+                                                                                                                          
+                                                                    'input_type'    =>  'radio',
+                                                           
+                                                                    'default_value' =>  'no',
+                                                                    
+                                                                    'sanitize_type' =>  array('sanitize_title', 'strtolower'),
+                                                                    'processing_order'  =>  70
+                                                                    );
                     
                                                                     
                     return $this->module_settings;  
@@ -148,7 +159,7 @@
                                                                                                                                 'description'   =>   __('Primary Two-Factor Authentication Method.', 'wp-hide-security-enhancer'),
                                                                                                                                 
                                                                                                                                 'help'          =>  array(
-                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('JavaScript Post-Processing type',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Primary Two-Factor option',    'wp-hide-security-enhancer'),
                                                                                                                                                                     'description'               =>  "<b>" . __('Select the Primary Two-Factor Authentication Method, which will be presented to the user when they reach the 2FA step during login. This method will be the first authentication option, the user can also pick others.', 'wp-hide-security-enhancer') . "</b>" . 
                                                                                                                                                                                                     "<br />&nbsp;".
                                                                                                                                                                                                     "<br />" . __("The available 2FA methods include:",    'wp-hide-security-enhancer').
@@ -165,6 +176,27 @@
                                                                                                                                                             '2fa_email'                     =>  __('Email',     'wp-hide-security-enhancer'),
                                                                                                                                                             '2fa_app'                       =>  __('Auth APP',    'wp-hide-security-enhancer'),
                                                                                                                                                             '2fa_recovery_codes'            =>  __('Recovery Codes',    'wp-hide-security-enhancer'),
+                                                                                                                                                            ),
+                                                                                                                                ) );
+                                                                break;
+                                                                
+                                    case 'temporary_login_2fa_bypass' :
+                                                                $component_setting =   array_merge ( $component_setting , array(
+                                                                                                                                'label'         =>  __('Disable 2FA when using Temporary Login',    'wp-hide-security-enhancer'),
+                                                                                                                                'description'   =>   __('Disable 2FA when using wordpress plugins like Temporary Login Without Password.', 'wp-hide-security-enhancer'),
+                                                                                                                                
+                                                                                                                                'help'          =>  array(
+                                                                                                                                                                    'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Disable 2FA when using Temporary Login',    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'description'               =>  "<b>" . __('When enabled, this option bypasses Two-Factor Authentication (2FA) for users accessing the site via a temporary login URL, such as those generated by the Temporary Login Without Password plugin. This ensures seamless access without additional authentication steps.', 'wp-hide-security-enhancer') . "</b>" . 
+                                                                                                                                                                                                    "<br />&nbsp;".
+                                                                                                                                                                                                    "<br />" . __("The new 'Disable 2FA when using Temporary Login' option in the WP Hide plugin enhances site accessibility by allowing temporary bypassing of Two-Factor Authentication (2FA) for specific login scenarios. When activated, if 2FA is enabled, users who access the site via temporary login URLs, generated by plugins such as Temporary Login Without Password, can log in without undergoing the usual 2FA process. This feature simplifies the user experience during temporary access, ensuring a seamless transition while maintaining robust security measures for standard login procedures. It is an ideal solution for administrators who require controlled, temporary access without compromising overall security.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                    'option_documentation_url'  =>  'https://wp-hide.com/documentation/2fa-two-factor-authentication/'
+                                                                                                                                                                    ),
+                                                                                                                                
+                                                                                                                                'input_type'    =>  'radio',
+                                                                                                                                'options'       =>  array(
+                                                                                                                                                            'no'                        =>  __('No',     'wp-hide-security-enhancer'),
+                                                                                                                                                            'yes'                       =>  __('Yes',    'wp-hide-security-enhancer'),
                                                                                                                                                             ),
                                                                                                                                 ) );
                                                                 break;

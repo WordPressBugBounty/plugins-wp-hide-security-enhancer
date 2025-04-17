@@ -3,8 +3,8 @@ Contributors: nsp-code, tdgu
 Donate link: https://www.nsp-code.com/
 Tags: wordpress hide, wp hide, security, security headers, login, 2fa
 Requires at least: 2.8
-Tested up to: 6.7.2
-Stable tag: 2.6.3
+Tested up to: 6.8
+Stable tag: 2.6.4
 License: GPLv2 or later
 
 Protect your website by concealing vulnerable WordPress traces, plugins, themes, login/admin url. 2FA, Captcha, Firewall, Security Headers etc.
@@ -34,7 +34,7 @@ When testing with WordPress theme and plugins detector services/sites, any setti
 
 Being the best content management system, widely used, WordPress is susceptible to a large range of hacking attacks including brute-force, SQL injections, XSS, XSRF etc. Despite the fact the WordPress core is a very secure code maintained by a team of professional enthusiast, the additional plugins and themes make ita vulnerable spot for every website. In many cases, those are created by pseudo-developers who do not follow the best coding practices or simply do not own the experience to create a secure plugin.
 Statistics reveal that every day new vulnerabilities are discovered, many affecting hundreds of thousands of WordPress websites.
-Over 99,9% of hacked WordPress websites are target of automated malware scripts, which search for certain WordPress fingerprints. This plugin hides or replaces those traces, making the hacking boots attacks useless.
+Over 99,9% of hacked WordPress websites are target of automated malware scripts, which search for certain WordPress fingerprints. This plugin hides or replaces those traces, making the hacking bots attacks useless.
 
 It works well with custom WordPress directory structures,e.g. custom plugins, themes, and upload folders.
 
@@ -275,6 +275,7 @@ Since version 1.2, WP-Hide change individual plugin URLs and made them unrecogni
 * Enable the 2FA for specific roles
 * Enforce User to Configure 2FA
 * Primary option for Two-Factor
+* Disable 2FA when using Temporary Login
 
 **Security -> 2FA Email**
 
@@ -443,6 +444,13 @@ Please get in touch with us and we’ll do our best to include it inthe next ver
 2. Sample front html code.
 
 == Changelog == 
+
+= 2.6.4 =
+* Process the text/xml content type, to allow changing the default URLs in certain sitemaps. 
+* New filter wp-hide/2fa/process_wp_login  https://wp-hide.com/documentation/wp-hide-2fa-process_wp_login/
+* New 2FA option - Disable 2FA when login using a Temporary Login
+* Compatibility with "Temporary Login Without Password" when using the Two Factor Authentication ( 2FA ) feature.
+* WordPress 6.8 compatibility check and tag update. 
 
 = 2.6.3 = 
 * Fix: Custom login page logo ( remove negate empty on $custom_logo_image_id )

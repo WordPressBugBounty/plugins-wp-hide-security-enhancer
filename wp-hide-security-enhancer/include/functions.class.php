@@ -2974,6 +2974,7 @@
                                                 'text/css',
                                                 'text/html',
                                                 'text/csv',
+                                                'text/xml',
                                                 'text/javascript',
                                                 'application/javascript',
                                                 'application/json'

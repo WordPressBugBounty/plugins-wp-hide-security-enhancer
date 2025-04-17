@@ -92,6 +92,7 @@
                     include_once(WPH_PATH . 'compatibility/redirection.php');
                     include_once(WPH_PATH . 'compatibility/wpforms-lite.php');
                     include_once(WPH_PATH . 'compatibility/dokan.php');
+                    include_once(WPH_PATH . 'compatibility/temporary-login-without-password.php');
                     
                     /**
                     * Themes

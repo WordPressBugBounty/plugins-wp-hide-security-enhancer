@@ -40,7 +40,7 @@
             function process_wp_login( $status, $user )
                 {
                     $temporary_login_2fa_bypass  =   $this->wph->functions->get_module_item_setting('temporary_login_2fa_bypass');
-                    if ( $temporary_login_2fa_bypass !== 'yes' )
+                    if ( $temporary_login_2fa_bypass !== 'yes' ||   ! isset ( $_GET['wtlwp_token'] ) )
                         return $status;
                     
                     return FALSE;

@@ -4,7 +4,7 @@ Donate link: https://www.nsp-code.com/
 Tags: wordpress hide, wp hide, security, security headers, login, 2fa
 Requires at least: 2.8
 Tested up to: 6.8
-Stable tag: 2.6.4
+Stable tag: 2.6.5
 License: GPLv2 or later
 
 Protect your website by concealing vulnerable WordPress traces, plugins, themes, login/admin url. 2FA, Captcha, Firewall, Security Headers etc.
@@ -444,6 +444,9 @@ Please get in touch with us and we’ll do our best to include it inthe next ver
 2. Sample front html code.
 
 == Changelog == 
+
+= 2.6.5 =
+Fix: Check for wtlwp_token GET argument if "Temporary Login Without Password" when using the Two Factor Authentication ( 2FA ) feature.
 
 = 2.6.4 =
 * Process the text/xml content type, to allow changing the default URLs in certain sitemaps. 

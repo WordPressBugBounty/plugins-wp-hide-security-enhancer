@@ -3,8 +3,8 @@ Contributors: nsp-code, tdgu
 Donate link: https://www.nsp-code.com/
 Tags: wordpress hide, wp hide, security, security headers, login, 2fa
 Requires at least: 2.8
-Tested up to: 6.8
-Stable tag: 2.6.5
+Tested up to: 6.8.1
+Stable tag: 2.6.6
 License: GPLv2 or later
 
 Protect your website by concealing vulnerable WordPress traces, plugins, themes, login/admin url. 2FA, Captcha, Firewall, Security Headers etc.
@@ -137,6 +137,7 @@ Since version 1.2, WP-Hide change individual plugin URLs and made them unrecogni
 **Hide -> Rewrite > Author**
 
 * New Author Path
+* Prevent Access to Author Archives
 * Block default path
 
 **Hide -> Rewrite > Search**
@@ -444,6 +445,10 @@ Please get in touch with us and we’ll do our best to include it inthe next ver
 2. Sample front html code.
 
 == Changelog == 
+
+= 2.6.6 =
+* New feature - Prevent Access to Author Archives via User IDs
+* WordPress 6.8.1 compatibility check and tag update 
 
 = 2.6.5 =
 Fix: Check for wtlwp_token GET argument if "Temporary Login Without Password" when using the Two Factor Authentication ( 2FA ) feature.

@@ -4,7 +4,7 @@ Donate link: https://www.nsp-code.com/
 Tags: wordpress hide, wp hide, security, security headers, login, 2fa
 Requires at least: 2.8
 Tested up to: 6.8.1
-Stable tag: 2.6.6
+Stable tag: 2.6.7
 License: GPLv2 or later
 
 Protect your website by concealing vulnerable WordPress traces, plugins, themes, login/admin url. 2FA, Captcha, Firewall, Security Headers etc.
@@ -445,6 +445,9 @@ Please get in touch with us and we’ll do our best to include it inthe next ver
 2. Sample front html code.
 
 == Changelog == 
+
+= 2.6.7 =
+* Fix apache rewrite for "Author Archives via User IDs" option
 
 = 2.6.6 =
 * New feature - Prevent Access to Author Archives via User IDs

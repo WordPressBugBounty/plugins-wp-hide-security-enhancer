@@ -186,15 +186,13 @@
                     $rewrite_to     =   $this->wph->functions->get_rewrite_to_base( 'index.php', TRUE, FALSE, 'site_path' );
                     
                     $text   =   '';
-                                        
-                    if($this->wph->server_web_config   === TRUE)
-                        $text   = '
-                                    <rule name="wph-block_xml_rpc" stopProcessing="true">
-                                        <match url="^xmlrpc.php"  />
-                                        <action type="Rewrite" url="'.  $rewrite_to .'?wph-throw-404" />  
-                                    </rule>
-                                                        ';
                     
+                    if($this->wph->server_htaccess_config   === TRUE)
+                        {                                        
+                            $text    =  'RewriteCond %{QUERY_STRING} author=\d+' . "\n";
+                            $text   .=  'RewriteRule ^ '.  $rewrite_to .'?wph-throw-404 [L]';
+                        }
+                        
                                
                     $processing_response['rewrite'] = $text;            
                                 

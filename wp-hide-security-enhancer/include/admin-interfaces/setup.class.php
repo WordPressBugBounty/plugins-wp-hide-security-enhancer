@@ -100,6 +100,7 @@
                                             'new_xml_rpc_path'              =>  $this->functions->random_word(),
                                             
                                             
+                                            'disable_author_archive'        =>  'yes',
                                             'remove_generator_meta'         =>  'yes',
                                             'remove_other_generator_meta'   =>  'yes',
                                             'remove_shortlink_meta'         =>  'yes',

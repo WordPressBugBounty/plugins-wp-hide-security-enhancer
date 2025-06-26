@@ -4,7 +4,7 @@ Donate link: https://www.nsp-code.com/
 Tags: wordpress hide, wp hide, security, security headers, login, 2fa
 Requires at least: 2.8
 Tested up to: 6.8.1
-Stable tag: 2.6.7
+Stable tag: 2.6.8
 License: GPLv2 or later
 
 Protect your website by concealing vulnerable WordPress traces, plugins, themes, login/admin url. 2FA, Captcha, Firewall, Security Headers etc.
@@ -174,6 +174,10 @@ Since version 1.2, WP-Hide change individual plugin URLs and made them unrecogni
 **Hide -> Rewrite > URL Slash**
 
 * URL’s add Slash – Add a slash to any links without it. This disguisesthe existence of a file, folder or a wrong URL, which will all be slashed.
+
+**Hide -> General / Html > Core**
+
+* Disabling Directory Listing
 
 **Hide -> General / Html > Meta**
 
@@ -446,6 +450,12 @@ Please get in touch with us and we’ll do our best to include it inthe next ver
 
 == Changelog == 
 
+= 2.6.8 =
+* New feature: Disabling Directory Listing
+* New feature: Disabling Author Archive
+* Include the malcare-waf.php and bv_connector_ to the ignore list when checking for dangerous files in the WordPress root.
+* Include the disable_author_archive into the sample setup.
+
 = 2.6.7 =
 * Fix apache rewrite for "Author Archives via User IDs" option
 
@@ -454,7 +464,7 @@ Please get in touch with us and we’ll do our best to include it inthe next ver
 * WordPress 6.8.1 compatibility check and tag update 
 
 = 2.6.5 =
-Fix: Check for wtlwp_token GET argument if "Temporary Login Without Password" when using the Two Factor Authentication ( 2FA ) feature.
+* Fix: Check for wtlwp_token GET argument if "Temporary Login Without Password" when using the Two Factor Authentication ( 2FA ) feature.
 
 = 2.6.4 =
 * Process the text/xml content type, to allow changing the default URLs in certain sitemaps. 

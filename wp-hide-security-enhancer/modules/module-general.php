@@ -9,6 +9,9 @@
                 {
                     
                     //add components
+                    include(WPH_PATH . "/modules/components/general-core.php");
+                    $this->components[]  =   new WPH_module_general_core();
+                    
                     include(WPH_PATH . "/modules/components/general-meta.php");
                     $this->components[]  =   new WPH_module_general_meta();
                     

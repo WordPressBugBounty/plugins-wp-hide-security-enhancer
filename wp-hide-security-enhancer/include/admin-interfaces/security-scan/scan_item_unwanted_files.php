@@ -74,7 +74,7 @@
                                                                                     'error_description'    =>  __('Text file, may contain sensitive data', 'wp-hide-security-enhancer')
                                                                                     ),
                                             'other php'                 => array(
-                                                                                    'regex'         => '/(index\.php|wp-activate\.php|wp-blog-header\.php|wp-comments-post\.php|wp-config\.php|wp-config-sample\.php|wp-cron\.php|wp-links-opml\.php|wp-load\.php|wp-login\.php|wp-mail\.php|wp-settings\.php|wp-signup\.php|wp-trackback\.php|xmlrpc\.php|wordfence-waf\.php)(*SKIP)(*FAIL)|.*\.php/m',
+                                                                                    'regex'         => '/(index\.php|wp-activate\.php|wp-blog-header\.php|wp-comments-post\.php|wp-config\.php|wp-config-sample\.php|wp-cron\.php|wp-links-opml\.php|wp-load\.php|wp-login\.php|wp-mail\.php|wp-settings\.php|wp-signup\.php|wp-trackback\.php|xmlrpc\.php|wordfence-waf\.php|malcare-waf\.php|bv_connector_[0-9]+\.php)(*SKIP)(*FAIL)|.*\.php/m',
                                                                                     'error_description'    =>  __('PHP executable file', 'wp-hide-security-enhancer')
                                                                                     )
                                         );

@@ -174,6 +174,28 @@
                     return $author_rewrite;
                       
                 }
+            
+            
+            function _init_author_disable_archive($saved_field_data)
+                {
+                    if(empty($saved_field_data) ||  $saved_field_data   ==  'no')
+                        return FALSE;
+                    
+                    add_action ( 'template_redirect', array ( $this, 'disable_author_archive' ) );
+                    
+                }
+                
+            
+            function disable_author_archive()
+                {
+                    if ( ! is_author() )
+                        return;
+                        
+                    global $wp_query;
+                    $wp_query->set_404();
+                    status_header( 404 );
+                    nocache_headers();
+                }
                 
                 
             function _callback_saved_author_disable_archive($saved_field_data)

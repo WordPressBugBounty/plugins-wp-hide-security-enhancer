@@ -163,7 +163,9 @@
                                                 <?php
                                                     
                                                     $module_object  =   $this->functions->get_module_component_by_slug ( $this->tab_slug );
-                                                    $module_description =   $module_object->get_module_description();
+                                                    $module_description =   FALSE;
+                                                    if ( is_object ( $module_object ) )
+                                                        $module_description =   $module_object->get_module_description();
                                                     if ( $module_description    !== FALSE )
                                                         echo $module_description;
                                                 

@@ -265,7 +265,7 @@
                             $plugin_rewrite_to  =   $this->wph->functions->get_rewrite_to_base( trailingslashit($plugin_path) . $active_plugin_directory );
                                                                          
                             if($this->wph->server_htaccess_config   === TRUE)
-                                $rewrite    .= "\nRewriteRule ^"    .   trailingslashit(   $plugin_custom_path   )   .   '(.+) "'. $plugin_rewrite_to .'$1" [L,QSA]';
+                                $rewrite    .= "\nRewriteRule ^"    .   trailingslashit(   $plugin_custom_path   )   .   '(.+) '. $plugin_rewrite_to .'$1 [L,QSA]';
                                 
                             if($this->wph->server_web_config   === TRUE)
                                 $rewrite    .= '

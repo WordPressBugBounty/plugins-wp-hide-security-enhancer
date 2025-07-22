@@ -3,8 +3,8 @@ Contributors: nsp-code, tdgu
 Donate link: https://www.nsp-code.com/
 Tags: wordpress hide, wp hide, security, security headers, login, 2fa
 Requires at least: 2.8
-Tested up to: 6.8.1
-Stable tag: 2.6.8
+Tested up to: 6.8.2
+Stable tag: 2.7
 License: GPLv2 or later
 
 Protect your website by concealing vulnerable WordPress traces, plugins, themes, login/admin url. 2FA, Captcha, Firewall, Security Headers etc.
@@ -449,6 +449,11 @@ Please get in touch with us and we’ll do our best to include it inthe next ver
 2. Sample front html code.
 
 == Changelog == 
+
+= 2.7 =
+* Remove double quotes in the Apache rewrites for better compatibility.
+* Fix: Ensure the $module_object is object, before retrieve the get_module_description()
+* WordPress 6.8.2 compatibility check and tag update 
 
 = 2.6.8 =
 * New feature: Disabling Directory Listing

@@ -782,8 +782,8 @@
                     if($this->wph->server_htaccess_config   === TRUE)
                         {
                                                         
-                            $rewrite    =   "\n" . 'RewriteCond "' . $cache_path . '/cache/wph/%{HTTP_HOST}%{REQUEST_URI}" -f' ."\n" .
-                                                'RewriteRule .* "' . $actual_cache_path . '/cache/wph/%{HTTP_HOST}%{REQUEST_URI}" [L]' ."\n";
+                            $rewrite    =   "\n" . 'RewriteCond ' . $cache_path . '/cache/wph/%{HTTP_HOST}%{REQUEST_URI} -f' ."\n" .
+                                                'RewriteRule .* ' . $actual_cache_path . '/cache/wph/%{HTTP_HOST}%{REQUEST_URI} [L]' ."\n";
                         }
                     
                     if($this->wph->server_web_config   === TRUE)

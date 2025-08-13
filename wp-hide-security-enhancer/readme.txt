@@ -4,7 +4,7 @@ Donate link: https://www.nsp-code.com/
 Tags: wordpress hide, wp hide, security, security headers, login, 2fa
 Requires at least: 2.8
 Tested up to: 6.8.2
-Stable tag: 2.7
+Stable tag: 2.7.2
 License: GPLv2 or later
 
 Protect your website by concealing vulnerable WordPress traces, plugins, themes, login/admin url. 2FA, Captcha, Firewall, Security Headers etc.
@@ -53,6 +53,7 @@ Once configured, you need to **clear server cache data and/or any cache plugins*
 * 2FA - Two-factor Authentication - Email Verification Code
 * 2FA - Two-factor Authentication - Authenticator App
 * 2FA - Two-factor Authentication - Recovery Codes
+* 2FA - Two-factor Authentication - Shortcode for front-side user settings interface
 * Google Captcha 
 * Blocks default wp-login.php
 * Blocks default wp-signup.php
@@ -341,14 +342,18 @@ HTTP Response Headers are a powerful tool to Harden Your Website Security.
 
 Feel free to contact us at contact@wp-hide.com for fast support.
 
+
+
+
+
 = Will the Plugin Alter Anything on My Server? =
 
-Absolutely Nothing!
-The plugin does not modify any files or directories on your server. All processes are handled virtually using URL rewrite techniques and WordPress filters to seamlessly integrate its functionalities and features. Your server remains completely untouched!
+Under the hood, this plugin never writes to, deletes, or modifies any existing files or directories on your server. Instead, it leverages WordPress’s built-in hook system and virtual URL rewrite rules—applied in memory—to seamlessly redirect and mask asset links. Rest assured, your core files, themes, and plugins remain exactly as you left them, with zero risk of unintended changes.
 
 = Is This Plugin Suitable for Someone Without PHP Knowledge? =
 
-Absolutely! No PHP knowledge is required. The plugin’s features and functionalities are applied automatically and can be easily managed through a user-friendly, descriptive admin interface.
+Yes—100% beginner-friendly.
+You don’t need to write a single line of PHP to customize or manage this plugin. Every feature is controlled via a clear, intuitive admin panel with descriptive labels, tooltips, and contextual help. Whether you want to hide common WordPress paths, rename your wp-content folder, or inject security headers, each option can be toggled on or off with a simple click. If you ever get stuck, hover over the question-mark icons for guidance, or check out our step-by-step documentation.
 
 = Is There a Demo Available to Explore? =
 
@@ -356,38 +361,49 @@ Yes, you can check out a live demo at <a target="_blank" href="https://demo.wp-h
 
 = Can I Use the Plugin on an Nginx Server? =
 
-The free version of the plugin cannot generate the required Nginx rewrite rules for full-stack Nginx servers. However, it is fully compatible with Apache, LiteSpeed, IIS, and Nginx when used as a reverse proxy.
+Free Version: Does not auto generate native Nginx rewrite directives. However, you can still run it behind an Nginx reverse proxy or on hybrid setups (e.g., Apache + Nginx). However, it is fully compatible with Apache, LiteSpeed, IIS, and Nginx when used as a reverse proxy.
 For Nginx conside  <a target="_blank" href="https://wp-hide.com">WP Hide PRO</a>.
+
+WP Hide PRO: Includes a dedicated UI for generating Nginx configuration snippets—simply paste them into your server block to enable full URL masking, asset renaming, and security header rules. For more details, check out WP Hide PRO.
 
 = Can I Still Update WordPress, Plugins, and Themes? =
 
-Yes, everything works as usual. The plugin does not interfere with your ability to update WordPress core, plugins, or themes. You can run updates at any time without any issues.
+Yes, updates remain effortless.
+Our plugin is designed to play nicely with the WordPress update process. You can upgrade your core, themes, and all other plugins through the dashboard or via WP-CLI without disabling WP Hide. All rewrite rules and filters persist through updates, so there’s no downtime or extra steps required.
 
 = Does the Plugin Affect My Website’s SEO? =
 
-Not at all. The plugin only modifies asset links (such as CSS, JavaScript, and media files) and does not alter actual content URLs. There is no negative impact on SEO whatsoever.
+Not in the slightest.
+We only rewrite the paths to static assets (CSS, JS, images) and administrative URLs—your publicly visible content URLs (posts, pages, categories) remain unchanged. Search engines will continue to index your site normally, and any existing sitemaps or canonical tags will work exactly as before. In fact, by hiding version parameters and generic WordPress identifiers, you may see a slight improvement in perceived site quality.
 
 = Is the Plugin Compatible with My Site’s Cache? =
 
-Yes, the plugin works seamlessly with any caching plugin installed on your site.
+Fully compatible.
+Whether you’re using WP Super Cache, W3 Total Cache, LiteSpeed Cache, or any other popular caching layer, WP Hide integrates without conflict. All rewritten URLs are cached just like your standard assets. If you enable HTML, CSS, or JS minification in your cache plugin, WP Hide will automatically adjust to serve the correct file paths.
 
 = What Are HTTP Security Headers? =
 
-HTTP Security Headers are a powerful tool to enhance your website’s security. The plugin simplifies the process of adding these headers through an intuitive graphical interface—no coding or manual file editing required.
+Critical defenses, made easy.
+HTTP Security Headers (like Content Security Policy, X-Frame-Options, and Strict-Transport-Security) instruct browsers to apply extra safeguards when serving your site. Normally, you’d have to edit .htaccess or web server config files—now you can add, customize, and test these headers directly from a graphical interface. No manual coding, no syntax headaches; just point and click level security hardening.
 
 = Which Servers Are Compatible with This Plugin? =
 
-The free version of WP-Hide works seamlessly with Apache and IIS servers, as well as any setup that relies on .htaccess for configuration. For other server types, consider upgrading to the <a target="_blank" href="https://wp-hide.com">WP Hide PRO</a> version.
+Out of the box:
+•    Apache (with .htaccess support)
+•    IIS (web.config)
+•    Any server behind Nginx, Varnish, or HAProxy
+
+For other environments:
+Consider upgrading to <a target="_blank" href="https://wp-hide.com">WP Hide PRO</a>, which provides tailored configuration snippets and an enhanced Setup page for Nginx, OpenLiteSpeed, and more.
 
 = How Can I Use the Plugin with My OpenLiteSpeed Server? =
 
-If you’re running OpenLiteSpeed, here are a few steps to ensure compatibility:
-
-* Verify that your server processes the .htaccess file, where rewrite rules are stored. For more details, refer to this <a target="_blank" href="https://www.litespeedtech.com/support/forum/threads/htaccess-is-ignored.15500/">support thread</a>.
-
-* If you’re using the LiteSpeed Cache plugin, disable the CSS/JS Minify option in the Optimization Settings.
-
-* If your server requires rewrite rules to be placed in a different file (e.g., a config file), consider upgrading to the <a target="_blank" href="https://wp-hide.com/wp-hide-pro-now-available/">WP Hide PRO</a> version, which includes a Setup page for generating the necessary rewrite code.
+1.    Enable .htaccess Processing
+Make sure your OpenLiteSpeed instance is configured to read .htaccess files—see this support thread for guidance.
+2.    Adjust Cache Plugin Settings
+If you use LiteSpeed Cache, turn off the CSS/JS Minify option (under Optimization Settings) to prevent conflicts with WP Hide’s rewrite rules.
+3.    Custom Config File
+If your server requires rules outside of .htaccess (e.g., in httpd-config.conf), WP Hide PRO can generate the exact rewrite blocks you need—no guesswork involved. See WP Hide PRO details.
 
 = How Do I Use the Plugin on a Bitnami Setup? =
 By default, Bitnami LAMP setups do not process .htaccess files, so rewrites won’t work. To resolve this:
@@ -408,14 +424,11 @@ You can still keep the configuration as it is using the <a target="_blank" href=
 = .htaccess File Writing Error – Unable to Write Custom Rules =
 If you see the error “Unable to write custom rules to your .htaccess. Is this file writable?”, follow these steps:
 
-* Ensure the .htaccess file is writable (typically rw-rw-r– / 0664 permissions) and owned by the same group as PHP.
-
-* Other plugins or themes might interfere with rewrite rules. Temporarily disable them to identify the culprit.
-
-* Deactivate and reactivate the WP Hide plugin—this has resolved the issue for some users.
-
-* Create a backup of your .htaccess file, delete it, and go to Settings > Permalinks to regenerate it. Then, update WP Hide settings to rewrite the .htaccess file.
-
+1.    Verify File Permissions. Ensure .htaccess has permissions 0664 (rw-rw-r–) or 0644, owned by the same user/group running PHP.
+2.    Check for Conflicts. Temporarily disable other plugins or themes that may lock or rewrite .htaccess. Reactivate them one by one to isolate the conflict.
+3.    Reinitialize the Plugin. Deactivate and then reactivate WP Hide; this often resets internal flags and allows writing.
+4.    Regenerate .htaccess. Backup and delete your existing .htaccess, then visit Settings → Permalinks to rebuild it. Afterward, return to WP Hide settings to reapply your custom rules.
+                            
 = Something Went Wrong – How Can I Recover My Site? =
 Don’t worry—your site will not be harmed. Here’s how to troubleshoot:
 
@@ -441,7 +454,8 @@ The Recovery Link resets all plugin options and restores your site to its defaul
 
 = What to do if I can’t find a functionality that I’m looking for? =
 
-Please get in touch with us and we’ll do our best to include it inthe next version.
+We’re continuously improving WP Hide! If there’s a feature you need—whether it’s a new rewrite rule type, custom header option, or integration with third party plugins—please contact us. Your suggestions drive our roadmap, and we’ll do our best to include it in an upcoming release.
+
 
 == Screenshots ==
 
@@ -449,6 +463,10 @@ Please get in touch with us and we’ll do our best to include it inthe next ver
 2. Sample front html code.
 
 == Changelog == 
+
+= 2.7.2 =
+* Front shortcode [wph-2fa-user-settings] for user 2FA options configuration  https://wp-hide.com/2fa-shortcode-let-users-manage-2fa-from-the-front-end/
+* Compatibility file for FlyingPress
 
 = 2.7 =
 * Remove double quotes in the Apache rewrites for better compatibility.

@@ -31,6 +31,9 @@
                     add_filter( 'authenticate',                 array( $this, 'authenticate_block_cookies' ),   9999 );
                     
                     add_action( 'login_form_validate_2fa',      array( $this, 'login_form_validate_2fa' ) );
+                    
+                    
+                    add_shortcode( 'wph-2fa-user-settings',     array( $this, 'shortcode_2fa_user_settings') );
 
                 }
                 
@@ -746,6 +749,28 @@
                     <?php
                 }
     
+    
+    
+            function shortcode_2fa_user_settings()
+                {
+                    
+                    if ( ! is_user_logged_in() )
+                        return;
+                    
+                    global $current_user;
+                    
+                    ob_start();
+                    
+                    wp_enqueue_style( '2fa-front', WPH_URL . '/assets/css/2fa-front.css');
+                    
+                    $this->profile_2fa_options( $current_user );
+                    
+                    $html   =   ob_get_contents();
+                    ob_end_clean();
+                    
+                    return $html;
+                        
+                }
     
     
             function profile_2fa_options_update( $user_id ) 

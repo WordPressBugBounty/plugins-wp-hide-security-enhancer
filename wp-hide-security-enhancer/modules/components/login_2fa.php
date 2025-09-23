@@ -198,7 +198,7 @@
                             if ( $error_type    ==  'error' )
                                 $notice_strong  =   'Error:';
                             
-                            echo '<div id="login_error" class="notice notice-' . $error_type .'"><p><strong>' .  $notice_strong .'</strong> ' . esc_html( $error_message ) . '</p></div>';
+                            echo '<div id="login_error" class="notice notice-' . esc_html( $error_type ) .'"><p><strong>' .  esc_html( $notice_strong ) .'</strong> ' . esc_html( $error_message ) . '</p></div>';
                         }
 
                     ?>
@@ -404,7 +404,7 @@
                         
                     $use_2fa_option   =   isset ( $this->active_2fa_options[ $_2fa_id ] ) ?  $this->active_2fa_options[ $_2fa_id ]  :   FALSE;
                     if ( ! $use_2fa_option )
-                        wp_die( __( 'Failed to locate the 2FA Option.', 'wp-hide-security-enhancer' ) );
+                        wp_die( esc_html__( 'Failed to locate the 2FA Option.', 'wp-hide-security-enhancer' ) );
 
 
                     $result = $this->process_2fa_option( $use_2fa_option, $user, $is_post_request );
@@ -707,13 +707,13 @@
                     wp_nonce_field( 'user_2fa_options', '_nonce_user_2fa_options', false );
                     
                     ?>
-                    <h2><?php esc_html_e( '2FA Available Options', 'two-factor' ); ?></h2>
+                    <h2><?php esc_html_e( '2FA Available Options', 'wp-hide-security-enhancer' ); ?></h2>
                     <input type="hidden" name="_2fa_enabled_providers[]" value="<?php /* Dummy input so $_POST value is passed when no providers are enabled. */ ?>" />
                     <table class="wp-list-table widefat fixed striped table-view-list _2fa-options-table">
                         <thead>
                             <tr>
-                                <th class="col-primary column-author" scope="col"><?php esc_html_e( 'Primary', 'two-factor' ); ?></th>
-                                <th class="col-name" scope="col"><?php esc_html_e( 'Option Name', 'two-factor' ); ?></th>
+                                <th class="col-primary column-author" scope="col"><?php esc_html_e( 'Primary', 'wp-hide-security-enhancer' ); ?></th>
+                                <th class="col-name" scope="col"><?php esc_html_e( 'Option Name', 'wp-hide-security-enhancer' ); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -741,8 +741,8 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th class="col-primary column-author" scope="col"><?php esc_html_e( 'Primary', 'two-factor' ); ?></th>
-                                <th class="col-name" scope="col"><?php esc_html_e( 'Option Name', 'two-factor' ); ?></th>
+                                <th class="col-primary column-author" scope="col"><?php esc_html_e( 'Primary', 'wp-hide-security-enhancer' ); ?></th>
+                                <th class="col-name" scope="col"><?php esc_html_e( 'Option Name', 'wp-hide-security-enhancer' ); ?></th>
                             </tr>
                         </tfoot>
                     </table>

@@ -6,13 +6,13 @@
     if ( $result === FALSE )
         {
         ?>
-        <p><span class="dashicons dashicons-flag error critical"></span><b><?php _e("Rewrite test failed! ", 'wp-hide-security-enhancer') ?></b> <?php _e("Ensure the rewrites are active for your server.", 'wp-hide-security-enhancer') ?>.</p>
+        <p><span class="dashicons dashicons-flag error critical"></span><b><?php esc_html_e("Rewrite test failed! ", 'wp-hide-security-enhancer') ?></b> <?php esc_html_e("Ensure the rewrites are active for your server.", 'wp-hide-security-enhancer') ?>.</p>
         <?php
         }
         else
         {
         ?>
-        <p><span class="dashicons dashicons-flag error critical"></span><b><?php _e("Rewrite test failed! ", 'wp-hide-security-enhancer') ?></b> <?php echo $result ?></p>
+        <p><span class="dashicons dashicons-flag error critical"></span><b><?php esc_html_e("Rewrite test failed! ", 'wp-hide-security-enhancer') ?></b> <?php echo esc_html ( $result ) ?></p>
         <?php   
         }
         

@@ -57,7 +57,7 @@
                         {
                                      
                             if( $found_errors   === FALSE )
-                                echo "<div class='notice notice-success'><p>". __('Settings saved', 'wp-hide-security-enhancer')  ."<br />" .  __('Remember, site cache clear is required.', 'wp-hide-security-enhancer')  ."</p></div>";
+                                echo "<div class='notice notice-success'><p>". esc_html__('Settings saved', 'wp-hide-security-enhancer')  ."<br />" .  esc_html__('Remember, site cache clear is required.', 'wp-hide-security-enhancer')  ."</p></div>";
                         }   
                     
                     
@@ -195,21 +195,42 @@
                           
                     ?>
                     <div id="wph" class="wrap">
-                        <h1>WP Hide & Security Enhancer - <?php _e( "Setup", 'wp-hide-security-enhancer' ) ?></h1>
+                        <h1>WP Hide & Security Enhancer - <?php esc_html_e ( "Setup", 'wp-hide-security-enhancer' ) ?></h1>
                                           
-                        <?php echo $this->functions->get_ad_banner(); ?>
-                        
-                        <?php
+                        <?php 
+                            
+                            echo wp_kses ( $this->functions->get_ad_banner(), array(
+                                                                                            'a'      => array(
+                                                                                                                    'href'  => array(),
+                                                                                                                    'title' => array(),
+                                                                                                                    'target' => array(),
+                                                                                                                ),
+                                                                                            'div'     => array(
+                                                                                                                    'id'    =>  array(),
+                                                                                                                    'class' =>  array(),
+                                                                                                                ),
+                                                                                            'img'     => array(
+                                                                                                                    'src'   =>  array()
+                                                                                                                
+                                                                                                                ),
+                                                                                            'span'     => array(
+                                                                                                                    'class'   =>  array()
+                                                                                                                
+                                                                                                                ),
+                                                                                            'p' => array(),
+                                                                                            'h4' => array(),
+                                                                                            'strong' => array(),
+                                                                                        ) );
                         
                             if( isset( $_GET['sample-setup-completed'] )    &&  $_GET['sample-setup-completed'] ==  'true' )
                                 {
                                     ?>
                                         <div class="start-container title success">
-                                            <h2><?php _e( "Sample Setup deployed !", 'wp-hide-security-enhancer' ) ?></h2>
+                                            <h2><?php esc_html_e ( "Sample Setup deployed !", 'wp-hide-security-enhancer' ) ?></h2>
                                         </div>
                                         <div class="container-description">
-                                            <p><?php _e( "A basic plugin set-up has been deployed, to get you started. A site cache clear is required to ensure the updates are reflected on the front side", 'wp-hide-security-enhancer' ) ?>. </p>
-                                            <p><?php _e( "Check with the front side to ensure everything is working. Further adjustments to other options is recommended", 'wp-hide-security-enhancer' ) ?>. </p>
+                                            <p><?php esc_html_e ( "A basic plugin set-up has been deployed, to get you started. A site cache clear is required to ensure the updates are reflected on the front side", 'wp-hide-security-enhancer' ) ?>. </p>
+                                            <p><?php esc_html_e ( "Check with the front side to ensure everything is working. Further adjustments to other options is recommended", 'wp-hide-security-enhancer' ) ?>. </p>
                                         </div>
                                     
                                         <p><br /><br /><br /></p>
@@ -220,7 +241,7 @@
                             
                             ?>
                             <div class="start-container title test <?php if ( $found_issues ===  TRUE ) { echo ' warning';} ?>">
-                                <h2><?php _e( "Checking your environment ..", 'wp-hide-security-enhancer' ) ?></h2>
+                                <h2><?php esc_html_e ( "Checking your environment ..", 'wp-hide-security-enhancer' ) ?></h2>
                             </div>
                             <div class="container-description environment-notices">
                             <?php
@@ -233,72 +254,72 @@
                             if ( $results['critical_issues'] ===  TRUE )
                                 {    
                                     ?>
-                                    <p class="framed"><span class="dashicons dashicons-warning error"></span> <?php _e('Critical issues were identified on your site, please fix them before proceeding with customizations.', 'wp-hide-security-enhancer') ?></p>
+                                    <p class="framed"><span class="dashicons dashicons-warning error"></span> <?php esc_html_e ('Critical issues were identified on your site, please fix them before proceeding with customizations.', 'wp-hide-security-enhancer') ?></p>
                                     <?php
                                 }
                             
                             if ( $results['found_issues'] ===  FALSE )
                                 {    
                                     ?>
-                                    <p><span class="dashicons dashicons-plugins-checked"></span> <?php _e('No problems have been found on your server environment.', 'wp-hide-security-enhancer') ?></p>
+                                    <p><span class="dashicons dashicons-plugins-checked"></span> <?php esc_html_e ('No problems have been found on your server environment.', 'wp-hide-security-enhancer') ?></p>
                                     <?php
                                 }
                         ?>
                             </div>               
                         <div class="start-container title">
-                            <h2><?php _e( "Getting Started", 'wp-hide-security-enhancer' ) ?></h2>
+                            <h2><?php esc_html_e ( "Getting Started", 'wp-hide-security-enhancer' ) ?></h2>
                         </div>
                         <div class="container-description">
-                            <p>The <b>WP Hide & Security Enhancer</b> <?php _e( "plugin enhances your website's security by concealing your WordPress installation, themes, and plugins. By keeping critical information hidden, it prevents hackers and automated bots from exploiting known vulnerabilities", 'wp-hide-security-enhancer' ) ?>. <?php _e( "With new vulnerabilities discovered every day", 'wp-hide-security-enhancer' ) ?> ( <a href="https://wpscan.com/plugins/" target="_blank">WPVulndb.com/</a> ) <?php _e( "using WP Hide & Security Enhancer ensures an added layer of protection, keeping your site safe and secure.", 'wp-hide-security-enhancer' ) ?> !</p>
-                            <p><?php _e('You can begin with a ', 'wp-hide-security-enhancer') ?> <b><?php _e('Sample Setup', 'wp-hide-security-enhancer') ?></b> <?php _e('to get started quickly. Then, use the', 'wp-hide-security-enhancer') ?> <a class="button-primary" href="<?php echo esc_url(admin_url( 'admin.php?page=wp-hide-security-scan')) ?>"><b>Scan</b></a> <?php _e('interface to identify potential vulnerabilities and fine-tune the plugin settings for optimal security. This approach ensures your website is protected with the highest level of defense', 'wp-hide-security-enhancer') ?>.</p>
+                            <p>The <b>WP Hide & Security Enhancer</b> <?php esc_html_e ( "plugin enhances your website's security by concealing your WordPress installation, themes, and plugins. By keeping critical information hidden, it prevents hackers and automated bots from exploiting known vulnerabilities", 'wp-hide-security-enhancer' ) ?>. <?php esc_html_e ( "With new vulnerabilities discovered every day", 'wp-hide-security-enhancer' ) ?> ( <a href="https://wpscan.com/plugins/" target="_blank">WPVulndb.com/</a> ) <?php esc_html_e ( "using WP Hide & Security Enhancer ensures an added layer of protection, keeping your site safe and secure.", 'wp-hide-security-enhancer' ) ?> !</p>
+                            <p><?php esc_html_e ('You can begin with a ', 'wp-hide-security-enhancer') ?> <b><?php esc_html_e ('Sample Setup', 'wp-hide-security-enhancer') ?></b> <?php esc_html_e ('to get started quickly. Then, use the', 'wp-hide-security-enhancer') ?> <a class="button-primary" href="<?php echo esc_url(admin_url( 'admin.php?page=wp-hide-security-scan')) ?>"><b>Scan</b></a> <?php esc_html_e ('interface to identify potential vulnerabilities and fine-tune the plugin settings for optimal security. This approach ensures your website is protected with the highest level of defense', 'wp-hide-security-enhancer') ?>.</p>
 
                         </div> 
                         
                         <div class="start-container title help">
-                            <h2><?php _e( "Recovery", 'wp-hide-security-enhancer' ) ?></h2>
+                            <h2><?php esc_html_e ( "Recovery", 'wp-hide-security-enhancer' ) ?></h2>
                         </div> 
                         <div class="container-description">
                         <?php $this->functions->show_recovery() ?>
                         </div>
                                                    
                         <div class="start-container title info">
-                            <h2><?php _e( "Basic functionality", 'wp-hide-security-enhancer' ) ?></h2>
+                            <h2><?php esc_html_e ( "Basic functionality", 'wp-hide-security-enhancer' ) ?></h2>
                         </div>
                         <div class="container-description">
-                            <p><?php _e( "The basic principle of the plugin is to change default assets URLs, remove or change specific HTML elements, and disable unused services. This makes WordPress unrecognizable. The process isn't automated, so it needs to be done manually while getting feedback on the front side to ensure everything is still functional. No file and directory are being changed anywhere, everything is processed on the fly using output buffering and filters", 'wp-hide-security-enhancer' ) ?>..</p>
+                            <p><?php esc_html_e ( "The basic principle of the plugin is to change default assets URLs, remove or change specific HTML elements, and disable unused services. This makes WordPress unrecognizable. The process isn't automated, so it needs to be done manually while getting feedback on the front side to ensure everything is still functional. No file and directory are being changed anywhere, everything is processed on the fly using output buffering and filters", 'wp-hide-security-enhancer' ) ?>..</p>
 
-                            <p><?php _e( "A default directory structure for WordPress appears like this on outputted HTML", 'wp-hide-security-enhancer' ) ?>:<br />
+                            <p><?php esc_html_e ( "A default directory structure for WordPress appears like this on outputted HTML", 'wp-hide-security-enhancer' ) ?>:<br />
                             https://--domain--<span class="highlight">/wp-includes/</span>css/dashicons.min.css  &nbsp;&nbsp;&nbsp;&nbsp;or &nbsp;&nbsp;&nbsp;&nbsp;  https://--domain--<span class="highlight">/wp-content/</span>themes/pub/wporg-plugins/css/style.css
-                            <br /><?php _e( "So the most important first step, is to change the default /wp-content/ and /wp-includes/ to something else. This can be done at", 'wp-hide-security-enhancer' ) ?> <a href="admin.php?page=wp-hide-rewrite&component=wp-includes">WP Includes</a> <?php _e( "and", 'wp-hide-security-enhancer' ) ?> <a href="admin.php?page=wp-hide-rewrite&component=wp-content">WP Content</a>
-                            <br /><?php _e( "Further adjustments to", 'wp-hide-security-enhancer' ) ?> <a href="admin.php?page=wp-hide-rewrite&component=theme">Theme</a>, <a href="admin.php?page=wp-hide-rewrite&component=plugins">Plugins</a>, <a href="admin.php?page=wp-hide-rewrite&component=uploads">Uploads</a> and <a href="admin.php?page=wp-hide-admin">Admin</a> <?php _e( "can be applied", 'wp-hide-security-enhancer' ) ?>.</p>
+                            <br /><?php esc_html_e ( "So the most important first step, is to change the default /wp-content/ and /wp-includes/ to something else. This can be done at", 'wp-hide-security-enhancer' ) ?> <a href="admin.php?page=wp-hide-rewrite&component=wp-includes">WP Includes</a> <?php esc_html_e ( "and", 'wp-hide-security-enhancer' ) ?> <a href="admin.php?page=wp-hide-rewrite&component=wp-content">WP Content</a>
+                            <br /><?php esc_html_e ( "Further adjustments to", 'wp-hide-security-enhancer' ) ?> <a href="admin.php?page=wp-hide-rewrite&component=theme">Theme</a>, <a href="admin.php?page=wp-hide-rewrite&component=plugins">Plugins</a>, <a href="admin.php?page=wp-hide-rewrite&component=uploads">Uploads</a> and <a href="admin.php?page=wp-hide-admin">Admin</a> <?php esc_html_e ( "can be applied", 'wp-hide-security-enhancer' ) ?>.</p>
                             <p></p>
-                            <p><?php _e( "At this point, for all simple sites, the WordPress CMS is already hidden. If using complex themes and plugins, further plugin options adjustments are necessarily or PRO might be required ( for example", 'wp-hide-security-enhancer' ) ?> <a href="https://wp-hide.com/how-to-easily-hide-elementor-page-builder/" target="_blank"><?php _e( "hiding Elementor", 'wp-hide-security-enhancer' ) ?></a>, Divi, visual builder etc).
+                            <p><?php esc_html_e ( "At this point, for all simple sites, the WordPress CMS is already hidden. If using complex themes and plugins, further plugin options adjustments are necessarily or PRO might be required ( for example", 'wp-hide-security-enhancer' ) ?> <a href="https://wp-hide.com/how-to-easily-hide-elementor-page-builder/" target="_blank"><?php esc_html_e ( "hiding Elementor", 'wp-hide-security-enhancer' ) ?></a>, Divi, visual builder etc).
 
-                            <br /><?php _e( "Take the time to understand each option, there are in-line additional help also external description to each of the features. If need additional assistance, use the support forum or contact us. Full description of each option can be found at", 'wp-hide-security-enhancer' ) ?> <a href="https://wp-hide.com/documentation_category/plugin-options-explained/" target="_blank"><?php _e( "Documentation", 'wp-hide-security-enhancer' ) ?></a>. </p>
+                            <br /><?php esc_html_e ( "Take the time to understand each option, there are in-line additional help also external description to each of the features. If need additional assistance, use the support forum or contact us. Full description of each option can be found at", 'wp-hide-security-enhancer' ) ?> <a href="https://wp-hide.com/documentation_category/plugin-options-explained/" target="_blank"><?php esc_html_e ( "Documentation", 'wp-hide-security-enhancer' ) ?></a>. </p>
 
                         
                         </div>
                         
                         <div id="wph-sample-setup" class="start-container title setup">
-                            <h2><?php _e( "Sample setup", 'wp-hide-security-enhancer' ) ?></h2>
+                            <h2><?php esc_html_e ( "Sample setup", 'wp-hide-security-enhancer' ) ?></h2>
                         </div>
                         <div class="container-description">
-                            <p><?php _e( "This establishes a straightforward setup to kickstart your journey. The process triggers activation of fundamental plugin options. Be mindful that all settings will revert to default, potentially overwriting existing values, so exercise caution. Following this procedure, WordPress CMS will be concealed on basic sites; otherwise, additional adjustments may be required for more customized configurations.", 'wp-hide-security-enhancer' ) ?></p>
+                            <p><?php esc_html_e ( "This establishes a straightforward setup to kickstart your journey. The process triggers activation of fundamental plugin options. Be mindful that all settings will revert to default, potentially overwriting existing values, so exercise caution. Following this procedure, WordPress CMS will be concealed on basic sites; otherwise, additional adjustments may be required for more customized configurations.", 'wp-hide-security-enhancer' ) ?></p>
                             <form id="wph-run-sample-setup" method="post" action="admin.php?page=wp-hide">
-                                <p><a href="javascript: void(0)" onclick="return WPH.confirm_sample_setup();" class="button-primary"><?php _e( "Create Plugin Setup", 'wp-hide-security-enhancer' ) ?></a></p>
-                                <p><a href="https://wp-hide.com/pricing/" target="_blank" class="button-primary p-button wph-pro"><span class="wph-pro">PRO</span> <?php _e( "Comprehensive Setup", 'wp-hide-security-enhancer' ) ?> </a></p>
+                                <p><a href="javascript: void(0)" onclick="return WPH.confirm_sample_setup();" class="button-primary"><?php esc_html_e ( "Create Plugin Setup", 'wp-hide-security-enhancer' ) ?></a></p>
+                                <p><a href="https://wp-hide.com/pricing/" target="_blank" class="button-primary p-button wph-pro"><span class="wph-pro">PRO</span> <?php esc_html_e ( "Comprehensive Setup", 'wp-hide-security-enhancer' ) ?> </a></p>
                                 
                                 <input type="hidden" name="wph-run-sample-setup" value="true" />
                                 <input type="hidden" name="wph-run-sample-setup-nonce" value="<?php echo wp_create_nonce( 'wph-run-sample-setup' ) ?>" />
                             </form>
-                            <p><?php _e( "Additional adjustments to the settings may be needed to tailor them to your specific environment. Utilize the Scan feature for easier identification of necessary improvements.", '' ) ?>
-                            <br /><?php _e( "For more complex sites, consider employing the ", 'wp-hide-security-enhancer' ) ?> <span class="wph-pro">PRO</span> <?php  _e( "plugin, which offers advanced tools such as PostProcessing with Replacements for targeted removal of individual fingerprints (e.g., elementor, divi, woocommerce, etc.).", 'wp-hide-security-enhancer' ) ?></p>
+                            <p><?php esc_html_e ( "Additional adjustments to the settings may be needed to tailor them to your specific environment. Utilize the Scan feature for easier identification of necessary improvements.", 'wp-hide-security-enhancer' ) ?>
+                            <br /><?php esc_html_e ( "For more complex sites, consider employing the ", 'wp-hide-security-enhancer' ) ?> <span class="wph-pro">PRO</span> <?php  esc_html_e ( "plugin, which offers advanced tools such as PostProcessing with Replacements for targeted removal of individual fingerprints (e.g., elementor, divi, woocommerce, etc.).", 'wp-hide-security-enhancer' ) ?></p>
                         </div>
                         
                                                 
                         <div class="start-container title video">
                             <div class="text">
-                                <h2><?php _e('Demo Video', 'wp-hide-security-enhancer') ?></h2>
+                                <h2><?php esc_html_e ('Demo Video', 'wp-hide-security-enhancer') ?></h2>
                             </div>                     
                         </div>
                         

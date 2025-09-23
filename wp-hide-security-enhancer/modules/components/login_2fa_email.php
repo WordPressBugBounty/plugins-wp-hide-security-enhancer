@@ -99,7 +99,10 @@
                 {
                     $code = $this->generate_token( $user->ID );
 
-                    $subject = sprintf( __( 'Here is your login confirmation code for %s', 'wp-hide-security-enhancer' ), wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES ) );
+                    $site_name = wp_strip_all_tags( wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES ) );
+                    $site_name = sanitize_text_field( $site_name );
+                    
+                    $subject = sprintf( __( 'Here is your login confirmation code for %s', 'wp-hide-security-enhancer' ), $site_name );
                     $message = sprintf( __( 'Use the following code to securely log in to your account: %s ' . "\n" . 'Please ensure you enter this code correctly to access your account. ' . "\n \n\n" . 'If you did not request this code, please contact support for assistance.', 'wp-hide-security-enhancer' ), $code );
 
                     $subject = apply_filters( 'wp-hide/2fa/email/email_subject', $subject, $user->ID );
@@ -334,7 +337,7 @@
             function interface_option_html( $user ) 
                 {
                     ?>
-                        <p><?php echo esc_html( sprintf( __( 'Authentication codes will be securely sent to the email address ( %s ) associated with your account. This added layer of security ensures that only you can access your account, even if your password is compromised. Make sure your email address is up-to-date to receive these important codes promptly.', 'two-factor' ), $user->user_email )); ?></p>
+                        <p><?php echo esc_html( sprintf( __( 'Authentication codes will be securely sent to the email address ( %s ) associated with your account. This added layer of security ensures that only you can access your account, even if your password is compromised. Make sure your email address is up-to-date to receive these important codes promptly.', 'wp-hide-security-enhancer' ), $user->user_email )); ?></p>
                     <?php
                 }
 

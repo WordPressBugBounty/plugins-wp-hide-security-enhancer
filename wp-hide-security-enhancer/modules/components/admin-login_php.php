@@ -378,7 +378,7 @@
                     </div>
 
                     <p>
-                        <input type="hidden" id="custom_logo_image_id" name="custom_logo_image_id" value="<?php echo $custom_logo_image_id ?>" >
+                        <input type="hidden" id="custom_logo_image_id" name="custom_logo_image_id" value="<?php echo esc_html ( $custom_logo_image_id ) ?>" >
                         <button type="button" class="set_custom_images button-primary">Set Logo</button>  &nbsp; <button type="button" id="remove_custom_image" class="button" style="<?php  if ( empty ( $custom_logo_image_id ) ) { echo 'display: none'; }  ?>">Remove Logo</button>
                     </p>
 

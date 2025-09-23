@@ -85,11 +85,32 @@
                     
                     ?>
                         <div id="wph" class="wrap">
-                            <h1><?php echo $this->interface_data['title'] ?></h1>
+                            <h1><?php echo esc_html( $this->interface_data['title'] ) ?></h1>
                          
                             <?php
-                                
-                                echo $this->functions->get_ad_banner();
+                                                                
+                                echo wp_kses ( $this->functions->get_ad_banner(), array(
+                                                                                            'a'      => array(
+                                                                                                                    'href'  => array(),
+                                                                                                                    'title' => array(),
+                                                                                                                    'target' => array(),
+                                                                                                                ),
+                                                                                            'div'     => array(
+                                                                                                                    'id'    =>  array(),
+                                                                                                                    'class' =>  array(),
+                                                                                                                ),
+                                                                                            'img'     => array(
+                                                                                                                    'src'   =>  array()
+                                                                                                                
+                                                                                                                ),
+                                                                                            'span'     => array(
+                                                                                                                    'class'   =>  array()
+                                                                                                                
+                                                                                                                ),
+                                                                                            'p' => array(),
+                                                                                            'h4' => array(),
+                                                                                            'strong' => array(),
+                                                                                        ) );
                                 
                                                                 
                                 $results    =   $this->functions->check_server_environment();
@@ -99,27 +120,27 @@
                             
                                         ?>
                                         <div class="start-container title test">
-                                            <h2><?php _e( "Checking your environment ..", 'wp-hide-security-enhancer' ) ?></h2>
+                                            <h2><?php esc_html_e( "Checking your environment ..", 'wp-hide-security-enhancer' ) ?></h2>
                                         </div>
                                         <div class="container-description environment-notices">
                                         <?php
                                         
                                         if ( $results['found_issues'] !==  FALSE )
                                             {    
-                                                echo $results['errors'];
+                                                echo esc_html ( $results['errors'] );
                                             }
                                         
                                         if ( $results['critical_issues'] ===  TRUE )
                                             {    
                                                 ?>
-                                                <p class="framed"><span class="dashicons dashicons-warning error"></span> <?php _e('Critical issues were identified on your site, please fix them before proceeding with customizations.', 'wp-hide-security-enhancer') ?></p>
+                                                <p class="framed"><span class="dashicons dashicons-warning error"></span> <?php esc_html_e('Critical issues were identified on your site, please fix them before proceeding with customizations.', 'wp-hide-security-enhancer') ?></p>
                                                 <?php
                                             }
                                         
                                         if ( $results['found_issues'] ===  FALSE )
                                             {    
                                                 ?>
-                                                <p><span class="dashicons dashicons-plugins-checked"></span> <?php _e('No problems have been found on your server environment.', 'wp-hide-security-enhancer') ?></p>
+                                                <p><span class="dashicons dashicons-plugins-checked"></span> <?php esc_html_e('No problems have been found on your server environment.', 'wp-hide-security-enhancer') ?></p>
                                                 <?php
                                             }
                                         ?></div><?php
@@ -127,7 +148,7 @@
 
                             ?>
                             
-                            <div class="content<?php if( $results['critical_issues'] ) {echo (' something-wrong');} ?>">
+                            <div class="content<?php if( $results['critical_issues'] ) { echo (' something-wrong'); } ?>">
                             
                                 <?php
                                 
@@ -140,7 +161,7 @@
                                     
                                     <?php if(!empty($this->interface_data['handle_title'])) { ?>
                                     <div class="postbox">
-                                        <h3 class="handle"><?php echo $this->interface_data['handle_title'] ?></h3>
+                                        <h3 class="handle"><?php echo esc_html ( $this->interface_data['handle_title'] ) ?></h3>
                                     </div>
                                     <?php } ?>
                                     
@@ -167,7 +188,7 @@
                                                     if ( is_object ( $module_object ) )
                                                         $module_description =   $module_object->get_module_description();
                                                     if ( $module_description    !== FALSE )
-                                                        echo $module_description;
+                                                        echo ( $module_description );
                                                 
                                                 ?>
                                                 <?php
@@ -191,7 +212,7 @@
                                                     <tr class="submit">
                                                         <td class="label">&nbsp;</td>
                                                         <td class="label">
-                                                            <input type="submit" value="<?php _e('Save',    'wp-hide-security-enhancer') ?>" class="button-primary alignright"> 
+                                                            <input type="submit" value="<?php esc_html_e('Save',    'wp-hide-security-enhancer') ?>" class="button-primary alignright"> 
                                                         </td>    
                                                     </tr>
                                                 </tbody>
@@ -207,7 +228,7 @@
                                                 <?php wp_nonce_field( 'wp-hide-reset-settings', '_wpnonce' ); ?>
                                                 
                                                 
-                                                <a href="javascript: void(0);" onclick="wph_setting_page_reset_confirmation ();" class="reset_settings button-secondary"><?php _e('Reset Page Settings',    'wp-hide-security-enhancer') ?></a>
+                                                <a href="javascript: void(0);" onclick="wph_setting_page_reset_confirmation ();" class="reset_settings button-secondary"><?php esc_html_e('Reset Page Settings',    'wp-hide-security-enhancer') ?></a>
                                                 <script type='text/javascript'>
                                                     function wph_setting_page_reset_confirmation () 
                                                         {
@@ -232,7 +253,7 @@
                                                 </script>
                                                 
                                                 
-                                                <input type="button" class="reset_settings button-secondary" value="<?php _e('Reset All Settings',    'wp-hide-security-enhancer') ?>" onclick="wph_setting_reset_confirmation ();">
+                                                <input type="button" class="reset_settings button-secondary" value="<?php esc_html_e('Reset All Settings',    'wp-hide-security-enhancer') ?>" onclick="wph_setting_reset_confirmation ();">
                                                 <script type='text/javascript'>
                                                     function wph_setting_reset_confirmation () 
                                                         {
@@ -266,7 +287,7 @@
                             if (    ! empty ( $module_setting['label'] ) )
                                 {
                                     ?>
-                                    <div class="section_title"><?php echo $module_setting['label'] ?></div>
+                                    <div class="section_title"><?php echo esc_html ( $module_setting['label'] ) ?></div>
                                     <?php   
                                 }
                                 else
@@ -291,11 +312,11 @@
                                         
                     ?>
                         <div class="postbox wph-postbox">
-                            <div class="wph_input widefat<?php if ( $module_setting['interface_help_split']   === FALSE ) { echo ' full_width';} ?> option-<?php echo $option_name ?>">
+                            <div class="wph_input widefat<?php if ( $module_setting['interface_help_split']   === FALSE ) { echo ' full_width';} ?> option-<?php echo esc_html ( $option_name ) ?>">
                                 <div class="row cell label <?php if ( $is_advanced ) { echo ' advanced'; } ?>">
                                             <ul class="options">
                                     <?php if ( $module_setting['input_type'] == 'text' ) { ?>
-                                    <li><span class="tips dashicons dashicons-edit"          title='Generate random value for the field' onClick="WPH.randomWord( this, '<?php if  ( ! empty ($module_setting['help']['input_value_extension'])) { echo $module_setting['help']['input_value_extension']; }  ?>' )"></span></li>
+                                    <li><span class="tips dashicons dashicons-edit"          title='Generate random value for the field' onClick="WPH.randomWord( this, '<?php if  ( ! empty ($module_setting['help']['input_value_extension'])) { echo esc_html ( $module_setting['help']['input_value_extension'] ); }  ?>' )"></span></li>
                                     <li><span class="tips dashicons dashicons-admin-appearance"  title='Remove the field value'  onClick="WPH.clear( this )"></span></li>
                                     <?php } ?>
                                     <?php
@@ -304,12 +325,12 @@
                                             {
                                         
                                     ?>
-                                    <li><a target="_blank" href="<?php echo $module_setting['help']['option_documentation_url'] ?>"><span class="tips dashicons dashicons-admin-links"       title='Open option help page'></span></a></li>
+                                    <li><a target="_blank" href="<?php echo esc_url ( $module_setting['help']['option_documentation_url'] ) ?>"><span class="tips dashicons dashicons-admin-links"       title='Open option help page'></span></a></li>
                                     <?php
                                             }
                                     ?>
                                 </ul>
-                                            <label for=""><?php echo $module_setting['label'] ?></label>
+                                            <label for=""><?php echo esc_html ( $module_setting['label'] )  ?></label>
                                             <?php
                                                 
                                                 if(is_array($module_setting['description']))
@@ -359,7 +380,7 @@
                                         <div class="option_help<?php  if ( $module_setting['help'] ===    FALSE ) { echo ' empty'; } ?>">
                                             <div class="text">
                                             <?php if ( ! empty ( $module_setting['help']['title'] ) ) { ?>
-                                            <h4><?php echo $module_setting['help']['title'] ?></h3>
+                                            <h4><?php echo esc_html ( $module_setting['help']['title'] ) ?></h3>
                                             <?php } ?>
                                             <?php  if ( $module_setting['help'] !==    FALSE ) { ?>
                                                 <p><?php echo wpautop ( $module_setting['help']['description'] )  ?></p>
@@ -371,7 +392,7 @@
                                         </div>
                                         <?php } ?>
                                         
-                                        <?php if(!empty($module_setting['options_pre'])) { ?><div class="options_text text_pre"><?php echo $module_setting['options_pre'] ?></div><?php } ?>
+                                        <?php if(!empty($module_setting['options_pre'])) { ?><div class="options_text text_pre"><?php echo esc_html ( $module_setting['options_pre'] ) ?></div><?php } ?>
                                         <div class="orow">
                                             <?php if ( isset($module_setting['module_option_html_render'])    &&  is_callable($module_setting['module_option_html_render']))
                                                 {
@@ -379,7 +400,7 @@
                                                 }
                                                 else
                                                 {
-                                                    if(!empty($module_setting['value_description'])) { ?><p class="description"><?php echo $module_setting['value_description'] ?></p><?php } ?>
+                                                    if(!empty($module_setting['value_description'])) { ?><p class="description"><?php echo esc_html ( $module_setting['value_description'] ) ?></p><?php } ?>
                                                     <!-- WPH Preserve - Start -->
                                                     <?php
                                                         
@@ -388,14 +409,14 @@
                                                                 case 'text' :
                                                                                 $class          =   'text';
                                                                                 
-                                                                                ?><input name="<?php echo $module_setting['id'] ?>" class="setting-value <?php echo $class ?>" value="<?php echo esc_html($value) ?>" placeholder="<?php echo esc_html($module_setting['placeholder']) ?>" type="text"><?php
+                                                                                ?><input name="<?php echo esc_html ( $module_setting['id'] ) ?>" class="setting-value <?php echo esc_html ( $class ) ?>" value="<?php echo esc_html($value) ?>" placeholder="<?php echo esc_html ( $module_setting['placeholder'] ) ?>" type="text"><?php
                                                                                 
                                                                                 break;
                                                                                 
                                                                 case 'textarea' :
                                                                                     $class          =   'textarea';
                                                                                     
-                                                                                    ?><textarea rows="7" name="<?php echo $module_setting['id'] ?>" class="setting-value <?php echo $class ?>"><?php echo stripslashes ( esc_html($value) ) ?></textarea><?php
+                                                                                    ?><textarea rows="7" name="<?php echo esc_html ( $module_setting['id'] ) ?>" class="setting-value <?php echo esc_html ( $class ) ?>"><?php echo stripslashes ( esc_html($value) ) ?></textarea><?php
                                                                                     
                                                                                     break;
                                                                                 
@@ -413,7 +434,7 @@
                                                                                                 if ( $option_value ==   'no' )
                                                                                                     echo 'default-value ';
                                                                                                 
-                                                                                                ?><?php echo $class ?>" <?php checked($value, $option_value)  ?> value="<?php echo $option_value ?>" name="<?php echo $module_setting['id'] ?>"> <span><?php echo esc_html($option_title) ?></span></label><?php
+                                                                                                ?><?php echo esc_html ( $class ) ?>" <?php checked($value, $option_value)  ?> value="<?php echo esc_html ( $option_value ) ?>" name="<?php echo esc_html ( $module_setting['id'] ) ?>"> <span><?php echo esc_html ( $option_title ) ?></span></label><?php
                                                                                             }
                                                                                     
                                                                                     ?>
@@ -426,7 +447,7 @@
                                                 }       
                                             ?>
                                         </div>
-                                        <?php if(!empty($module_setting['options_post'])) { ?><div class="options_text text_post"><?php echo $module_setting['options_post'] ?></div><?php } ?>
+                                        <?php if(!empty($module_setting['options_post'])) { ?><div class="options_text text_post"><?php echo esc_html ( $module_setting['options_post'] ) ?></div><?php } ?>
                                     
                                     </div>
                             </div>
@@ -434,11 +455,11 @@
                             <div class="wph_help option_help<?php  if ( $module_setting['help'] ===    FALSE ) { echo ' empty'; } ?>">
                                 <div class="text">
                                 <?php  if ( $module_setting['help'] !==    FALSE ) { ?>
-                                    <h4><?php echo $module_setting['help']['title'] ?></h4>
+                                    <h4><?php echo esc_html ( $module_setting['help']['title'] ) ?></h4>
                                     <p><?php echo $module_setting['help']['description'] ?></p>
-                                    <?php  if ( ! empty ( $module_setting['help']['option_documentation_url'] ) ) { ?>  <br /> <a class="button read_more" target="_blank" href="<?php echo $module_setting['help']['option_documentation_url'] ?>">Read More</a> <br /><br /><?php } ?>
+                                    <?php  if ( ! empty ( $module_setting['help']['option_documentation_url'] ) ) { ?>  <br /> <a class="button read_more" target="_blank" href="<?php echo esc_url ( $module_setting['help']['option_documentation_url'] ) ?>">Read More</a> <br /><br /><?php } ?>
                                 <?php } else { ?>
-                                <p>There is no help available for this option.</p>
+                                <p><?php esc_html_e("There is no help available for this option.", 'wp-hide-security-enhancer') ?></p>
                                 <?php }?>
                                 </div>
                                 
@@ -455,7 +476,7 @@
                 {
                     
                     ?> 
-                    <h2 class="nav-tab-wrapper <?php echo $tab_slug ?>">
+                    <h2 class="nav-tab-wrapper <?php echo esc_html ( $tab_slug ) ?>">
                         <?php
                             
                             //output all module components as tabs
@@ -483,7 +504,7 @@
                                         }
                                     
                                     ?>   
-                                    <a href="<?php echo esc_url(admin_url( 'admin.php?page=' . $this->screen_slug . '&component=' . $module_component->id)); ?>" class="nav-tab <?php echo $class ?>"><?php echo $module_component->title ?></a>
+                                    <a href="<?php echo esc_url ( admin_url ( 'admin.php?page=' . $this->screen_slug . '&component=' . $module_component->id ) ); ?>" class="nav-tab <?php echo esc_html ( $class ) ?>"><?php echo esc_html ( $module_component->title ) ?></a>
                                     <?php                                    
                                 }
                         

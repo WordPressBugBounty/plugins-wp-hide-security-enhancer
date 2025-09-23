@@ -94,7 +94,7 @@
                 
             public function get_other_label() 
                 {
-                    return __( 'Use a pre-saved recovery code', 'two-factor' );
+                    return __( 'Use a pre-saved recovery code', 'wp-hide-security-enhancer' );
                 }
                 
                 
@@ -415,13 +415,13 @@
                                 $count  =   count ( $recovery_code_list );
                             
                             ?>
-                            <p><?php printf( __( 'You have %s recovery codes remaining, each of which can be used once.', 'two-factor' ), $count ); ?></p>
+                            <p><?php printf( __( 'You have %s recovery codes remaining, each of which can be used once.', 'wp-hide-security-enhancer' ), $count ); ?></p>
                             <?php
                         }
                     
                     ?>
-                        <p><?php _e( 'To generate a new list of recovery codes, click the button below.', 'two-factor' ); ?></p>
-                        <input type="submit" name="generate_recovery_codes" id="wph_2fa_rc_regenerate" class="button action" value="<?php _e( 'Generate Recovery Codes', 'two-factor' ); ?>">
+                        <p><?php _e( 'To generate a new list of recovery codes, click the button below.', 'wp-hide-security-enhancer' ); ?></p>
+                        <input type="submit" name="generate_recovery_codes" id="wph_2fa_rc_regenerate" class="button action" value="<?php _e( 'Generate Recovery Codes', 'wp-hide-security-enhancer' ); ?>">
                     <?php
                 }
                 

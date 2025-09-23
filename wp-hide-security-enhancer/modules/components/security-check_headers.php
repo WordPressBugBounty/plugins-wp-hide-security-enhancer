@@ -177,9 +177,9 @@
                 {
                     ?>
                     <br />
-                    <h4><?php _e( 'The current protection level is', 'wp-hide-security-enhancer') ?></h4>
+                    <h4><?php esc_html_e( 'The current protection level is', 'wp-hide-security-enhancer') ?></h4>
                     <br />
-                    <link rel="stylesheet" href="<?php echo WPH_URL; ?>/assets/css/graph.css" />
+                    <link rel="stylesheet" href="<?php echo esc_url ( WPH_URL . "/assets/css/graph.css" ); ?>" />
                     <div id="wph-graph">
                         <div class="wph-graph-container">
                             <div class="wph-graph-bg"></div>
@@ -189,7 +189,7 @@
                         </div>
                     </div>
                     <div id="wph-check-headers">
-                        <button id="wph-check-headers-button" type="button" class="button button-primary" onClick="WPH.check_headers( '<?php echo esc_attr ( wp_create_nonce( 'wph/check_headers') ) ?>')"><?php _e('Check Current Headers',    'wp-hide-security-enhancer') ?></button><span class="spinner"></span>
+                        <button id="wph-check-headers-button" type="button" class="button button-primary" onClick="WPH.check_headers( '<?php echo esc_attr ( wp_create_nonce( 'wph/check_headers') ) ?>')"><?php esc_html_e('Check Current Headers',    'wp-hide-security-enhancer') ?></button><span class="spinner"></span>
                     </div>
                     <div id="wph-headers-container"></div>
                     <script type="text/javascript">
@@ -266,8 +266,8 @@
                         <table class="found-headers">
                             <thead>
                                 <tr>
-                                    <th style="width: 30%"><?php _e('Header', 'wp-hide-security-enhancer') ?></th>
-                                    <th><?php _e('Value', 'wp-hide-security-enhancer') ?></th>
+                                    <th style="width: 30%"><?php esc_html_e('Header', 'wp-hide-security-enhancer') ?></th>
+                                    <th><?php esc_html_e('Value', 'wp-hide-security-enhancer') ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -289,13 +289,16 @@
                                                 }
                                             ?>
                                             <tr<?php if ( $is_security_header ){ echo ' class="security-header" ';} ?>>
-                                                <td style="width: 30%"><?php echo $header_key ?><?php if ( $is_security_header ){ echo ' <span class="dashicons dashicons-saved"></span>';} ?></td>
+                                                <td style="width: 30%"><?php echo esc_html ( $header_key ) ?><?php if ( $is_security_header ){ echo ' <span class="dashicons dashicons-saved"></span>';} ?></td>
                                                 <td><?php 
                                                     
                                                     if (  is_array ( $header_value ) )
                                                         echo implode( "<br />", array_map( 'htmlspecialchars', $header_value ) ) ;
                                                         else
-                                                        echo htmlspecialchars ( $header_value ); 
+                                                        {
+                                                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+                                                            echo htmlspecialchars ( $header_value ); 
+                                                        }
                                                 ?></td>
                                             </tr>
                                             <?php
@@ -337,15 +340,15 @@
                         if ( count ( $headers_not_found ) > 0 )
                             {
                                 ?>
-                                <h4 class="important"><?php _e('Warning! The following headers could not be found:', 'wp-hide-security-enhancer' ); echo "<br />" . implode( '<br />', $headers_not_found); ?></h4>
-                                <p class="important"><?php _e('Ensure the server mod_headers module is active.', 'wp-hide-security-enhancer' ); ?></p>
+                                <h4 class="important"><?php esc_html_e('Warning! The following headers could not be found:', 'wp-hide-security-enhancer' ); echo "<br />" . implode( '<br />', $headers_not_found); ?></h4>
+                                <p class="important"><?php esc_html_e('Ensure the server mod_headers module is active.', 'wp-hide-security-enhancer' ); ?></p>
                                 <?php   
                                 
                             }
                     
                     ?>
                     <p>&nbsp;</p>
-                    <h4><?php _e('Consider adding more security headers:', 'wp-hide-security-enhancer') ?></h4>
+                    <h4><?php esc_html_e('Consider adding more security headers:', 'wp-hide-security-enhancer') ?></h4>
                     <?php
                     
                         foreach ( $this->headers    as $header_key  =>  $header_data )
@@ -353,7 +356,7 @@
                                 if ( in_array ( $header_key, $found_headers ) )
                                     continue;
                                     
-                                ?><p><a href="<?php echo $header_data['link'] ?>" target="_blank"><code><?php echo $header_key ?></code></a><?php  if ( $header_data['availability'] == 'pro' ) { echo ' <span class="wph-pro">PRO</span>'; } ?><br /><?php echo $header_data['description'] ?></p><?php   
+                                ?><p><a href="<?php echo esc_url ( $header_data['link'] ) ?>" target="_blank"><code><?php echo esc_html ( $header_key )  ?></code></a><?php  if ( $header_data['availability'] == 'pro' ) { echo ' <span class="wph-pro">PRO</span>'; } ?><br /><?php echo $header_data['description'] ?></p><?php   
                             }
 
                     $_JSON_response['html']  =   ob_get_clean();

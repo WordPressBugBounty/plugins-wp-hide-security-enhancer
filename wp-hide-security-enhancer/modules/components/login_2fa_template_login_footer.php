@@ -25,7 +25,7 @@
                     esc_url( home_url( '/' ) ),
                     sprintf(
                         /* translators: %s: Site title. */
-                        _x( '&larr; Go to %s', 'site' ),
+                        _x( '&larr; Go to %s', 'wp-hide-security-enhancer' ),
                         get_bloginfo( 'title', 'display' )
                     )
                 );
@@ -71,7 +71,7 @@
                             <span class="screen-reader-text">
                                 <?php
                                 /* translators: Hidden accessibility text. */
-                                _e( 'Language' );
+                                _e( 'Language', 'wp-hide-security-enhancer' );
                                 ?>
                             </span>
                         </label>
@@ -110,7 +110,7 @@
                             <input type="hidden" name="action" value="<?php echo esc_attr( $_GET['action'] ); ?>" />
                         <?php } ?>
 
-                            <input type="submit" class="button" value="<?php esc_attr_e( 'Change' ); ?>">
+                            <input type="submit" class="button" value="<?php esc_attr_e( 'Change', 'wp-hide-security-enhancer' ); ?>">
 
                         </form>
                     </div>

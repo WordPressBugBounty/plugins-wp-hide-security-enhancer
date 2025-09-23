@@ -559,7 +559,7 @@
                     
                     if(isset($_GET['reset_settings']))
                         {
-                            echo "<div class='updated'><p><b>WP Hide</b> ". __('All Settings where restored to default', 'wp-hide-security-enhancer')  ."</p></div>";
+                            echo "<div class='updated'><p><b>WP Hide</b> ". esc_html__('All Settings where restored to default', 'wp-hide-security-enhancer')  ."</p></div>";
                             
                             $this->functions->settings_changed_check_for_cache_plugins();
                         }
@@ -567,7 +567,7 @@
                     
                     if( isset( $_GET['headers_sample_setup'] ) )
                         {
-                            echo "<div class='notice notice-success'><p>". __('Headers Sample Setup deployed successfully.', 'wp-hide-security-enhancer')  ."</p></div>";   
+                            echo "<div class='notice notice-success'><p>". esc_html__('Headers Sample Setup deployed successfully.', 'wp-hide-security-enhancer')  ."</p></div>";   
                         }
                         
                     if(isset($_GET['settings_updated']))
@@ -593,7 +593,7 @@
                                 }
                             
                             if( $found_errors   === FALSE )
-                                echo "<div class='notice notice-success'><p>". __('Settings saved', 'wp-hide-security-enhancer')  ."<br />" .  __('Remember, site cache clear is required.', 'wp-hide-security-enhancer')  ."</p></div>";
+                                echo "<div class='notice notice-success'><p>". esc_html__('Settings saved', 'wp-hide-security-enhancer')  ."<br />" .  esc_html__('Remember, site cache clear is required.', 'wp-hide-security-enhancer')  ."</p></div>";
                             
                             if( is_array($process_interface_save_errors)    &&  count($process_interface_save_errors) > 0)
                                 {
@@ -605,7 +605,7 @@
                                                 {
                                                     if($process_interface_save_error['type']    == 'warning')
                                                         {
-                                                            echo $process_interface_save_error['message'] .'<br />';
+                                                            echo esc_html ( $process_interface_save_error['message'] ) .'<br />';
                                                         }
                                                 }
                                             echo "</p></div>";
@@ -619,7 +619,7 @@
                                                 {
                                                     if($process_interface_save_error['type']    == 'error')
                                                         {
-                                                            echo $process_interface_save_error['message'] .'<br />';
+                                                            echo esc_html ( $process_interface_save_error['message'] ) .'<br />';
                                                         }
                                                 }
                                             echo "</p></div>";
@@ -635,7 +635,7 @@
                             
                             $this->functions->cache_clear();
                             
-                            echo "<div class='updated'><p>". __('Cache cleared', 'wp-hide-security-enhancer')  ."</p></div>";
+                            echo "<div class='updated'><p>". esc_html__('Cache cleared', 'wp-hide-security-enhancer')  ."</p></div>";
                         
                         }
                         
@@ -668,7 +668,7 @@
                                         {
                                             if($process_interface_save_error['type']    == 'warning')
                                                 {
-                                                    echo $process_interface_save_error['message'] .'<br />';
+                                                    echo esc_html ( $process_interface_save_error['message'] ) .'<br />';
                                                 }
                                         }
                                     echo "</p></div>";
@@ -682,7 +682,7 @@
                                         {
                                             if($process_interface_save_error['type']    == 'error')
                                                 {
-                                                    echo $process_interface_save_error['message'] .'<br />';
+                                                    echo esc_html ( $process_interface_save_error['message'] ) .'<br />';
                                                 }
                                         }
                                     echo "</p></div>";
@@ -1596,6 +1596,7 @@
                     
                     //raw retrieve the post data
                     $mysql_query    =   $wpdb->prepare( "SELECT * FROM " .   $wpdb->posts  .  "   WHERE ID    =   %d", $post_id );
+                    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery WordPress.DB.DirectDatabaseQuery.NoCaching 
                     $post_data      =   $wpdb->get_row( $mysql_query );
                     
                     $replacement_list   =   $this->functions->get_replacement_list();
@@ -1611,6 +1612,7 @@
                             $mysql_query    =   $wpdb->prepare( "   UPDATE " .   $wpdb->posts  .  "
                                                         SET post_content    =   %s   
                                                         WHERE ID    =   %d",  $post_content, $post_id);
+                            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery WordPress.DB.DirectDatabaseQuery.NoCaching 
                             $result         =   $wpdb->get_results( $mysql_query );
                         }
                     
@@ -1673,7 +1675,7 @@
                                 }
                         }
 
-                    
+                    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery WordPress.DB.DirectDatabaseQuery.NoCaching 
                     $meta_ids = $wpdb->get_col( $wpdb->prepare( "SELECT $id_column FROM $table WHERE meta_key = %s AND $column = %d", $meta_key, $object_id ) );
                     if ( empty( $meta_ids ) ) {
                         return add_metadata( $meta_type, $object_id, $raw_meta_key, $passed_value );
@@ -1726,6 +1728,7 @@
                         }
                     }
 
+                    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
                     $result = $wpdb->update( $table, $data, $where );
                     if ( ! $result ) {
                         return false;
@@ -1905,7 +1908,7 @@
                         "SELECT post_id, meta_value FROM $wpdb->postmeta WHERE meta_key = '_wp_attached_file' AND meta_value = %s",
                         $path
                     );
-
+                    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery WordPress.DB.DirectDatabaseQuery.NoCaching 
                     $results = $wpdb->get_results( $sql );
                     $post_id = null;
 

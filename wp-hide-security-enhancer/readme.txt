@@ -1,10 +1,10 @@
 === WP Hide & Security Enhancer ===
 Contributors: nsp-code, tdgu
 Donate link: https://www.nsp-code.com/
-Tags: wordpress hide, wp hide, security, security headers, login, 2fa
+Tags: hide, security, headers, login, 2fa
 Requires at least: 2.8
 Tested up to: 6.8.2
-Stable tag: 2.7.2
+Stable tag: 2.7.4
 License: GPLv2 or later
 
 Protect your website by concealing vulnerable WordPress traces, plugins, themes, login/admin url. 2FA, Captcha, Firewall, Security Headers etc.
@@ -463,6 +463,11 @@ We’re continuously improving WP Hide! If there’s a feature you need—whethe
 2. Sample front html code.
 
 == Changelog == 
+
+= 3.7.4 =
+* Code improvements, revisions and cleanup.
+* Add escapes to different texts. 
+* Fix textdomain typos.
 
 = 2.7.2 =
 * Front shortcode [wph-2fa-user-settings] for user 2FA options configuration  https://wp-hide.com/2fa-shortcode-let-users-manage-2fa-from-the-front-end/

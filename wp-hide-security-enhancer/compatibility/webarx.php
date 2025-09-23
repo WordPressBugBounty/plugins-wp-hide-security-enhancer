@@ -45,7 +45,7 @@
                     $webarx_rename_wp_login     =   get_option( 'webarx_rename_wp_login' );
                     
                     if  ( ! empty ( $webarx_mv_wp_login ) &&  ! empty ( $webarx_rename_wp_login )  ) 
-                        echo "<div class='error'><p><b>". __("WP Hide Conflict Notice.", 'wp-hide-security-enhancer') . "</b> ". __("You use another plugin (WebARX) to change the default wp-login.php. To avoid conflicts, activate the option within a single code.", 'wp-hide-security-enhancer') .'</p></div>';    
+                        echo "<div class='error'><p><b>". esc_html__("WP Hide Conflict Notice.", 'wp-hide-security-enhancer') . "</b> ". esc_html__("You use another plugin (WebARX) to change the default wp-login.php. To avoid conflicts, activate the option within a single code.", 'wp-hide-security-enhancer') .'</p></div>';    
                         
                 }
             

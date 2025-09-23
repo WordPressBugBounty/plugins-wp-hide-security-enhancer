@@ -81,7 +81,7 @@
                     ?>
                     <div id="WPH_conflict_handle_wp_simple_firewall_login" class="error notice">
                         <p>
-                            <?php _e('<b>Conflict notice</b>: <b>The Security Firewall</b> - Login Protection -> Hide Login -> use similar functionality as to WP Hide plugin - Admin Login Url change.  ', 'wp-hide-security-enhancer'); ?>
+                            <?php esc_html_e('<b>Conflict notice</b>: <b>The Security Firewall</b> - Login Protection -> Hide Login -> use similar functionality as to WP Hide plugin - Admin Login Url change.  ', 'wp-hide-security-enhancer'); ?>
                         </p>
                     </div>
                     

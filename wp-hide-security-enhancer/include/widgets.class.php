@@ -43,7 +43,7 @@
                     if ( isset ( $site_scan['last_scan'] )   &&  ! empty ( $site_scan['last_scan'] ) )
                         {
                             ?>
-                            <p><?php _e( 'Your current estimated protection is',    'wp-hide-security-enhancer') ?> <b><?php _e( $site_score['protection'],    'wp-hide-security-enhancer') ?></b>.<br /><?php
+                            <p><?php esc_html_e( 'Your current estimated protection is',    'wp-hide-security-enhancer' ) ?> <b><?php echo esc_html( $site_score['protection'] ) ?></b>.<br /><?php
                             
                                 echo $this->wph->security_scan->get_security_hints( $site_score, 'widget' );
                             
@@ -53,7 +53,7 @@
                         else
                         {
                             ?>
-                            <p><?php _e( 'Run a fist scan to determine the current protection level of your website.',    'wp-hide-security-enhancer') ?><br /><br /><a class="button button-primary" href="<?php echo network_admin_url ( 'admin.php?page=wp-hide-security-scan' ) ?>"><?php _e( 'Security Scan', 'wp-hide-security-enhancer') ?></a></p>
+                            <p><?php esc_html_e( 'Run a fist scan to determine the current protection level of your website.',    'wp-hide-security-enhancer') ?><br /><br /><a class="button button-primary" href="<?php echo esc_url ( network_admin_url ( 'admin.php?page=wp-hide-security-scan' ) ) ?>"><?php esc_html_e( 'Security Scan', 'wp-hide-security-enhancer') ?></a></p>
                             <?php
                         }
                     

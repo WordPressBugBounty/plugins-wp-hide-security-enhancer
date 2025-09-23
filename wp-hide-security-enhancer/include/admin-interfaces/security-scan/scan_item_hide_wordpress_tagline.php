@@ -44,7 +44,7 @@
                     
                     $option       =   get_option ( 'blogdescription' );
                     
-                    if (    $option ==  __('Just another WordPress site') )
+                    if (    $option ==  __( 'Just another WordPress site', 'wp-hide-security-enhancer' ) )
                         $found_issue    =   TRUE;
 
                     if ( $found_issue   )

@@ -67,6 +67,9 @@
                     
                     $wp_roles   =   get_option( $wpdb->prefix . 'user_roles');
                     
+                    if ( ! is_array ( $wp_roles ) )
+                        return $component_settings;
+                    
                     $first  =   TRUE;
                     
                     foreach ( $component_settings   as  $component_key  =>  $component_setting )

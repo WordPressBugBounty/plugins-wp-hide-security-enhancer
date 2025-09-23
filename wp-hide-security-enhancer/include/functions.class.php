@@ -313,7 +313,7 @@
                                     $errors =   TRUE;
                                     $process_interface_save_errors[]    =   array(  
                                                                                     'type'      =>  'error',
-                                                                                    'message'   =>  __('Value', 'wp-hide-security-enhancer') . ' <b>' . $data['value'] .'</b> ' . __('set for', 'wp-hide-security-enhancer') . ' ' . __($data['module_name'],     'wp-hide-security-enhancer') . ' ' . __('already in use for another option.',     'wp-hide-security-enhancer')
+                                                                                    'message'   =>  __('Value', 'wp-hide-security-enhancer') . ' <b>' . $data['value'] .'</b> ' . __('set for', 'wp-hide-security-enhancer') . ' ' . $data['module_name'] . ' ' . __('already in use for another option.',     'wp-hide-security-enhancer')
                                                                                     );
                                 }
                                 else
@@ -339,7 +339,7 @@
                                                 {
                                                     $errors =   TRUE;
                                                     $process_interface_save_errors[]    =   array(  'type'      =>  'error',
-                                                                                            'message'   =>  __('The value', 'wp-hide-security-enhancer') . ' <b>' . $data['value'] .'</b> ' . __('set for', 'wp-hide-security-enhancer') . ' ' . __($data['module_name'],     'wp-hide-security-enhancer') . ' ' . sprintf ( __('must be a minimum of %s characters or longer.',     'wp-hide-security-enhancer'), apply_filters( 'wp-hide/interface/process/minimum_slug_length', 5, $data ) )
+                                                                                            'message'   =>  __('The value', 'wp-hide-security-enhancer') . ' <b>' . $data['value'] .'</b> ' . __('set for', 'wp-hide-security-enhancer') . ' ' . $data['module_name'] . ' ' . sprintf ( __('must be a minimum of %s characters or longer.',     'wp-hide-security-enhancer'), apply_filters( 'wp-hide/interface/process/minimum_slug_length', 5, $data ) )
                                                                                             );   
                                                     
                                                 }  
@@ -350,7 +350,7 @@
                                                 {
                                                     $errors =   TRUE;
                                                     $process_interface_save_errors[]    =   array(  'type'      =>  'error',
-                                                                                            'message'   =>  __('The value', 'wp-hide-security-enhancer') . ' <b>' . $data['value'] .'</b> ' . __('set for', 'wp-hide-security-enhancer') . ' ' . __($data['module_name'],     'wp-hide-security-enhancer') . ' ' . sprintf ( __('must be a minimum of %s characters or longer.',     'wp-hide-security-enhancer'), apply_filters( 'wp-hide/interface/process/minimum_slug_length', 5, $data ) )
+                                                                                            'message'   =>  __('The value', 'wp-hide-security-enhancer') . ' <b>' . $data['value'] .'</b> ' . __('set for', 'wp-hide-security-enhancer') . ' ' . $data['module_name'] . ' ' . sprintf ( __('must be a minimum of %s characters or longer.',     'wp-hide-security-enhancer'), apply_filters( 'wp-hide/interface/process/minimum_slug_length', 5, $data ) )
                                                                                             );   
                                                     
                                                 }  
@@ -360,7 +360,7 @@
                                         {
                                             $errors =   TRUE;
                                             $process_interface_save_errors[]    =   array(  'type'      =>  'error',
-                                                                                            'message'   =>  __('Value', 'wp-hide-security-enhancer') . ' <b>' . $data['value'] .'</b> ' . __('set for', 'wp-hide-security-enhancer') . ' ' . __($data['module_name'],     'wp-hide-security-enhancer') . ' ' . __('use the same base slug ', 'wp-hide-security-enhancer') . '<b>' . $parts[0] . '</b> ' . __('used for another option.',     'wp-hide-security-enhancer')
+                                                                                            'message'   =>  __('Value', 'wp-hide-security-enhancer') . ' <b>' . $data['value'] .'</b> ' . __('set for', 'wp-hide-security-enhancer') . ' ' . $data['module_name'] . ' ' . __('use the same base slug ', 'wp-hide-security-enhancer') . '<b>' . $parts[0] . '</b> ' . __('used for another option.',     'wp-hide-security-enhancer')
                                                                                             );
                                         }   
                                     
@@ -379,7 +379,7 @@
                                         {
                                             $errors =   TRUE;
                                             $process_interface_save_errors[]    =   array(  'type'      =>  'error',
-                                                                                            'message'   =>  __('Value', 'wp-hide-security-enhancer') . ' <b>' . $data['value'] .'</b> ' . __('set for', 'wp-hide-security-enhancer') . ' ' . __($data['module_name'],     'wp-hide-security-enhancer') . ' ' . $error_description
+                                                                                            'message'   =>  __('Value', 'wp-hide-security-enhancer') . ' <b>' . $data['value'] .'</b> ' . __('set for', 'wp-hide-security-enhancer') . ' ' . $data['module_name'] . ' ' . $error_description
                                                                                             );
                                             continue;                                                
                                         }
@@ -388,7 +388,7 @@
                                         {
                                             $errors =   TRUE;
                                             $process_interface_save_errors[]    =   array(  'type'      =>  'error',
-                                                                                            'message'   =>  __('Value', 'wp-hide-security-enhancer') . ' <b>' . $data['value'] .'</b> ' . __('set for', 'wp-hide-security-enhancer') . ' ' . __($data['module_name'],     'wp-hide-security-enhancer') . ' ' . $error_description
+                                                                                            'message'   =>  __('Value', 'wp-hide-security-enhancer') . ' <b>' . $data['value'] .'</b> ' . __('set for', 'wp-hide-security-enhancer') . ' ' . $data['module_name'] . ' ' . $error_description
                                                                                             );
                                                                                             
                                         }
@@ -495,16 +495,16 @@
                         {
                             //check if just flushed
                             if(!isset($_GET['w3tc_note']))
-                                echo "<div class='error'><p>". __('W3 Total Cache Plugin is active, make sure you clear the cache for new changes to apply', 'wp-hide-security-enhancer')  ."</p></div>";
+                                echo "<div class='error'><p>". esc_html__('W3 Total Cache Plugin is active, make sure you clear the cache for new changes to apply', 'wp-hide-security-enhancer')  ."</p></div>";
                         }
                     if(array_search('wp-super-cache/wp-cache.php',    $active_plugins)    !== FALSE)  
                         {
-                            echo "<div class='error'><p>". __('WP Super Cache Plugin is active, make sure you clear the cache for new changes to apply', 'wp-hide-security-enhancer')  ."</p></div>";
+                            echo "<div class='error'><p>". esc_html__('WP Super Cache Plugin is active, make sure you clear the cache for new changes to apply', 'wp-hide-security-enhancer')  ."</p></div>";
                         }
                         
                        if(array_search('wp-fastest-cache/wpFastestCache.php',    $active_plugins)    !== FALSE)  
                         {
-                            echo "<div class='error'><p>". __('WP Fastest Cache Plugin is active, make sure you clear the cache for new changes to apply', 'wp-hide-security-enhancer')  ."</p></div>";
+                            echo "<div class='error'><p>". esc_html__('WP Fastest Cache Plugin is active, make sure you clear the cache for new changes to apply', 'wp-hide-security-enhancer')  ."</p></div>";
                         }    
                     
                 }
@@ -970,7 +970,7 @@
             function show_recovery()
                 {
                     ?>
-                            <p class="important framed"><span class="dashicons dashicons-warning important" alt="f534"></span> <?php _e('Copy the following link to a safe place. You can use it later to reset all plugin options if something goes wrong or lost the new login URL.',    'wp-hide-security-enhancer') ?><br /><span id="wph-recovery-link" onClick="WPH.selectText( 'wph-recovery-link' )"><?php echo trailingslashit ( home_url() ) ?>?wph-recovery=<?php  echo $this->get_recovery_code() ?></span></b></p>
+                            <p class="important framed"><span class="dashicons dashicons-warning important" alt="f534"></span> <?php esc_html_e ('Copy the following link to a safe place. You can use it later to reset all plugin options if something goes wrong or lost the new login URL.',    'wp-hide-security-enhancer') ?><br /><span id="wph-recovery-link" onClick="WPH.selectText( 'wph-recovery-link' )"><?php echo esc_url ( trailingslashit ( home_url() ) ) ?>?wph-recovery=<?php  echo esc_attr ( $this->get_recovery_code() ) ?></span></b></p>
                     <?php   
         
                 }
@@ -2430,29 +2430,29 @@
                     </head>                            
                     <body>
   
-                        <h1>WP-Hide - <?php _e('Recovery', 'wp-hide-security-enhancer') ?></h1>
-                        <p><b><?php _e('The plugin options have been reset successfully.', 'wp-hide-security-enhancer') ?></b></p>
+                        <h1>WP-Hide - <?php esc_html_e('Recovery', 'wp-hide-security-enhancer') ?></h1>
+                        <p><b><?php esc_html_e('The plugin options have been reset successfully.', 'wp-hide-security-enhancer') ?></b></p>
                         <br />
                         <?php
                         
                         if (  $this->wph->server_htaccess_config  === TRUE )
                             {
                                 ?>
-                                <p><?php _e('Ensure the .htaccess file does not contain any WP-Hide rewrite lines. The plugin already attempts to clear the lines, if the operation fails, they are required to be removed manually. ', 'wp-hide-security-enhancer') ?></p>
+                                <p><?php esc_html_e('Ensure the .htaccess file does not contain any WP-Hide rewrite lines. The plugin already attempts to clear the lines, if the operation fails, they are required to be removed manually. ', 'wp-hide-security-enhancer') ?></p>
                                 <?php 
                             }
                             
                         if (  $this->wph->server_web_config  === TRUE )
                             {
                                 ?>
-                                <p><?php _e('Ensure the web.config file does not contain any WP-Hide rewrite lines. The plugin already attempts to clear the lines, if the operation fails, they are required to be removed manually. ', 'wp-hide-security-enhancer') ?></p>
+                                <p><?php esc_html_e('Ensure the web.config file does not contain any WP-Hide rewrite lines. The plugin already attempts to clear the lines, if the operation fails, they are required to be removed manually. ', 'wp-hide-security-enhancer') ?></p>
                                 <?php 
                             }
                                
                         ?>
                                                     
                         <p><br /></p>
-                        <p><a class="button" href="<?php echo get_site_url() ?>"><?php _e('Continue to your Site', 'wp-hide-security-enhancer') ?></a></p>
+                        <p><a class="button" href="<?php echo esc_url ( get_site_url() ) ?>"><?php esc_html_e('Continue to your Site', 'wp-hide-security-enhancer') ?></a></p>
                  
                     
                     </body>
@@ -2482,29 +2482,29 @@
                         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
                         <meta name="viewport" content="width=device-width">
                         <meta name='robots' content='noindex,follow' />
-                        <title>WP-Hide - <?php _e('Recovery', 'wp-hide-security-enhancer') ?></title>
+                        <title>WP-Hide - <?php esc_html_e('Recovery', 'wp-hide-security-enhancer') ?></title>
                         <style type="text/css">
                             html{background:#f1f1f1}body{background:#fff;color:#444;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;margin:2em auto;padding:1em 2em;max-width:700px;-webkit-box-shadow:0 1px 3px rgba(0,0,0,.13);box-shadow:0 1px 3px rgba(0,0,0,.13)}h1{border-bottom:1px solid #dadada;clear:both;color:#666;font-size:24px;margin:30px 0 0 0;padding:0;padding-bottom:7px}#error-page{margin-top:50px}#error-page .wp-die-message,#error-page p{font-size:14px;line-height:1.5;margin:25px 0 20px}#error-page code{font-family:Consolas,Monaco,monospace}ul li{margin-bottom:10px;font-size:14px}a{color:#0073aa}a:active,a:hover{color:#006799}a:focus{color:#124964;-webkit-box-shadow:0 0 0 1px #5b9dd9,0 0 2px 1px rgba(30,140,190,.8);box-shadow:0 0 0 1px #5b9dd9,0 0 2px 1px rgba(30,140,190,.8);outline:0}.button{background:#f7f7f7;border:1px solid #ccc;color:#555;display:inline-block;text-decoration:none;font-size:13px;line-height:2;height:28px;margin:0;padding:0 10px 1px;cursor:pointer;-webkit-border-radius:3px;-webkit-appearance:none;border-radius:3px;white-space:nowrap;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-webkit-box-shadow:0 1px 0 #ccc;box-shadow:0 1px 0 #ccc;vertical-align:top}.button.button-large{height:30px;line-height:2.15384615;padding:0 12px 2px}.button:focus,.button:hover{background:#fafafa;border-color:#999;color:#23282d}.button:focus{border-color:#5b9dd9;-webkit-box-shadow:0 0 3px rgba(0,115,170,.8);box-shadow:0 0 3px rgba(0,115,170,.8);outline:0}.button:active{background:#eee;border-color:#999;-webkit-box-shadow:inset 0 2px 5px -3px rgba(0,0,0,.5);box-shadow:inset 0 2px 5px -3px rgba(0,0,0,.5)}    
                         </style>
                     </head>                            
                     <body>
   
-                        <h1>WP-Hide - <?php _e('Headers Recovery', 'wp-hide-security-enhancer') ?></h1>
-                        <p><b><?php _e('The plugin Headers options have been disabled successfully.', 'wp-hide-security-enhancer') ?></b></p>
+                        <h1>WP-Hide - <?php esc_html_e('Headers Recovery', 'wp-hide-security-enhancer') ?></h1>
+                        <p><b><?php esc_html_e('The plugin Headers options have been disabled successfully.', 'wp-hide-security-enhancer') ?></b></p>
                         <br />
                         <?php
                         
                         if (  $this->wph->server_htaccess_config  === TRUE )
                             {
                                 ?>
-                                <p><?php _e('Ensure the .htaccess file does not contain any rewrite Header lines. The plugin already attempted to clear the data. If the operation fails, manual removal is required.', 'wp-hide-security-enhancer') ?></p>
+                                <p><?php esc_html_e('Ensure the .htaccess file does not contain any rewrite Header lines. The plugin already attempted to clear the data. If the operation fails, manual removal is required.', 'wp-hide-security-enhancer') ?></p>
                                 <?php 
                             }
                             
                         if (  $this->wph->server_web_config  === TRUE )
                             {
                                 ?>
-                                <p><?php _e('Ensure the web.config file does not contain any rewrite Header lines. The plugin already attempted to clear the data. If the operation fails, manual removal is required.', 'wp-hide-security-enhancer') ?></p>
+                                <p><?php esc_html_e('Ensure the web.config file does not contain any rewrite Header lines. The plugin already attempted to clear the data. If the operation fails, manual removal is required.', 'wp-hide-security-enhancer') ?></p>
                                 <?php 
                             }
                             
@@ -2515,21 +2515,21 @@
                                 if (    $this->wph->functions->server_is_wpengine() )
                                     {
                                         ?>
-                                        <p><?php _e('Your site use WPEngine! You need to get in touch with live support and ask to remove the custom Nginx Header rewrite code from your account.', 'wp-hide-security-enhancer') ?></p>
+                                        <p><?php esc_html_e('Your site use WPEngine! You need to get in touch with live support and ask to remove the custom Nginx Header rewrite code from your account.', 'wp-hide-security-enhancer') ?></p>
                                         <?php
                                     }
                                 else if (    $this->wph->functions->server_is_kinsta() )
                                     {
                                         ?>
-                                        <p><?php _e('Your site use Kinsta! You need to get in touch with live support and ask to remove the custom Nginx Header rewrite code from your account.', 'wp-hide-security-enhancer') ?></p>
+                                        <p><?php esc_html_e('Your site use Kinsta! You need to get in touch with live support and ask to remove the custom Nginx Header rewrite code from your account.', 'wp-hide-security-enhancer') ?></p>
                                         <?php
                                     }
                                     else
                                     {
                                 
                                         ?>
-                                        <p><?php _e('Check with your Nginx config file located usually at', 'wp-hide-security-enhancer') ?> /etc/nginx/sites-available/ <?php _e('and remove any Header rewrite rules within', 'wp-hide-security-enhancer') ?> <strong># BEGIN WP Hide & Security Enhancer</strong> <?php _e('and', 'wp-hide-security-enhancer') ?> <strong># END WP Hide & Security Enhancer</strong></p>
-                                        <p><?php _e('After the configuration file update', 'wp-hide-security-enhancer') ?>, <strong><?php _e('Test', 'wp-hide-security-enhancer') ?></strong> <?php _e('the new data using ', 'wp-hide-security-enhancer') ?> <strong>nginx -t</strong>. <?php _e('If successfully compiled, restart the Nginx service.', 'wp-hide-security-enhancer') ?></p>
+                                        <p><?php esc_html_e('Check with your Nginx config file located usually at', 'wp-hide-security-enhancer') ?> /etc/nginx/sites-available/ <?php esc_html_e('and remove any Header rewrite rules within', 'wp-hide-security-enhancer') ?> <strong># BEGIN WP Hide & Security Enhancer</strong> <?php esc_html_e('and', 'wp-hide-security-enhancer') ?> <strong># END WP Hide & Security Enhancer</strong></p>
+                                        <p><?php esc_html_e('After the configuration file update', 'wp-hide-security-enhancer') ?>, <strong><?php esc_html_e('Test', 'wp-hide-security-enhancer') ?></strong> <?php esc_html_e('the new data using ', 'wp-hide-security-enhancer') ?> <strong>nginx -t</strong>. <?php esc_html_e('If successfully compiled, restart the Nginx service.', 'wp-hide-security-enhancer') ?></p>
                                         <?php
                                     } 
                             }
@@ -2539,7 +2539,7 @@
                         ?>
                                                     
                         <p><br /></p>
-                        <p><a class="button" href="<?php echo get_site_url() ?>"><?php _e('Continue to your Site', 'wp-hide-security-enhancer') ?></a></p>
+                        <p><a class="button" href="<?php echo esc_url ( get_site_url() ) ?>"><?php esc_html_e('Continue to your Site', 'wp-hide-security-enhancer') ?></a></p>
                  
                     
                     </body>
@@ -2812,7 +2812,7 @@
                     // Site Wide Only is the old header for Network
                     if ( ! $plugin_data['Network'] && $plugin_data['_sitewide'] ) {
                         /* translators: 1: Site Wide Only: true, 2: Network: true */
-                        _deprecated_argument( __FUNCTION__, '3.0', sprintf( __( 'The %1$s plugin header is deprecated. Use %2$s instead.' ), '<code>Site Wide Only: true</code>', '<code>Network: true</code>' ) );
+                        _deprecated_argument( __FUNCTION__, '3.0', sprintf( esc_html__( 'The %1$s plugin header is deprecated. Use %2$s instead.', 'wp-hide-security-enhancer' ), '<code>Site Wide Only: true</code>', '<code>Network: true</code>' ) );
                         $plugin_data['Network'] = $plugin_data['_sitewide'];
                     }
                     $plugin_data['Network'] = ( 'true' == strtolower( $plugin_data['Network'] ) );
@@ -2897,7 +2897,7 @@
                         $plugin_data['Description'] = wptexturize( $plugin_data['Description'] );
 
                         if ( $plugin_data['Author'] )
-                            $plugin_data['Description'] .= ' <cite>' . sprintf( __('By %s.'), $plugin_data['Author'] ) . '</cite>';
+                            $plugin_data['Description'] .= ' <cite>' . sprintf( 'By %s.', $plugin_data['Author'] ) . '</cite>';
                     }
 
                     return $plugin_data;

@@ -179,7 +179,7 @@
                                         {
                                             ?>
                                             <label>
-                                                <input type="radio" <?php  if ( $option_value == 'cloudflare_turnstile' ) { echo 'disabled="disabled"'; }  ?> class="radio input-captcha-type" value="<?php echo $option_value ?>" name="captcha_type" <?php if ( $values['captcha_type'] == $option_value ) { ?>checked="checked"<?php } ?>> <span><?php echo $option_title ?></span>
+                                                <input type="radio" <?php  if ( $option_value == 'cloudflare_turnstile' ) { echo 'disabled="disabled"'; }  ?> class="radio input-captcha-type" value="<?php echo esc_html ( $option_value ) ?>" name="captcha_type" <?php if ( $values['captcha_type'] == $option_value ) { ?>checked="checked"<?php } ?>> <span><?php echo esc_html ( $option_title ) ?></span>
                                             </label>    
                                             <?php
                                         }
@@ -227,7 +227,7 @@
                             foreach ( $captcha_options as   $captcha_type   =>  $group )
                                 {
                                     ?>
-                                    <div <?php if ( $captcha_type   !=  $values['captcha_type'] ) { echo 'style="display: none"';}  ?> class="captcha-options <?php echo $captcha_type ?> postbox wph-postbox">
+                                    <div <?php if ( $captcha_type   !=  $values['captcha_type'] ) { echo 'style="display: none"';}  ?> class="captcha-options <?php echo esc_html ( $captcha_type ) ?> postbox wph-postbox">
                                     <div class="wph_input widefat">
                                     <?php
                                         
@@ -236,7 +236,7 @@
                                             ?>
      
                                                     <div class="row spacer">
-                                                        <p><?php echo $option_args['title'] ?></p>
+                                                        <p><?php echo esc_html ( $option_args['title'] ) ?></p>
                                                         <?php
                                                         
                                                         switch ( $option_args['type'] )
@@ -249,11 +249,11 @@
                                                                                     else if ( isset ( $option_args['default'] ) )
                                                                                     echo esc_html ( $option_args['default'] );
                                                                                 
-                                                                                ?>" name="<?php echo $option_key ?>" /><?php
+                                                                                ?>" name="<?php echo esc_html ( $option_key ) ?>" /><?php
                                                                                 break;
                                                                 
                                                                 case 'select':   
-                                                                                ?><select class="setting-value text" name="<?php echo $option_key ?>">
+                                                                                ?><select class="setting-value text" name="<?php echo esc_html ( $option_key ) ?>">
                                                                                     <?php
                                                                                         
                                                                                         foreach ( $option_args['options'] as    $select_option_key  =>  $select_option_title )
@@ -262,7 +262,7 @@
                                                                                                     if ( isset ( $values[ $option_key ] ) )
                                                                                                         selected ( $select_option_key, $values[ $option_key ] );
                                                                                                 
-                                                                                                ?> value="<?php echo $select_option_key ?>"><?php echo $select_option_title ?></option><?php    
+                                                                                                ?> value="<?php echo esc_html ( $select_option_key ) ?>"><?php echo esc_html ( $select_option_title ) ?></option><?php    
                                                                                             }
                                                                                         
                                                                                     ?>    

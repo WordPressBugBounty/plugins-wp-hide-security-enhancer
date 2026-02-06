@@ -224,12 +224,17 @@
                                         ?><label><input type="checkbox" class="setting-value checkbox" <?php 
                                             if ( array_search ( $option_value, $values )    !== FALSE )
                                                 echo 'checked="checked"';
-                                            ?> value="<?php echo $option_value ?>" name="<?php echo $module_setting['id'] ?>[]"> <span><?php echo esc_html( $option_title ) ?></span></label><?php
+                                            ?> value="<?php echo esc_attr ( $option_value ) ?>" name="<?php echo esc_attr ( $module_setting['id'] ) ?>[]"> <span><?php echo esc_html( $option_title ) ?></span></label><?php
                                     }
                             
                             ?>
+                            <br />
+                            <label><input type="checkbox" class="setting-value checkbox" <?php 
+                                            if ( array_search ( 'no-role', $values )    !== FALSE || count ( $values ) < 1 ) 
+                                                echo 'checked="checked"';
+                                            ?> value="no-role" name="<?php echo esc_attr ( $module_setting['id'] ) ?>[]"> <span><i><?php esc_html_e( 'No Role', 'wp-hide-security-enhancer' ) ?></i></span></label>
 
-                            <input style="display: none" type="checkbox" class="setting-value checkbox" checked="checked" value="--none--" name="<?php echo $module_setting['id'] ?>[]">
+                            <input style="display: none" type="checkbox" class="setting-value checkbox" checked="checked" value="--none--" name="<?php echo esc_attr ( $module_setting['id'] ) ?>[]">
 
                         </fieldset>
                     <?php    
@@ -267,6 +272,8 @@
                         {
                             $value      =   $this->get_site_roles();
                             $value      =   array_keys ( $value );
+                            
+                            $value[]    =   'no-role';
                         }
                         
                     return $value;

@@ -116,14 +116,14 @@
                             delete_transient ( 'wph-process_API_interface_errors' );
                             
                             if ( ! empty ( $interface_errors ) )
-                                echo '<p class="important">' . $interface_errors . '</p>';
+                                echo '<p class="important">' . esc_html ( $interface_errors ) . '</p>';
                             
-                            ?><div id="captch_test" class="captcha-integration <?php echo $this->captcha_id ?>">
+                            ?><div id="captch_test" class="captcha-integration <?php echo esc_attr ( $this->captcha_id ) ?>">
                             <div><?php $this->html_field() ?></div>
 
                             <p></p>
-                            <button class="button-primary red" onclick="WPH.captcha_test(); return false;"><?php _e('Test API',  'wp-hide-security-enhancer') ?></button>
-                            <p><?php _e('The captcha will not show on the front side until the Test is successful.',  'wp-hide-security-enhancer') ?></p>
+                            <button class="button-primary red" onclick="WPH.captcha_test(); return false;"><?php esc_html_e('Test API',  'wp-hide-security-enhancer') ?></button>
+                            <p><?php esc_html_e('The captcha will not show on the front side until the Test is successful.',  'wp-hide-security-enhancer') ?></p>
                             <input type="hidden" id="api_test" name="api_test" value="" />
                             
                             </div>
@@ -136,8 +136,8 @@
                         {
                             ob_start();
                                    
-                            ?><div id="captch_test" class="captcha-integration <?php echo $this->captcha_id ?>">
-                            <p class="green"><?php _e('The Google Captcha V2 integration is completed.',  'wp-hide-security-enhancer') ?></p>
+                            ?><div id="captch_test" class="captcha-integration <?php echo esc_attr ( $this->captcha_id ) ?>">
+                            <p class="green"><?php esc_html_e('The Google Captcha V2 integration is completed.',  'wp-hide-security-enhancer') ?></p>
                             
                             <?php 
                                 
@@ -155,8 +155,8 @@
             
             function get_module_help()
                 {
-                    ?><p><?php _e('You can get your site key and secret key from',  'wp-hide-security-enhancer') ?> <a href="https://www.google.com/recaptcha/admin/create" target="_blank">https://www.google.com/recaptcha/admin/create</a></p><?php
-                    ?><p><?php _e('After filling in and saving the options, remember to click the <b class="important">Test API</b> button located at the top of this section. The CAPTCHA won\'t appear on the front end until the test is successfully completed',  'wp-hide-security-enhancer') ?></p><?php
+                    ?><p><?php esc_html_e('You can get your site key and secret key from',  'wp-hide-security-enhancer') ?> <a href="https://www.google.com/recaptcha/admin/create" target="_blank">https://www.google.com/recaptcha/admin/create</a></p><?php
+                    ?><p><?php esc_html_e('After filling in and saving the options, remember to click the <b class="important">Test API</b> button located at the top of this section. The CAPTCHA won\'t appear on the front end until the test is successfully completed',  'wp-hide-security-enhancer') ?></p><?php
                 }
                 
                 
@@ -221,11 +221,11 @@
                         <script src="https://www.google.com/recaptcha/api.js?hl=<?php 
                         
                         if ( $values['g2-language'] ==  'auto' )
-                            echo get_locale();
+                            echo esc_attr ( get_locale() );
                             else
-                            echo $values['g2-language']; ?>" async defer></script>
+                            echo esc_attr ( $values['g2-language'] ); ?>" async defer></script>
                             
-                        <div class="g-recaptcha" data-sitekey="<?php echo $values['g2-site-key'] ?>" data-theme="<?php echo $values['g2-theme'] ?>"></div>    
+                        <div class="g-recaptcha" data-sitekey="<?php echo esc_attr ( $values['g2-site-key'] ) ?>" data-theme="<?php echo esc_attr ( $values['g2-theme'] ) ?>"></div>    
                         
                     
                     <?php

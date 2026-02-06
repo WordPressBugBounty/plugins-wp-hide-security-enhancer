@@ -92,7 +92,7 @@
                     
                     ?>
                         <div class="row xspacer header">
-                            <p><?php _e('Enable Header',    'wp-hide-security-enhancer') ?></p>
+                            <p><?php esc_html_e('Enable Header',    'wp-hide-security-enhancer') ?></p>
                             <fieldset>
                                 <label>
                                     <input type="radio" class="setting-value default-value radio" value="no" name="enabled" <?php if ( $module_settings['enabled'] == 'no' ) { ?>checked="checked"<?php } ?>> <span>No</span>
@@ -103,7 +103,7 @@
                             </fieldset>
                         </div>
                         
-                        <p><?php _e('Header Options',    'wp-hide-security-enhancer') ?></p>
+                        <p><?php esc_html_e('Header Options',    'wp-hide-security-enhancer') ?></p>
                         <div class="row spacer">
                             <fieldset>
                                 <label>

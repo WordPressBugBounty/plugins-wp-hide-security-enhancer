@@ -165,7 +165,7 @@
                     
                     if($this->wph->server_htaccess_config   === TRUE)
                         {                          
-                            if ( stripos($_SERVER['SERVER_SOFTWARE'], 'LiteSpeed') )
+                            if ( isset ( $_SERVER['SERVER_SOFTWARE'] ) && stripos( wp_unslash ( $_SERVER['SERVER_SOFTWARE'] ), 'LiteSpeed') )
                                 $text   .=   "RewriteCond %{HTTP_USER_AGENT} !LiteSpeed-Image\n";    
                             
                             $text   .=   "RewriteCond %{ENV:REDIRECT_STATUS} ^$\n";

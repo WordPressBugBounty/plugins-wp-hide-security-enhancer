@@ -115,7 +115,7 @@
                                         <pre id="recovery-code-list" class="recovery-code-list" onclick="selectAndCopyText();"><?php
                                         
                                         foreach ( $recovery_codes   as  $recovery_code )
-                                            echo '<p>' . $recovery_code . '</p>';
+                                            echo '<p>' . esc_attr ( $recovery_code ) . '</p>';
                                         
                                         ?></pre>
                                         
@@ -187,7 +187,7 @@
                             <strong><label for="authentication_code"><?php esc_html_e( 'Verification Code:', 'wp-hide-security-enhancer' ); ?></label></strong>
                             
                             <input type="text" inputmode="numeric" name="2fa_recovery_code" id="authentication_code" class="input" value="" size="20" pattern="[0-9 ]*" placeholder="12345678" data-digits="8" />
-                            <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e( 'Verify', 'wp-hide-security-enhancer' ) ?>">
+                            <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php esc_html_e( 'Verify', 'wp-hide-security-enhancer' ) ?>">
                         </p>
 
                     <?php
@@ -378,6 +378,18 @@
                     return $codes;    
                 }
                 
+            
+            
+            /**
+            * Reset the Recovery Codes setup 
+            * 
+            * @param mixed $user_id
+            */
+            static public function reset_setup( $user_id )
+                {
+                    delete_user_meta( $user_id, '_2fa_rc_setup_completed' );    
+                }
+                
                 
             /**
             * Update the recovery code list
@@ -415,13 +427,13 @@
                                 $count  =   count ( $recovery_code_list );
                             
                             ?>
-                            <p><?php printf( __( 'You have %s recovery codes remaining, each of which can be used once.', 'wp-hide-security-enhancer' ), $count ); ?></p>
+                            <p><?php esc_html ( printf( esc_html__( 'You have %s recovery codes remaining, each of which can be used once.', 'wp-hide-security-enhancer' ), esc_attr ( $count ) ) ); ?></p>
                             <?php
                         }
                     
                     ?>
-                        <p><?php _e( 'To generate a new list of recovery codes, click the button below.', 'wp-hide-security-enhancer' ); ?></p>
-                        <input type="submit" name="generate_recovery_codes" id="wph_2fa_rc_regenerate" class="button action" value="<?php _e( 'Generate Recovery Codes', 'wp-hide-security-enhancer' ); ?>">
+                        <p><?php esc_html_e( 'To generate a new list of recovery codes, click the button below.', 'wp-hide-security-enhancer' ); ?></p>
+                        <input type="submit" name="generate_recovery_codes" id="wph_2fa_rc_regenerate" class="button action" value="<?php esc_html_e( 'Generate Recovery Codes', 'wp-hide-security-enhancer' ); ?>">
                     <?php
                 }
                 
@@ -447,12 +459,14 @@
                         <pre id="recovery-code-list" class="recovery-code-list"><?php
                         
                         foreach ( $recovery_codes   as  $recovery_code )
-                            echo '<p>' . $recovery_code . '</p>';
+                            echo '<p>' . esc_attr ( $recovery_code ) . '</p>';
                         
                         ?></pre>
                         <p class="_2fa-info"><?php esc_html_e( 'After leaving this page, you will no longer be able to view these codes !', 'wp-hide-security-enhancer' ); ?> <?php esc_html_e( 'Be sure to store these codes in a safe location to prevent loss or unauthorized access.', 'wp-hide-security-enhancer' ); ?></p>
                         <p class="_2fa-info">&nbsp;</p>
                     <?php
+                    
+                    $allow_tags =   WPH_functions::get_general_description_allowed_tags();
                     
                     ob_start();
                     
@@ -461,7 +475,7 @@
                     $html   =   ob_get_contents();
                     ob_end_clean();
 
-                    echo $html;
+                    echo wp_kses ( $html, $allow_tags );
                     
                     wp_die();
                     

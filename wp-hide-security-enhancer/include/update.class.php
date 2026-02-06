@@ -242,6 +242,7 @@
                             if ( $_trigger_flush_rules  === TRUE )
                                 {
                                     //on plugin inline code update
+                                    //phpcs:ignore WordPress.Security.NonceVerification.Recommended
                                     if(isset($_GET['action'])   &&  $_GET['action']     ==  'activate-plugin')
                                         add_action('shutdown',        array($this,    'flush_rules') , -1);
                                         else

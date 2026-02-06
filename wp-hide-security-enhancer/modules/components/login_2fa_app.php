@@ -125,7 +125,7 @@
                             <p class="_2fa_apps_icons">
                                 <a target="_blank" href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2"><img src="<?php echo esc_url ( WPH_URL . "/assets/images/google-auth.png" ) ?>" /></a> <a target="_blank" href="https://play.google.com/store/apps/details?id=com.azure.authenticator"><img src="<?php echo esc_url ( WPH_URL . "/assets/images/microsoft-auth.png" ) ?>" /></a> <a target="_blank" href="https://play.google.com/store/apps/details?id=org.fedorahosted.freeotp"><img src="<?php echo esc_url ( WPH_URL . "/assets/images/freeotp-auth.png" ) ?>" /></a> <a target="_blank" href="https://play.google.com/store/apps/details?id=com.duosecurity.duomobile"><img src="<?php echo esc_url ( WPH_URL . "/assets/images/duo-auth.png" ) ?>" /></a> <a target="_blank" href="https://play.google.com/store/apps/details?id=com.authy.authy"><img src="<?php echo esc_url ( WPH_URL . "/assets/images/Twilio_Authy_icon_II.svg" ) ?>" /></a> <a target="_blank" href="https://play.google.com/store/apps/details?id=com.lastpass.authenticator"><img src="<?php echo esc_url ( WPH_URL . "/assets/images/lastpass-auth.png" ) ?>" /></a>
                             </p>
-                            <p class="_2fa-info aligncenter"><img id="AppAuthenticator" src="<?php echo $qrCodeUrl ?>" /></p>
+                            <p class="_2fa-info aligncenter"><img id="AppAuthenticator" src="<?php echo esc_attr ( $qrCodeUrl ) ?>" /></p>
                             <p class="_2fa-info aligncenter"><code><?php echo esc_html ( $secret ) ?></code></p>
                             <p>&nbsp;</p>
                             <p>
@@ -240,11 +240,12 @@
             */
             function process_authentication( $user )
                 {
-                    $field  =  '2fa_app_code'; 
+                    $field  =  '2fa_app_code';
+                    //phpcs:ignore WordPress.Security.NonceVerification.Recommended 
                     if ( empty( $_REQUEST[ $field ] ) )
                         return new WP_Error( 'error', __( 'ERROR: Invalid inpput code.', 'wp-hide-security-enhancer' ));
 
-                    $code   =   preg_replace( '/0-9/' , "",       $_REQUEST[ $field ] );
+                    $code   =   preg_replace( '/0-9/' , "",       wp_unslash ( $_REQUEST[ $field ] ) );
                     $secret =   $this->get_app_secret( $user->ID );
                           
                     if ( ! isset( $user->ID ) || ! $code )
@@ -320,7 +321,7 @@
             * 
             * @param mixed $user_id
             */
-            function reset_app_setup( $user_id )
+            static public function reset_app_setup( $user_id )
                 {
                     delete_user_meta( $user_id, '_2fa_app_setup_completed' );    
                 }
@@ -387,7 +388,7 @@
             function ajax_app_reset() 
                 {
                     
-                    if( !isset($_POST['nonce']) || ! wp_verify_nonce($_POST['nonce'], 'wph_2fa_nonce') )
+                    if( !isset($_POST['nonce']) || ! wp_verify_nonce( sanitize_text_field ( wp_unslash ( $_POST['nonce'] ) ), 'wph_2fa_nonce') )
                         wp_die('Permission denied');
 
                     $current_user = wp_get_current_user();
@@ -417,7 +418,7 @@
             */
             function ajax_app_code_submit()
                 {
-                    if( !isset($_POST['nonce']) || ! wp_verify_nonce($_POST['nonce'], 'wph_2fa_nonce') )
+                    if( !isset($_POST['nonce']) || ! wp_verify_nonce( sanitize_text_field ( wp_unslash ( $_POST['nonce'] ) ), 'wph_2fa_nonce') )
                         wp_die('Permission denied');
 
                     $current_user = wp_get_current_user();
@@ -425,7 +426,7 @@
                         wp_die('Permission denied');   
                     
                     
-                    $code   =   preg_replace( '/0-9/' , "",       $_POST[ 'app_code' ] );
+                    $code   =   isset ( $_POST[ 'app_code' ] )  ?   preg_replace( '/0-9/' , "",       sanitize_text_field ( wp_unslash ( $_POST[ 'app_code' ] ) ) ) :   '';
                     $secret =   $this->get_app_secret( $current_user->ID );
                     
                     include_once( WPH_PATH . '/vendors/GoogleAuthenticator.php');

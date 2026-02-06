@@ -35,9 +35,9 @@
             function admin_print_scripts()
                 {
                     wp_enqueue_script( 'jquery');
-                    wp_register_script('wph', WPH_URL . '/assets/js/wph.js', array(), WPH_CORE_VERSION );
+                    wp_register_script('wph', WPH_URL . '/assets/js/wph.js', array(), WPH_CORE_VERSION, false );
                     
-                    wp_enqueue_script('jquery.tipsy.js', WPH_URL . '/assets/js/jquery.tipsy.js' , array(), WPH_CORE_VERSION ); 
+                    wp_enqueue_script('jquery.tipsy.js', WPH_URL . '/assets/js/jquery.tipsy.js' , array(), WPH_CORE_VERSION, false ); 
                     
                     // Localize the script with new data
                     $translation_array = array(
@@ -53,7 +53,8 @@
             
             function admin_notices()
                 {
-                    if( isset( $_GET['sample-setup-completed'] )    &&  $_GET['sample-setup-completed'] ==  'true' )
+                    $nonce = isset( $_GET['nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['nonce'] ) ) : '';
+                    if ( wp_verify_nonce( $nonce, 'wph/run-sample-setup' )  &&  isset( $_GET['sample-setup-completed'] )    &&  $_GET['sample-setup-completed'] ==  'true' )
                         {
                                      
                             if( $found_errors   === FALSE )
@@ -66,8 +67,8 @@
             
             function pasive_actions()
                 {
-                    
-                    if ( isset ( $_GET['wph_environment'] ) && $_GET['wph_environment'] == 'ignore-rewrite-test' )
+                    $nonce = isset( $_GET['nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['nonce'] ) ) : '';
+                    if ( wp_verify_nonce( $nonce, 'wph/ignore-rewrite-test' )   &&  isset ( $_GET['wph_environment'] ) && $_GET['wph_environment'] == 'ignore-rewrite-test' )
                         update_option( 'wph-environment-ignore-rewrite-test', 'false' );
                             
                 }
@@ -77,7 +78,7 @@
                     if ( ! isset ( $_POST['wph-run-sample-setup'] ) )
                         return FALSE;
                     
-                    $nonce  =   $_POST['wph-run-sample-setup-nonce'];
+                    $nonce  =   isset ( $_POST['wph-run-sample-setup-nonce'] )  ?   sanitize_text_field( wp_unslash( $_POST['wph-run-sample-setup-nonce'] ) )   :   '';
                     if ( ! wp_verify_nonce( $nonce, 'wph-run-sample-setup' ) )
                         return FALSE;
                     
@@ -155,7 +156,7 @@
                     $this->wph->settings['module_settings']   =   $_settings;
                                                             
                     //generate a new write_check_string
-                    $write_check_string  =   time() . '_' . mt_rand(100, 99999);
+                    $write_check_string  =   time() . '_' . wp_rand(100, 99999);
                     $this->wph->settings['write_check_string']   =   $write_check_string;
                                                                                    
                     //update the settings
@@ -177,7 +178,7 @@
                         $new_location       =   trailingslashit(    site_url()  )   .  "wp-admin/admin.php?page=wp-hide";
                     
                     
-                    $new_location   .=  '&sample-setup-completed=true';
+                    $new_location   .=  '&sample-setup-completed=true&nonce=' . wp_create_nonce( 'wph/run-sample-setup');
                         
                     wp_redirect($new_location);
                     die();
@@ -192,6 +193,8 @@
                     update_option( 'wph-first-view', 'false' );
                     
                     $found_issues   =   FALSE;
+                    
+                    $allow_tags =   WPH_functions::get_general_description_allowed_tags();
                           
                     ?>
                     <div id="wph" class="wrap">
@@ -199,30 +202,10 @@
                                           
                         <?php 
                             
-                            echo wp_kses ( $this->functions->get_ad_banner(), array(
-                                                                                            'a'      => array(
-                                                                                                                    'href'  => array(),
-                                                                                                                    'title' => array(),
-                                                                                                                    'target' => array(),
-                                                                                                                ),
-                                                                                            'div'     => array(
-                                                                                                                    'id'    =>  array(),
-                                                                                                                    'class' =>  array(),
-                                                                                                                ),
-                                                                                            'img'     => array(
-                                                                                                                    'src'   =>  array()
-                                                                                                                
-                                                                                                                ),
-                                                                                            'span'     => array(
-                                                                                                                    'class'   =>  array()
-                                                                                                                
-                                                                                                                ),
-                                                                                            'p' => array(),
-                                                                                            'h4' => array(),
-                                                                                            'strong' => array(),
-                                                                                        ) );
+                            echo wp_kses ( $this->functions->get_ad_banner(), $allow_tags );
                         
-                            if( isset( $_GET['sample-setup-completed'] )    &&  $_GET['sample-setup-completed'] ==  'true' )
+                            $nonce = isset( $_GET['nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['nonce'] ) ) : '';
+                            if ( wp_verify_nonce( $nonce, 'wph/run-sample-setup' )  &&  isset( $_GET['sample-setup-completed'] )    &&  $_GET['sample-setup-completed'] ==  'true' )
                                 {
                                     ?>
                                         <div class="start-container title success">
@@ -248,7 +231,7 @@
                             
                             if ( $results['found_issues'] !==  FALSE )
                                 {    
-                                    echo $results['errors'];
+                                    echo wp_kses ( $results['errors'], $allow_tags );
                                 }
                             
                             if ( $results['critical_issues'] ===  TRUE )
@@ -310,7 +293,7 @@
                                 <p><a href="https://wp-hide.com/pricing/" target="_blank" class="button-primary p-button wph-pro"><span class="wph-pro">PRO</span> <?php esc_html_e ( "Comprehensive Setup", 'wp-hide-security-enhancer' ) ?> </a></p>
                                 
                                 <input type="hidden" name="wph-run-sample-setup" value="true" />
-                                <input type="hidden" name="wph-run-sample-setup-nonce" value="<?php echo wp_create_nonce( 'wph-run-sample-setup' ) ?>" />
+                                <input type="hidden" name="wph-run-sample-setup-nonce" value="<?php echo esc_attr ( wp_create_nonce( 'wph-run-sample-setup' ) ) ?>" />
                             </form>
                             <p><?php esc_html_e ( "Additional adjustments to the settings may be needed to tailor them to your specific environment. Utilize the Scan feature for easier identification of necessary improvements.", 'wp-hide-security-enhancer' ) ?>
                             <br /><?php esc_html_e ( "For more complex sites, consider employing the ", 'wp-hide-security-enhancer' ) ?> <span class="wph-pro">PRO</span> <?php  esc_html_e ( "plugin, which offers advanced tools such as PostProcessing with Replacements for targeted removal of individual fingerprints (e.g., elementor, divi, woocommerce, etc.).", 'wp-hide-security-enhancer' ) ?></p>

@@ -99,9 +99,7 @@
             
             function do_reset_settings()
                 {
-                    
-                    $nonce  =   $_POST['_wpnonce'];
-                    if ( ! wp_verify_nonce( $nonce, 'wp-hide-reset-settings' ) )
+                    if ( ! isset ( $_POST['_wpnonce'] )    ||  ! wp_verify_nonce( wp_unslash ( $_POST['_wpnonce'] ), 'wp-hide-reset-settings' ) )
                         return FALSE;
                         
                     //only for admins
@@ -140,15 +138,14 @@
                 
             function process_interface_save()
                 {
-                    $nonce  =   $_POST['wph-interface-nonce'];
-                    if ( ! wp_verify_nonce( $nonce, 'wph/interface_fields' ) )
+                    if ( ! isset ( $_POST['wph-interface-nonce'] )    ||   ! wp_verify_nonce( wp_unslash ( $_POST['wph-interface-nonce'] ), 'wph/interface_fields' ) )
                         return FALSE;
                     
                     //only for admins
                     If ( !  current_user_can ( 'manage_options' ) )
                         return FALSE;
                         
-                    $screen_slug  =   preg_replace( '/[^a-zA-Z0-9\-\_$]/m' , "", $_GET['page'] );
+                    $screen_slug  =   isset ( $_GET['page'] ) ? preg_replace( '/[^a-zA-Z0-9\-\_$]/m' , "", $_GET['page'] )  :   '';
                     if(empty($screen_slug))
                         return FALSE;
                         
@@ -407,7 +404,7 @@
                             $this->wph->settings['module_settings']   =   $_settings_;
                             
                             //generate a new write_check_string
-                            $write_check_string  =   time() . '_' . mt_rand(100, 99999);
+                            $write_check_string  =   time() . '_' . wp_rand(100, 99999);
                             $this->wph->settings['write_check_string']   =   $write_check_string;
                                                                                            
                             //update the settings
@@ -1070,7 +1067,7 @@
                     $response   =   wp_remote_get( $test_url, array( 'sslverify' => false, 'timeout' => 30 ) );
                      
                     $response_message       =   '';
-                    $messages['manual_check']     =  __( "Make a fix or manually check the ", 'wp-hide-security-enhancer' ) . '<b><a target="_blank" href="' . $test_url . '">' . __( "Test URL", 'wp-hide-security-enhancer' ) . '</a></b>, '.  __( "if the result is a JSON response (contains a name and description), the rewrites are working correctly on your site and you can", 'wp-hide-security-enhancer' ) .' <a href="' . $this->get_current_url()  . '&wph_environment=ignore-rewrite-test">' . __( "Ignore", 'wp-hide-security-enhancer' ) . '</a> ' . __( "this notification", 'wp-hide-security-enhancer' ) .'<br />';
+                    $messages['manual_check']     =  __( "Make a fix or manually check the ", 'wp-hide-security-enhancer' ) . '<b><a target="_blank" href="' . $test_url . '">' . __( "Test URL", 'wp-hide-security-enhancer' ) . '</a></b>, '.  __( "if the result is a JSON response (contains a name and description), the rewrites are working correctly on your site and you can", 'wp-hide-security-enhancer' ) .' <a href="' . $this->get_current_url()  . '&wph_environment=ignore-rewrite-test&nonce=' . wp_create_nonce( 'wph/ignore-rewrite-test')  . '">' . __( "Ignore", 'wp-hide-security-enhancer' ) . '</a> ' . __( "this notification", 'wp-hide-security-enhancer' ) .'<br />';
                     $messages['manual_check']     .=  __( "Sample result, the appearance can be different from a browser to another:", 'wp-hide-security-enhancer' ) . '<br /><img src="' . WPH_URL . '/assets/images/rewrite-test-json-response.jpg" /><br />';
                     $messages['manual_check']     .=  __( "The Ignore action will be available until the next plugin options update.", 'wp-hide-security-enhancer' ) . '<br /><br />';
                     $messages['manual_check']     .=  __( "If the Test URL is not functional, the plugin will fail to provide specific features. Check your Hosting provider for more details regarding rewrites and how to activate on your account.", 'wp-hide-security-enhancer' ) . '<br />';
@@ -1137,7 +1134,7 @@
                                                 $response_message    .=  ":" . $response['response']['message'];
                                             
                                             $messages['server_check']     =  __( "A custom rewrite line has been inserted into your rewrite file for testing. The ", 'wp-hide-security-enhancer' ) . '<b><a target="_blank" href="' . $test_url . '">' . __( "Test URL", 'wp-hide-security-enhancer' ) . '</a></b> '.  __( "expected to return a JSON response (contains a name and description) The server instead replied a", 'wp-hide-security-enhancer' ) . ' <b class="highlight">' . $response['response']['code'] . '</b> ' . __( "error with the message", 'wp-hide-security-enhancer' ) . ' <b class="highlight">' . $response['response']['message'] . '</b><br />';
-                                            $messages['server_check']     .= "<br />" . __( "In certain environments ( e.g. Cloudflare) the plugin may not be allowed to check the test rewrite automatically. If checking manually the ", 'wp-hide-security-enhancer' ) . '<b><a target="_blank" href="' . $test_url . '">' . __( "Test URL", 'wp-hide-security-enhancer' ) . '</a></b>, ' . __( "if the result is a valid JSON response (contains a name and description), you can", 'wp-hide-security-enhancer' ) .' <a href="' . $this->get_current_url()  . '&wph_environment=ignore-rewrite-test">' . __( "Ignore", 'wp-hide-security-enhancer' ) . '</a> ' . __( "this notification", 'wp-hide-security-enhancer' ) .'<br />';
+                                            $messages['server_check']     .= "<br />" . __( "In certain environments ( e.g. Cloudflare) the plugin may not be allowed to check the test rewrite automatically. If checking manually the ", 'wp-hide-security-enhancer' ) . '<b><a target="_blank" href="' . $test_url . '">' . __( "Test URL", 'wp-hide-security-enhancer' ) . '</a></b>, ' . __( "if the result is a valid JSON response (contains a name and description), you can", 'wp-hide-security-enhancer' ) .' <a href="' . $this->get_current_url()  . '&wph_environment=ignore-rewrite-test&nonce=' . wp_create_nonce( 'wph/ignore-rewrite-test')  . '">' . __( "Ignore", 'wp-hide-security-enhancer' ) . '</a> ' . __( "this notification", 'wp-hide-security-enhancer' ) .'<br />';
                                             $messages['server_check']     .=  __( "Sample result, the appearance can be different from a browser to another:", 'wp-hide-security-enhancer' ) . '<br /><img src="' . WPH_URL . '/assets/images/rewrite-test-json-response.jpg" /><br />';
                                             $messages['server_check']     .=  __( "The Ignore action will be available until the next plugin options update.", 'wp-hide-security-enhancer' ) . '<br />';
                                             $messages['server_check']     .= "<br />" . __( "If manually checking the Test URL fails too, you need to get in touch with your server support for a fix. The rewrite engine is either disabled for your account or their internal set-up does not allow such rewrites. ", 'wp-hide-security-enhancer' );
@@ -1300,7 +1297,7 @@
                     $response   =   wp_remote_get( $test_url, array( 'sslverify' => false, 'timeout' => 30 ) );
                     
                     $response_message       =   '';
-                    $messages['manual_check']     =  __( "Make a fix or manually check the ", 'wp-hide-security-enhancer' ) . '<b><a target="_blank" href="' . $test_url . '">' . __( "Test URL", 'wp-hide-security-enhancer' ) . '</a></b>, '.  __( "if the result is a JSON response (contains a name and description), the rewrites are working correctly on your site and you can", 'wp-hide-security-enhancer' ) .' <a href="' . $this->get_current_url()  . '&wph_environment=ignore-rewrite-test">' . __( "Ignore", 'wp-hide-security-enhancer' ) . '</a> ' . __( "this notification", 'wp-hide-security-enhancer' ) .'<br />';
+                    $messages['manual_check']     =  __( "Make a fix or manually check the ", 'wp-hide-security-enhancer' ) . '<b><a target="_blank" href="' . $test_url . '">' . __( "Test URL", 'wp-hide-security-enhancer' ) . '</a></b>, '.  __( "if the result is a JSON response (contains a name and description), the rewrites are working correctly on your site and you can", 'wp-hide-security-enhancer' ) .' <a href="' . $this->get_current_url()  . '&wph_environment=ignore-rewrite-test&nonce=' . wp_create_nonce( 'wph/ignore-rewrite-test')  . '">' . __( "Ignore", 'wp-hide-security-enhancer' ) . '</a> ' . __( "this notification", 'wp-hide-security-enhancer' ) .'<br />';
                     $messages['manual_check']     .=  __( "Sample result, the appearance can be different from a browser to another:", 'wp-hide-security-enhancer' ) . '<br /><img src="' . WPH_URL . '/assets/images/rewrite-test-json-response.jpg" /><br />';
                     $messages['manual_check']     .=  __( "The Ignore action will be available until the next plugin options update.", 'wp-hide-security-enhancer' ) . '<br /><br />';
                     $messages['manual_check']     .=  __( "If the Test URL is not functional, the plugin will fail to provide specific features. Check your Hosting provider for more details regarding rewrites and how to activate on your account.", 'wp-hide-security-enhancer' ) . '<br />';
@@ -1310,7 +1307,7 @@
                             
                             if  ( ! isset( $response['response']['code'] ) )
                                 return __( "The wp_remote_get() returns invalid Response Code", 'wp-hide-security-enhancer' );
-                            
+
                             if  ( $response['response']['code'] !=  200 )
                                 {
                                     if ( $response['response']['code'] ==  404 )
@@ -1367,7 +1364,7 @@
                                                 $response_message    .=  ":" . $response['response']['message'];
                                             
                                             $messages['server_check']     =  __( "A custom rewrite line has been inserted into your rewrite file for testing. The ", 'wp-hide-security-enhancer' ) . '<b><a target="_blank" href="' . $test_url . '">' . __( "Test URL", 'wp-hide-security-enhancer' ) . '</a></b> '.  __( "expected to return a JSON response (contains a name and description) The server instead replied a", 'wp-hide-security-enhancer' ) . ' <b class="highlight">' . $response['response']['code'] . '</b> ' . __( "error with the message", 'wp-hide-security-enhancer' ) . ' <b class="highlight">' . $response['response']['message'] . '</b><br />';
-                                            $messages['server_check']     .= "<br />" . __( "In certain environments ( e.g. Cloudflare) the plugin may not be allowed to check the test rewrite automatically. If checking manually the ", 'wp-hide-security-enhancer' ) . '<b><a target="_blank" href="' . $test_url . '">' . __( "Test URL", 'wp-hide-security-enhancer' ) . '</a></b>, ' . __( "if the result is a valid JSON response (contains a name and description), you can", 'wp-hide-security-enhancer' ) .' <a href="' . $this->get_current_url()  . '&wph_environment=ignore-rewrite-test">' . __( "Ignore", 'wp-hide-security-enhancer' ) . '</a> ' . __( "this notification", 'wp-hide-security-enhancer' ) .'<br />';
+                                            $messages['server_check']     .= "<br />" . __( "In certain environments ( e.g. Cloudflare) the plugin may not be allowed to check the test rewrite automatically. If checking manually the ", 'wp-hide-security-enhancer' ) . '<b><a target="_blank" href="' . $test_url . '">' . __( "Test URL", 'wp-hide-security-enhancer' ) . '</a></b>, ' . __( "if the result is a valid JSON response (contains a name and description), you can", 'wp-hide-security-enhancer' ) .' <a href="' . $this->get_current_url()  . '&wph_environment=ignore-rewrite-test&nonce=' . wp_create_nonce( 'wph/ignore-rewrite-test')  . '">' . __( "Ignore", 'wp-hide-security-enhancer' ) . '</a> ' . __( "this notification", 'wp-hide-security-enhancer' ) .'<br />';
                                             $messages['server_check']     .=  __( "Sample result, the appearance can be different from a browser to another:", 'wp-hide-security-enhancer' ) . '<br /><img src="' . WPH_URL . '/assets/images/rewrite-test-json-response.jpg" /><br />';
                                             $messages['server_check']     .=  __( "The Ignore action will be available until the next plugin options update.", 'wp-hide-security-enhancer' ) . '<br />';
                                             $messages['server_check']     .= "<br />" . __( "If manually checking the Test URL fails too, you need to get in touch with your server support for a fix. The rewrite engine is either disabled for your account or their internal set-up does not allow such rewrites. ", 'wp-hide-security-enhancer' );
@@ -1807,6 +1804,51 @@
                 {
                     update_option('wph_settings', $settings);
                 }
+                
+                
+            /**
+            * Return a general list of allowed tags in the items description
+            * 
+            */
+            static public function get_general_description_allowed_tags()
+                {
+                    $allow_tags =   array(
+                                                'div'   => array(
+                                                    'id'        =>  array(),
+                                                    'class'     =>  array()
+                                                ),
+                                                'img'   => array(
+                                                    'src'      => array(),
+                                                    'class'     =>  array()
+                                                ),
+                                                'span'   => array(
+                                                    'alt'      => array(),
+                                                    'class'     =>  array()
+                                                ),
+                                                'a'      => array(
+                                                    'href'     => array(),
+                                                    'target'     => array(),
+                                                    'class'     => array(),
+                                                    'title'     => array(),
+                                                        ),
+                                                'ul'      => array(),
+                                                'li'      => array(),
+                                                'p'      => array(
+                                                        'class'     => array(),
+                                                        ),
+                                                'h4'      => array(),
+                                                'b'      => array(),
+                                                'i'      => array(),
+                                                'strong'      => array(),
+                                                'button'      => array(),
+                                                'br'      => array(),
+                                                'code'      => array(),
+                                                'style'      => array(),
+                                            );
+                                            
+                    return $allow_tags;   
+                }
+                
                 
             
             /**
@@ -2279,7 +2321,7 @@
                     
                     $settings   =   $this->get_settings();   
                     
-                    $recovery_code  =   substr( md5(rand(1,9999) . microtime()), 0, 10 );
+                    $recovery_code  =   substr( md5(wp_rand(1,9999) . microtime()), 0, 10 );
                     
                     $settings['recovery_code']  =   $recovery_code;
                     
@@ -2621,7 +2663,7 @@
                     $this->wph->settings    =   $site_settings;
                     
                     //generate a new write_check_string
-                    $write_check_string  =   time() . '_' . mt_rand(100, 99999);
+                    $write_check_string  =   time() . '_' . wp_rand(100, 99999);
                     $this->wph->settings['write_check_string']   =   $write_check_string;
                                                                                    
                     //update the settings
@@ -3328,11 +3370,11 @@
                     $cons = array( 'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'x', 'z', 'pt', 'gl', 'gr', 'ch', 'ph', 'ps', 'sh', 'st', 'th', 'wh' );
                     $cons_cant_start = array( 'ck', 'cm', 'dr', 'ds','ft', 'gh', 'gn', 'kr', 'ks', 'ls', 'lt', 'lr', 'mp', 'mt', 'ms', 'ng', 'ns','rd', 'rg', 'rs', 'rt', 'ss', 'ts', 'tch');
                     $vows = array( 'a', 'e', 'i', 'o', 'u', 'y','ee', 'oa', 'oo');
-                    $current = ( mt_rand( 0, 1 ) == '0' ? 'cons' : 'vows' );
+                    $current = ( wp_rand( 0, 1 ) == '0' ? 'cons' : 'vows' );
                     $word = '';
                     while( strlen( $word ) < $length ) {
                         if( strlen( $word ) == 2 ) $cons = array_merge( $cons, $cons_cant_start );
-                        $rnd = ${$current}[ mt_rand( 0, count( ${$current} ) -1 ) ];
+                        $rnd = ${$current}[ wp_rand( 0, count( ${$current} ) -1 ) ];
                         if( strlen( $word . $rnd ) <= $length ) {
                             $word .= $rnd;
                             $current = ( $current == 'cons' ? 'vows' : 'cons' );
@@ -3377,16 +3419,16 @@
                     
                         <div id="info_box">
                             <div class="image">
-                                <img src="<?php echo WPH_URL ?>/assets/images/computer.png" />
+                                <img src="<?php echo esc_url ( WPH_URL . '/assets/images/computer.png' ) ?>" />
                             </div>
                             
                             <div class="text">
                                 <p> </p>
-                                <p><?php    _e('Help us to maintain this plugin by sending improvements, suggestions and reporting any issues at ', 'wp-hide-security-enhancer')  ?><a target="_blank" href="https://wp-hide.com/">wp-hide.com</a></p>
+                                <p><?php    esc_html_e('Help us to maintain this plugin by sending improvements, suggestions and reporting any issues at ', 'wp-hide-security-enhancer')  ?><a target="_blank" href="https://wp-hide.com/">wp-hide.com</a></p>
                                 <span class="split">&nbsp;</span>
-                                <h4><?php   _e('Did you know there is a', 'wp-hide-security-enhancer')  ?> <span class="wph-pro">PRO</span> <?php   _e('version of this plug-in?', 'wp-hide-security-enhancer')  ?> <a target="_blank" href="https://wp-hide.com/wp-hide-pro-now-available/">Read more</a></h4>
+                                <h4><?php   esc_html_e('Did you know there is a', 'wp-hide-security-enhancer')  ?> <span class="wph-pro">PRO</span> <?php   esc_html_e('version of this plug-in?', 'wp-hide-security-enhancer')  ?> <a target="_blank" href="https://wp-hide.com/wp-hide-pro-now-available/">Read more</a></h4>
                                 <span class="split">&nbsp;</span>
-                                <p><?php    _e('Did you find this plugin useful? Please support our work by submitting a review, spread the word about the code, or write an article about the plugin in your blog with a link to development site', 'wp-hide-security-enhancer') ?> <a href="https://wp-hide.com/" target="_blank"><strong>https://wp-hide.com/</strong></a></p>
+                                <p><?php    esc_html_e('Did you find this plugin useful? Please support our work by submitting a review, spread the word about the code, or write an article about the plugin in your blog with a link to development site', 'wp-hide-security-enhancer') ?> <a href="https://wp-hide.com/" target="_blank"><strong>https://wp-hide.com/</strong></a></p>
                             </div>
                             
                             

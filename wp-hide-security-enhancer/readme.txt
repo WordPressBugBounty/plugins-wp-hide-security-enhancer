@@ -3,8 +3,8 @@ Contributors: nsp-code, tdgu
 Donate link: https://www.nsp-code.com/
 Tags: hide, security, headers, login, 2fa
 Requires at least: 2.8
-Tested up to: 6.8.2
-Stable tag: 2.7.4
+Tested up to: 6.9
+Stable tag: 2.8
 License: GPLv2 or later
 
 Protect your website by concealing vulnerable WordPress traces, plugins, themes, login/admin url. 2FA, Captcha, Firewall, Security Headers etc.
@@ -54,6 +54,7 @@ Once configured, you need to **clear server cache data and/or any cache plugins*
 * 2FA - Two-factor Authentication - Authenticator App
 * 2FA - Two-factor Authentication - Recovery Codes
 * 2FA - Two-factor Authentication - Shortcode for front-side user settings interface
+* 2FA - Two-factor Authentication - My Account > Account Details - area for 2FA user settings interface
 * Google Captcha 
 * Blocks default wp-login.php
 * Blocks default wp-signup.php
@@ -464,7 +465,32 @@ We’re continuously improving WP Hide! If there’s a feature you need—whethe
 
 == Changelog == 
 
-= 3.7.4 =
+= 2.8.1 =
+* Removed deprecated log_save method.
+* Slight code improvements for better readability. 
+
+= 2.8 =
+* Output the module description HTML as is, instead using wp_kses to avoid stripping out the tags.
+* Added button and style tags in the allowed list of tags.
+* Fix striped out the HTML tag in the Captcha CloudFlare availability title. 
+
+= 2.7.9 =
+* Fix: Security enhancement by replacing unserialize() with a custom deserialization class.
+* WordPress 6.9 compatibility check/
+* WordPress 6.9 tag update.
+
+= 2.7.7 =
+* Add 2FA reset links for the users in the Users interface. 
+* Included the in_footer argument for wp_register_script().
+* Fix: Include no-role as default in the list for the option "Enable the 2FA for specific roles".
+
+= 2.7.6 =
+* Add escape output for all texts through esc_html_e, esc_html__, esc_html, esc_attr, esc_url.
+* Add nonces to urls.
+* Check if a specific superglobal property exists before using it. 
+* Fix wp_kses() stripping out certain html tags. Add to allowed list. 
+
+= 2.7.4 =
 * Code improvements, revisions and cleanup.
 * Add escapes to different texts. 
 * Fix textdomain typos.

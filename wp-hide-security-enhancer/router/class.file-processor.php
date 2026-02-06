@@ -98,7 +98,7 @@
                         
                     $out = ob_get_contents();
                     ob_end_clean();
-                    
+                    //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo $out;
                 }
             
@@ -191,7 +191,7 @@
                         }
                     
                     $this->push_file_to_cache( $file_data );
-                    
+                    //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo $file_data;
                     
                 }

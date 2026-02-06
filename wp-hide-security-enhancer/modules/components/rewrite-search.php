@@ -149,6 +149,7 @@
             */
             function template_redirect() 
                 {
+                    //phpcs:ignore WordPress.Security.NonceVerification.Recommended
                     if ( is_search() && ! empty( $_GET['s'] ) ) 
                         {
                             $new_search_path        =   $this->wph->functions->get_module_item_setting('search');

@@ -86,9 +86,9 @@
                             delete_transient ( 'wph-process_API_interface_errors' );
                             
                             if ( ! empty ( $interface_errors ) )
-                                echo '<p class="important">' . $interface_errors . '</p>';
+                                echo '<p class="important">' . esc_html ( $interface_errors ) . '</p>';
                             
-                            ?><div id="captch_test" class="captcha-integration <?php echo $this->captcha_id ?>">
+                            ?><div id="captch_test" class="captcha-integration <?php echo esc_attr (  $this->captcha_id ) ?>">
                             <script src="https://www.google.com/recaptcha/api.js"></script>
                             <script>
                                function onSubmit(token) {
@@ -103,9 +103,9 @@
                                
                                
                              </script>
-                            <button class="g-recaptcha button-primary red" data-sitekey="<?php echo $values['g3-site-key'] ?>" data-callback='onSubmit' data-action='submit'><?php _e('Test API',  'wp-hide-security-enhancer') ?></button>
-                            <p><?php _e('If the Test API button is not triggering, check the Google badge message on the bottom-right corner of your screen. The provided site key may be invalid for this domain.',  'wp-hide-security-enhancer') ?></p>
-                            <p><?php _e('The captcha will not show on the front side until the Test is successful.',  'wp-hide-security-enhancer') ?></p>
+                            <button class="g-recaptcha button-primary red" data-sitekey="<?php echo esc_attr ( $values['g3-site-key'] ) ?>" data-callback='onSubmit' data-action='submit'><?php esc_html_e('Test API',  'wp-hide-security-enhancer') ?></button>
+                            <p><?php esc_html_e('If the Test API button is not triggering, check the Google badge message on the bottom-right corner of your screen. The provided site key may be invalid for this domain.',  'wp-hide-security-enhancer') ?></p>
+                            <p><?php esc_html_e('The captcha will not show on the front side until the Test is successful.',  'wp-hide-security-enhancer') ?></p>
                             <input type="hidden" id="api_test" name="api_test" value="" />
                             
                             </div>
@@ -119,7 +119,7 @@
                             ob_start();
                                    
                             ?><div id="captch_test" class="captcha-integration <?php echo $this->captcha_id ?>">
-                            <p class="green"><?php _e('The Google Captcha V3 integration is completed.',  'wp-hide-security-enhancer') ?></p>
+                            <p class="green"><?php esc_html_e('The Google Captcha V3 integration is completed.',  'wp-hide-security-enhancer') ?></p>
                             
                             <?php 
                                 
@@ -137,12 +137,12 @@
             
             function get_module_help()
                 {
-                    ?><p><?php _e('You can get your site key and secret key from',  'wp-hide-security-enhancer') ?> <a href="https://www.google.com/recaptcha/admin/create" target="_blank">https://www.google.com/recaptcha/admin/create</a></p>
-                    <p><?php _e('After filling in and saving the options, remember to click the <b class="important">Test API</b> button located at the top of this section. The CAPTCHA won\'t appear on the front end until the test is successfully completed',  'wp-hide-security-enhancer') ?></p>
-                    <p>&nbsp;</p><h4>The Required Score</h4><p><?php _e('reCAPTCHA v3 returns a score for each request without user friction. The score is based on interactions with your site and enables you to take an appropriate action for your site.',  'wp-hide-security-enhancer') ?></p>
-                    <p><?php _e('The default score is 0.5 which is considered a safe value to distinguish between bots and real users. ',  'wp-hide-security-enhancer') ?></p>
-                    <p><b class="important"><?php _e('Warning',  'wp-hide-security-enhancer') ?></b></p>
-                    <p><?php _e('Setting an excessively high value may result in being locked out of your site\'s login. Conversely, using an extremely low value can validate bots. The optimal value is 0.5.',  'wp-hide-security-enhancer') ?></p><?php
+                    ?><p><?php esc_html_e('You can get your site key and secret key from',  'wp-hide-security-enhancer') ?> <a href="https://www.google.com/recaptcha/admin/create" target="_blank">https://www.google.com/recaptcha/admin/create</a></p>
+                    <p><?php esc_html_e('After filling in and saving the options, remember to click the <b class="important">Test API</b> button located at the top of this section. The CAPTCHA won\'t appear on the front end until the test is successfully completed',  'wp-hide-security-enhancer') ?></p>
+                    <p>&nbsp;</p><h4>The Required Score</h4><p><?php esc_html_e('reCAPTCHA v3 returns a score for each request without user friction. The score is based on interactions with your site and enables you to take an appropriate action for your site.',  'wp-hide-security-enhancer') ?></p>
+                    <p><?php esc_html_e('The default score is 0.5 which is considered a safe value to distinguish between bots and real users. ',  'wp-hide-security-enhancer') ?></p>
+                    <p><b class="important"><?php esc_html_e('Warning',  'wp-hide-security-enhancer') ?></b></p>
+                    <p><?php esc_html_e('Setting an excessively high value may result in being locked out of your site\'s login. Conversely, using an extremely low value can validate bots. The optimal value is 0.5.',  'wp-hide-security-enhancer') ?></p><?php
                     
                 }
                 
@@ -205,7 +205,7 @@
                             #login {width: 350px}
                             div.g-recaptcha {padding-bottom: 20px}
                         </style>
-                        <script src="https://www.google.com/recaptcha/api.js?render=<?php echo $values['g3-site-key'] ?>" async defer></script>
+                        <script src="https://www.google.com/recaptcha/api.js?render=<?php echo esc_attr ( $values['g3-site-key'] ) ?>" async defer></script>
                             
                         <script>
                             function reCaptchaSubmit(e) {
@@ -213,7 +213,7 @@
                                 
                                 var container = this;
                                 grecaptcha.ready(function() {
-                                    grecaptcha.execute('<?php echo $values['g3-site-key'] ?>', {action: 'submit'}).then(function(token) {
+                                    grecaptcha.execute('<?php echo esc_attr ( $values['g3-site-key'] ) ?>', {action: 'submit'}).then(function(token) {
                                         var input_field         =   document.createElement("input");
                                         input_field.type        =   "hidden";
                                         input_field.name        =   "g-recaptcha-response" ;

@@ -103,7 +103,9 @@
                     $site_name = sanitize_text_field( $site_name );
                     
                     $subject = sprintf( __( 'Here is your login confirmation code for %s', 'wp-hide-security-enhancer' ), $site_name );
-                    $message = sprintf( __( 'Use the following code to securely log in to your account: %s ' . "\n" . 'Please ensure you enter this code correctly to access your account. ' . "\n \n\n" . 'If you did not request this code, please contact support for assistance.', 'wp-hide-security-enhancer' ), $code );
+                    $message = sprintf( __( 'Use the following code to securely log in to your account: %s ', 'wp-hide-security-enhancer' ), $code );
+                    $message .= "\n" . __( 'Please ensure you enter this code correctly to access your account.', 'wp-hide-security-enhancer' );
+                    $message .= "\n \n\n" . __( 'If you did not request this code, please contact support for assistance.', 'wp-hide-security-enhancer' );
 
                     $subject = apply_filters( 'wp-hide/2fa/email/email_subject', $subject, $user->ID );
                     $message = apply_filters( 'wp-hide/2fa/email/email_message', $message, $code, $user->ID );
@@ -134,7 +136,7 @@
                             <strong><label for="authentication_code"><?php esc_html_e( 'Authentication Code:', 'wp-hide-security-enhancer' ); ?></label></strong>
                             
                             <input type="text" inputmode="numeric" name="2fa_email_code" id="authentication_code" class="input" value="" size="20" pattern="[0-9 ]*" placeholder="12345678" data-digits="8" />
-                            <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e( 'Verify', 'wp-hide-security-enhancer' ) ?>">
+                            <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php esc_attr_e( 'Verify', 'wp-hide-security-enhancer' ) ?>">
                             <input type="submit" class="button" name="2fa_email_code_resend" value="<?php esc_attr_e( 'Resend Code', 'wp-hide-security-enhancer' ); ?>" />
                         </p>
                     <?php
@@ -295,7 +297,7 @@
                     if ( empty( $_REQUEST[ $field ] ) )
                         return new WP_Error( 'error', __( 'ERROR: Invalid inpput code.', 'wp-hide-security-enhancer' ));
 
-                    $code = preg_replace( '/0-9/' , "",       $_REQUEST[ $field ] );
+                    $code = isset ( $_REQUEST[ $field ] ) ? preg_replace( '/0-9/' , "",       sanitize_text_field( wp_unslash ( $_REQUEST[ $field ] ) ) ) :   '';
                           
                     if ( ! isset( $user->ID ) || ! $code )
                         return new WP_Error( 'error', __( 'ERROR: Invalid user or empty code.', 'wp-hide-security-enhancer' ));

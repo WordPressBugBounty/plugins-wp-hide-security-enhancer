@@ -9,6 +9,7 @@
                 {
                     parent::__construct();
                     
+                    //phpcs:ignore WordPress.Security.NonceVerification.Recommended
                     if ( isset ( $_GET['page'] ) && $_GET['page']   ==  'wp-hide-admin' )
                         add_action ( 'admin_enqueue_scripts', 'wp_enqueue_media' );
                     
@@ -219,6 +220,7 @@
             function login_url( $login_url, $redirect, $force_reauth )
                 {
                     //ensure there is no loop with another plugin
+                    //phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace
                     $backtrace  =   debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
                     foreach ( $backtrace   as $key  =>  $backtrace )
                         {
@@ -230,6 +232,7 @@
                         }
                     
                     //Gravity Forms
+                    //phpcs:ignore WordPress.Security.NonceVerification.Recommended
                     if ( isset ( $_GET['gf_page'] ))
                         {
                             include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
@@ -432,7 +435,8 @@
                 {
                     $results            =   array();
                     
-                    $custom_logo_image_id  =   preg_replace("/[^0-9]/", '', $_POST['custom_logo_image_id'] );
+                    //phpcs:ignore WordPress.Security.NonceVerification.Missing
+                    $custom_logo_image_id  =   isset ( $_POST['custom_logo_image_id'] )     ?   preg_replace("/[^0-9]/", '', wp_unslash( $_POST['custom_logo_image_id'] ) )   :   '';
                     
                     $results['value']   =   $custom_logo_image_id;
                     

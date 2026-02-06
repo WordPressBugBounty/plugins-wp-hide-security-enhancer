@@ -17,6 +17,9 @@
 
         // Don't allow interim logins to navigate away from the page.
         if ( ! $interim_login ) {
+            
+            $allow_tags =   WPH_functions::get_general_description_allowed_tags();
+            
             ?>
             <p id="backtoblog">
                 <?php
@@ -25,7 +28,7 @@
                     esc_url( home_url( '/' ) ),
                     sprintf(
                         /* translators: %s: Site title. */
-                        _x( '&larr; Go to %s', 'wp-hide-security-enhancer' ),
+                        __( '&larr; Go to %s', 'wp-hide-security-enhancer' ),
                         get_bloginfo( 'title', 'display' )
                     )
                 );
@@ -36,7 +39,7 @@
                  *
                  * @param string $link HTML link to the home URL of the current site.
                  */
-                echo apply_filters( 'login_site_html_link', $html_link );
+                echo wp_kses ( apply_filters( 'login_site_html_link', $html_link ), $allow_tags );
                 ?>
             </p>
             <?php
@@ -70,8 +73,7 @@
                             <span class="dashicons dashicons-translation" aria-hidden="true"></span>
                             <span class="screen-reader-text">
                                 <?php
-                                /* translators: Hidden accessibility text. */
-                                _e( 'Language', 'wp-hide-security-enhancer' );
+                                esc_html_e( 'Language', 'wp-hide-security-enhancer' );
                                 ?>
                             </span>
                         </label>
@@ -103,11 +105,11 @@
                         <?php } ?>
 
                         <?php if ( isset( $_GET['redirect_to'] ) && '' !== $_GET['redirect_to'] ) { ?>
-                            <input type="hidden" name="redirect_to" value="<?php echo sanitize_url( $_GET['redirect_to'] ); ?>" />
+                            <input type="hidden" name="redirect_to" value="<?php echo esc_url( wp_unslash ( $_GET['redirect_to'] ) ); ?>" />
                         <?php } ?>
 
                         <?php if ( isset( $_GET['action'] ) && '' !== $_GET['action'] ) { ?>
-                            <input type="hidden" name="action" value="<?php echo esc_attr( $_GET['action'] ); ?>" />
+                            <input type="hidden" name="action" value="<?php echo esc_attr( wp_unslash ( $_GET['action'] ) ); ?>" />
                         <?php } ?>
 
                             <input type="submit" class="button" value="<?php esc_attr_e( 'Change', 'wp-hide-security-enhancer' ); ?>">
@@ -123,7 +125,7 @@
             ob_start();
             ?>
             <script>
-            try{document.getElementById('<?php echo $input_id; ?>').focus();}catch(e){}
+            try{document.getElementById('<?php echo esc_attr ( $input_id ); ?>').focus();}catch(e){}
             if(typeof wpOnload==='function')wpOnload();
             </script>
             <?php

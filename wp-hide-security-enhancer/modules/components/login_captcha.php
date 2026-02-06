@@ -39,7 +39,10 @@
                     foreach ( $captcha_options as   $captcha_type   =>  $group )
                         {
                             if ( $values['captcha_type']    ==  $captcha_type )
-                                $html   =   $this->captcha_type[ $captcha_type ]->get_module_description( $values );     
+                                {
+                                    $html   =   $this->captcha_type[ $captcha_type ]->get_module_description( $values );
+                                    break;
+                                }
                         }
       
       
@@ -175,11 +178,17 @@
                                             'cloudflare_turnstile'  =>  __( 'CloudFlare Turnstile <span class="wph-pro">PRO</span>',  'wp-hide-security-enhancer' )
                                             );
                                     
+                                    $allowed_html = array(
+                                                            'span' => array(
+                                                                'class'   => array()
+                                                            )
+                                                        );
+                                    
                                     foreach ( $options   as $option_value =>  $option_title )
                                         {
                                             ?>
                                             <label>
-                                                <input type="radio" <?php  if ( $option_value == 'cloudflare_turnstile' ) { echo 'disabled="disabled"'; }  ?> class="radio input-captcha-type" value="<?php echo esc_html ( $option_value ) ?>" name="captcha_type" <?php if ( $values['captcha_type'] == $option_value ) { ?>checked="checked"<?php } ?>> <span><?php echo esc_html ( $option_title ) ?></span>
+                                                <input type="radio" <?php  if ( $option_value == 'cloudflare_turnstile' ) { echo 'disabled="disabled"'; }  ?> class="radio input-captcha-type" value="<?php echo esc_html ( $option_value ) ?>" name="captcha_type" <?php if ( $values['captcha_type'] == $option_value ) { ?>checked="checked"<?php } ?>> <span><?php echo wp_kses ( $option_title, $allowed_html ) ?></span>
                                             </label>    
                                             <?php
                                         }
@@ -333,7 +342,7 @@
                             if ( ! isset ( $_POST[ $setting_name ] ) )
                                 continue;
                                 
-                            $value  =   preg_replace( '/[^a-zA-Z0-9-_]/m' , '', $_POST[ $setting_name ] );
+                            $value  =   isset ( $_POST[ $setting_name ] )   ?   preg_replace( '/[^a-zA-Z0-9-_]/m' , '', wp_unslash ( $_POST[ $setting_name ] ) )   :   '';
                             if ( empty ( $value ) )
                                 continue;
                                 
@@ -348,7 +357,7 @@
                                     if ( ! isset ( $_POST[ $option_key ] ) )
                                         continue;
                                         
-                                    $value  =   preg_replace( '/[^a-zA-Z0-9-_\.]/m' , '', $_POST[ $option_key ] );
+                                    $value  =   isset ( $_POST[ $option_key ] ) ?   preg_replace( '/[^a-zA-Z0-9-_\.]/m' , '', wp_unslash ( $_POST[ $option_key ] ) )   :   '';
                                     if ( empty ( $value ) )
                                         continue;
                                     

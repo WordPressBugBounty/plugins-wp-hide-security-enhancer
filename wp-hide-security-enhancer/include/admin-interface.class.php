@@ -74,7 +74,7 @@
             function _do_pasive_actions()
                 {
                     
-                    if ( isset ( $_GET['wph_environment'] ) && $_GET['wph_environment'] == 'ignore-rewrite-test' )
+                    if ( isset ( $_GET['nonce'] )    && wp_verify_nonce( wp_unslash( $_GET['nonce'] ), 'wph/ignore-rewrite-test' )   &&  isset ( $_GET['wph_environment'] ) && $_GET['wph_environment'] == 'ignore-rewrite-test' )
                         update_option( 'wph-environment-ignore-rewrite-test', 'false' );
                     
                     
@@ -83,34 +83,15 @@
             function _generate_interface_html()
                 {
                     
+                    $allow_tags =   WPH_functions::get_general_description_allowed_tags();
+                       
                     ?>
                         <div id="wph" class="wrap">
                             <h1><?php echo esc_html( $this->interface_data['title'] ) ?></h1>
                          
                             <?php
                                                                 
-                                echo wp_kses ( $this->functions->get_ad_banner(), array(
-                                                                                            'a'      => array(
-                                                                                                                    'href'  => array(),
-                                                                                                                    'title' => array(),
-                                                                                                                    'target' => array(),
-                                                                                                                ),
-                                                                                            'div'     => array(
-                                                                                                                    'id'    =>  array(),
-                                                                                                                    'class' =>  array(),
-                                                                                                                ),
-                                                                                            'img'     => array(
-                                                                                                                    'src'   =>  array()
-                                                                                                                
-                                                                                                                ),
-                                                                                            'span'     => array(
-                                                                                                                    'class'   =>  array()
-                                                                                                                
-                                                                                                                ),
-                                                                                            'p' => array(),
-                                                                                            'h4' => array(),
-                                                                                            'strong' => array(),
-                                                                                        ) );
+                                echo wp_kses ( $this->functions->get_ad_banner(), $allow_tags );
                                 
                                                                 
                                 $results    =   $this->functions->check_server_environment();
@@ -127,7 +108,7 @@
                                         
                                         if ( $results['found_issues'] !==  FALSE )
                                             {    
-                                                echo esc_html ( $results['errors'] );
+                                                echo wp_kses ( $results['errors'], $allow_tags );
                                             }
                                         
                                         if ( $results['critical_issues'] ===  TRUE )
@@ -182,13 +163,16 @@
                                             
                                             <div class="options">
                                                 <?php
-                                                    
+                                                               
                                                     $module_object  =   $this->functions->get_module_component_by_slug ( $this->tab_slug );
                                                     $module_description =   FALSE;
                                                     if ( is_object ( $module_object ) )
                                                         $module_description =   $module_object->get_module_description();
                                                     if ( $module_description    !== FALSE )
-                                                        echo ( $module_description );
+                                                        {
+                                                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                                            echo ( $module_description);
+                                                        }
                                                 
                                                 ?>
                                                 <?php
@@ -302,6 +286,9 @@
                
                     if($module_setting['visible']   === FALSE)
                         return;
+                        
+                        
+                    $allow_tags =   WPH_functions::get_general_description_allowed_tags();
                                         
                     $option_name    =   $module_setting['id'];
                     $value          =   $this->wph->get_setting_value(  $option_name, $module_setting );
@@ -330,7 +317,7 @@
                                             }
                                     ?>
                                 </ul>
-                                            <label for=""><?php echo esc_html ( $module_setting['label'] )  ?></label>
+                                            <label for=""><?php echo wp_kses ( $module_setting['label'], $allow_tags )  ?></label>
                                             <?php
                                                 
                                                 if(is_array($module_setting['description']))
@@ -338,14 +325,14 @@
                                                         foreach($module_setting['description']  as  $description)
                                                             {
                                                                 ?>
-                                                                    <div class="description"><?php echo nl2br($description) ?></div>
+                                                                    <div class="description"><?php echo wp_kses ( nl2br($description), $allow_tags );?></div>
                                                                 <?php
                                                             }    
                                                     }
                                                     else
                                                     {
                                                         ?>
-                                                            <p class="description"><?php echo nl2br($module_setting['description']) ?></p>
+                                                            <p class="description"><?php echo wp_kses ( nl2br($module_setting['description']), $allow_tags ); ?></p>
                                                         <?php 
                                                     } ?>
                                                     
@@ -356,10 +343,10 @@
                                                             ?>
                                                             <div class="wph_anotice">
                                                                 <div class="icon">
-                                                                    <img src="<?php echo WPH_URL ?>/assets/images/warning.png" />
+                                                                    <img src="<?php echo esc_url ( WPH_URL . '/assets/images/warning.png' ) ?>" />
                                                                 </div>
                                                                 <div class="text">
-                                                                    <p> <?php  echo $module_setting['advanced_option']['description'] ?> </p>
+                                                                    <p> <?php  echo wp_kses ( $module_setting['advanced_option']['description'], $allow_tags ) ?> </p>
                                                                 </div>
                                                                 <div class="actions">
                                                                     <a href="javascript: void(0)" onclick="WPH.showAdvanced( jQuery(this) )" class="button-primary">SHOW</a>    
@@ -383,7 +370,7 @@
                                             <h4><?php echo esc_html ( $module_setting['help']['title'] ) ?></h3>
                                             <?php } ?>
                                             <?php  if ( $module_setting['help'] !==    FALSE ) { ?>
-                                                <p><?php echo wpautop ( $module_setting['help']['description'] )  ?></p>
+                                                <p><?php echo wp_kses ( wpautop ( $module_setting['help']['description'], $allow_tags ), $allow_tags )  ?></p>
                                             <?php } else { ?>
                                             <p>There is no help available for this option.</p>
                                             <?php }?>
@@ -392,7 +379,7 @@
                                         </div>
                                         <?php } ?>
                                         
-                                        <?php if(!empty($module_setting['options_pre'])) { ?><div class="options_text text_pre"><?php echo esc_html ( $module_setting['options_pre'] ) ?></div><?php } ?>
+                                        <?php if(!empty($module_setting['options_pre'])) { ?><div class="options_text text_pre"><?php echo wp_kses ( $module_setting['options_pre'], $allow_tags ) ?></div><?php } ?>
                                         <div class="orow">
                                             <?php if ( isset($module_setting['module_option_html_render'])    &&  is_callable($module_setting['module_option_html_render']))
                                                 {
@@ -416,7 +403,7 @@
                                                                 case 'textarea' :
                                                                                     $class          =   'textarea';
                                                                                     
-                                                                                    ?><textarea rows="7" name="<?php echo esc_html ( $module_setting['id'] ) ?>" class="setting-value <?php echo esc_html ( $class ) ?>"><?php echo stripslashes ( esc_html($value) ) ?></textarea><?php
+                                                                                    ?><textarea rows="7" name="<?php echo esc_html ( $module_setting['id'] ) ?>" class="setting-value <?php echo esc_html ( $class ) ?>"><?php echo esc_html( stripslashes ( $value ) ) ?></textarea><?php
                                                                                     
                                                                                     break;
                                                                                 
@@ -447,7 +434,7 @@
                                                 }       
                                             ?>
                                         </div>
-                                        <?php if(!empty($module_setting['options_post'])) { ?><div class="options_text text_post"><?php echo esc_html ( $module_setting['options_post'] ) ?></div><?php } ?>
+                                        <?php if(!empty($module_setting['options_post'])) { ?><div class="options_text text_post"><?php echo wp_kses ( $module_setting['options_post'], $allow_tags ) ?></div><?php } ?>
                                     
                                     </div>
                             </div>
@@ -455,8 +442,8 @@
                             <div class="wph_help option_help<?php  if ( $module_setting['help'] ===    FALSE ) { echo ' empty'; } ?>">
                                 <div class="text">
                                 <?php  if ( $module_setting['help'] !==    FALSE ) { ?>
-                                    <h4><?php echo esc_html ( $module_setting['help']['title'] ) ?></h4>
-                                    <p><?php echo $module_setting['help']['description'] ?></p>
+                                    <h4><?php echo wp_kses ( $module_setting['help']['title'], $allow_tags ) ?></h4>
+                                    <p><?php echo wp_kses ( $module_setting['help']['description'], $allow_tags ) ?></p>
                                     <?php  if ( ! empty ( $module_setting['help']['option_documentation_url'] ) ) { ?>  <br /> <a class="button read_more" target="_blank" href="<?php echo esc_url ( $module_setting['help']['option_documentation_url'] ) ?>">Read More</a> <br /><br /><?php } ?>
                                 <?php } else { ?>
                                 <p><?php esc_html_e("There is no help available for this option.", 'wp-hide-security-enhancer') ?></p>

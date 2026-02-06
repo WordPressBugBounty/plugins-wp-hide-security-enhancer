@@ -293,10 +293,13 @@
                                                 <td><?php 
                                                     
                                                     if (  is_array ( $header_value ) )
-                                                        echo implode( "<br />", array_map( 'htmlspecialchars', $header_value ) ) ;
+                                                        {
+                                                            //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                                            echo implode( "<br />", array_map( 'htmlspecialchars', $header_value ) ) ;
+                                                        }
                                                         else
                                                         {
-                                                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+                                                            //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
                                                             echo htmlspecialchars ( $header_value ); 
                                                         }
                                                 ?></td>
@@ -340,7 +343,9 @@
                         if ( count ( $headers_not_found ) > 0 )
                             {
                                 ?>
-                                <h4 class="important"><?php esc_html_e('Warning! The following headers could not be found:', 'wp-hide-security-enhancer' ); echo "<br />" . implode( '<br />', $headers_not_found); ?></h4>
+                                <h4 class="important"><?php esc_html_e('Warning! The following headers could not be found:', 'wp-hide-security-enhancer' ); 
+                                //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                echo "<br />" . implode( '<br />', $headers_not_found); ?></h4>
                                 <p class="important"><?php esc_html_e('Ensure the server mod_headers module is active.', 'wp-hide-security-enhancer' ); ?></p>
                                 <?php   
                                 
@@ -356,7 +361,7 @@
                                 if ( in_array ( $header_key, $found_headers ) )
                                     continue;
                                     
-                                ?><p><a href="<?php echo esc_url ( $header_data['link'] ) ?>" target="_blank"><code><?php echo esc_html ( $header_key )  ?></code></a><?php  if ( $header_data['availability'] == 'pro' ) { echo ' <span class="wph-pro">PRO</span>'; } ?><br /><?php echo $header_data['description'] ?></p><?php   
+                                ?><p><a href="<?php echo esc_url ( $header_data['link'] ) ?>" target="_blank"><code><?php echo esc_html ( $header_key )  ?></code></a><?php  if ( $header_data['availability'] == 'pro' ) { echo ' <span class="wph-pro">PRO</span>'; } ?><br /><?php echo esc_html ( $header_data['description'] ) ?></p><?php   
                             }
 
                     $_JSON_response['html']  =   ob_get_clean();

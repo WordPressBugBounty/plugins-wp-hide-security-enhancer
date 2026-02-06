@@ -16,24 +16,33 @@
                     global $wph;
                     $this->wph  =   $wph;
                     
-                    add_action( 'init',                         array( $this, 'set_active_options' ) );
+                    add_action( 'init',                             array( $this, 'set_active_options' ) );
                     
-                    add_action( 'show_user_profile',            array( $this, 'profile_2fa_options' ) );
-                    add_action( 'edit_user_profile',            array( $this, 'profile_2fa_options' ) );
-                    add_action( 'personal_options_update',      array( $this, 'profile_2fa_options_update' ) );
-                    add_action( 'edit_user_profile_update',     array( $this, 'profile_2fa_options_update' ) );
+                    add_action( 'show_user_profile',                array( $this, 'profile_2fa_options' ) );
+                    add_action( 'edit_user_profile',                array( $this, 'profile_2fa_options' ) );
                     
-                    add_action( 'wp_login',                     array( $this, 'wp_login' ),                     10, 2 );
+                    add_filter( 'user_row_actions',                 array( $this, 'user_row_2fa_actions' ), 10, 2 );
+                    add_action( 'admin_post_user_action_2fa_app_reset',     array( $this, 'handle_user_action_2fa_app_reset' ) );
+                    add_action( 'admin_post_user_action_2fa_rc_reset',      array( $this, 'handle_user_action_2fa_rc_reset' ) );
+                    add_action( 'admin_notices',                    array( $this, 'user_2fa_action_admin_notice' ) );
                     
-                    add_action( 'set_auth_cookie',              array( $this, 'store_auth_token' ) );
-                    add_action( 'set_logged_in_cookie',         array( $this, 'store_auth_token' ) );
+                    add_action( 'woocommerce_edit_account_form',    array( $this, 'profile_2fa_options' ) );
+                    
+                    add_action( 'personal_options_update',          array( $this, 'profile_2fa_options_update' ) );
+                    add_action( 'edit_user_profile_update',         array( $this, 'profile_2fa_options_update' ) );
+                    
+                    add_action( 'woocommerce_save_account_details', array( $this, 'profile_2fa_options_update' ) );
+                    
+                    add_action( 'wp_login',                         array( $this, 'wp_login' ),                     10, 2 );
+                    
+                    add_action( 'set_auth_cookie',                  array( $this, 'store_auth_token' ) );
+                    add_action( 'set_logged_in_cookie',             array( $this, 'store_auth_token' ) );
 
-                    add_filter( 'authenticate',                 array( $this, 'authenticate_block_cookies' ),   9999 );
+                    add_filter( 'authenticate',                     array( $this, 'authenticate_block_cookies' ),   9999 );
                     
-                    add_action( 'login_form_validate_2fa',      array( $this, 'login_form_validate_2fa' ) );
+                    add_action( 'login_form_validate_2fa',          array( $this, 'login_form_validate_2fa' ) );
                     
-                    
-                    add_shortcode( 'wph-2fa-user-settings',     array( $this, 'shortcode_2fa_user_settings') );
+                    add_shortcode( 'wph-2fa-user-settings',         array( $this, 'shortcode_2fa_user_settings') );
 
                 }
                 
@@ -104,10 +113,13 @@
                     if ( ! $user instanceof WP_User )
                         return FALSE;
                     
-                    if ( ! is_array ( $_2fa_enable_for_roles )  ||  ! is_array ( $user->roles ) )
+                    if ( ! is_array ( $_2fa_enable_for_roles ) )
                         return FALSE;
                     
                     $user_roles =   $user->roles;
+                    
+                    if ( empty ( $user_roles ) )
+                        $user_roles[]   =   'no-role';
                     
                     foreach ( $user_roles   as  $user_role )     
                         {
@@ -150,7 +162,8 @@
                     if ( ! $login_nonce )
                         wp_die( esc_html__( 'Unable to create a login nonce.', 'wp-hide-security-enhancer' ) );
 
-                    $redirect_to = isset( $_REQUEST['redirect_to'] ) ? $_REQUEST['redirect_to'] : admin_url();
+                    //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                    $redirect_to = isset( $_REQUEST['redirect_to'] ) ? wp_unslash ( $_REQUEST['redirect_to'] ) : admin_url();
 
                     $this->HTML( $user, $login_nonce['key'], $redirect_to );    
                 }
@@ -181,7 +194,7 @@
                     $use_2fa_option =   $this->active_2fa_options[ $use_2fa_id ];
 
                     $additional_2fa_options    = array_diff_key( $this->active_2fa_options, array( $use_2fa_id => false ) );
-                    $rememberme = ! empty( $_POST['rememberme'] );
+                    $rememberme = isset( $_POST['rememberme'] ) && '' !== wp_unslash( $_POST['rememberme'] );
 
                     if ( ! function_exists( 'login_header' ) )
                         require_once WPH_PATH . 'modules/components/login_2fa_template_login_header.php';
@@ -341,16 +354,16 @@
                     if ( ! $this->is_using_2fa() )
                         return;
                     
-                    $_2fa_user_id       = ! empty( $_REQUEST['2fa_user_id'] )   ? preg_replace( '/[^0-9a-zA-Z]/' , "",       $_REQUEST['2fa_user_id'] )          : 0;
-                    $_2fa_nonce         = ! empty( $_REQUEST['2fa_nonce'] )     ? preg_replace( '/[^0-9a-zA-Z]/' , "", $_REQUEST['2fa_nonce'] )            : '';
-                    $_2fa_id            = ! empty( $_REQUEST['2fa_id'] )        ? preg_replace( '/[^0-9a-zA-Z_]/' , "", $_REQUEST['2fa_id'] )              : '';
+                    $_2fa_user_id       = ! empty( $_REQUEST['2fa_user_id'] )   ? preg_replace( '/[^0-9a-zA-Z]/' , "",       wp_unslash( $_REQUEST['2fa_user_id'] ) )          : 0;
+                    $_2fa_nonce         = ! empty( $_REQUEST['2fa_nonce'] )     ? preg_replace( '/[^0-9a-zA-Z]/' , "",      wp_unslash( $_REQUEST['2fa_nonce'] ) )            : '';
+                    $_2fa_id            = ! empty( $_REQUEST['2fa_id'] )        ? preg_replace( '/[^0-9a-zA-Z_]/' , "",     wp_unslash( $_REQUEST['2fa_id'] ) )              : '';
                     $redirect_to        = ! empty( $_REQUEST['redirect_to'] )   ? wp_unslash( $_REQUEST['redirect_to'] )                                : '';
-                    $is_post_request    = ( 'POST' === strtoupper( $_SERVER['REQUEST_METHOD'] ) );
+                    $is_post_request    = ( 'POST' === strtoupper( wp_unslash ( $_SERVER['REQUEST_METHOD'] ) ) );
                     $user               = get_user_by( 'id', $_2fa_user_id );
-                    $submit             = ! empty( $_REQUEST['submit'] )   ? preg_replace( '/[^0-9a-zA-Z]/' , "",       $_REQUEST['submit'] )      : '';  
+                    $submit             = ! empty( $_REQUEST['submit'] )   ? preg_replace( '/[^0-9a-zA-Z]/' , "",      wp_unslash( $_REQUEST['submit'] ) )     : '';  
                     
                     $rememberme = false;
-                    if ( isset( $_REQUEST['rememberme'] ) && $_REQUEST['rememberme'] )
+                    if ( isset( $_REQUEST['rememberme'] ) && wp_unslash ( $_REQUEST['rememberme'] ) )
                         $rememberme = true;
 
                     if ( ! $_2fa_user_id || ! $_2fa_nonce ||    !   $_2fa_id    || ! $user )
@@ -696,6 +709,17 @@
             */
             function profile_2fa_options( $user ) 
                 {
+                        
+                    if ( ! is_object ( $user ) )
+                        {
+                            global $userdata;
+                            
+                            $user   =   $userdata;
+                        }
+                        
+                    if ( ! $this->is_using_2fa() ||  ! $this->is_using_2fa_option() || ! $this->is_active_for_role( $user ) )    
+                        return;
+                    
                     wp_enqueue_style( '2fa-dashboard', WPH_URL . '/assets/css/wph-2fa-dashboard.css');
                     wp_enqueue_script( '2fa-dashboard', WPH_URL . '/assets/js/wph-2fa-dashboard.js', array('jquery'), null, true );
 
@@ -748,6 +772,145 @@
                     </table>
                     <?php
                 }
+                
+                
+            
+            /**
+            * Show the 2FA reset action links
+            * 
+            * @param mixed $actions
+            * @param mixed $user
+            */
+            function user_row_2fa_actions( $actions, $user )
+                {
+                    // only show to users who can edit this user (adjust capability as needed)
+                    if ( ! current_user_can( 'edit_user', $user->ID ) )
+                        return $actions;
+
+                    if ( isset ( $this->active_2fa_options['2fa_app'] ) )
+                        {
+                            $action = 'user_action_2fa_app_reset';
+                            $url = add_query_arg( array(
+                                                        'action'    => $action,
+                                                        'user_id'   => $user->ID,
+                                                        ), admin_url( 'admin-post.php' ) );
+
+                            // create nonce keyed to user id so it's per-user and harder to replay
+                            $url = wp_nonce_url( $url, $action . '_' . $user->ID );
+
+
+                            $actions['2fa_app_reset'] = sprintf( '<a href="%s">%s</a>', esc_url( $url ), esc_html__( '2FA APP Reset', 'wp-hide-security-enhancer' ) );
+                        }
+                        
+                    if ( isset ( $this->active_2fa_options['2fa_recovery_codes'] ) )
+                        {
+                            $action = 'user_action_2fa_rc_reset';
+                            $url = add_query_arg( array(
+                                                        'action'    => $action,
+                                                        'user_id'   => $user->ID,
+                                                        ), admin_url( 'admin-post.php' ) );
+
+                            // create nonce keyed to user id so it's per-user and harder to replay
+                            $url = wp_nonce_url( $url, $action . '_' . $user->ID );
+
+
+                            $actions['2fa_rc_reset'] = sprintf( '<a href="%s">%s</a>', esc_url( $url ), esc_html__( '2FA Recovery Codes Reset', 'wp-hide-security-enhancer' ) );
+                        }
+
+                    return $actions;   
+                }
+                
+            
+            /**
+            * Process the user_action_2fa_app_reset action
+            *     
+            */
+            function handle_user_action_2fa_app_reset() 
+                {
+                    // require user_id param
+                    if ( empty( $_GET['user_id'] ) )
+                        wp_die( __( 'Missing user ID', 'wp-hide-security-enhancer' ) );
+
+                    $user_id = intval( $_GET['user_id'] );
+
+                    check_admin_referer( 'user_action_2fa_app_reset_' . $user_id );
+
+                    if ( ! current_user_can( 'edit_user', $user_id ) )
+                        wp_die( __( 'You do not have permission to perform this action.', 'wp-hide-security-enhancer' ) );
+
+
+                    WPH_module_component_login_2fa_app::reset_app_setup( $user_id );
+                    $message = '1';
+
+                    // Redirect back to users list with a query arg so we can show an admin notice
+                    $redirect = wp_get_referer();
+                    if ( ! $redirect )
+                    $redirect = admin_url( 'users.php' );
+                    $redirect = add_query_arg( 'user_action_2fa_app_reset_result', $message, $redirect );
+                    $redirect = remove_query_arg( 'user_action_2fa_rc_reset_result', $redirect );
+
+                    wp_safe_redirect( $redirect );
+                    exit;
+                }
+                
+                
+                
+            /**
+            * Process the user_action_2fa_app_reset action
+            *     
+            */
+            function handle_user_action_2fa_rc_reset() 
+                {
+                    // require user_id param
+                    if ( empty( $_GET['user_id'] ) )
+                        wp_die( __( 'Missing user ID', 'wp-hide-security-enhancer' ) );
+
+                    $user_id = intval( $_GET['user_id'] );
+
+                    check_admin_referer( 'user_action_2fa_rc_reset_' . $user_id );
+
+                    if ( ! current_user_can( 'edit_user', $user_id ) )
+                        wp_die( __( 'You do not have permission to perform this action.', 'wp-hide-security-enhancer' ) );
+
+
+                    WPH_module_component_login_2fa_recovery_codes::reset_setup( $user_id );
+                    $message = '1';
+
+                    // Redirect back to users list with a query arg so we can show an admin notice
+                    $redirect = wp_get_referer();
+                    if ( ! $redirect )
+                    $redirect = admin_url( 'users.php' );
+                    $redirect = add_query_arg( 'user_action_2fa_rc_reset_result', $message, $redirect );
+                    $redirect = remove_query_arg( 'user_action_2fa_app_reset_result', $redirect );
+
+                    wp_safe_redirect( $redirect );
+                    exit;
+                }
+
+
+                /**
+                * Show an admin notice on the users screen after the action runs.
+                * 
+                */
+                function user_2fa_action_admin_notice() 
+                    {
+                        if ( empty( $_GET['user_action_2fa_app_reset_result'] ) &&  empty( $_GET['user_action_2fa_rc_reset_result'] ) )
+                            return;
+
+                        if ( isset ( $_GET['user_action_2fa_app_reset_result'] )    &&  ! empty ( $_GET['user_action_2fa_app_reset_result'] )  )
+                            {
+                                $result = sanitize_text_field( wp_unslash( $_GET['user_action_2fa_app_reset_result'] ) );
+                                if ( $result    === '1' )
+                                    printf( '<div class="notice notice-success is-dismissible"><p>%s</p></div>', esc_html( __( 'The user 2FA App has been successfully reset.', 'wp-hide-security-enhancer' ) ) );
+                            }
+                        if ( isset ( $_GET['user_action_2fa_rc_reset_result'] )     &&  ! empty ( $_GET['user_action_2fa_rc_reset_result'] ) )
+                            {
+                                $result = sanitize_text_field( wp_unslash( $_GET['user_action_2fa_rc_reset_result'] ) );
+                                if ( $result    === '1' )
+                                    printf( '<div class="notice notice-success is-dismissible"><p>%s</p></div>', esc_html( __( 'The user 2FA Recovery Codes has been successfully reset.', 'wp-hide-security-enhancer' ) ) );
+                            }
+                    }    
+            
     
     
     

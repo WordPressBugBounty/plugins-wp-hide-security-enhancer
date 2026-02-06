@@ -336,7 +336,7 @@
             function wp_core_update_user_admin_url( $url, $path )
                 {
                     
-                    if( strpos( $_SERVER['REQUEST_URI'], "/update-core.php")    === FALSE )
+                    if( isset ( $_SERVER['REQUEST_URI'] )   &&  strpos( wp_unslash( $_SERVER['REQUEST_URI'] ), "/update-core.php")    === FALSE )
                         return $url;
                         
                     //replace the wp-admin with custom slug
@@ -350,7 +350,7 @@
 
             function wp_core_update_admin_url( $url, $path, $blog_id )
                 {
-                    if( strpos( $_SERVER['REQUEST_URI'], "/update-core.php")    === FALSE && strpos( $_SERVER['REQUEST_URI'], "/update.php")    === FALSE)
+                    if( isset ( $_SERVER['REQUEST_URI'] )   &&  strpos( wp_unslash( $_SERVER['REQUEST_URI'] ), "/update-core.php")    === FALSE && strpos( wp_unslash( $_SERVER['REQUEST_URI'] ), "/update.php")    === FALSE)
                         return $url;
                     
                     //replace the wp-admin with custom slug

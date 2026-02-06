@@ -59,6 +59,8 @@
             function init()
                 {
                     
+                    include_once(WPH_PATH . '/include/serialize.class.php');                   
+                    
                     //set the urls_replacement priority blocks
                     $this->urls_replacement['high']     =   array();
                     $this->urls_replacement['normal']   =   array();
@@ -103,7 +105,7 @@
                         }
                     
                     //handle the compatibility
-                    $this->plugins_themes_compatibility();
+                    $this->third_party_compatibility();
                     
                     $this->_modules_components_run();
                     
@@ -380,9 +382,9 @@
             
             function admin_print_styles()
                 {
-                    wp_enqueue_style( 'tipsy.css', WPH_URL . '/assets/css/tipsy.css', array(), WPH_CORE_VERSION );
+                    wp_enqueue_style( 'tipsy.css', WPH_URL . '/assets/css/tipsy.css', array(), WPH_CORE_VERSION, false );
                     
-                    wp_register_style('WPHStyle', WPH_URL . '/assets/css/wph.css', array(), WPH_CORE_VERSION );
+                    wp_register_style('WPHStyle', WPH_URL . '/assets/css/wph.css', array(), WPH_CORE_VERSION, false );
                     wp_enqueue_style( 'WPHStyle'); 
                 
                 }
@@ -390,7 +392,7 @@
                 
             function admin_print_styles_general()
                 {
-                    wp_register_style('WPH-Styles-general', WPH_URL . '/assets/css/wph-general.css', array(), WPH_CORE_VERSION );
+                    wp_register_style('WPH-Styles-general', WPH_URL . '/assets/css/wph-general.css', array(), WPH_CORE_VERSION, false );
                     wp_enqueue_style( 'WPH-Styles-general'); 
                 }
                 
@@ -398,9 +400,9 @@
             function admin_print_scripts()
                 {
                     wp_enqueue_script( 'jquery');
-                    wp_register_script('wph', WPH_URL . '/assets/js/wph.js', array(), WPH_CORE_VERSION );
+                    wp_register_script('wph', WPH_URL . '/assets/js/wph.js', array(), WPH_CORE_VERSION, false );
                     
-                    wp_enqueue_script('jquery.tipsy.js', WPH_URL . '/assets/js/jquery.tipsy.js', array(), WPH_CORE_VERSION  ); 
+                    wp_enqueue_script('jquery.tipsy.js', WPH_URL . '/assets/js/jquery.tipsy.js', array(), WPH_CORE_VERSION, false  ); 
                     
                     // Localize the script with new data
                     $translation_array = array(
@@ -1574,7 +1576,7 @@
             * General Plugins and Themes compatibility Handle
             *     
             */
-            function plugins_themes_compatibility()
+            function third_party_compatibility()
                 {
                     
                     include_once( WPH_PATH . '/include/class.compatibility.php' );
@@ -1634,34 +1636,19 @@
                     global $wpdb;
 
                     $meta_type      =   'post';
+                    $table          =   _get_meta_table( $meta_type );
+                    $column         =   sanitize_key( $meta_type . '_id' );
+                    $id_column      =   'meta_id';
                     
-                    $table          = _get_meta_table( $meta_type );
-                    $column         = sanitize_key( $meta_type . '_id' );
-                    $id_column      = 'user' == $meta_type ? 'umeta_id' : 'meta_id';
                     
-                    $is_serialized  =   FALSE;
-                    if ( is_serialized( $meta_value ) )
-                        {
-                            $unserialized_data = @unserialize( $meta_value );
-                            if ( $unserialized_data !== FALSE )
-                                {
-                                    $is_serialized  =   TRUE;
-                                    $meta_value          =   $unserialized_data;
-                                }
-                        }
-                    
-                    $replacement_list   =   $this->functions->get_replacement_list();
-                    //reverse the list
-                    $replacement_list   =   array_flip($replacement_list);
-                    
-                    //Reverse te Urls
-                    $meta_value =   $this->option_block_revert( $meta_value, $replacement_list );
-                    
-                    if ( $is_serialized === TRUE )
-                        $meta_value  =   maybe_serialize( $meta_value );
-                    
+                    $processed  =   WPH_Serialize::process( $meta_value );
+                    if ( $processed === FALSE )
+                        return $check;
+                        
+                    $meta_value =   $processed;
+                         
                     $raw_meta_key   = $meta_key;
-                    $passed_value   = wp_slash($meta_value);
+                    $passed_value   = $meta_value;
                        
                     // Compare existing value to new value if no prev value given and the key exists only once.
                     if ( empty( $prev_value ) && function_exists( 'get_metadata_raw' ) ) 
@@ -1674,13 +1661,12 @@
                                     }
                                 }
                         }
-
+                        
                     // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery WordPress.DB.DirectDatabaseQuery.NoCaching 
                     $meta_ids = $wpdb->get_col( $wpdb->prepare( "SELECT $id_column FROM $table WHERE meta_key = %s AND $column = %d", $meta_key, $object_id ) );
                     if ( empty( $meta_ids ) ) {
                         return add_metadata( $meta_type, $object_id, $raw_meta_key, $passed_value );
                     }
-           
 
                     $_meta_value = $meta_value;
                     $meta_value  = maybe_serialize( $meta_value );
@@ -1712,7 +1698,7 @@
                          */
                         do_action( "update_{$meta_type}_meta", $meta_id, $object_id, $meta_key, $_meta_value );
 
-                        if ( 'post' == $meta_type ) {
+                        if ( 'post' === $meta_type ) {
                             /**
                              * Fires immediately before updating a post's metadata.
                              *
@@ -1752,7 +1738,7 @@
                          */
                         do_action( "updated_{$meta_type}_meta", $meta_id, $object_id, $meta_key, $_meta_value );
 
-                        if ( 'post' == $meta_type ) {
+                        if ( 'post' === $meta_type ) {
                             /**
                              * Fires immediately after updating a post's metadata.
                              *
@@ -1788,30 +1774,13 @@
                     //ignore specific options
                     if ( apply_filters('wph/reverse_urls/pre_update_option', $option, FALSE ) )
                         return $value;
-                    
-                    $replacement_list   =   $this->functions->get_replacement_list();
-                    if ( count ( $replacement_list ) < 1 )
+                        
+                    $processed  =   WPH_Serialize::process( $value );
+                    if ( $processed === FALSE )
                         return $value;
-                    
-                    $replacement_list   =   array_flip($replacement_list);
-                    
-                    //check if the value is already serialized
-                    $is_serialized  =   FALSE;
-                    if ( is_serialized( $value ) )
-                        {
-                            $unserialized_data = @unserialize( $value );
-                            if ( $unserialized_data !== FALSE )
-                                {
-                                    $is_serialized  =   TRUE;
-                                    $value          =   $unserialized_data;
-                                }
-                        }
-                    
-                    $value  =   $this->option_block_revert( $value, $replacement_list );
-                    
-                    if ( $is_serialized === TRUE )
-                        $value  =   maybe_serialize( $value );
-                                            
+                        
+                    $value  =   $processed;    
+                                                  
                     return $value;   
                 }
                 
@@ -1832,51 +1801,7 @@
                     
                     return $ignore_status;
                 }
-                
-                
-            function option_block_revert( $data, $replacement_list )
-                {
-                    $is_serialized  =   FALSE;
-                    if ( is_serialized( $data ) )
-                        {
-                            $unserialized_data = @unserialize( $data );
-                            if ( $unserialized_data !== FALSE )
-                                {
-                                    $is_serialized  =   TRUE;
-                                    $data          =   $unserialized_data;
-                                }
-                        }
-                    
-                    switch (gettype($data))
-                        {
-                            case 'array':
-                                            foreach ($data as $key => $value)
-                                                {
-                                                    $data[$key] = $this->option_block_revert( $value, $replacement_list );
-                                                }
-                                            break;
-                                            
-                            case 'object':
-                                            foreach ($data as $key => $value)
-                                                {
-                                                    $data->$key = $this->option_block_revert( $value, $replacement_list );
-                                                }
-                                            break;
-                                            
-                            case 'string': 
-                                            $data = $this->functions->content_urls_replacement( $data,  $replacement_list ); 
-                                            
-                                            break;            
-                        }
-                    
-                    
-                    if ( $is_serialized === TRUE )
-                        $data  =   maybe_serialize( $data );
-                    
-                    return $data;
-                }           
-                
-            
+      
             
             function attachment_url_to_postid ( $post_id, $url )
                 {
@@ -1941,18 +1866,6 @@
                     if ( ob_get_level() < 1 )
                         ob_start( array($this, 'ob_start_callback'));    
                 }
-                
-                
-            function log_save($text)
-                {
-                    
-                    $myfile     = fopen(WPH_PATH . "/debug.txt", "a") or die("Unable to open file!");
-                    $txt        =  $text   .   "\n";
-                    fwrite($myfile, $txt);
-                    fclose($myfile);   
-                    
-                }
-
             
         } 
 

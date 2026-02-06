@@ -93,7 +93,7 @@
                     
                     ?>
                         <div class="row xspacer header">
-                            <p><?php _e('Enable Header',    'wp-hide-security-enhancer') ?></p>
+                            <p><?php esc_html_e('Enable Header',    'wp-hide-security-enhancer') ?></p>
                             <fieldset>
                                 <label>
                                     <input type="radio" class="setting-value default-value radio" value="no" name="enabled" <?php if ( $module_settings['enabled'] == 'no' ) { ?>checked="checked"<?php } ?>> <span>No</span>
@@ -104,7 +104,7 @@
                             </fieldset>
                         </div>
                         
-                        <p><?php _e('Header Options',    'wp-hide-security-enhancer') ?></p>
+                        <p><?php esc_html_e('Header Options',    'wp-hide-security-enhancer') ?></p>
                         <div class="row spacer option-item">
                             <fieldset>
                                 <label>
@@ -120,7 +120,7 @@
                                     <input type="radio" class="radio" value="1; report=" name="value" <?php if ( $module_settings['value'] == '1; report=' ) { ?>checked="checked"<?php } ?>> <span>1; report=</span>
                                 </label>
                                 <label>
-                                    <input style="<?php if ( $module_settings['value'] != '1; report=' ) { echo 'display: none';} ?>" type="text" placeholder="Report URI" value="<?php echo $module_settings['report_to']; ?>" name="report_to">
+                                    <input style="<?php if ( $module_settings['value'] != '1; report=' ) { echo 'display: none';} ?>" type="text" placeholder="Report URI" value="<?php echo esc_html ( $module_settings['report_to'] ); ?>" name="report_to">
                                 </label>
                             </fieldset>
                         </div>

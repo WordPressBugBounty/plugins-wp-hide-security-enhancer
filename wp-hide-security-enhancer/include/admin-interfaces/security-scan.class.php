@@ -100,6 +100,7 @@
                     
                     if ( ( ! isset ( $site_scan['last_scan'] )    ||  empty ( $site_scan['last_scan'] ) )   &&  empty (  $page_visited ) )
                         {
+                            //phpcs:ignore WordPress.Security.NonceVerification.Recommended
                             if ( isset (  $_GET['page'] )   &&  $_GET['page']   ==  'wp-hide-security-scan')
                                 return FALSE;
                             
@@ -167,10 +168,10 @@
                 
             function admin_print_scripts()
                 {
-                    wp_enqueue_script('jquery.tipsy.js', WPH_URL . '/assets/js/jquery.tipsy.js', array(), WPH_CORE_VERSION  );
+                    wp_enqueue_script('jquery.tipsy.js', WPH_URL . '/assets/js/jquery.tipsy.js', array(), WPH_CORE_VERSION, false  );
                     
                     wp_enqueue_script( 'jquery');
-                    wp_register_script('wph', WPH_URL . '/assets/js/wph.js', array(), WPH_CORE_VERSION );
+                    wp_register_script('wph', WPH_URL . '/assets/js/wph.js', array(), WPH_CORE_VERSION, false );
                     
                     // Localize the script with new data
                     $translation_array = array(
@@ -420,7 +421,7 @@
                                                     }
                                             
                                             ?>
-                                            <p class="last_scan"><b><?php esc_html_e ( 'Last Scan', 'wp-hide-security-enhancer' ); ?>:</b> <?php echo esc_html ( date( "Y-m-d H:i:s", $site_scan['last_scan'] ) );  ?></p>
+                                            <p class="last_scan"><b><?php esc_html_e ( 'Last Scan', 'wp-hide-security-enhancer' ); ?>:</b> <?php echo esc_html ( gmdate( "Y-m-d H:i:s", $site_scan['last_scan'] ) );  ?></p>
                                             <?php if  ( empty ( $context ) ) { ?>
                                             <p class="security_hints"><?php echo esc_html ( $this->get_security_hints( $site_score ) ) ?></p>
                                             <?php } ?>
@@ -493,7 +494,8 @@
                 
             private function render_item( $scan_item_id, $scan_item_data, $response  )
                 {
-                    
+                    $allow_tags =   WPH_functions::get_general_description_allowed_tags();
+                                            
                     ?>
                         <div id="item-<?php echo esc_html ( $scan_item_id ) ?>" class="postbox wph-postbox item<?php if ( $response->status ) { echo ' valid-item'; } ?>">
                             <div class="wph_input widefat<?php 
@@ -503,12 +505,13 @@
                                 <div class="row cell label">
                                     <label><span class="dashicons <?php echo esc_html ( $scan_item_data['icon'] ) ?>"></span> <?php echo esc_html ( $scan_item_data['title'] ) ?></label>
                                     <p class="info"><?php echo esc_html ( $response->info ); ?></p>
-                                    <div class="description"><?php echo $response->description; ?></div>
+                                    <div class="description"><?php echo wp_kses ( $response->description, $allow_tags ); ?></div>
                                     <div class="actions">
                                     <?php
                                         if ( count ( (array)$response->actions ) > 0 )
                                         foreach ( $response->actions    as  $action_type =>  $action )
                                             {
+                                                //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                                 echo  " " . $this->get_action_html( $action_type, $action, $scan_item_id );  
                                             }
                                         ?></div>
@@ -517,7 +520,7 @@
                             </div>
                             <div class="wph_help option_help">
                                 <div class="text">
-                                    <?php echo wpautop( $scan_item_data['help'] ) ?>
+                                    <?php echo wp_kses ( wpautop( $scan_item_data['help'] ), $allow_tags ) ?>
                                 </div>
                             </div>
                         </div>    
@@ -587,7 +590,7 @@
             function wp_ajax_wph_site_scan()
                 {
                    
-                    if ( ! wp_verify_nonce( $_POST['nonce'], 'wph/site_scan' ) ) 
+                    if ( ! isset ( $_POST['nonce'] )    ||  ! wp_verify_nonce( wp_unslash( $_POST['nonce'] ), 'wph/site_scan' ) ) 
                         die();    
                     
                     $this->get_HTML();
@@ -639,7 +642,7 @@
             function wp_ajax_wph_site_scan_progress()
                 {
                    
-                    if ( ! wp_verify_nonce( $_POST['nonce'], 'wph/site_scan' ) ) 
+                    if ( ! isset ( $_POST['nonce'] )    ||  ! wp_verify_nonce( wp_unslash( $_POST['nonce'] ), 'wph/site_scan' ) ) 
                         die();    
                     
                     wp_ob_end_flush_all();
@@ -697,11 +700,10 @@
                 
             function wp_ajax_wph_site_scan_ignore()
                 {
-                    
-                    if ( ! wp_verify_nonce( $_POST['nonce'], 'wph/site_scan/ignore' ) ) 
+                    if ( ! isset ( $_POST['nonce'] )    ||  ! wp_verify_nonce( wp_unslash( $_POST['nonce'] ), 'wph/site_scan/ignore' ) )
                         die();    
                     
-                    $item_id    =   preg_replace( '/[^a-zA-Z0-9\-\_$]/m' , "", $_POST['item_id'] );
+                    $item_id    =   isset ( $_POST['item_id'] ) ?   preg_replace( '/[^a-zA-Z0-9\-\_$]/m' , "", $_POST['item_id'] )  :   '';
                     
                     if ( ! empty ( $item_id ) )
                         {
@@ -732,10 +734,10 @@
             function wp_ajax_wph_site_scan_restore()
                 {
                     
-                    if ( ! wp_verify_nonce( $_POST['nonce'], 'wph/site_scan/restore' ) ) 
+                    if ( ! isset ( $_POST['nonce'] )    ||  ! wp_verify_nonce( wp_unslash( $_POST['nonce'] ), 'wph/site_scan/restore' ) ) 
                         die();    
                     
-                    $item_id    =   preg_replace( '/[^a-zA-Z0-9\-\_$]/m' , "", $_POST['item_id'] );
+                    $item_id    =   isset ( $_POST['item_id'] )     ?   preg_replace( '/[^a-zA-Z0-9\-\_$]/m' , "", $_POST['item_id'] )  :   '';
                     
                     if ( ! empty ( $item_id ) )
                         {

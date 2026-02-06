@@ -353,7 +353,7 @@
                     if ( $disable_developer_tools == 'no' )
                         return;
                         
-                    wp_register_script('devtools-detect', WPH_URL . '/assets/js/devtools-detect.js', array(), WPH_CORE_VERSION );
+                    wp_register_script('devtools-detect', WPH_URL . '/assets/js/devtools-detect.js', array(), WPH_CORE_VERSION, false );
                     wp_enqueue_script ( 'devtools-detect' );
                     
                 }
@@ -425,7 +425,10 @@
                         if ( count ( $disabled_events ) >   0 )
                             {
                                 ?>
-                                const disable_events = ['<?php echo implode( "', '", $disabled_events ); ?>'];
+                                const disable_events = ['<?php 
+                                //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+                                echo ( implode( "', '", $disabled_events ) ); 
+                                ?>'];
                                 disable_events.forEach( function( event_name ) {
                                     document.addEventListener( event_name, function (event) {
                                             event.preventDefault()

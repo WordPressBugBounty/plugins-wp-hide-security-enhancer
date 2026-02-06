@@ -40,12 +40,14 @@
                     
                     $site_score =    $this->wph->security_scan->get_site_score( $site_scan );
                     
+                    $allow_tags =   WPH_functions::get_general_description_allowed_tags();
+                    
                     if ( isset ( $site_scan['last_scan'] )   &&  ! empty ( $site_scan['last_scan'] ) )
                         {
                             ?>
                             <p><?php esc_html_e( 'Your current estimated protection is',    'wp-hide-security-enhancer' ) ?> <b><?php echo esc_html( $site_score['protection'] ) ?></b>.<br /><?php
                             
-                                echo $this->wph->security_scan->get_security_hints( $site_score, 'widget' );
+                                echo wp_kses ( $this->wph->security_scan->get_security_hints( $site_score, 'widget' ), $allow_tags );
                             
                             ?></p>
                             <?php

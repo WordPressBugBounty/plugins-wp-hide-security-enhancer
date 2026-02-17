@@ -78,6 +78,7 @@
                                                                                                                                                                                 "<code>https://-domain-name-/xmlrpc.php</code>
                                                                                                                                                                                 <br /><br />" . __("Through this option it can be changed to anything else. This ensure the protocol will not be called by anyone who don't know the actual path.",    'wp-hide-security-enhancer'),
                                                                                                                                             'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-xml-rpc/',
+                                                                                                                                            'ai_question'               =>  'Help me understand the "New XML-RPC Path" option with WP Hide plugin',
                                                                                                                                             'input_value_extension'     =>  'php'
                                                                                                                                             ),
                                                                                                         
@@ -94,6 +95,7 @@
                                                                                                             'description' => __("This blocks the default XML-RPC service. The functionality applies if <b>New XML-RPC Path</b> option is filled in.", 'wp-hide-security-enhancer') . 
                                                                                                                              "<br/><br />" . __("Keep in mind that some third-party services, like Jetpack, rely on XML-RPC to connect to WordPress sites for features such as monitoring, statistics, and site management.", 'wp-hide-security-enhancer'),
                                                                                                             'option_documentation_url' => 'https://wp-hide.com/documentation/rewrite-xml-rpc/',
+                                                                                                            'ai_question'               =>  'Help me understand the "Block default xmlrpc.php" option with WP Hide plugin',
                                                                                                         ),
                                                                                                         'advanced_option' => array(
                                                                                                             'description' => '<b>' . __('This is an advanced option !', 'wp-hide-security-enhancer') . '</b><br />' . 
@@ -115,6 +117,7 @@
                                                                                                             'description' => __("Activating the option, methods requiring authentication will be blocked through a call.", 'wp-hide-security-enhancer') . 
                                                                                                                              "<br />" . __("Brute force attacks often target the XML-RPC service. Therefore, it's advisable to enable this option unless you are using the service for specific purposes, such as with a remote mobile app.", 'wp-hide-security-enhancer'),
                                                                                                             'option_documentation_url' => 'https://wp-hide.com/documentation/rewrite-xml-rpc/',
+                                                                                                            'ai_question'               =>  'Help me understand the "Disable XML-RPC methods requiring authentication" option with WP Hide plugin',
                                                                                                         ),
                                                                                                         'options' => array(
                                                                                                             'no'  => __('No', 'wp-hide-security-enhancer'),
@@ -132,6 +135,7 @@
                                                                                                             'description' => __("Before disabling the XML-RPC, ensure the service is not used for any of the following:", 'wp-hide-security-enhancer') . 
                                                                                                                              "<ul><li>" . __("Mobile Apps: XML-RPC allows users to manage their WordPress sites via mobile apps.", 'wp-hide-security-enhancer') . "</li></ul>",
                                                                                                             'option_documentation_url' => 'https://wp-hide.com/documentation/rewrite-xml-rpc/',
+                                                                                                            'ai_question'               =>  'Help me understand the "Disable XML-RPC service" option with WP Hide plugin',
                                                                                                         ),
                                                                                                         'options' => array(
                                                                                                             'no'  => __('No', 'wp-hide-security-enhancer'),
@@ -148,6 +152,7 @@
                                                                                                             'title'       => __('Help', 'wp-hide-security-enhancer') . ' - ' . __('Remove pingback', 'wp-hide-security-enhancer'),
                                                                                                             'description' => __("This enables removing pingback functionality, which is used to notify authors of links to their posts.", 'wp-hide-security-enhancer'),
                                                                                                             'option_documentation_url' => 'https://wp-hide.com/documentation/rewrite-xml-rpc/',
+                                                                                                            'ai_question'               =>  'Help me understand the "Remove pingback" option with WP Hide plugin',
                                                                                                         ),
                                                                                                         'options' => array(
                                                                                                             'no'  => __('No', 'wp-hide-security-enhancer'),

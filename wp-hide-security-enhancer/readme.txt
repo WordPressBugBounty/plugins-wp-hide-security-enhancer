@@ -4,7 +4,7 @@ Donate link: https://www.nsp-code.com/
 Tags: hide, security, headers, login, 2fa
 Requires at least: 2.8
 Tested up to: 6.9
-Stable tag: 2.8
+Stable tag: 2.8.2
 License: GPLv2 or later
 
 Protect your website by concealing vulnerable WordPress traces, plugins, themes, login/admin url. 2FA, Captcha, Firewall, Security Headers etc.
@@ -464,6 +464,9 @@ We’re continuously improving WP Hide! If there’s a feature you need—whethe
 2. Sample front html code.
 
 == Changelog == 
+
+= 2.8.2 =
+* Add AI-powered help to every option to make its purpose easier to understand, with practical examples and usage tips.
 
 = 2.8.1 =
 * Removed deprecated log_save method.

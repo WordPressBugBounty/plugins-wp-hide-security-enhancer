@@ -351,6 +351,6 @@
     
     jQuery( document ).ready( function() {
         
-        jQuery('.options span').tipsy({fade: false, gravity: 's'});    
+        jQuery('.options span, .options .icon').tipsy({fade: false, gravity: 's'});    
     })
     

@@ -50,7 +50,8 @@
                                                                                                                                                                                                 "<br /> " . __("Benefits:",    'wp-hide-security-enhancer') .
                                                                                                                                                                                                 "<ul><li>" . __("Enhances security by hiding directory structure",    'wp-hide-security-enhancer') . "</li>".
                                                                                                                                                                                                 "<li>" . __("Protects sensitive files and assets",    'wp-hide-security-enhancer') . "</li></ul>" ,
-                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-core/'
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-core/',
+                                                                                                                                                                'ai_question'               =>  'Help me understand the "Disabling Directory Listing for server folders" option with WP Hide plugin'
                                                                                                                                                                 ),
 
                                                                                                                                     'options'       =>  array(

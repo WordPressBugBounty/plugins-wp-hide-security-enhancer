@@ -91,6 +91,9 @@
 .wph_input .options li {  padding: 0px 3px}
 .wph_input .options li a:focus, .wph_input .options li a:active { outline: 0; border: none;  -moz-outline-style: none; }
 .wph_input .options li span {display:block;cursor: pointer; color: #797979; font-size: 17px;}
+.wph_input .options li a {display: block}
+.wph_input .options li .icon {max-width: 20px; margin-top: -7px; margin-left: 3px}
+.wph_input .options li .icon:hover {filter: brightness(0);}
 .wph_input .options li span:hover {color: #000}
 .wph_input input[type=text],.wph_input textarea,.wph_input select{border-color:#dddddd; width: 100%; margin-left: 0px} 
 .wph_input #replacer_insert_root {display: none}

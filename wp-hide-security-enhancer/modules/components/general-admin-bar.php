@@ -95,7 +95,8 @@
                                                                                                         'help'          =>  array(
                                                                                                                                     'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove Admin Bar for ',    'wp-hide-security-enhancer') . $role['name'] . ' ' .  __('role.',    'wp-hide-security-enhancer'),
                                                                                                                                     'description'               =>  $help_description,
-                                                                                                                                    'option_documentation_url'  =>  'https://www.wp-hide.com/documentation/general-html-admin-bar/'
+                                                                                                                                    'option_documentation_url'  =>  'https://www.wp-hide.com/documentation/general-html-admin-bar/',
+                                                                                                                                    'ai_question'               =>  'Help me understand the "Remove Admin Bar for user type" option with WP Hide plugin'
                                                                                                                                     ),
                                                                                                         
                                                                                                         'options'               =>  array(

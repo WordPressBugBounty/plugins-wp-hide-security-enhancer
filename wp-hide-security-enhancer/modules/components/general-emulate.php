@@ -53,7 +53,8 @@
                                                                                                                                                                                                 __("- Joomla",    'wp-hide-security-enhancer') . "<br />" .
                                                                                                                                                                                                 __("- TYPO3",    'wp-hide-security-enhancer') . "<br />" .
                                                                                                                                                                                                 __("- Wix",    'wp-hide-security-enhancer') . "<br />" ,
-                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-emulate-cms/'
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/general-emulate-cms/',
+                                                                                                                                                                'ai_question'               =>  'Help me understand the "Emulate CMS" option with WP Hide plugin'
                                                                                                                                                                 ),
                                                                                                                                     
                                                                                                                                     'options'       =>  array(

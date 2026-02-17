@@ -43,6 +43,8 @@
                                                                                                                                     'help'          =>  array(
                                                                                                                                                                 'title'                     =>  __('Help',    'wp-hide-security-enhancer') . ' - ' . __('Remove Oembed',    'wp-hide-security-enhancer'),
                                                                                                                                                                 'description'               =>  __("WordPress oEmbed recognizes URLs to a number of services, for example Youtube videos. When WordPress sees the URL it will connect to the external service (Youtube) and ask for the relevant HTML code to embed the video into the page or post.",    'wp-hide-security-enhancer'),
+                                                                                                                                                                
+                                                                                                                                                                'ai_question'               =>  'Help me understand the "Remove Oembed tags from header" option with WP Hide plugin'
                                                                                                                                                                 ),
 
                                                                                                                                     'options'       =>  array(

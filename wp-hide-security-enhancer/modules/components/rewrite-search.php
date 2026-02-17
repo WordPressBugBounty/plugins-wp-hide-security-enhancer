@@ -59,7 +59,7 @@
                                                                                                                                                                                                     <code>https://-domain-name-/search/search-word/</code>
                                                                                                                                                                                                     <br /><br /> ". __("By using a value of 'find' this become:",    'wp-hide-security-enhancer') . "<br />
                                                                                                                                                                                                     <code>https://-domain-name-/find/search-word/</code>",
-                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-search/'
+                                                                                                                                                                'option_documentation_url'  =>  'https://wp-hide.com/documentation/rewrite-search/',
                                                                                                                                                                 ),
                                                                                                                                 
                                                                                                                                 'value_description' =>  'e.g. find',

@@ -306,16 +306,12 @@
                                     <li><span class="tips dashicons dashicons-edit"          title='Generate random value for the field' onClick="WPH.randomWord( this, '<?php if  ( ! empty ($module_setting['help']['input_value_extension'])) { echo esc_html ( $module_setting['help']['input_value_extension'] ); }  ?>' )"></span></li>
                                     <li><span class="tips dashicons dashicons-admin-appearance"  title='Remove the field value'  onClick="WPH.clear( this )"></span></li>
                                     <?php } ?>
-                                    <?php
-                                        
-                                        if ( $module_setting['help'] !==    FALSE   &&  ! empty( $module_setting['help']['option_documentation_url'] ))
-                                            {
-                                        
-                                    ?>
+                                    <?php if ( $module_setting['help'] !==    FALSE   &&  ! empty( $module_setting['help']['option_documentation_url'] )) { ?>
                                     <li><a target="_blank" href="<?php echo esc_url ( $module_setting['help']['option_documentation_url'] ) ?>"><span class="tips dashicons dashicons-admin-links"       title='Open option help page'></span></a></li>
-                                    <?php
-                                            }
-                                    ?>
+                                    <?php }
+                                        if ( $module_setting['help'] !==    FALSE   &&  ! empty( $module_setting['help']['ai_question'] )) { ?>
+                                    <li><a target="_blank" href="https://chat.openai.com/?q=<?php echo esc_html ( $module_setting['help']['ai_question'] ) ?>"><img src="<?php echo WPH_URL ?>/assets/images/ai-icon.png" class="icon" title='Get Help from AI for This Option'></a></li>
+                                    <?php } ?>
                                 </ul>
                                             <label for=""><?php echo wp_kses ( $module_setting['label'], $allow_tags )  ?></label>
                                             <?php

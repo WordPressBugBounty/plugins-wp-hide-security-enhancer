@@ -233,10 +233,11 @@ h2.subtitle {font-size: 15px; font-style: italic; font-weight: bold}
 .wrap .example { color: #666666; font-size: 11px; font-weight: bold}
 
 .start-container {    background-color: #fff;    border-left: 3px solid #0073aa;    overflow: hidden;    padding: 25px 20px 20px 30px;    position: relative;}
-.start-container::before {    color: #eee2ec;    content: "\f111";    content: "\f332";    display: block;    font-family: dashicons;    font-size: 232px;    line-height: 1;    position: absolute;    right: 0;    text-align: center;    top: 0;    width: 1em; z-index: 1}
+.start-container::before {    color: #eee2ec;    content: "\f111";    content: "\f332";    display: block;    font-family: dashicons;    font-size: 232px;    line-height: 1;    position: absolute;    right: 0;    text-align: center;    top: 0;    width: 1em; z-index: 0}
 .start-container.licence-key::before { content: "\f112"; }
 .start-container .text {position: relative;z-index: 2}
 .start-container h2, .start-container p {position: relative}
+.start-container h2 small {font-size: 0.7em; font-weight: normal}
 .start-container input[type="text"] {width: 740px; max-width: 100%;}
 .start-container .warning {color: #ca4a1f}
 

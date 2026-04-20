@@ -102,7 +102,7 @@
             function login_page_HTML( $user, $args  )
                 {
                         
-                    if ( $this->user_require_setup( $user->ID ) ||   $this->get_available_codes( $user->ID ) === FALSE )
+                    if ( ( $this->user_2fa_require_setup( )  &&  ! $this->user_2fa_option_setup_completed ( $user->ID ) )  ||   $this->get_available_codes( $user->ID ) === FALSE )
                         {
                                                                                     
                                 if ( isset( $user->ID ) && isset( $_REQUEST[ '2fa_generate_list' ] ) ) 
@@ -126,7 +126,7 @@
                                             <?php
                                                 
                                                 $_2fa_require_setup             =   $this->wph->functions->get_module_item_setting('2fa_require_setup');
-                                                $other_2fa_option_require_setup =   $this->wph->_2fa->_2fa_option_require_setup( $user->ID, array ( '2fa_recovery_codes' ) );
+                                                $other_2fa_option_require_setup =   $this->wph->_2fa->_2fa_get_first_option_require_setup( $user->ID, array ( '2fa_recovery_codes' ) );
                                                 if ( $_2fa_require_setup    ==  'yes'   &&  $other_2fa_option_require_setup    !== FALSE )
                                                     {
                                                         $link_args = array(
@@ -320,19 +320,31 @@
             
             
             /**
-            * Check if the user require setup for Recovery Codes
+            * Check if the 2fa option require setup for Recovery Codes
             * 
             * @param mixed $user_id
             */
-            function user_require_setup( $user_id )
+            function user_2fa_require_setup(  )
+                {                        
+                    return TRUE;
+                }
+                
+            
+            /**
+            * Check if the user 2fa option set-up is completed
+            * 
+            * @param mixed $user_id
+            */
+            function user_2fa_option_setup_completed( $user_id )
                 {
                     $setup_completed = get_user_meta( $user_id, '_2fa_rc_setup_completed', true );
                     
                     if (    $setup_completed   !==  'true' )
-                        return TRUE;
+                        return FALSE;
                         
-                    return FALSE;
+                    return TRUE;
                 }
+                
                 
             
             /**
@@ -412,7 +424,7 @@
             */
             function interface_option_html( $user ) 
                 {
-                    if ( $this->user_require_setup( $user->ID ) ||   $this->get_available_codes( $user->ID ) === FALSE )
+                    if ( $this->user_2fa_require_setup( )  &&  ! $this->user_2fa_option_setup_completed ( $user->ID )  ||   $this->get_available_codes( $user->ID ) === FALSE )
                         {
                             ?>
                             <p class="_2fa-info important"><b><?php esc_html_e( 'The Recovery Code setup is not yet complete.', 'wp-hide-security-enhancer' ); ?></b></p>

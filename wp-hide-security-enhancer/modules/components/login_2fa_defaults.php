@@ -157,6 +157,24 @@
                                                                 break;
                                                                 
                                     case '2fa_primary' :
+                                                                $options = array();
+
+                                                                $items = array(
+                                                                    '2fa_email'            => 'Email',
+                                                                    '2fa_app'              => 'Auth APP',
+                                                                    '2fa_recovery_codes'   => 'Recovery Codes',
+                                                                );
+
+                                                                foreach ($items as $key => $label) 
+                                                                    {
+                                                                        $option_value = $this->wph->functions->get_module_item_setting($key);
+
+                                                                        $options[$key] = __($label, 'wp-hide-security-enhancer');
+
+                                                                        if ($option_value !== 'yes')
+                                                                            $options[$key] .= ' ( ' . __('inactive', 'wp-hide-security-enhancer') . ' )';
+                                                                    }
+                                                                
                                                                 $component_setting =   array_merge ( $component_setting , array(
                                                                                                                                 'label'         =>  __('Primary Two-Factor option',    'wp-hide-security-enhancer'),
                                                                                                                                 'description'   =>   __('Primary Two-Factor Authentication Method.', 'wp-hide-security-enhancer'),
@@ -176,11 +194,7 @@
                                                                                                                                                                     ),
                                                                                                                                 
                                                                                                                                 'input_type'    =>  'radio',
-                                                                                                                                'options'       =>  array(
-                                                                                                                                                            '2fa_email'                     =>  __('Email',     'wp-hide-security-enhancer'),
-                                                                                                                                                            '2fa_app'                       =>  __('Auth APP',    'wp-hide-security-enhancer'),
-                                                                                                                                                            '2fa_recovery_codes'            =>  __('Recovery Codes',    'wp-hide-security-enhancer'),
-                                                                                                                                                            ),
+                                                                                                                                'options'       =>  $options,
                                                                                                                                 ) );
                                                                 break;
                                                                 

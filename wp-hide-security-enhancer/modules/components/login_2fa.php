@@ -182,7 +182,7 @@
                             //check if required to set-up
                             if ( $_2fa_require_setup    ==  'yes' )
                                 {
-                                    $other_2fa_option_require_setup =   $this->_2fa_option_require_setup( $user->ID );
+                                    $other_2fa_option_require_setup =   $this->_2fa_get_first_option_require_setup( $user->ID );
                                     if ( $other_2fa_option_require_setup    !== FALSE )
                                         $use_2fa_id =   $other_2fa_option_require_setup;
                                 }
@@ -231,7 +231,7 @@
                                 $use_2fa_option->login_page_HTML( $user, $args );
                                 
                            
-                                if ( $_2fa_require_setup == 'no'    &&  $use_2fa_option->user_require_setup( $user->ID ) ) 
+                                if ( $_2fa_require_setup == 'no'    &&  $use_2fa_option->user_2fa_require_setup( )  &&  ! $use_2fa_option->user_2fa_option_setup_completed ( $user->ID ) ) 
                                     {
                                         if ( $use_2fa_id === '2fa_recovery_codes' )
                                             echo '<br />';
@@ -258,9 +258,10 @@
                                 $link_args['redirect_to'] = $redirect_to;
                      
                             $_2fa_require_setup =   $this->wph->functions->get_module_item_setting('2fa_require_setup');
-                            if ( $_2fa_require_setup == 'yes'   &&  $this->_2fa_option_require_setup( $user->ID )   !== FALSE )
+                            if ( //$_2fa_require_setup == 'yes'   &&  
+                            $this->_2fa_get_first_option_require_setup( $user->ID )   !== FALSE )
                                 {
-                                    if ( $this->_2fa_option_require_setup( $user->ID, array ( $use_2fa_id ) )   !== FALSE )
+                                    if ( $this->_2fa_get_first_option_require_setup( $user->ID, array ( $use_2fa_id ) )   !== FALSE )
                                         {
                                             ?>
                                             <div class="other_2fa_options">
@@ -272,7 +273,7 @@
                                                     
                                                     foreach ( $this->active_2fa_options as  $active_2fa_option_id  =>  $_2fa_option )
                                                         {
-                                                            if ( $_2fa_option->user_require_setup ( $user->ID ) &&  $use_2fa_id != $active_2fa_option_id )
+                                                            if ( $_2fa_option->user_2fa_require_setup( )  &&  ! $_2fa_option->user_2fa_option_setup_completed ( $user->ID ) &&  $use_2fa_id != $active_2fa_option_id )
                                                                 {
                                                                     $link_args['2fa_id'] = $active_2fa_option_id;
                                                                     
@@ -288,29 +289,46 @@
                                             </div><?php   
                                         }
                                 }
-                                else
+                                
+                                
+                                //else
                                 {
-                                    ?>
-                                    <div class="other_2fa_options">
-                                        <p>
-                                            <?php esc_html_e( 'Or use other available options:', 'wp-hide-security-enhancer' ); ?>
-                                        </p>
-                                        <ul>
-                                            <?php
-                                            foreach ( $this->active_2fa_options as $_2fa_key => $_2fa_option ) 
-                                                {
-                                                    if ( $_2fa_key   ==  $use_2fa_id )
-                                                        continue;
-                                                        
-                                                    $link_args['2fa_id'] = $_2fa_key;
-                                                ?>
-                                                <li>
-                                                    <a href="<?php echo esc_url( $this->login_url( $link_args ) ); ?>"><?php echo esc_html( $_2fa_option->get_other_label() ); ?></a>
-                                                </li><?php 
-                                                } 
+                                    $other_available_2fa_options    =   array();
+                                    foreach ( $this->active_2fa_options as $_2fa_key => $_2fa_option ) 
+                                        {
+                                            if ( $_2fa_key   ==  $use_2fa_id )
+                                                continue;
+                                            
+                                            if (    $_2fa_option->user_2fa_option_setup_completed( $user->ID  )  === FALSE )
+                                                continue;
+                                                
+                                            $other_available_2fa_options[] = $_2fa_key;
+                                        }
+                                        
+                                    if ( count ( $other_available_2fa_options ) >   0 )
+                                        {
                                             ?>
-                                        </ul>
-                                    </div><?php
+                                            <div class="other_2fa_options">
+                                                <p>
+                                                    <?php esc_html_e( 'Or use other available options:', 'wp-hide-security-enhancer' ); ?>
+                                                </p>
+                                                <ul>
+                                                    <?php
+                                                    foreach ( $this->active_2fa_options as $_2fa_key => $_2fa_option ) 
+                                                        {
+                                                            if ( ! in_array ( $_2fa_key, $other_available_2fa_options ) )
+                                                                continue;
+                                                                
+                                                            $link_args['2fa_id'] = $_2fa_key;
+                                                        ?>
+                                                        <li>
+                                                            <a href="<?php echo esc_url( $this->login_url( $link_args ) ); ?>"><?php echo esc_html( $_2fa_option->get_other_label() ); ?></a>
+                                                        </li><?php 
+                                                        } 
+                                                    ?>
+                                                </ul>
+                                            </div><?php
+                                        }
                                 }
                         }
                         
@@ -377,7 +395,7 @@
                         
                     //check if other 2fa options which require setup
                     $_2fa_require_setup             =   $this->wph->functions->get_module_item_setting('2fa_require_setup');
-                    $other_2fa_option_require_setup =   $this->_2fa_option_require_setup( $user->ID ); 
+                    $other_2fa_option_require_setup =   $this->_2fa_get_first_option_require_setup( $user->ID ); 
 
                     if ( strtolower ( $submit )    ==  'setuplater' &&  $_2fa_require_setup !== 'yes'  )
                         {
@@ -387,7 +405,7 @@
                                     if ( $active_2fa_option_id  ===  '2fa_recovery_codes' )
                                         continue;
                                         
-                                    if ( $_2fa_option->user_require_setup ( $user->ID ) === FALSE   &&  $_2fa_id != $active_2fa_option_id )
+                                    if ( $_2fa_option->user_2fa_require_setup( )  &&  ! $_2fa_option->user_2fa_option_setup_completed ( $user->ID )   &&  $_2fa_id != $active_2fa_option_id )
                                         {
                                             $link_args = array(
                                                                 'action'        =>  'validate_2fa',
@@ -442,6 +460,7 @@
                             return;
                         }
                     
+                    /**
                     if ( $_2fa_require_setup    ==  'yes'   &&  $other_2fa_option_require_setup    !== FALSE )
                         {
                             $link_args = array(
@@ -455,6 +474,7 @@
                             wp_safe_redirect( $this->login_url( $link_args ) );
                             exit();
                         }
+                    */
                     
                     $args   =   array(
                                                 'user_id'       =>  $user->ID,
@@ -524,13 +544,13 @@
             * Return the first 2fa option id which require setup
             * 
             */
-            function _2fa_option_require_setup( $user_ID, $exclude  =   array() )
+            function _2fa_get_first_option_require_setup( $user_ID, $exclude  =   array() )
                 {
                     $use_2fa_id =   FALSE;
                     
                     foreach ( $this->active_2fa_options as  $active_2fa_option_id  =>  $active_2fa_option )
                         {
-                            if ( array_search ( $active_2fa_option_id, $exclude )   === FALSE &&  $active_2fa_option->user_require_setup ( $user_ID ) )
+                            if ( array_search ( $active_2fa_option_id, $exclude )   === FALSE &&  $active_2fa_option->user_2fa_require_setup( )  &&  ! $active_2fa_option->user_2fa_option_setup_completed ( $user_ID ) )
                                 {
                                     $use_2fa_id =   $active_2fa_option_id;
                                     break;

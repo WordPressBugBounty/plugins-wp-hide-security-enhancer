@@ -108,7 +108,7 @@
             function login_page_HTML( $user, $args  )
                 {
                         
-                    if ( $this->user_require_setup( $user->ID ) )
+                    if ( $this->user_2fa_require_setup( )  &&  ! $this->user_2fa_option_setup_completed ( $user->ID ) )
                         {
                             include_once( WPH_PATH . '/vendors/GoogleAuthenticator.php');
                             
@@ -269,18 +269,28 @@
             
             
             /**
-            * Check if the user require setup for the APP
+            * Check if the 2fa option require setup for the APP
             * 
             * @param mixed $user_id
             */
-            function user_require_setup( $user_id )
+            function user_2fa_require_setup( )
+                {
+                    return TRUE;
+                }
+                
+            /**
+            * Check if the user 2fa option set-up is completed
+            * 
+            * @param mixed $user_id
+            */
+            function user_2fa_option_setup_completed( $user_id )
                 {
                     $setup_completed = get_user_meta( $user_id, '_2fa_app_setup_completed', true );
                     
                     if (    $setup_completed   !==  'true' )
-                        return TRUE;
+                        return FALSE;
                         
-                    return FALSE;
+                    return TRUE;
                 }
                 
                 
@@ -336,7 +346,7 @@
             function interface_option_html( $user, $reset_secret    =   TRUE ) 
                 {
                     
-                    if ( $this->user_require_setup( $user->ID ) )
+                    if ( $this->user_2fa_require_setup( )  &&  ! $this->user_2fa_option_setup_completed ( $user->ID ) )
                         {
                             include_once( WPH_PATH . '/vendors/GoogleAuthenticator.php');
                             

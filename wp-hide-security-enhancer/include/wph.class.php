@@ -186,6 +186,9 @@
                     
                     //New login url email
                     add_action( 'init',                             array ( 'WPH_module_admin_login_php', 'check_new_url_email_notice' ) );
+                    
+                    add_filter( 'plugin_action_links_wp-hide-security-enhancer/wp-hide.php',                  array ( $this,  'add_plugin_action_links') );
+                    add_filter( 'network_admin_plugin_action_links_wp-hide-security-enhancer/wp-hide.php' ,   array ( $this,  'add_plugin_action_links')  );
                                         
                 }
             
@@ -1865,6 +1868,16 @@
                 {
                     if ( ob_get_level() < 1 )
                         ob_start( array($this, 'ob_start_callback'));    
+                }
+                
+                
+            function add_plugin_action_links( $plugin_actions )
+                {
+                    $new_actions = array();
+
+                    $new_actions['wph_settings'] = sprintf( __( '<a href="%s">Settings</a>', 'wp-hide-security-enhancer' ), esc_url( admin_url( 'admin.php?page=wp-hide' ) ) );
+
+                    return array_merge( $new_actions, $plugin_actions );    
                 }
             
         } 

@@ -320,16 +320,26 @@
                 
             
             /**
-            * Check if the user require setup for the APP
+            * Check if the 2fa option require setup for the APP
             * 
             * @param mixed $user_id
             */
-            function user_require_setup( $user_id )
+            function user_2fa_require_setup(  )
                 {
                             
                     return FALSE;
                 }
+                
             
+            /**
+            * Check if the user 2fa option set-up is completed
+            * 
+            * @param mixed $user_id
+            */    
+            function user_2fa_option_setup_completed( $user_id )
+                {
+                    return TRUE;
+                }
             
  
             /**

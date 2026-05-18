@@ -235,7 +235,15 @@
                                     if ( file_exists ( WPH_PATH . '/router/environment.php') )
                                         @unlink( WPH_PATH . '/router/environment.php' );
                                     
-                                }     
+                                }
+                                
+                            if(version_compare($version, '2.8.6', '<'))
+                                {
+                                    delete_site_option( 'wph/site_scan' );
+                                                                                                            
+                                    $version =   '2.8.6';
+                                    
+                                }      
                             
                             
                             //check for triggered flush rules

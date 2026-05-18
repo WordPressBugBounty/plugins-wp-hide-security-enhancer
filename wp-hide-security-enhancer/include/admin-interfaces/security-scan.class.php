@@ -48,6 +48,8 @@
                                             'firewall',
                                             'unwanted_files',
                                             
+                                            'vulnerabilities',
+                                            
                                             'php_display_errors',
                                             'php_register_globals',
                                             'php_safe_mode',

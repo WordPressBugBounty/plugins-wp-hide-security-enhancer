@@ -51,19 +51,29 @@
                         {
                             $_JSON_response['status']       =   FALSE;
                             
-                            $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span>The Registration should be customised or disabled through Dashboard > Settings.', 'wp-hide-security-enhancer' );
+                            $_JSON_response['description']  =   '<div class="vulnerability-report">
+
+                                                                            <div class="description">
+                                                                                <p>' . __( 'The Registration should be customised or disabled through Dashboard > Settings.', 'wp-hide-security-enhancer' ) . '</p>
+                                                                            </div>
+                                                                                                                                                                                            
+                                                                         </div>';
                             
-                            $_JSON_response['actions']      =   array (
-                                                                        'fix'       =>  '<a class="button-primary wph-pro" target="_blank" href="https://wp-hide.com/pricing/">PRO</a>',
-                                                                        'ignore'            =>  '//--post-generated--',
-                                                                        'restore'           =>  '//--post-generated--',
-                                                                        );
+                            
                         }
                         else
                         {
                             $_JSON_response['status']       =   TRUE;
                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-yes"></span>The option appears properly configured.', 'wp-hide-security-enhancer' );
-                        }  
+                        }
+                        
+                    
+                    $_JSON_response['actions']      =   array (
+                                                                        'fix'       =>  '<a class="button-primary wph-pro" target="_blank" href="https://wp-hide.com/pricing/">PRO</a>',
+                                                                        'ignore'            =>  '//--post-generated--',
+                                                                        'restore'           =>  '//--post-generated--',
+                                                                        'help'              =>  '<a class="button tips" original-title="Get Help from AI" target="_blank" href="https://chat.openai.com/?q=Help me understand the &quot; Through your site, if the WordPress Membership option is active, anyone can register.&quot;. This is a Scan Item in WP Hide plugin">AI Help</a>',
+                                                                        );  
                         
                     return $this->return_json_response( $_JSON_response );
                 

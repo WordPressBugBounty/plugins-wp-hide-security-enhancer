@@ -45,24 +45,45 @@
                     if ( $expose_php    === TRUE   )
                         {
                             $_JSON_response['status']       =   FALSE;
-                            $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span>The expose_php is ON. 
-                                                                        To fix this security issue, change the php.ini:
+                                                                        
+                            $_JSON_response['description']  =   '<div class="vulnerability-report">
 
-                                                                        <br /><code>expose_php = "off"</code>
-
-                                                                        <br />or within .htaccess:
-
-                                                                        <br /><code>php_flag expose_php off</code>.', 'wp-hide-security-enhancer' );
-                            $_JSON_response['actions']      =   array (
-                                                                        'ignore'            =>  '//--post-generated--',
-                                                                        'restore'           =>  '//--post-generated--',
-                                                                        );
-                        }
+                                                                    <div class="description">
+                                                                        <p>' . __( 'The expose_php setting is currently enabled on your server. This allows PHP to disclose its version in HTTP headers, making it easier for attackers to identify potential vulnerabilities based on outdated software. For improved security, it is recommended to disable expose_php in your configuration.', 'wp-hide-security-enhancer' ) . '</p>
+                                                                    </div>
+                                                                    
+                                                                    <div class="description">
+                                                                        <p>' . __( 'To fix this security issue, change the php.ini', 'wp-hide-security-enhancer' ) . '</p>
+                                                                    </div>
+                                                                    <div class="code_example">
+                                                                        <ul>
+                                                                            <li>expose_php = "off"</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    
+                                                                    <div class="description">
+                                                                        <p>' . __( 'You can disable this within .htaccess', 'wp-hide-security-enhancer' ) . '</p>
+                                                                    </div>
+                                                                    <div class="code_example">
+                                                                        <ul>
+                                                                            <li>php_flag expose_php off</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                            
+                                                                 </div>';
+                                                                        
+                                                    }
                         else
                         {
                             $_JSON_response['status']       =   TRUE;
                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-yes"></span>The expose_php is Off.', 'wp-hide-security-enhancer' );
-                        }  
+                        }
+                        
+                    $_JSON_response['actions']      =   array (
+                                                                        'ignore'            =>  '//--post-generated--',
+                                                                        'restore'           =>  '//--post-generated--',
+                                                                        'help'              =>  '<a class="button tips" original-title="Get Help from AI" target="_blank" href="https://chat.openai.com/?q=Help me understand the &quot; The expose_php setting is currently enabled on your server. This allows PHP to disclose its version in HTTP headers, making it easier for attackers to identify potential vulnerabilities based on outdated software. For improved security, it is recommended to disable expose_php in your configuration. &quot;. This is a Scan Item in WP Hide plugin">AI Help</a>',
+                                                                        );  
                         
                     return $this->return_json_response( $_JSON_response );
                 

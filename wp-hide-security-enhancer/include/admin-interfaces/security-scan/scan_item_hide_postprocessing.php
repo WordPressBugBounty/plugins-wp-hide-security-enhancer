@@ -55,19 +55,28 @@
                         {
                             $_JSON_response['status']       =   FALSE;
                             
-                            $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span>Your site assets still contain traceable data within CSS / JavaScript', 'wp-hide-security-enhancer' );
+                            $_JSON_response['description']  =   '<div class="vulnerability-report">
+
+                                                                            <div class="description">
+                                                                                <p>' . __( 'Your site assets still contain traceable data within CSS / JavaScript', 'wp-hide-security-enhancer' ) . '</p>
+                                                                            </div>
+                                                                                                                                                                                            
+                                                                         </div>';
                             
-                            $_JSON_response['actions']      =   array (
-                                                                        'fix'       =>  '<a class="button-primary wph-pro" target="_blank" href="https://wp-hide.com/pricing/">PRO</a>',
-                                                                        'ignore'            =>  '//--post-generated--',
-                                                                        'restore'           =>  '//--post-generated--',
-                                                                        );
+                            
                         }
                         else
                         {
                             $_JSON_response['status']       =   TRUE;
                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-yes"></span>The option appears properly configured.', 'wp-hide-security-enhancer' );
                         }  
+                        
+                    $_JSON_response['actions']      =   array (
+                                                                        'fix'       =>  '<a class="button-primary wph-pro" target="_blank" href="https://wp-hide.com/pricing/">PRO</a>',
+                                                                        'ignore'            =>  '//--post-generated--',
+                                                                        'restore'           =>  '//--post-generated--',
+                                                                        'help'              =>  '<a class="button tips" original-title="Get Help from AI" target="_blank" href="https://chat.openai.com/?q=Help me understand the &quot; The feature provides a post-processing engine for all site assets ( CSS /  JavaScript ). That encodes the CSS  and JavaScript, which makes it unable to read.&quot;. This is a Scan Item in WP Hide plugin">AI Help</a>',
+                                                                        );  
                         
                     return $this->return_json_response( $_JSON_response );
                 

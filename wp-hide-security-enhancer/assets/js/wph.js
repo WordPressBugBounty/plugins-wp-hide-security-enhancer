@@ -11,11 +11,20 @@
             
             adminInit() {
                 
+                var self = this;
+                
                 jQuery( document ).ready( function() {
                     if ( jQuery( '.submenu.wph-highlight').length > 0 )
                         jQuery( '.submenu.wph-highlight').closest( 'li' ).addClass('wph-current');
-                })   
-                
+                        
+                    
+                    jQuery(document).on('click', '.gc-header', function(e) {
+                            self.wphToggle(e.currentTarget);
+                        });
+                    
+                    jQuery('#wph-toggle-all').on('click', function(e) { self.wphToggleAll(e.currentTarget); });
+ 
+                })
                 
             }
             
@@ -148,21 +157,29 @@
                     jQuery('#security-scan #scan_overview .spinner').css( 'visibility', 'visible');
                     jQuery('#security-scan #scan_overview .working').css( 'display', 'inline-block');
                     
-                    jQuery('#wph-scan-score .passed h5').html('0');
-                    jQuery('#wph-scan-score .failed h5').html('0');
+                    jQuery('#wph-scan-score .passed span').html('0');
+                    jQuery('#wph-scan-score .failed span').html('0');
                     
+                    /*
                     jQuery('#wph-graph .wph-graph-progress' ).css( 'transform', 'rotate(0deg)' );
                     jQuery('#wph-graph .wph-graph-data b' ).html( '0%' );
                     jQuery('#scan_overview .protection' ).html( 'Unknown' );
+                    */
+                    WPH.setGraph( 0 );
+                    jQuery('#scan_overview .protection' ).html( 'Unknown' );
                     
-                    jQuery('#all-scann-items div.item').not('.ajax_updated').each ( function ( ) {
-                        jQuery(this).find(' > .wph_input').addClass('unknown').removeClass('issue_found');
-                        jQuery(this).find('.info').html('');
-                        jQuery(this).find('.description').html('');
-                        jQuery(this).find('.actions').html('');
+                    jQuery('#security-scan #all-scann-items .gc-header .spinner').css( 'visibility', 'visible');
+                    jQuery('#security-scan #all-scann-items .gc-header .gc-item .status').removeClass( 'status-fail', 'status-ignore', 'status-pass' ).addClass( 'status-unknown' ).html( 'Unknow' );
+                                        
+                    jQuery('#all-scann-items div.gc').not('.ajax_updated').each ( function ( ) {
+                        jQuery(this).addClass('unknown');
+                        jQuery(this).find('.issue_info').html('');
+                        jQuery(this).find('.issue_description').html('');
+                        jQuery(this).find('.issue_actions').html('');
                     })
-                     
-                    var LastResponseLength  =   false;
+                    
+                    WPH.wphToggleAll( jQuery('#wph-toggle-all'), 'close');
+
                     var Response        =   '';
                     
                     jQuery.ajax({
@@ -203,6 +220,7 @@
                 
             site_scan_progres ( nonce )
                 {
+                    
                     jQuery.ajax({
                         type: 'POST',
                         url: ajaxurl,
@@ -215,18 +233,17 @@
                             
                             WPH.AJAX_data  =   data;
                             
-                            jQuery ( '#security-scan #scan_overview .working .progress' ).html( data.items_progress );
-                            jQuery('#wph-scan-score .passed h5').html( data.success );
-                            jQuery('#wph-scan-score .failed h5').html( data.failed );
+                            jQuery('#security-scan #scan_overview .working .progress' ).html( data.items_progress );
+                            jQuery('#wph-scan-score .passed span').html( data.success );
+                            jQuery('#wph-scan-score .failed span').html( data.failed );
                             
-                            jQuery('#wph-graph .wph-graph-progress' ).css( 'transform', 'rotate(' + data.graph_progress + 'deg)' );
-                            jQuery('#wph-graph .wph-graph-data b' ).html( data.progress + '%' );
+                            WPH.setGraph( data.progress );
                             jQuery('#scan_overview .protection' ).html( data.protection );
                             
                             if ( data.scann_in_progress  ==   false )
                                 clearInterval( WPH.SiteScanProgress_interval );
                                 
-                            jQuery('#all-scann-items div.item').not('.ajax_updated').each ( function ( ) {
+                            jQuery('#all-scann-items div.gc').not('.ajax_updated').each ( function ( ) {
                                 var item_id =   jQuery(this).attr('id');
                                 var el_item_id     =   item_id.replace("item-", "")
                                 if ( eval ( "WPH.AJAX_data.results." + el_item_id  )  != undefined )    
@@ -239,33 +256,52 @@
                                             {    
                                                 jQuery('#' + item_id ).addClass( item_response.status );
                                                 
-                                                jQuery('#' + item_id + " > .wph_input").removeClass( 'unknown' );
+                                                jQuery('#' + item_id ).removeClass( 'unknown' );
                                                 
                                                 if ( item_response.status == true )
-                                                    jQuery('#' + item_id ).addClass('valid-item');
+                                                    {
+                                                        jQuery('#' + item_id ).addClass('item-pass');
+                                                        jQuery('#' + item_id ).removeClass('item-fail');
+                                                        
+                                                        jQuery('#' + item_id + ' .gc-header').removeClass('status-fail');
+                                                        jQuery('#' + item_id + ' .gc-header').addClass('status-pass');
+                                                        jQuery('#' + item_id + ' .gc-header span.status').removeClass('status-fail');
+                                                        jQuery('#' + item_id + ' .gc-header span.status').addClass('status-pass');
+                                                        jQuery('#' + item_id + ' .gc-header span.status').text( 'Passed' );
+                                                    }
                                                 else if ( item_response.status == false )
-                                                    jQuery('#' + item_id + " > .wph_input").addClass( 'issue_found' );
+                                                    {
+                                                        jQuery('#' + item_id ).addClass('item-fail');
+                                                        jQuery('#' + item_id ).removeClass('item-pass');
+                                                        
+                                                        jQuery('#' + item_id + ' .gc-header').addClass('status-fail');
+                                                        jQuery('#' + item_id + ' .gc-header').removeClass('status-pass');
+                                                        jQuery('#' + item_id + ' .gc-header span.status').removeClass('status-pass');
+                                                        jQuery('#' + item_id + ' .gc-header span.status').addClass('status-fail');
+                                                        jQuery('#' + item_id + ' .gc-header span.status').text( 'Failed' );
+                                                    }
                                             }
                                         
-                                        jQuery('#' + item_id + " .info").html( '' );
+                                        jQuery('#' + item_id + " .issue_info").html( '' );
                                         if ( item_response.info  != undefined )
                                             {    
-                                                jQuery('#' + item_id + " .info").html( item_response.info );
+                                                jQuery('#' + item_id + " .issue_info").html( item_response.info );
                                             }
                                         
-                                        jQuery('#' + item_id + " .description").html( '' );
+                                        jQuery('#' + item_id + " .issue_description").html( '' );
                                         if ( item_response.description  != undefined )
                                             {    
-                                                jQuery('#' + item_id + " .description").html( item_response.description );
+                                                jQuery('#' + item_id + " .issue_description").html( item_response.description );
                                             }
                                             
-                                        jQuery('#' + item_id + " .actions").html( '' );
+                                        jQuery('#' + item_id + " .issue_actions").html( '' );
                                         if ( item_response.actions  != undefined )
                                             {    
-                                                jQuery('#' + item_id + " .actions").html( item_response.actions );
+                                                jQuery('#' + item_id + " .issue_actions").html( item_response.actions );
                                             }
                                             
                                         jQuery('#' + item_id ).addClass('ajax_updated');
+                                        jQuery('#' + item_id + ' .gc-header .spinner').css( 'visibility', 'hidden');
                                                                                 
                                     }
                                 
@@ -273,7 +309,10 @@
                             
                         },  
                         error: function(errorThrown){
-                            //jQuery('#scan_overview .wph_results').append( '<p>Error while retrieving the AJAX update.</p>');
+                            jQuery('#scan_overview .wph_results')
+                                .find('p.error').remove()
+                                .end()
+                                .append('<p class="error">Error while retrieving the AJAX update.</p>');
                         }
                     });
                 }
@@ -281,6 +320,8 @@
                 
             scan_ignore_item ( item_id, nonce )
                 {
+                    jQuery('#item-' + item_id + ' .gc-header .spinner').css( 'visibility', 'visible');
+                    
                     jQuery.ajax({
                         type: 'POST',
                         url: ajaxurl,
@@ -291,17 +332,21 @@
                             'nonce'     :   nonce
                         },
                         success:function( data ) {
-                            jQuery('html, body').animate({
-                                scrollTop: jQuery("#info_box").offset().top
-                            }, 500);
+                            
                             jQuery('#item-' + data.item_id ).appendTo("#hidden-items");
-                            jQuery('#wph-graph .wph-graph-data' ).html("<b>" + data.progress + "%</b><br>" + data.protection );
-                            jQuery('#wph-graph .wph-graph-progress' ).css( 'transform', 'rotate(' + data.graph_progress + 'deg)' );
-                            jQuery('#wph-scan-score .passed h5' ).html( data.success );
-                            jQuery('#wph-scan-score .failed h5' ).html( data.failed );
+                            jQuery('#scan_overview .protection' ).html( data.protection );
+                            WPH.setGraph( data.progress );
+                            jQuery('#wph-scan-score .passed span' ).html( data.success );
+                            jQuery('#wph-scan-score .failed span' ).html( data.failed );
+                            
+                            jQuery('#item-' + item_id + ' .gc-header .spinner').css( 'visibility', 'hidden');
+                            
+                            jQuery('html, body').animate({
+                                scrollTop: jQuery("#scan_overview").offset().top - 200
+                            }, 500);
                         },  
                         error: function(errorThrown){
-
+                            jQuery('#item-' + item_id + ' .gc-header .spinner').css( 'visibility', 'hidden');
                         }
                     });
                     
@@ -310,6 +355,8 @@
                 
             scan_restore_item ( item_id, nonce )
                 {
+                    jQuery('#item-' + item_id + ' .gc-header .spinner').css( 'visibility', 'visible');
+                    
                     jQuery.ajax({
                         type: 'POST',
                         url: ajaxurl,
@@ -320,26 +367,101 @@
                             'nonce'     :   nonce
                         },
                         success:function( data ) {
-                            jQuery('html, body').animate({
-                                scrollTop: jQuery("#info_box").offset().top
-                            }, 500);
-                            jQuery('#item-' + data.item_id ).appendTo("#scann-items");
+                                                        
+                            var $newItem = jQuery('#item-' + data.item_id);
+                            var $lastFail = jQuery('#scann-items .gc.item-fail').last();
+                            if ($lastFail.length) {
+                                $newItem.insertAfter($lastFail);
+                            } else {
+                                // If no failed items, append at the beginning or end
+                                jQuery('#item-' + data.item_id ).appendTo("#scann-items");
+                            }
+                            
+                            
                             jQuery('#wph-graph .wph-graph-data' ).html("<b>" + data.progress + "%</b><br>" + data.protection );
-                            jQuery('#wph-graph .wph-graph-progress' ).css( 'transform', 'rotate(' + data.graph_progress + 'deg)' );
-                            jQuery('#wph-scan-score .passed h5' ).html( data.success );
-                            jQuery('#wph-scan-score .failed h5' ).html( data.failed );
+                            jQuery('#scan_overview .protection' ).html( data.protection );
+                            WPH.setGraph( data.progress );
+                            jQuery('#wph-scan-score .passed span' ).html( data.success );
+                            jQuery('#wph-scan-score .failed span' ).html( data.failed );
+                            
+                            jQuery('#item-' + item_id + ' .gc-header span.status-ignore').remove();
+                            
+                            jQuery('#item-' + item_id + ' .gc-header .spinner').css( 'visibility', 'hidden');
+                            
+                            jQuery('html, body').animate({
+                                scrollTop: jQuery("#scan_overview").offset().top - 200
+                            }, 500);
                         },  
                         error: function(errorThrown){
-
+                            jQuery('#item-' + item_id + ' .gc-header .spinner').css( 'visibility', 'hidden');
                         }
                     });
                     
                 }
                 
+            setGraph ( percent ) 
+                {
+                  const progress = document.querySelector('.progress');
+                  const text = document.querySelector('.value');
+
+                  const offset = 100 - percent;
+
+                  progress.style.strokeDashoffset = offset;
+                  text.textContent = percent + '%';
+                }    
+            
+                
             captcha_test () 
                 {
                     jQuery( '#api_test' ).val( 'true' );
                     jQuery( '#api_test' ).closest('form').requestSubmit();
+                }
+                
+            
+            wphToggle( element )
+                {
+                    var $toggle = jQuery(element);
+                    var $content = $toggle.closest('.gc').find('.gc-body');
+                    var $icon = $toggle.find('.gc-item.toggle .dashicons');
+
+                    $content.slideToggle(200);
+                    $icon.toggleClass('dashicons-arrow-down-alt2 dashicons-arrow-up-alt2');
+                }
+                
+            wphToggleAll ( element, force )
+                {
+                    var area    = jQuery('.gc-area');
+                    var items   =   jQuery( area ).find('.gc');
+                    var first_element_toggle   =   jQuery( items ).first().find('.gc-header .wph-toggle span');
+                    
+                    var doClose = ( force === 'close' ) ? true
+                                : ( force === 'open'  ) ? false
+                                : jQuery( first_element_toggle ).hasClass( 'dashicons-arrow-up-alt2');
+                    
+                    if ( doClose )
+                        {
+                            //close all
+                            jQuery( items ).find('.gc-header .wph-toggle span.dashicons').removeClass(function(index, className) {
+                                                                                                                                return className
+                                                                                                                                    .split(/\s+/)
+                                                                                                                                    .filter(c => c !== 'dashicons')
+                                                                                                                                    .join(' ');
+                                                                                                                            });
+                            jQuery( items ).find('.gc-header .wph-toggle span.dashicons').addClass('dashicons-arrow-down-alt2');
+                            jQuery( items ).find('.gc-body').slideUp(200);
+                        }
+                        else
+                        {
+                            //open all
+                            jQuery( items ).find('.gc-header .wph-toggle span.dashicons').removeClass(function(index, className) {
+                                                                                                                                return className
+                                                                                                                                    .split(/\s+/)
+                                                                                                                                    .filter(c => c !== 'dashicons')
+                                                                                                                                    .join(' ');
+                                                                                                                            });
+                            jQuery( items ).find('.gc-header .wph-toggle span.dashicons').addClass('dashicons-arrow-up-alt2');
+                            jQuery( items ).find('.gc-body').slideDown(200);
+                        }
                 }
             
     }
@@ -347,10 +469,8 @@
     var WPH = new WPH_Class();
     
     
-    
-    
     jQuery( document ).ready( function() {
-        
-        jQuery('.options span, .options .icon').tipsy({fade: false, gravity: 's'});    
+        if (jQuery.fn.tipsy) {
+            jQuery('.tips').tipsy({fade: false, gravity: 's', html: true });    
+        }
     })
-    

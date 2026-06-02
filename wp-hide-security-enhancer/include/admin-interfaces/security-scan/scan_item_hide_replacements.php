@@ -128,31 +128,46 @@
                             $_JSON_response['status']       =   FALSE;
                             
                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span>Your site assets still contain traceable data within HTML / CSS / JavaScript. Those can be removed using the Replacements functionality.', 'wp-hide-security-enhancer' );
-                            $_JSON_response['description']  .=   '<br /><br />';
+                            $_JSON_response['description']  =   '<div class="vulnerability-report">
+
+                                                                    <div class="description">
+                                                                        <p>' . __( 'Your site assets still contain traceable data within HTML / CSS / JavaScript. Those can be removed using the Replacements functionality.', 'wp-hide-security-enhancer' ) . '</p>
+                                                                    </div>
+                                                                    
+                                                                    <div class="error_log">
+                                                                        <ul>
+                                                                    ';
                             
                             foreach ( $found_traces   as  $code_name    =>  $found_status )
                                 {
-                                    
-                                    $_JSON_response['description']  .=  '<p class="important">';              
-                                    $_JSON_response['description']  .=   '<b> <span class="dashicons dashicons-search"></span> ' . __( 'Found', 'wp-hide-security-enhancer' ) .' - ' . $code_name .'</b>. ' . __( 'Add replacements for <code>', 'wp-hide-security-enhancer' ) . implode ( "</code>, <code>", $fingerprints[$code_name]['replacements'] ) . '</code>';
-                                    $_JSON_response['description']  .=  '</p>';
-                                    
+                                    $_JSON_response['description']  .=  "<li><span class='info'>[" . __( 'Found', 'wp-hide-security-enhancer' ) . "]</span> " . $code_name .'. ' . __( 'Add postprocesing replacements for <code>', 'wp-hide-security-enhancer' ) . implode ( "</code>, <code>", $fingerprints[$code_name]['replacements'] ) . '</code></li>';
                                 }
+                                
+                            $_JSON_response['description']  .=   '</ul></div></div>';
                             
                             if ( $this->wph->security_scan->remote_errors   !== FALSE )
-                                $_JSON_response['description']  .=   "<br /><br /><span class='error'>" . __('Unable to complete this security task as an error occoured', 'wp-hide-security-enhancer' ) . ': <b>' .$this->wph->security_scan->remote_errors . '</b></span>';
+                                $_JSON_response['description']  =   '<div class="vulnerability-report">
+
+                                                                            <div class="description">
+                                                                                <p>' . __( 'Unable to complete this security task as an error occoured', 'wp-hide-security-enhancer' ) . '</p>
+                                                                            </div>
+                                                                                                                                                                                            
+                                                                         </div>';
                             
-                            $_JSON_response['actions']      =   array (
-                                                                        'fix'       =>  '<a class="button-primary wph-pro" target="_blank" href="https://wp-hide.com/pricing/">PRO</a>',
-                                                                        'ignore'            =>  '//--post-generated--',
-                                                                        'restore'           =>  '//--post-generated--',
-                                                                        );
+                            
                         }
                         else
                         {
                             $_JSON_response['status']       =   TRUE;
                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-yes"></span>There are no obvious fingerprints.', 'wp-hide-security-enhancer' );
                         }  
+                        
+                    $_JSON_response['actions']      =   array (
+                                                                        'fix'       =>  '<a class="button-primary wph-pro" target="_blank" href="https://wp-hide.com/pricing/">PRO</a>',
+                                                                        'ignore'            =>  '//--post-generated--',
+                                                                        'restore'           =>  '//--post-generated--',
+                                                                        'help'              =>  '<a class="button tips" original-title="Get Help from AI" target="_blank" href="https://chat.openai.com/?q=Help me understand the &quot; "The module implements a post-processing engine, which allows arbitrary words to be replaced with custom ones. This works for all site data as HTML, Css, JavaScript assets. This is the perfect tool to white-label any plugins or active code on a site, by replacing the specific words (classes, tags, JavaScript variables etc). &quot;. This is a Scan Item in WP Hide plugin">AI Help</a>',
+                                                                        );  
                         
                     return $this->return_json_response( $_JSON_response );
                 

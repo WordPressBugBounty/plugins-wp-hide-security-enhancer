@@ -30,7 +30,7 @@
                                         'icon'          =>  'dashicons-shield',
                                         
                                         'help'          =>  __("A Firewall is a security piece of software that adds a layer of protection to your site. A firewall works as a rules-based filter for all incoming traffic to a website, it ensures only the secure traffic is reaching the server, all malicious attempts will be blocked and logged.
-                                                                <br />A Firewall works as Proactive ratter reactive security solution, so it helps to protect a website before the malicious and malware actually reach it. This is a huge improvement for security, as preventing any harm and damages to a site, spare the administrators of incalculable losses which the malware can do.",    'wp-hide-security-enhancer'),
+                                                                <br />This works as Proactive ratter reactive security solution, so it helps to protect a website before the malicious and malware actually reach it. This is a huge improvement for security, as preventing any harm and damages to a site, spare the administrators of incalculable losses which the malware can do.",    'wp-hide-security-enhancer'),
                                         
                                         'score_points'  =>  20,
                                         );
@@ -108,32 +108,41 @@
                     if ( count ( $found_errors ) > 0 )
                         {
                             $_JSON_response['status']       =   FALSE;
-                            
-                            $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span>Your site does not appear to use a Firewall or fails to block specific hacks.', 'wp-hide-security-enhancer' );
-                            $_JSON_response['description']  .=   '<br /><br />';
-                            
+                                                        
+                            $_JSON_response['description']  =   '<div class="vulnerability-report">
+
+                                                                    <div class="description">
+                                                                        <p>' . __( 'No active firewall has been detected on your site, or the current configuration does not appear to effectively block common attack patterns. A properly configured firewall helps protect your site by filtering malicious traffic and blocking known exploit attempts before they reach your WordPress installation.', 'wp-hide-security-enhancer' ) . '</p>
+                                                                    </div>
+                                                                    
+                                                                    <div class="error_log">
+                                                                        <ul>
+                                                                    ';
+                                                        
                             foreach ( $found_errors   as  $found_error_messages )
                                 {
-                                    
-                                    $_JSON_response['description']  .=  '<p class="important">';              
-                                    $_JSON_response['description']  .=   '<b> <span class="dashicons dashicons-search"></span> ' . __( 'Found', 'wp-hide-security-enhancer' ) .' - ' . implode ( '<br />' , $found_error_messages ) .'</b>';
-                                    $_JSON_response['description']  .=  '</p>';
-                                    
+                                    $_JSON_response['description']  .=   "<li><span class='info'>[" . __( 'Issue', 'wp-hide-security-enhancer' ) . "]</span> " . implode ( ', ' , $found_error_messages ) .'</li>';                                    
                                 }
+                                
+                            $_JSON_response['description']  .=   '</ul></div></div>';
                             
-                            $_JSON_response['actions']      =   array (
-                                                                        'fix'       =>  '<a class="button-primary wph-pro" target="_blank" href="https://wp-hide.com/pricing/">PRO</a>',
-                                                                        'ignore'            =>  '//--post-generated--',
-                                                                        'restore'           =>  '//--post-generated--',
-                                                                        );
+                            
                         }
                         else
                         {
                             $_JSON_response['status']       =   TRUE;
-                            $_JSON_response['description']  =   __( '<span class="dashicons dashicons-yes"></span>Your site appears to use a Firewall.', 'wp-hide-security-enhancer' );
-                        }  
+                            $_JSON_response['description']  =   __( '<span class="dashicons dashicons-yes"></span>Your site use a Firewall.', 'wp-hide-security-enhancer' );
+                        }
+                        
+                    $_JSON_response['actions']      =   array (
+                                                                        'fix'       =>  '<a class="button-primary wph-pro fix" target="_blank" href="https://wp-hide.com/pricing/">PRO</a>',
+                                                                        'ignore'            =>  '//--post-generated--',
+                                                                        'restore'           =>  '//--post-generated--',
+                                                                        'help'              =>  '<a class="button tips" original-title="Get Help from AI" target="_blank" href="https://chat.openai.com/?q=Help me understand the &quot; No active firewall has been detected on your site, or the current configuration does not appear to effectively block common attack patterns. A properly configured firewall helps protect your site by filtering malicious traffic and blocking known exploit attempts before they reach your WordPress installation. &quot;. This is a Scan Item in WP Hide plugin">AI Help</a>',
+                                                                        );  
                         
                     return $this->return_json_response( $_JSON_response );
+                    
                 
                 }    
             

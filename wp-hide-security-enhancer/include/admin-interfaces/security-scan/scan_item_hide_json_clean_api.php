@@ -52,19 +52,27 @@
                         {
                             $_JSON_response['status']       =   FALSE;
                             
-                            $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span>The "Clean the REST API response" should be active.', 'wp-hide-security-enhancer' );
+                            $_JSON_response['description']  =   '<div class="vulnerability-report">
+
+                                                                            <div class="description">
+                                                                                <p>' . __( 'The "Clean the REST API response" should be active.', 'wp-hide-security-enhancer' ) . '</p>
+                                                                            </div>
+                                                                                                                                                                                            
+                                                                         </div>';
                             
-                            $_JSON_response['actions']      =   array (
-                                                                        'fix'       =>  '<a class="button-primary" href="'. get_dashboard_url( '', 'admin.php?page=wp-hide-rewrite&component=json-rest', 'admin' ) .'">Fix</a>',
-                                                                        'ignore'            =>  '//--post-generated--',
-                                                                        'restore'           =>  '//--post-generated--',
-                                                                        );
                         }
                         else
                         {
                             $_JSON_response['status']       =   TRUE;
                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-yes"></span>The option appears properly configured.', 'wp-hide-security-enhancer' );
-                        }  
+                        }
+                        
+                    $_JSON_response['actions']      =   array (
+                                                                        'fix'       =>  '<a class="button-primary tips" original-title="Go to a Fix" href="'. network_admin_url ( 'admin.php?page=wp-hide&component=json-rest') .'">Fix</a>',
+                                                                        'ignore'            =>  '//--post-generated--',
+                                                                        'restore'           =>  '//--post-generated--',
+                                                                        'help'              =>  '<a class="button tips" original-title="Get Help from AI" target="_blank" href="https://chat.openai.com/?q=Help me understand the &quot; When calling the site REST API base route ( e.g. /wp-json/ or ?rest_route=/ ) the service outputs all available namespaces and routes for current site. This can be a breach for the system, as outputs important information regarding certain used theme and plugins. Recommended selection for this option is Yes, to ensure no inside data is being exposed.&quot;. This is a Scan Item in WP Hide plugin">AI Help</a>',
+                                                                        );  
                         
                     return $this->return_json_response( $_JSON_response );
                 

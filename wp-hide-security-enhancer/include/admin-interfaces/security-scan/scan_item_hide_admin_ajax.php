@@ -51,19 +51,27 @@
                         {
                             $_JSON_response['status']       =   FALSE;
                             
-                            $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span>Rewriting the admin-ajax.php to another slug to increase overall security for a WordPress site.', 'wp-hide-security-enhancer' );
+                            $_JSON_response['description']  =   '<div class="vulnerability-report">
+
+                                                                    <div class="description">
+                                                                        <p>' . __( 'Rewriting the admin-ajax.php to another slug to increase overall security for a WordPress site.', 'wp-hide-security-enhancer' ) . '</p>
+                                                                    </div>
+                                                                                                                                                                                    
+                                                                 </div>';
                             
-                            $_JSON_response['actions']      =   array (
-                                                                        'fix'       =>  '<a class="button-primary wph-pro" target="_blank" href="https://wp-hide.com/pricing/">PRO</a>',
-                                                                        'ignore'            =>  '//--post-generated--',
-                                                                        'restore'           =>  '//--post-generated--',
-                                                                        );
+                            
                         }
                         else
                         {
                             $_JSON_response['status']       =   TRUE;
                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-yes"></span>The option appears properly configured.', 'wp-hide-security-enhancer' );
-                        }  
+                        }
+                        
+                    $_JSON_response['actions']      =   array (
+                                                                        'fix'       =>  '<a class="button-primary wph-pro" target="_blank" href="https://wp-hide.com/pricing/">PRO</a>',
+                                                                        'ignore'            =>  '//--post-generated--',
+                                                                        'restore'           =>  '//--post-generated--',
+                                                                        );  
                         
                     return $this->return_json_response( $_JSON_response );
                 

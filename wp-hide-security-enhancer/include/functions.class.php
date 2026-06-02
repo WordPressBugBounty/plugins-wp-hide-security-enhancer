@@ -963,6 +963,46 @@
                     
                 }
                 
+                
+            function output_server_environment_issues( $results, $_show_notice_for_no_issues    =   FALSE )
+                {
+                    
+                    if ( ! is_array ( $results ) )
+                        return;
+                        
+                    if ( $_show_notice_for_no_issues    === FALSE   &&  $results['found_issues'] ===  FALSE )
+                        return;
+                        
+                    $allow_tags =   $this->get_general_description_allowed_tags();
+
+                    ?>
+                    <div class="start-container title test <?php if ( $results['found_issues'] ===  TRUE ) { echo ' warning';} ?>">
+                        <h2><?php esc_html_e( "Checking your environment ..", 'wp-hide-security-enhancer' ) ?></h2>
+                    </div>
+                    <div class="container-description environment-notices">
+                    <?php
+                    
+                    if ( $results['found_issues'] !==  FALSE )
+                        {    
+                            echo wp_kses ( $results['errors'], $allow_tags );
+                        }
+                    
+                    if ( $results['critical_issues'] ===  TRUE )
+                        {    
+                            ?>
+                            <p class="framed"><span class="dashicons dashicons-warning error"></span> <?php esc_html_e('Critical issues were identified on your site, please fix them before proceeding with customizations.', 'wp-hide-security-enhancer') ?></p>
+                            <?php
+                        }
+                    
+                    if ( $_show_notice_for_no_issues    === TRUE    &&  $results['found_issues'] ===  FALSE )
+                        {    
+                            ?>
+                            <p><span class="dashicons dashicons-plugins-checked"></span> <?php esc_html_e('No problems have been found on your server environment.', 'wp-hide-security-enhancer') ?></p>
+                            <?php
+                        }
+                    ?></div><?php
+                }
+                
             
             function show_recovery()
                 {

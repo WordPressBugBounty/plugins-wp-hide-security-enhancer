@@ -23,11 +23,14 @@
                     wp_register_style('wph-graphs', WPH_URL . '/assets/css/graph.css', array(), WPH_CORE_VERSION );
                     wp_enqueue_style( 'wph-graphs');
                     
-                    wp_register_style('wph-security-scan', WPH_URL . '/assets/css/security-scan.css', array(), WPH_CORE_VERSION );
-                    wp_enqueue_style( 'wph-security-scan');
+                    wp_register_style('wph-scan', WPH_URL . '/assets/css/wph-scan.css', array(), WPH_CORE_VERSION );
+                    wp_enqueue_style( 'wph-scan');
                     
                     wp_register_style('wph-dashboard-widget', WPH_URL . '/assets/css/dashboard-widget.css', array(), WPH_CORE_VERSION );
                     wp_enqueue_style( 'wph-dashboard-widget');
+                    
+                    wp_register_script('wph', WPH_URL . '/assets/js/wph.js', array(), WPH_CORE_VERSION );
+                    wp_enqueue_script( 'wph');
                 }
                 
                 

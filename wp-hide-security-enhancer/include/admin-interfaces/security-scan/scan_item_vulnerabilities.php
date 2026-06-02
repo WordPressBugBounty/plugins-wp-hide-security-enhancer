@@ -57,10 +57,10 @@ Early vulnerability detection minimizes risk, improves platform resilience, and 
                     $_JSON_response     =   array();
 
                     $_JSON_response['status']       =   FALSE;
-                    $_JSON_response['description']  =   '<div class="vulnerability-report">
+                    $_JSON_response['description']  =   '<div class="vulnerability-report vulnerability-sample">
 
                                                             <div class="description"><span class="dashicons dashicons-no"></span> ' . __( 'Available in WP Hide PRO', 'wp-hide-security-enhancer' ) .
-                                                            '</div>
+                                                            '<br /><img src="' . WPH_URL .'/assets/images/wp-hide-vulnerability-report-sample.png" alt="" /></div>
                                                             </div>';
                     $_JSON_response['actions']      =   array (
                                                                 'fix'       =>  '<a class="button-primary wph-pro" target="_blank" href="https://wp-hide.com/vulnerability-scan-with-ai-know-your-plugins-themes-risk-before-it-becomes-a-problem/">PRO</a>',

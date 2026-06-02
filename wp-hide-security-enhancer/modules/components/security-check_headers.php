@@ -7,11 +7,6 @@
             
             public $headers = array ();
             
-            function init()
-                {
-                    add_action('init', array ( $this, 'set_headers' ) );
-                }
-            
             function get_component_title()
                 {
                     return "Check Headers";
@@ -41,7 +36,7 @@
                 }
                 
             
-            function set_headers()
+            function _set_headers()
                 {
                     $this->headers['cross-origin-embedder-policy']    =   array ( 
                                                                                 'title'         =>  'Cross-Origin-Embedder-Policy',
@@ -126,7 +121,8 @@
                 
             function set_module_components_description( $component_settings )
                 {
-
+                    $this->_set_headers();
+                    
                     foreach ( $component_settings   as  $component_key  =>  $component_setting )
                         {
                             if ( ! isset ( $component_setting['id'] ) )
@@ -240,7 +236,7 @@
                             echo json_encode( $_JSON_response );
                             die();
                         }
-                    if  ( $http_response->get_status() !=  200 )
+                    if  ( $http_response->get_status() !=  200  && $http_response->get_status() !=  302 )
                         {
                             if ( $http_response->get_status() ==  401 )
                                 {

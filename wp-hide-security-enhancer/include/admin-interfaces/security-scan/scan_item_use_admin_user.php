@@ -53,18 +53,27 @@
                     if ( count ( $found_users ) > 0   )
                         {
                             $_JSON_response['status']       =   FALSE;
-                            $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span>The admin or administrator usernames were found on your system!', 'wp-hide-security-enhancer' );
-                            $_JSON_response['actions']      =   array (
-                                                                        'read_more'         =>  '<a class="button" target="_blank" href="https://www.wpbeginner.com/wp-tutorials/how-to-change-your-wordpress-username/">Read More</a>',
-                                                                        'ignore'            =>  '//--post-generated--',
-                                                                        'restore'           =>  '//--post-generated--',
-                                                                        );
+                            $_JSON_response['description']  =   '<div class="vulnerability-report">
+
+                                                                    <div class="description">
+                                                                        <p>' . __( 'One or more user accounts are using the default “admin” or “administrator” usernames. These are commonly targeted by automated attacks because they are predictable. For better security, avoid using default or easily guessable usernames and switch to unique, less obvious account names.', 'wp-hide-security-enhancer' ) . '</p>
+                                                                    </div>
+                                                                                                                                                                                    
+                                                                 </div>';
+                            
                         }
                         else
                         {
                             $_JSON_response['status']       =   TRUE;
                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-yes"></span>There are no admin or administrator usernames.', 'wp-hide-security-enhancer' );
-                        }  
+                        }
+                        
+                    $_JSON_response['actions']      =   array (
+                                                                        'read_more'         =>  '<a class="button tips" original-title="Read more details" target="_blank" href="https://www.wpbeginner.com/wp-tutorials/how-to-change-your-wordpress-username/">Read More</a>',
+                                                                        'ignore'            =>  '//--post-generated--',
+                                                                        'restore'           =>  '//--post-generated--',
+                                                                        'help'              =>  '<a class="button tips" original-title="Get Help from AI" target="_blank" href="https://chat.openai.com/?q=Help me understand the &quot;One or more user accounts are using the default “admin” or “administrator” usernames. These are commonly targeted by automated attacks because they are predictable. For better security, avoid using default or easily guessable usernames and switch to unique, less obvious account names.&quot;. This is a Scan Item in WP Hide plugin">AI Help</a>',
+                                                                        );  
                         
                     return $this->return_json_response( $_JSON_response );
                 

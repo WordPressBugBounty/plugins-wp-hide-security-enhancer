@@ -67,30 +67,46 @@
                             $_JSON_response['status']       =   FALSE;
                             
                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span>Your site headers still contain some valuable pieces of information regarding your environment.', 'wp-hide-security-enhancer' );
+                            $_JSON_response['description']  =   '<div class="vulnerability-report">
+
+                                                                    <div class="description">
+                                                                        <p>' . __( 'Your site headers still contain some valuable pieces of information regarding your environment.', 'wp-hide-security-enhancer' ) . '</p>
+                                                                    </div>
+                                                                    
+                                                                    <div class="error_log">
+                                                                        <ul>
+                                                                    ';
                             
                             foreach ( $found_headers   as  $found_header )
                                 {
-                                    
-                                    $_JSON_response['description']  .=  '<p class="important">';              
-                                    $_JSON_response['description']  .=   '<b> <span class="dashicons dashicons-search"></span> Found - ' . ucfirst ( $found_header ) .'</b>';
-                                    $_JSON_response['description']  .=  '</p>';
-                                    
+                                    $_JSON_response['description']  .=  "<li><span class='info'>[" . __( 'Found', 'wp-hide-security-enhancer' ) . "]</span> " . ucfirst ( $found_header ) . '</li>';
                                 }
                                 
+                            $_JSON_response['description']  .=   '</ul></div></div>';
+                                
                             if ( $this->wph->security_scan->remote_started  &&  $this->wph->security_scan->remote_errors   !== FALSE )
-                                $_JSON_response['description']  .=   "<br /><br /><span class='error'>" . __('Unable to complete this security task as an error occoured', 'wp-hide-security-enhancer' ) . ': <b>' .$this->wph->security_scan->remote_errors . '</b></span>';
+                                $_JSON_response['description']  =   '<div class="vulnerability-report">
+
+                                                                            <div class="description">
+                                                                                <p>' . __('Unable to complete this security task as an error occoured', 'wp-hide-security-enhancer' ) . ': <b>' .$this->wph->security_scan->remote_errors . '</b></p>
+                                                                            </div>
+                                                                                                                                                                                            
+                                                                         </div>';
                             
-                            $_JSON_response['actions']      =   array (
-                                                                        'fix'       =>  '<a class="button-primary" href="'. get_dashboard_url( '', 'admin.php?page=wp-hide-general&component=headers', 'admin' ) .'">Fix</a>',
-                                                                        'ignore'            =>  '//--post-generated--',
-                                                                        'restore'           =>  '//--post-generated--',
-                                                                        );
+                            
                         }
                         else
                         {
                             $_JSON_response['status']       =   TRUE;
                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-yes"></span>There are no headers containing valuable pieces of information regarding your environment.', 'wp-hide-security-enhancer' );
-                        }  
+                        }
+                        
+                    $_JSON_response['actions']      =   array (
+                                                                        'fix'       =>  '<a class="button-primary tips" original-title="Go to a Fix" href="'. network_admin_url ( 'admin.php?page=wp-hide-general&component=headers' ) .'">Fix</a>',
+                                                                        'ignore'            =>  '//--post-generated--',
+                                                                        'restore'           =>  '//--post-generated--',
+                                                                        'help'              =>  '<a class="button tips" original-title="Get Help from AI" target="_blank" href="https://chat.openai.com/?q=Help me understand the &quot; Remove the X-Powered-By and Server Headers if set. This type of header information discloses important details regarding your server environment..&quot;. This is a Scan Item in WP Hide plugin">AI Help</a>',
+                                                                        );  
                         
                     return $this->return_json_response( $_JSON_response );
                 

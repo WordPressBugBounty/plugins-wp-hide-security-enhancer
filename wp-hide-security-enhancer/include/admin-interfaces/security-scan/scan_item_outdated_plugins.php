@@ -57,15 +57,23 @@
                     if ( is_array( $found_outdated ) && count ( $found_outdated ) > 0   )
                         {
                             $_JSON_response['status']       =   FALSE;
-                            $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span>The following plugins are found outdated on your site:', 'wp-hide-security-enhancer' );
+                            
+                            $_JSON_response['description']  =   '<div class="vulnerability-report">
+
+                                                                    <div class="description">
+                                                                        <p>' . __( 'The following plugins on your site are outdated. Running outdated plugins may expose your site to known security vulnerabilities and compatibility issues. It is strongly recommended to update them to the latest available versions as soon as possible.', 'wp-hide-security-enhancer' ) . '</p>
+                                                                    </div>
+                                                                                                                                                                                    
+                                                                 ';
                             
                             $all_plugins = apply_filters( 'all_plugins', get_plugins() );
                             
+                            $_JSON_response['description']  .=  '<ul>';
                             foreach ( $found_outdated   as  $plugin_slug    =>  $plugin_data )
                                 {
                                     $plugin_data    =   array_merge ( (array)$plugin_data, $all_plugins[$plugin_slug]);       
                                     
-                                    $_JSON_response['description']  .=  '<p class="outdated_plugin">';
+                                    $_JSON_response['description']  .=  '<li>';
                                     
                                     if ( isset ( $plugin_data['icons'] )    &&  isset ( $plugin_data['icons']['2x'] ) )
                                         $_JSON_response['description']  .=   '<img class="icon" src="'. $plugin_data['icons']['2x'].'" /> ';
@@ -74,23 +82,25 @@
                                                                                 
                                     $_JSON_response['description']  .=   '<b>' . $plugin_data['Name'] .'</b><br />' . __( ' Upgrade from ', 'wp-hide-security-enhancer' ) . $plugin_data['Version'] .  __( ' to ', 'wp-hide-security-enhancer' ) . $plugin_data['new_version'];
                                     
-                                    $_JSON_response['description']  .=  '</p>';
+                                    $_JSON_response['description']  .=  '</li>';
                                     
                                 }
+                            $_JSON_response['description']  .=  '</ul></div>';
+                                                        
                             
-                            $_JSON_response['description']  .=   __( '<br /><p class="description">The inactive plugins require updating as well, as may contain harmful vulnerabilities, exploaitable even if the code is not active.</p>', 'wp-hide-security-enhancer' );
-                            
-                            $_JSON_response['actions']      =   array (
-                                                                        'fix'       =>  '<a class="button-primary" href="'. get_dashboard_url( '', 'plugins.php', 'admin' ) .'">Fix</a>',
-                                                                        'ignore'            =>  '//--post-generated--',
-                                                                        'restore'           =>  '//--post-generated--',
-                                                                        );
                         }
                         else
                         {
                             $_JSON_response['status']       =   TRUE;
                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-yes"></span>All plugins are Up to Date.', 'wp-hide-security-enhancer' );
-                        }  
+                        }
+                        
+                    $_JSON_response['actions']      =   array (
+                                                                        'fix'       =>  '<a class="button-primary tips" original-title="Go to a Fix" href="'. network_admin_url ( 'plugins.php' ) .'">Fix</a>',
+                                                                        'ignore'            =>  '//--post-generated--',
+                                                                        'restore'           =>  '//--post-generated--',
+                                                                        'help'              =>  '<a class="button tips" original-title="Get Help from AI" target="_blank" href="https://chat.openai.com/?q=Help me understand the &quot;The following plugins on your site are outdated. Running outdated plugins may expose your site to known security vulnerabilities and compatibility issues. It is strongly recommended to update them to the latest available versions as soon as possible.&quot;. This is a Scan Item in WP Hide plugin">AI Help</a>',
+                                                                        );  
                         
                     return $this->return_json_response( $_JSON_response );
                 

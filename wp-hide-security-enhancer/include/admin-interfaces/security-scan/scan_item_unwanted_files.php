@@ -107,23 +107,27 @@
                     if ( $found_issue )
                         {
                             $_JSON_response['status']       =   FALSE;
-                            $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span> Your WordPress root still includes dangerous files which may contain valuable pieces of information regarding your environment.', 'wp-hide-security-enhancer' );
-                            $_JSON_response['description']  .=   '<br /><br />'    .   __( 'Consider re-locating the followng files from your site root:', 'wp-hide-security-enhancer' );
-                            $_JSON_response['description']  .=   '<br /><br />';
+                            
+                            $_JSON_response['description']  =   '<div class="vulnerability-report">
+
+                                                                    <div class="description">
+                                                                        <p>' . __( 'Your WordPress root directory still contains sensitive files that could expose valuable information about your server environment, configuration, or security setup. These files are often targeted by automated scans and can provide attackers with clues to exploit vulnerabilities.', 'wp-hide-security-enhancer' ) . '</p>
+                                                                        <p>' . __( 'For improved security, it’s highly recommended to remove or relocate the following files outside of your site’s publicly accessible root. Keeping them accessible may increase your exposure to potential attacks.', 'wp-hide-security-enhancer' ) . '</p>
+                                                                        <p>' . __( 'Consider reviewing and moving these files to a safer location as soon as possible:', 'wp-hide-security-enhancer' ) . '</p>
+                                                                    </div>
+                                                                    
+                                                                    <div class="error_log">
+                                                                        <ul>
+                                                                    ';
                             
                             foreach ( $founds   as  $data )
-                                {
-                                    
-                                    $_JSON_response['description']  .=  '<p class="important">';              
-                                    $_JSON_response['description']  .=   '<b> <span class="dashicons dashicons-search"></span> ' . $data['value'] . ' (' . $unwanted_files[ $data['type'] ]['error_description'] . ')</b>';
-                                    $_JSON_response['description']  .=  '</p>';
-                                    
+                                {                                    
+                                    $_JSON_response['description']  .=   "<li><span class='info'>[" . __( 'Warning', 'wp-hide-security-enhancer' ) . "]</span> " . $data['value'];   
                                 }
+                                
+                            $_JSON_response['description']  .=   '</ul></div></div>';
                             
-                            $_JSON_response['actions']      =   array (
-                                                                        'ignore'            =>  '//--post-generated--',
-                                                                        'restore'           =>  '//--post-generated--',
-                                                                        );
+                            
                             
                         }
                         else
@@ -131,7 +135,13 @@
                             $_JSON_response['status']       =   TRUE;
                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-yes"></span> Your WordPress root still includes dangerous files which may contain valuable pieces of information regarding your environment.', 'wp-hide-security-enhancer' );
                             
-                        }  
+                        } 
+                        
+                    $_JSON_response['actions']      =   array (
+                                                                        'ignore'            =>  '//--post-generated--',
+                                                                        'restore'           =>  '//--post-generated--',
+                                                                        'help'              =>  '<a class="button tips" original-title="Get Help from AI" target="_blank" href="https://chat.openai.com/?q=Help me understand the &quot; This security check scans your WordPress root directory for sensitive or potentially dangerous files that should not be publicly accessible. These files may expose information about your environment and increase the risk of targeted attacks. To reduce exposure, avoid keeping unnecessary files in the domain root—remove or relocate them whenever possible &quot;. This is a Scan Item in WP Hide plugin">AI Help</a>',
+                                                                        );  
                         
                     return $this->return_json_response( $_JSON_response );
                 

@@ -57,35 +57,44 @@
                     if ( is_array( $found_outdated ) && count ( $found_outdated ) > 0   )
                         {
                             $_JSON_response['status']       =   FALSE;
-                            $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span>The following plugins are found outdated on your site:', 'wp-hide-security-enhancer' );
+                            
+                            $_JSON_response['description']  =   '<div class="vulnerability-report">
+
+                                                                    <div class="description">
+                                                                        <p>' . __( 'The following themes on your site are outdated. Running outdated themes may expose your site to known security vulnerabilities and compatibility issues. It is strongly recommended to update them to the latest available versions as soon as possible.', 'wp-hide-security-enhancer' ) . '</p>
+                                                                    </div>
+                                                                                                                                                                                    
+                                                                 ';
                                                         
+                            $_JSON_response['description']  .=  '<ul>';                             
                             foreach ( $found_outdated   as  $theme_slug    =>  $theme_data )
                                 {
                                     $theme          =   wp_get_theme( $theme_slug );
                                     
-                                    $_JSON_response['description']  .=  '<p class="outdated_plugin">';
+                                    $_JSON_response['description']  .=  '<li>';
                                     
                                     $_JSON_response['description']  .=   '<img class="icon" src="'. $theme->get_screenshot() .'" /> ';
                                                                                 
                                     $_JSON_response['description']  .=   '<b>' . $theme->get('Name') .'</b><br />' . __( ' Upgrade from ', 'wp-hide-security-enhancer' ) . $theme->get('Version') .  __( ' to ', 'wp-hide-security-enhancer' ) . $theme_data['new_version'];
                                     
-                                    $_JSON_response['description']  .=  '</p>';
+                                    $_JSON_response['description']  .=  '</li>';
                                     
                                 }
+                            $_JSON_response['description']  .=  '</ul></div>'; 
                             
-                            $_JSON_response['description']  .=   __( '<br /><p class="description">The  inactive themes require updating as well, as may contain harmful vulnerabilities, exploaitable even if the code is not active.</p>', 'wp-hide-security-enhancer' );
-                            
-                            $_JSON_response['actions']      =   array (
-                                                                        'fix'       =>  '<a class="button-primary" href="'. get_dashboard_url( '', 'themes.php', 'admin' ) .'">Fix</a>',
-                                                                        'ignore'            =>  '//--post-generated--',
-                                                                        'restore'           =>  '//--post-generated--',
-                                                                        );
                         }
                         else
                         {
                             $_JSON_response['status']       =   TRUE;
                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-yes"></span>All themes are Up to Date.', 'wp-hide-security-enhancer' );
-                        }  
+                        }
+                        
+                    $_JSON_response['actions']      =   array (
+                                                                        'fix'       =>  '<a class="button-primary tips" original-title="Go to a Fix" href="'. network_admin_url ( 'themes.php' ) .'">Fix</a>',
+                                                                        'ignore'            =>  '//--post-generated--',
+                                                                        'restore'           =>  '//--post-generated--',
+                                                                        'help'              =>  '<a class="button tips" original-title="Get Help from AI" target="_blank" href="https://chat.openai.com/?q=Help me understand the &quot;The following themes on your site are outdated. Running outdated themes may expose your site to known security vulnerabilities and compatibility issues. It is strongly recommended to update them to the latest available versions as soon as possible.&quot;. This is a Scan Item in WP Hide plugin">AI Help</a>',
+                                                                        );
                         
                     return $this->return_json_response( $_JSON_response );
                 

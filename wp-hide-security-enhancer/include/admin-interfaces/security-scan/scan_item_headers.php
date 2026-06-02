@@ -51,6 +51,7 @@
                     if ( $this->wph->security_scan->remote_headers )
                         {
                             $WPH_module_general_security_check_headers  =   new WPH_module_general_security_check_headers();
+                            $WPH_module_general_security_check_headers->_set_headers();
                             
                             $headers    =   $this->wph->security_scan->remote_headers;
                             
@@ -83,26 +84,34 @@
                         {
                             $_JSON_response['status']       =   FALSE;
                             
-                            $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span>Your site is missing some security headers.', 'wp-hide-security-enhancer' );
+                            $_JSON_response['description']  =   '<div class="vulnerability-report">
+
+                                                                    <div class="description">
+                                                                        <p>' . __( 'Your site is missing some security headers.', 'wp-hide-security-enhancer' ) . '</p>
+                                                                    </div>
+                                                                    
+                                                                    <div class="error_log">
+                                                                        <ul>
+                                                                    ';
                             
                             foreach ( $not_found_headers   as  $not_found_header )
                                 {
-                                    
-                                    $_JSON_response['description']  .=  '<p class="important">';              
-                                    $_JSON_response['description']  .=   '<b> <span class="dashicons dashicons-search"></span> Not Found - ' . ucfirst ( $not_found_header ) .'</b>';
-                                    $_JSON_response['description']  .=  '</p>';
-                                    
+                                    $_JSON_response['description']  .=  "<li><span class='info'>[" . __( 'Not Found', 'wp-hide-security-enhancer' ) . "]</span> " . ucfirst ( $not_found_header ) .'</li>';                                    
                                 }
                                 
+                            $_JSON_response['description']  .=   '</ul></div></div>';
+                                
                             if ( $this->wph->security_scan->remote_started  &&  $this->wph->security_scan->remote_errors   !== FALSE )
-                                $_JSON_response['description']  .=   "<br /><br /><span class='error'>" . __('Unable to complete this security task as an error occoured', 'wp-hide-security-enhancer' ) . ': <b>' .$this->wph->security_scan->remote_errors . '</b></span>';
+                                {
+                                    $_JSON_response['description']  .=   '<div class="vulnerability-report">
+
+                                                                    <div class="description">
+                                                                        <p>' . __( 'Unable to complete this security task as an error occoured:', 'wp-hide-security-enhancer' ) . $this->wph->security_scan->remote_errors . '</p>
+                                                                    </div>
+                                                                    ';                                   
+                                }
                             
-                            $_JSON_response['actions']      =   array (
-                                                                        'fix'       =>  '<a class="button-primary" href="'. get_dashboard_url( '', 'admin.php?page=wp-hide-security-headers', 'admin' ) .'">Fix</a>',
-                                                                        'fix2'       =>  '<a class="button-primary wph-pro" target="_blank" href="https://wp-hide.com/pricing/">PRO</a>',
-                                                                        'ignore'            =>  '//--post-generated--',
-                                                                        'restore'           =>  '//--post-generated--',
-                                                                        );
+                            
                         }
                         else
                         {
@@ -110,6 +119,13 @@
                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-yes"></span>There are no headers containing valuable pieces of information regarding your environment.', 'wp-hide-security-enhancer' );
                         }  
                         
+                    $_JSON_response['actions']      =   array (
+                                                                        'fix'               =>  '<a class="button-primary wph-pro" target="_blank" href="https://wp-hide.com/pricing/">PRO</a>',
+                                                                        'ignore'            =>  '//--post-generated--',
+                                                                        'restore'           =>  '//--post-generated--',
+                                                                        'help'              =>  '<a class="button tips" original-title="Get Help from AI" target="_blank" href="https://chat.openai.com/?q=Help me understand the &quot; Your site is missing some security headers. &quot;. This is a Scan Item in WP Hide plugin">AI Help</a>',
+                                                                        );
+                               
                     return $this->return_json_response( $_JSON_response );
                 
                 }    

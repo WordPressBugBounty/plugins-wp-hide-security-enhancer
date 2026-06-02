@@ -29,8 +29,7 @@
                                         'title'         =>  'WP Debug',
                                         'icon'          =>  'dashicons-code-standards',
                                         
-                                        'help'          =>  __("Debugging PHP code is part of any project, but WordPress comes with specific debug systems designed to simplify the process as well as standardize code across the core, plugins and themes.
-                                                                On production sites, the debug should be disabled to avoid exposing paths and other pieces of information related to the site. ",    'wp-hide-security-enhancer'),
+                                        'help'          =>  __("WordPress includes built-in debugging features to help developers identify issues and maintain consistent code across core, plugins, and themes. However, on production sites, debugging should be disabled, as it may expose file paths and other sensitive information that could be used to compromise your site. ",    'wp-hide-security-enhancer'),
                                         
                                         'score_points'  =>  5,
                                         
@@ -48,17 +47,39 @@
                     if ( defined ( 'WP_DEBUG' ) &&  WP_DEBUG    === TRUE   )
                         {
                             $_JSON_response['status']       =   FALSE;
-                            $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span>The WP_DEBUG is active. Check your site wp-config.php and comment the constant declaration.', 'wp-hide-security-enhancer' );
-                            $_JSON_response['actions']      =   array (
-                                                                        'ignore'            =>  '//--post-generated--',
-                                                                        'restore'           =>  '//--post-generated--',
-                                                                        );
+                            $_JSON_response['description']  =   __( '', 'wp-hide-security-enhancer' );
+                            $_JSON_response['description']  =   '<div class="vulnerability-report">
+
+                                                                    <div class="description">
+                                                                        <p>' . __( 'WP_DEBUG constant is currently enabled. While useful for development, it can expose sensitive information about your site. Check your', 'wp-hide-security-enhancer' ) . ' <code>wp-config.php</code> ' . __( 'file and disable it by setting the constant to', 'wp-hide-security-enhancer' ) . ' <code>false</code> ' . __( 'or commenting out its declaration.', 'wp-hide-security-enhancer' ) . '</p>
+                                                                    </div>
+                                                                    
+                                                                    <div class="row labels">
+                                                                        <div class="item">
+                                                                            <div class="label">' . __( 'Expected', 'wp-hide-security-enhancer' ) .'</div>
+                                                                            <div class="value">FALSE</div>
+                                                                        </div>
+
+                                                                        <div class="item">
+                                                                            <div class="label">' . __( 'Current', 'wp-hide-security-enhancer' ) . '</div>
+                                                                            <div class="value">TRUE</div>
+                                                                        </div>
+                                                                    </div>
+                                                                                                                                                
+                                                                 </div>';
+                            
                         }
                         else
                         {
                             $_JSON_response['status']       =   TRUE;
                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-yes"></span>The WP_DEBUG is disabled.', 'wp-hide-security-enhancer' );
                         }  
+                        
+                    $_JSON_response['actions']      =   array (
+                                                                        'ignore'            =>  '//--post-generated--',
+                                                                        'restore'           =>  '//--post-generated--',
+                                                                        'help'              =>  '<a class="button tips" original-title="Get Help from AI" target="_blank" href="https://chat.openai.com/?q=Help me understand the &quot;WP_DEBUG constant is currently enabled. While useful for development, it can expose sensitive information about your site. Check your wp-config.php file and disable it by setting the constant to false or commenting out its declaration.&quot;. This is a Scan Item in WP Hide plugin">AI Help</a>',
+                                                                        );
                         
                     return $this->return_json_response( $_JSON_response );
                 

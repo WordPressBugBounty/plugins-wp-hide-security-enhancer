@@ -47,7 +47,7 @@
                     $_JSON_response['info']  =   __( 'Using Version: ', 'wp-hide-security-enhancer' ) . $phpversion;
                     
                                             
-                    if ( version_compare ( $phpversion, '7.0', '>=' ) )
+                    if ( version_compare ( $phpversion, '7.4', '>=' ) )
                         {
                             $_JSON_response['status']       =   TRUE;
                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-yes"></span> You are using at least the minimum recommended PHP version.', 'wp-hide-security-enhancer' );
@@ -55,12 +55,21 @@
                         else
                         {
                             $_JSON_response['status']       =   FALSE;
-                            $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span> You are using an older PHP version that the minimum recommended.', 'wp-hide-security-enhancer' );
-                            $_JSON_response['actions']      =   array (
+                            $_JSON_response['description']  =   '<div class="vulnerability-report">
+
+                                                                            <div class="description">
+                                                                                <p>' . __( 'You are using an older PHP version that the minimum recommended.', 'wp-hide-security-enhancer' ) . '</p>
+                                                                            </div>
+                                                                                                                                                                                            
+                                                                         </div>';
+                            
+                        }  
+                        
+                    $_JSON_response['actions']      =   array (
                                                                         'ignore'            =>  '//--post-generated--',
                                                                         'restore'           =>  '//--post-generated--',
-                                                                        );
-                        }  
+                                                                        'help'              =>  '<a class="button tips" original-title="Get Help from AI" target="_blank" href="https://chat.openai.com/?q=Help me understand the &quot; Using the latest PHP version ensures the longevity of security updates. While older versions of PHP offer security updates for a time past end of life, the most secure option is the version that is actively maintained.&quot;. This is a Scan Item in WP Hide plugin">AI Help</a>',
+                                                                        );  
                         
                     return $this->return_json_response( $_JSON_response );
                 

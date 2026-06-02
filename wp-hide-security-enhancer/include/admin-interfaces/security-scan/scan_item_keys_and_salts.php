@@ -66,18 +66,27 @@
                     if ( $wrong_value   )
                         {
                             $_JSON_response['status']       =   FALSE;
-                            $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span>The Authentication unique keys and salts are empty or invalid.', 'wp-hide-security-enhancer' );
-                            $_JSON_response['actions']      =   array (
-                                                                        'read_more'     =>  '<a class="button" target="_blank" href="https://www.malcare.com/blog/wordpress-salts/">Read More</a>',
-                                                                        'ignore'            =>  '//--post-generated--',
-                                                                        'restore'           =>  '//--post-generated--',
-                                                                        );
+                            $_JSON_response['description']  =   '<div class="vulnerability-report">
+
+                                                                            <div class="description">
+                                                                                <p>' . __( 'The Authentication unique keys and salts are empty or invalid.', 'wp-hide-security-enhancer' ) . '</p>
+                                                                            </div>
+                                                                                                                                                                                            
+                                                                         </div>';
+                            
                         }
                         else
                         {
                             $_JSON_response['status']       =   TRUE;
                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-yes"></span>The Authentication unique keys and salts are correctly set-up.', 'wp-hide-security-enhancer' );
                         }  
+                        
+                    $_JSON_response['actions']      =   array (
+                                                                        'read_more'     =>  '<a class="button" target="_blank" href="https://www.malcare.com/blog/wordpress-salts/">Read More</a>',
+                                                                        'ignore'            =>  '//--post-generated--',
+                                                                        'restore'           =>  '//--post-generated--',
+                                                                        'help'              =>  '<a class="button tips" original-title="Get Help from AI" target="_blank" href="https://chat.openai.com/?q=Help me understand the &quot; WordPress security authentication or secret key or SALT keys, are the encrypted code that protects your login information. Salt keys are cryptographic elements used to hash data in order to secure it.&quot;. This is a Scan Item in WP Hide plugin">AI Help</a>',
+                                                                        );  
                         
                     return $this->return_json_response( $_JSON_response );
                 

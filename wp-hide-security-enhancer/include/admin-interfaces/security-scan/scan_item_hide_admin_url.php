@@ -39,34 +39,43 @@
             
             function scan()
                 {
-                    $_JSON_response     =   array();
+                    $_JSON_response = array();
                     
-                    $found_issue        =   FALSE;
+                    $found_issue = FALSE;
                     
                     $option       =   $this->wph->functions->get_module_item_setting('admin_url');
                     
-                    if (    empty ( $option )   ||  $option ==  'no' )
-                        $found_issue    =   TRUE;
+                    if (empty($option) || $option == 'no')
+                        $found_issue = TRUE;
 
-                    if ( $found_issue   )
+                    if ($found_issue)
                         {
-                            $_JSON_response['status']       =   FALSE;
+                            $_JSON_response['status'] = FALSE;
                             
-                            $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span>Map a new admin url instead default prevent hackers boot to attempt to brute force a site login.', 'wp-hide-security-enhancer' );
+                            $_JSON_response['description'] = '<div class="vulnerability-report">
+
+                                                                    <div class="description">
+                                                                        <p>' . __('Mapping a new admin URL instead of the default one helps prevent brute force login attempts and unauthorized access.', 'wp-hide-security-enhancer') . '</p>
+                                                                    </div>
+                                                                                                                                                                                    
+                                                                 </div>';
                             
-                            $_JSON_response['actions']      =   array (
-                                                                        'fix'       =>  '<a class="button-primary" href="'. get_dashboard_url( '', 'admin.php?page=wp-hide-admin&component=admin-url', 'admin' ) .'">Fix</a>',
-                                                                        'ignore'            =>  '//--post-generated--',
-                                                                        'restore'           =>  '//--post-generated--',
-                                                                        );
+                            
                         }
                         else
                         {
-                            $_JSON_response['status']       =   TRUE;
-                            $_JSON_response['description']  =   __( '<span class="dashicons dashicons-yes"></span>The option appears properly configured.', 'wp-hide-security-enhancer' );
-                        }  
+                            $_JSON_response['status'] = TRUE;
+                            $_JSON_response['description'] = __('<span class="dashicons dashicons-yes"></span>The option appears properly configured.', 'wp-hide-security-enhancer');
+                        }
                         
-                    return $this->return_json_response( $_JSON_response );
+                    $_JSON_response['actions'] = array(
+                                                                'fix'     => '<a class="button-primary tips" original-title="Go to a Fix" href="'. network_admin_url('admin.php?page=wp-hide-admin&component=admin-url') .'">Fix</a>',
+                                                                'ignore'  => '//--post-generated--',
+                                                                'restore' => '//--post-generated--',
+                                                                'help'    => '<a class="button tips" original-title="Get Help from AI" target="_blank" href="https://chat.openai.com/?q=Help me understand the &quot; Mapping a new admin URL instead of the default one helps prevent brute force login attempts and unauthorized access. &quot;. This is a Scan Item in WP Hide plugin">AI Help</a>',
+                                                            );  
+                        
+                    return $this->return_json_response($_JSON_response);
                 
                 }    
             

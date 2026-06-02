@@ -162,8 +162,8 @@
                     wp_register_style('wph-graphs', WPH_URL . '/assets/css/graph.css', array(), WPH_CORE_VERSION );
                     wp_enqueue_style( 'wph-graphs');
                     
-                    wp_register_style('wph-security-scan', WPH_URL . '/assets/css/security-scan.css', array(), WPH_CORE_VERSION );
-                    wp_enqueue_style( 'wph-security-scan');
+                    wp_register_style('wph-scan', WPH_URL . '/assets/css/wph-scan.css', array(), WPH_CORE_VERSION );
+                    wp_enqueue_style( 'wph-scan');
                 
                 }
                 
@@ -173,7 +173,7 @@
                     wp_enqueue_script('jquery.tipsy.js', WPH_URL . '/assets/js/jquery.tipsy.js', array(), WPH_CORE_VERSION, false  );
                     
                     wp_enqueue_script( 'jquery');
-                    wp_register_script('wph', WPH_URL . '/assets/js/wph.js', array(), WPH_CORE_VERSION, false );
+                    wp_register_script('wph', WPH_URL . '/assets/js/wph.js', array(), WPH_CORE_VERSION);
                     
                     // Localize the script with new data
                     $translation_array = array(
@@ -193,208 +193,343 @@
                     $site_scan  =   (array)get_site_option('wph/site_scan');   
                     $site_scan['visited']   =   md5 ( json_encode( $this->get_scan_items() ) );
                     update_site_option ( 'wph/site_scan', $site_scan );   
+                    
+                                       
+                    $allow_tags =   WPH_functions::get_general_description_allowed_tags();
                                                  
                     ?>
                     <div id="wph" class="wrap">
-                        <h1>WP Hide & Security Enhancer - <?php esc_html_e( "Security Scan", 'wp-hide-security-enhancer' ) ?></h1>
-                                          
-                        <?php echo wp_kses ( $this->functions->get_ad_banner(), array(
-                                                                                            'a'      => array(
-                                                                                                                    'href'  => array(),
-                                                                                                                    'title' => array(),
-                                                                                                                    'target' => array(),
-                                                                                                                ),
-                                                                                            'div'     => array(
-                                                                                                                    'id'    =>  array(),
-                                                                                                                    'class' =>  array(),
-                                                                                                                ),
-                                                                                            'img'     => array(
-                                                                                                                    'src'   =>  array()
-                                                                                                                
-                                                                                                                ),
-                                                                                            'span'     => array(
-                                                                                                                    'class'   =>  array()
-                                                                                                                
-                                                                                                                ),
-                                                                                            'p' => array(),
-                                                                                            'h4' => array(),
-                                                                                            'strong' => array(),
-                                                                                        ) ); ?>
+                        <h1>WP Hide & Security Enhancer <span class="plugin-mark">PRO</span> - <?php _e( "Security Scan", 'wp-hide-security-enhancer' ) ?></h1>
                         
-                 
-                        <div class="start-container title security_scan">
-                            <h2><?php esc_html_e( "Security Scan", 'wp-hide-security-enhancer' ) ?></h2> 
-                            <p><b><?php esc_html_e( "AI-Powered Security Scan", 'wp-hide-security-enhancer' ) ?></b> - <?php esc_html_e( "Built on insights generated by our", 'wp-hide-security-enhancer' ) ?> <b><?php esc_html_e( "proprietary AI-engineered", 'wp-hide-security-enhancer' ) ?></b> <?php esc_html_e( "with advanced models, the scan checks your site against 99.9% of identified security issues and vulnerabilities.", 'wp-hide-security-enhancer' ) ?></p>
-                        </div>
-                        <div id="security-scan">
-              
-                                <?php  $this->render_overview( $site_scan ); ?>
+                        <?php
                             
-                                <p><br /></p>
-              
-                                <div id="all-scann-items">
-                                    <div id="scann-items">
-                                    <?php
-                                    
-                                        $wph_site_scan_ignore   =   isset ( $site_scan['ignore'] ) ?    (array)$site_scan['ignore'] :   array();
-                                                
-                                        foreach ( $this->scan_items as  $scan_item_id  =>  $item_instance )
-                                            {
-                                                
-                                                if ( in_array ( $scan_item_id, $wph_site_scan_ignore ) )
-                                                    continue;
-                                                
-                                                $scan_item_data     =   $item_instance->get_settings();
-                                                $scan_response      =   isset ( $site_scan['results'][ $scan_item_id ] ) ?     $site_scan['results'][ $scan_item_id ] :   FALSE ;
-                                                      
-                                                if ( ! $scan_response )
-                                                    {
-                                                        $scan_response  =   new stdClass();
-                                                        $scan_response->status      =   'unknown';
-                                                        $scan_response->info        =   '';
-                                                        $scan_response->description =   '<h5>' . __( 'Unknow - Start a new Scan', 'wp-hide-security-enhancer' ) .'</h5>';
-                                                        $scan_response->actions     =   array();
-                                                    }
-                                                                                                   
-                                                $this->render_item( $scan_item_id, $scan_item_data, $scan_response );
-                                                
-                                            }
-                                    ?>
-                                    </div>    
-                                    <div id="hidden-items">
-                                    <?php
-
-                                        foreach ( $this->scan_items as  $scan_item_id  =>  $item_instance )
-                                            {
-                                                
-                                                if ( ! in_array ( $scan_item_id, $wph_site_scan_ignore ) )
-                                                    continue;
-                                                
-                                                $scan_item_data     =   $item_instance->get_settings();
-                                                $scan_response      =   isset ( $site_scan['results'][ $scan_item_id ] ) ?     $site_scan['results'][ $scan_item_id ] :   FALSE ;
-                                                
-                                                /*      
-                                                if ( ! $scan_response )
-                                                    {
-                                                        $scan_response   =   json_decode ( $item_instance->scan() );
-                                                        $site_scan['results'][ $scan_item_id ] =   $scan_response;
-                                                    }
-                                                */
-                                                       
-                                                $this->render_item( $scan_item_id, $scan_item_data, $scan_response );
-                                                
-                                            }
-                                    ?>
-                                    </div>          
-                                </div>
-                        </div>               
+                            echo wp_kses ( $this->functions->get_ad_banner(), $allow_tags );
+                            
+                            $results    =   $this->functions->check_server_environment();
+                            $this->functions->output_server_environment_issues( $results );
+                            
+                        ?>
                         
+                        <div id="wph-notices" class="no-wrap"></div>
+                        
+                        
+                        
+                        <div id="security-scan" class="general-scan min-h-screen bg-background">
+                                
+                                
+                                
+                                <header>
+                                    <div class="container">
+                                        <div class="items">
+                                            <div>
+                                                <h1><span class="dashicons dashicons-shield"></span> <?php _e( "Security Scan", 'wp-hide-security-enhancer' ) ?></h1>
+                                                <p class="text-muted-foreground text-xs"><b><?php esc_html_e( "AI-Powered Security Scan", 'wp-hide-security-enhancer' ) ?></b><br /><?php esc_html_e( "Built on insights generated by our", 'wp-hide-security-enhancer' ) ?> <b><?php esc_html_e( "proprietary AI-engineered", 'wp-hide-security-enhancer' ) ?></b> <?php esc_html_e( "with advanced models, the scan checks your site against 99.9% of identified security issues and vulnerabilities.", 'wp-hide-security-enhancer' ) ?></p>
+                                            </div>
+                                        </div>
+                                        <div class="items">
+                                            <span class="dashicons dashicons-clock"></span>
+                                            <span>Last scan: <?php 
+                                                if ( ! isset ( $site_scan['last_scan'] ) )
+                                                    __( 'Unavailable', 'wp-hide-security-enhancer' );
+                                                    else
+                                                    echo date( "Y-m-d H:i:s", $site_scan['last_scan'] );  ?></span>
+                                        </div>
+                                    </div>
+                                </header>
+
+                                <main class="container">
+                                    
+                                    
+                                    <?php  $this->render_overview( $site_scan ); ?>
+                                    
+                                    
+                                    <div id="all-scann-items">
+                                        
+                                        <div class="gc_top">
+                                            <h2 class="info">Scan Results</h2>
+                                            <button id="wph-toggle-all" class="button" onclick="return false;">
+                                              <span class="dashicons dashicons-arrow-down-alt2"></span> Toggle All
+                                            </button>
+                                        </div>
+
+                                        <div class="gc-area">
+                                            
+                                            
+                                            <div id="scann-items">
+                                            <?php
+                                            
+                                                $site_score    =   $this->get_site_score( $site_scan );
+                                                $wph_site_scan_ignore   =   isset ( $site_scan['ignore'] ) ?    (array)$site_scan['ignore'] :   array();
+                                                
+                                                $items_needs_attention      =   0;
+                                                $items_passed               =   0;
+                                                
+                                                if ( isset ( $site_scan['last_scan'] ) )
+                                                    {
+                                                        uasort($site_scan['results'], function ($item, $seccond_item) 
+                                                            {
+                                                                return ($item->status === $seccond_item->status) ? 0 : ($item->status ? 1 : -1);
+                                                            });
+                                                        
+                                                        $items_needs_attention  =   $site_score['failed'];
+                                                        $items_passed           =   $site_score['success'];
+                                                            
+                                                        //re-sort the items in the main object
+                                                        $orderedScanItems = [];
+
+                                                        foreach ($site_scan['results'] as $key => $result) 
+                                                            {
+                                                                if (isset($this->scan_items[$key]))
+                                                                    $orderedScanItems[$key] = $this->scan_items[$key];
+                                                            }
+
+                                                        // Add any leftovers at the end
+                                                        foreach ($this->scan_items as $key => $item) 
+                                                            {
+                                                                if (!isset($orderedScanItems[$key]))
+                                                                    $orderedScanItems[$key] = $item;
+                                                            }
+
+                                                        $this->scan_items = $orderedScanItems;
+                                                    }
+                                                    
+                                                if ( $items_needs_attention > 0 )
+                                                    echo '<h2 class="info text-destructive">Needs Attention ('. $items_needs_attention .')</h2>';
+                                                    
+                                                $triggered_pased    =   FALSE;
+                                                        
+                                                foreach ( $this->scan_items as  $scan_item_id  =>  $item_instance )
+                                                    {
+                                                        
+                                                        if ( in_array ( $scan_item_id, $wph_site_scan_ignore ) )
+                                                            continue;
+                                                        
+                                                        if ( isset ( $site_scan['results'][ $scan_item_id ] )   &&  isset ( $site_scan['results'][ $scan_item_id ]->status ) &&  $site_scan['results'][ $scan_item_id ]->status   === TRUE    &&  $triggered_pased    === FALSE )
+                                                            {
+                                                                $triggered_pased    =   TRUE;
+                                                                echo '<h2 class="info text-success">Passed ('. $items_passed .')</h2>';   
+                                                            }
+                                                        
+                                                        $scan_item_data     =   $item_instance->get_settings();
+                                                        $scan_response      =   isset ( $site_scan['results'][ $scan_item_id ] ) ?     $site_scan['results'][ $scan_item_id ] :   FALSE ;
+                                                              
+                                                        if ( ! $scan_response )
+                                                            {
+                                                                $scan_in_progress   =   FALSE;
+                                                                if ( isset ( $site_scan['last_scan_progress'] )     &&  $site_scan['last_scan_progress']    >   0   &&  $site_scan['last_scan_progress']    >   time() - 60 )
+                                                                    $scan_in_progress   =   TRUE;
+                                                                
+                                                                
+                                                                $scan_response  =   new stdClass();
+                                                                $scan_response->status      =   'unknown';
+                                                                $scan_response->info        =   '';
+                                                                
+                                                                if ( ! $scan_in_progress )
+                                                                    $scan_response->description =   '<h5>' . __( 'Unknow - Start a new Scan', 'wp-hide-security-enhancer' ) .'</h5>';
+                                                                    else
+                                                                    $scan_response->description =   '<h5>' . __( 'Scan in progress. refresh the page in a min.', 'wp-hide-security-enhancer' ) .'</h5>';
+                                                                    
+                                                                $scan_response->actions     =   array();
+                                                            }
+                                                                                                           
+                                                        $this->render_item( $scan_item_id, $scan_item_data, $scan_response );
+                                                        
+                                                    }
+                                            ?>
+                                            </div> 
+                                            
+                                            
+                                            <div id="hidden-items">
+                                            
+                                            <?php
+                                                    
+                                                echo '<h2 class="info">Ignored ('. count ( $wph_site_scan_ignore ) .')</h2>';
+                                                    
+                                                foreach ( $this->scan_items as  $scan_item_id  =>  $item_instance )
+                                                    {
+                                                        
+                                                        if ( ! in_array ( $scan_item_id, $wph_site_scan_ignore ) )
+                                                            continue;
+                                                        
+                                                        $scan_item_data     =   $item_instance->get_settings();
+                                                        $scan_response      =   isset ( $site_scan['results'][ $scan_item_id ] ) ?     $site_scan['results'][ $scan_item_id ] :   FALSE ;
+                                                                                                        
+                                                        $this->render_item( $scan_item_id, $scan_item_data, $scan_response );
+                                                        
+                                                    }
+                                            ?>
+                                            </div>
+                                            
+                                             
+                                            
+                                        </div>
+                                    </div>
+                                </main>
+                            </div>
+      
 
                     <?php
                     
                 }
                 
+                
             
             public function render_overview( $site_scan, $context = '' )
                 {
-                    ?>
-                    <div id="scan_overview" class="wph-postbox header">
-                        <div class="wph_graph wph_input widefat">
-                            <div class="row cell label">
-                    <?php
                     
+                    $site_score    =   $this->get_site_score( $site_scan );
                     
-                        if ( ! isset ( $site_scan['last_scan'] )    ||  empty ( $site_scan['last_scan'] ) )
-                            {
-                                ?>
-                                    
-                                    <div id="wph-graph">
-                                        <div class="wph-graph-container">
-                                            <div class="wph-graph-bg"></div>
-                                            <div class="wph-graph-text"></div>
-                                            <div class="wph-graph-progress" style="transform: rotate(0deg);"></div>
-                                            <div class="wph-graph-data"><b>0%</b><br><span class="protection"><?php esc_html_e ('Unknown',    'wp-hide-security-enhancer') ?></span></div>
-                                        </div>
-                                    </div>
-                                    <p class="hint"><span class="dashicons dashicons-plugins-checked"></span> <?php esc_html_e ( 'Running first Scan.. Please wait!',    'wp-hide-security-enhancer') ?></p>
-                                <?php   
-                            }
-                            else
-                            {
-                                $site_score    =   $this->get_site_score( $site_scan );
-                                
-                                ?>
-                                    
-                                    <div id="wph-graph">
-                                        <div class="wph-graph-container">
-                                            <div class="wph-graph-bg"></div>
-                                            <div class="wph-graph-text"></div>
-                                            <div class="wph-graph-progress" style="transform: rotate(<?php echo esc_html ( $site_score['graph_progress'] ) ?>deg);"></div>
-                                            <div class="wph-graph-data"><b><?php echo esc_html( $site_score['progress'] ) ?>%</b><br><span class="protection"><?php echo esc_html( $site_score['protection'] ) ?></span></div>
-                                        </div>
-                                    </div>
-                                    <p class="hint"><span class="dashicons dashicons-plugins-checked"></span> <?php esc_html_e ( 'Your current estimated protection is', 'wp-hide-security-enhancer' ); ?> <span class="protection"><?php echo esc_html( $site_score['protection'] ) ?></span>.</p>
-                                <?php
-                            }
-                            
+                    //check for scann in progress
+                    $scan_in_progress   =   FALSE;
+                    if ( isset ( $site_scan['last_scan_progress'] )     &&  $site_scan['last_scan_progress']    >   0   &&  $site_scan['last_scan_progress']    >   time() - 60 )
+                        $scan_in_progress   =   TRUE;
+                    
                     ?>
-                        </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+                                    <symbol id="icon-shield-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+                                        <path d="m9 12 2 2 4-4"></path>
+                                    </symbol>
+                                    <symbol id="icon-shield-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+                                        <path d="m14.5 9.5-5 5"></path>
+                                        <path d="m9.5 9.5 5 5"></path>
+                                    </symbol>
+                                </svg>
+                    <div id="scan_overview">
+                            <div class="wph_graph">
+                                <div id="wph-graph" class="relative flex items-center justify-center">
+                                    <div class="wph-graph">
+                                        <svg viewBox="0 0 200 100" class="wph-svg">
 
-                        </div>
-                        <div class="wph_results">
-                            <div class="text">
-                            <?php
+                                            <!-- Background arc -->
+                                            <path d="M 15 100 A 85 85 0 0 1 185 100" class="bg" />
+                                            <path d="M 15 100 A 85 85 0 0 1 185 100" class="progress" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" />
+
+                                            <!-- Text -->
+                                            <text x="100" y="75" text-anchor="middle" class="value"><?php if ( ! isset ( $site_scan['last_scan'] )    ||  empty ( $site_scan['last_scan'] ) )
+                                                {
+                                                    ?>0%<?php
+                                                }
+                                                else
+                                                {
+                                                    ?><?php echo $site_score['progress'] ?>%<?php
+                                                }
+                                            ?></text>
                             
-                                reset ( $this->scan_items );
-                                $first_scan_item_id =   ucwords ( key ( $this->scan_items ) );
+                                        </svg>
+                                    </div>
+
+                                    <script>
+                                        jQuery( document ).ready( function() {
+                                        WPH.setGraph(<?php
+                                            if ( ! isset ( $site_scan['last_scan'] )    ||  empty ( $site_scan['last_scan'] ) )
+                                                echo '0';
+                                                else
+                                                echo $site_score['progress'];
+                                        ?>);
+                                        })
+                                    </script>
+           
+                                </div>
+                                <p class="hint"><span class="dashicons dashicons-plugins-checked"></span> <?php
                                 
-                                //check for scann in progress
-                                $scan_in_progress   =   FALSE;
-                                if ( isset ( $site_scan['last_scan_progress'] )     &&  $site_scan['last_scan_progress']    >   0   &&  $site_scan['last_scan_progress']    >   time() - 60 )
-                                    $scan_in_progress   =   TRUE;
-                            
                                 if ( ! isset ( $site_scan['last_scan'] )    ||  empty ( $site_scan['last_scan'] ) )
                                     {
-                                        ?>
+                                        _e( 'Running first Scan.. Please wait!',    'wp-hide-security-enhancer');
+                                    }
+                                    else
+                                    {
+                                        _e( 'Your current estimated protection is', 'wp-hide-security-enhancer' ); ?> <span class="protection"><?php _e( $site_score['protection'],    'wp-hide-security-enhancer') ?></span>.<?php
+                                    }   
+                                
+                                
+                                
+                                ?></p>
+                                <?php if ( ! isset ( $site_scan['last_scan'] )    ||  empty ( $site_scan['last_scan'] ) ) { ?>
+                                <script type="text/javascript">
+                                    jQuery( document ).ready(function() {
+                                        jQuery('#wph-site-scan-button').click();
+                                    });
+                                </script>
+                                <?php } ?>
+                            </div>
+                            <div class="wph_results">
+                                <?php
+                                
+                                    if ( ! isset ( $site_scan['last_scan'] )    ||  empty ( $site_scan['last_scan'] ) )
+                                        {
+                                            ?>
+                                            <div id="wph-scan-score">
+                                                <div class="score-item">
+                                                    <div class="icon passed">
+                                                        <svg class="text-success" width="24" height="24"><use href="#icon-shield-check"/></svg>
+                                                    </div>
+                                                    <div class="passed">
+                                                        <span>0</span>
+                                                        <p>Passed</p>
+                                                    </div>
+                                                </div>
+                                                <div  class="score-item">
+                                                    <div class="icon failed">
+                                                        <svg class="text-destructive" width="24" height="24"><use href="#icon-shield-x"/></svg>
+                                                    </div>
+                                                    <div class="failed">
+                                                        <span>0</span>
+                                                        <p>Failed</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button id="wph-site-scan-button" tabindex="0" class="button <?php  if ( $scan_in_progress ) { echo 'disabled'; } ?>"  onClick="WPH.site_scan( '<?php echo esc_attr ( wp_create_nonce( 'wph/site_scan') ) ?>')">
+                                                <span class="dashicons dashicons-search" ></span>
+                                                <?php _e( 'Start First Scan', 'wp-hide-security-enhancer' ); ?>
+                                            </button>
                                             <p class="actions">
-                                                <button id="wph-site-scan-button" type="button" class="button <?php  if ( $scan_in_progress ) { echo 'disabled'; } ?> button-primary" onClick="WPH.site_scan( '<?php echo esc_attr ( wp_create_nonce( 'wph/site_scan') ) ?>')"><?php esc_html_e ( 'Start First Scan', 'wp-hide-security-enhancer' ); ?></button>
                                                 <span class="spinner" style="visibility: hidden;"></span>
-                                                <span class="working"><?php esc_html_e ( 'Working', 'wp-hide-security-enhancer' ); ?> <span class="progress">0</span> <?php esc_html_e ( 'of', 'wp-hide-security-enhancer' ); ?> <span class="total_items"><?php echo count ( $this->scan_items ) ?></span> <?php esc_html_e ( 'total tests', 'wp-hide-security-enhancer' ); ?></span> 
+                                                <span class="working"><?php _e( 'Working', 'wp-hide-security-enhancer' ); ?> <span class="progress">0</span> <?php _e( 'of', 'wp-hide-security-enhancer' ); ?> <span class="total_items"><?php echo count ( $this->scan_items ) ?></span> <?php _e( 'total tests', 'wp-hide-security-enhancer' ); ?></span> 
                                                 <br />
-                                                <b><?php esc_html_e ( 'Running first Scan.. Please wait!',    'wp-hide-security-enhancer') ?></b></p>
-                                            <p class="last_scan"><b><?php esc_html_e ( 'Last Scan', 'wp-hide-security-enhancer' ); ?>:</b> <?php esc_html_e ( 'Unavailable', 'wp-hide-security-enhancer' ); ?></p>
-                                            <script type="text/javascript">
-                                                jQuery( document ).ready(function() {
-                                                    jQuery('#wph-site-scan-button').click();
-                                                });
-                                            </script>
+                                                <b><?php _e( 'Running first Scan.. Please wait!',    'wp-hide-security-enhancer') ?></b>
+
                                         <?php
                                         
                                             //check for scann in progress
                                             if ( $scan_in_progress )
                                                 {
-                                                    ?><p class="new-items"><?php esc_html_e ( 'Another Scan instance in progress. Refresh the page in a minute.', 'wp-hide-security-enhancer' ) ?></p><?php
+                                                    ?><span class="new-items"><?php _e( 'Another Scan instance in progress. Refresh the page in a minute.', 'wp-hide-security-enhancer' ) ?></span><?php
                                                 }
-                                    }
-                                    else
-                                    {
-                                        ?>
+                                                
+                                            ?></p><?php
+                                        }
+                                        else
+                                        {
+                                            ?>
                                             <div id="wph-scan-score">
-                                                <table><tbody><tr>
-                                                            <td class="passed">
-                                                                <h4><?php esc_html_e ( 'Passed', 'wp-hide-security-enhancer' ); ?></h4>
-                                                                <h5><?php echo esc_html ( $site_score['success'] ) ?></h5>
-                                                            </td>
-                                                            <td class="failed">
-                                                                <h4><?php esc_html_e ( 'Failed', 'wp-hide-security-enhancer' ); ?></h4>
-                                                                <h5><?php echo esc_html ( $site_score['failed'] ) ?></h5>
-                                                            </td>
-                                                        </tr></tbody></table>
+                                                <div class="score-item">
+                                                    <div class="icon passed">
+                                                        <svg class="text-success" width="24" height="24"><use href="#icon-shield-check"/></svg>
+                                                    </div>
+                                                    <div class="passed">
+                                                        <span><?php echo $site_score['success'] ?></span>
+                                                        <p><?php _e( 'Passed', 'wp-hide-security-enhancer' ); ?></p>
+                                                    </div>
+                                                </div>
+                                                <div class="score-item ">
+                                                    <div class="icon failed">
+                                                        <svg class="text-destructive" width="24" height="24"><use href="#icon-shield-x"/></svg>
+                                                    </div>
+                                                    <div class="failed">
+                                                        <span><?php echo $site_score['failed'] ?></span>
+                                                        <p><?php _e( 'Failed', 'wp-hide-security-enhancer' ); ?></p>
+                                                    </div>
+                                                </div>
                                             </div>
+                                            <button id="wph-site-scan-button" class="button <?php  if ( $scan_in_progress ) { echo 'disabled'; } ?>" tabindex="0" onClick="WPH.site_scan( '<?php echo esc_attr ( wp_create_nonce( 'wph/site_scan') ) ?>')">
+                                                <span class="dashicons dashicons-search"></span>
+                                                <?php _e( 'Start New Scan', 'wp-hide-security-enhancer' ); ?>
+                                            </button>
                                             <p class="actions">
-                                                <button id="wph-site-scan-button" type="button" class="button <?php  if ( $scan_in_progress ) { echo 'disabled'; } ?> button-primary" onClick="WPH.site_scan( '<?php echo esc_attr ( wp_create_nonce( 'wph/site_scan') ) ?>')"><?php esc_html_e ( 'Start New Scan', 'wp-hide-security-enhancer' ); ?></button>
                                                 <span class="spinner" style="visibility: hidden;"></span>
-                                                <span class="working"><?php esc_html_e ( 'Working', 'wp-hide-security-enhancer' ); ?> <span class="progress">0</span> <?php esc_html_e ( 'of', 'wp-hide-security-enhancer' ); ?> <span class="total_items"><?php echo count ( $this->scan_items ) ?></span> <?php esc_html_e ( 'total tests', 'wp-hide-security-enhancer' ); ?></span> 
+                                                <span class="working"><?php _e( 'Working', 'wp-hide-security-enhancer' ); ?> <span class="progress">0</span> <?php _e( 'of', 'wp-hide-security-enhancer' ); ?> <span class="total_items"><?php echo count ( $this->scan_items ) ?></span> <?php _e( 'total tests', 'wp-hide-security-enhancer' ); ?></span> 
                                             </p>
                                             <?php
                                             
@@ -415,26 +550,29 @@
                                                 //check for scann in progress
                                                 if ( $scan_in_progress )
                                                     {
-                                                        ?><p class="new-items"><?php esc_html_e ( 'Another Scan instance in progress. Refresh the page in a minute.', 'wp-hide-security-enhancer' ) ?></p><?php
+                                                        ?><p class="new-items"><?php _e( 'Another Scan instance in progress. Refresh the page in a minute.', 'wp-hide-security-enhancer' ) ?></p><?php
                                                     }
                                                     
                                                 if ( ! $scan_in_progress  &&  $found_new_scan_items )
                                                     {
-                                                        ?><p class="new-items"><?php esc_html_e ( 'Found new Items, a new Security Scann is recommended.', 'wp-hide-security-enhancer' ) ?></p><?php
+                                                        ?><p class="new-items"><?php _e( 'Found new Items, a new Security Scann is recommended.', 'wp-hide-security-enhancer' ) ?></p><?php
                                                     }
                                             
                                             ?>
-                                            <p class="last_scan"><b><?php esc_html_e ( 'Last Scan', 'wp-hide-security-enhancer' ); ?>:</b> <?php echo esc_html ( gmdate( "Y-m-d H:i:s", $site_scan['last_scan'] ) );  ?></p>
                                             <?php if  ( empty ( $context ) ) { ?>
-                                            <p class="security_hints"><?php echo esc_html ( $this->get_security_hints( $site_score ) ) ?></p>
+                                            <div class="security_hints"><?php echo $this->get_security_hints( $site_score ) ?></div>
                                             <?php } ?>
-                                        <?php
-                                    }
-                            ?>
+                             
+                                            <?php    
+                                            
+                                        }
+                                        
+                                ?>
+                                           
+                                
                             </div>
                         </div>
-                    </div>
-                    
+                   
                     <?php
                     
                 }
@@ -497,39 +635,60 @@
                 
             private function render_item( $scan_item_id, $scan_item_data, $response  )
                 {
-                    $allow_tags =   WPH_functions::get_general_description_allowed_tags();
-                                            
+                    $site_scan  =   (array)get_site_option('wph/site_scan');
+                    
+                    $wph_site_scan_ignore   =   isset ( $site_scan['ignore'] ) ?    (array)$site_scan['ignore'] :   array();
+                    
+                    $ignore_html    =   '';
+                    
+                    if ( in_array ( $scan_item_id, $wph_site_scan_ignore ) )
+                        $ignore_html    =   '<span class="status-ignore">' . __( 'Ignored', 'security-scan-interface' ) .'</span>';
+                       
                     ?>
-                        <div id="item-<?php echo esc_html ( $scan_item_id ) ?>" class="postbox wph-postbox item<?php if ( $response->status ) { echo ' valid-item'; } ?>">
-                            <div class="wph_input widefat<?php 
-                                        if ( ! $response->status ) { echo ' issue_found';}
-                                        else if ( $response->status ===  'unknown' ) { echo ' unknown';}
-                                    ?>">
-                                <div class="row cell label">
-                                    <label><span class="dashicons <?php echo esc_html ( $scan_item_data['icon'] ) ?>"></span> <?php echo esc_html ( $scan_item_data['title'] ) ?></label>
-                                    <p class="info"><?php echo esc_html ( $response->info ); ?></p>
-                                    <div class="description"><?php echo wp_kses ( $response->description, $allow_tags ); ?></div>
-                                    <div class="actions">
+                        <div id="item-<?php echo $scan_item_id ?>" class="gc <?php if ( $response->status ) echo 'item-pass'; else echo 'item-fail' ?>">
+                            <div class="gc-header status-<?php if ( $response->status ) echo 'pass'; else echo 'fail' ?>">
+                                <div class="gc-item">
+                                    <span class="dashicons dashicon-circle"></span>
+                                    <div>
+                                        <h3><?php echo $scan_item_data['title'] ?></h3>
+                                        <p class="issue_info"><?php echo $response->info; ?></p>
+                                    </div>
+                                </div>
+                                <div class="gc-item toggle">
+                                    <span class="spinner"></span>
+                                    <?php echo $ignore_html ?>
+                                    <span class="status status-<?php if ( $response->status ) echo 'pass'; else echo 'fail' ?>"><?php if ( $response->status ) esc_html_e ( 'Passed', 'security-scan-interface' ); else esc_html_e ( 'Failed', 'security-scan-interface' ); ?></span>
+                                    <div class="wph-toggle">
+                                      <span class="dashicons <?php if ( $response->status ) { echo 'dashicons-arrow-down-alt2';} else { echo 'dashicons-arrow-up-alt2';} ?>"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gc-body" <?php if ( $response->status ) { echo 'style="display: none;"';} ?>>
+                                <div class="gc-item">
+                                    <div class="issue_description"><?php echo $response->description; ?></div>
+                                    
                                     <?php
                                         if ( count ( (array)$response->actions ) > 0 )
+                                        {
+                                            ?><div class="issue_actions"><?php
                                         foreach ( $response->actions    as  $action_type =>  $action )
                                             {
-                                                //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                                 echo  " " . $this->get_action_html( $action_type, $action, $scan_item_id );  
                                             }
-                                        ?></div>
+                                            ?></div><?php
+                                        }
+                                    ?>
+                                    <div class="option_help text-muted-foreground">
+                                        <?php echo wpautop( $scan_item_data['help'] ) ?>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
 
-                            </div>
-                            <div class="wph_help option_help">
-                                <div class="text">
-                                    <?php echo wp_kses ( wpautop( $scan_item_data['help'] ), $allow_tags ) ?>
-                                </div>
-                            </div>
-                        </div>    
                     <?php
                     
                 }
+                
                 
             
             function get_security_hints( $site_score, $context  =   'security-scan-interface' )
@@ -576,10 +735,10 @@
                     switch( $action_type )
                         {
                             case 'ignore'   :
-                                                $html   =   '<a class="button ignore" href="javascript: void(0)" onclick="WPH.scan_ignore_item(\'' . $scan_item_id . '\', \''. esc_attr ( wp_create_nonce( 'wph/site_scan/ignore') ) .'\')">'.  __( 'Ignore', 'wp-hide-security-enhancer' ) .'</a>';   
+                                                $html   =   '<a class="button ignore tips" original-title="Ignore the item" href="javascript: void(0)" onclick="WPH.scan_ignore_item(\'' . $scan_item_id . '\', \''. esc_attr ( wp_create_nonce( 'wph/site_scan/ignore') ) .'\')">'.  __( 'Ignore', 'wp-hide-security-enhancer' ) .'</a>';   
                                                 break;
                             case 'restore'   :
-                                                $html   =   '<a class="button restore" href="javascript: void(0)" onclick="WPH.scan_restore_item(\'' . $scan_item_id . '\', \''. esc_attr ( wp_create_nonce( 'wph/site_scan/restore') ) .'\')">'.  __( 'Restore', 'wp-hide-security-enhancer' )  .'</a>';   
+                                                $html   =   '<a class="button restore tips" original-title="Restore the item" href="javascript: void(0)" onclick="WPH.scan_restore_item(\'' . $scan_item_id . '\', \''. esc_attr ( wp_create_nonce( 'wph/site_scan/restore') ) .'\')">'.  __( 'Restore', 'wp-hide-security-enhancer' )  .'</a>';   
                                                 break;                            
                             default:            
                                                 $html   =   $action;
@@ -685,7 +844,7 @@
                         }
                         
                     $response['total']          =   count ( $this->scan_items );
-                    $response['items_progress'] =   count ( $response['results'] );
+                    $response['items_progress'] =   is_array ( $response['results'] ) ? count ( $response['results'] )  :   0;
                     
                     $results    =   $this->get_site_score( $site_scan );
                     

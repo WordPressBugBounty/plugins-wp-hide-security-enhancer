@@ -84,33 +84,44 @@
                         {
                             $_JSON_response['status']       =   FALSE;
                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span>The following plugins are very old and appear unmaintained:', 'wp-hide-security-enhancer' );
-                                                        
+                            $_JSON_response['description']  =   '<div class="vulnerability-report">
+
+                                                                    <div class="description">
+                                                                        <p>' . __( 'The following plugins appear to be outdated and no longer actively maintained. Unmaintained plugins are a significant security risk, as they may contain unresolved vulnerabilities and compatibility issues. It is recommended to replace them with actively supported alternatives or remove them if no longer needed.', 'wp-hide-security-enhancer' ) . '</p>
+                                                                    </div>
+                                                                    
+                                                                    <div class="error_log">
+                                                                        <ul>
+                                                                    ';
+
                             foreach ( $found_old   as  $plugin_slug    =>  $plugin_data )
                                 {
                                     
-                                    $_JSON_response['description']  .=  '<p class="outdated_plugin">';
+                                    $_JSON_response['description']  .=  '<li>';
                                     
                                     $_JSON_response['description']  .=   '<img class="icon" src="'. $plugin_data['screenshot'].'" /> ';
                                                                                 
                                     $_JSON_response['description']  .=   '<b>' . $plugin_data['name'] .'</b><br />' . __( ' Last updated on ', 'wp-hide-security-enhancer' ) . $plugin_data['last_updated'];
                                     
-                                    $_JSON_response['description']  .=  '</p>';
+                                    $_JSON_response['description']  .=  '</li>';
                                     
                                 }
+                                
+                            $_JSON_response['description']  .=   '</ul></div></div>';
                             
-                            $_JSON_response['description']  .=   __( '<br /><p class="description">We strongly suggest finding replacements for the above plugins and remove from your site.</p>', 'wp-hide-security-enhancer' );
-                            
-                            $_JSON_response['actions']      =   array (
-                                                                        'fix'       =>  '<a class="button-primary" href="'. get_dashboard_url( '', 'plugins.php', 'admin' ) .'">Fix</a>',
-                                                                        'ignore'            =>  '//--post-generated--',
-                                                                        'restore'           =>  '//--post-generated--',
-                                                                        );
                         }
                         else
                         {
                             $_JSON_response['status']       =   TRUE;
                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-yes"></span>There are no Old Plugins.', 'wp-hide-security-enhancer' );
                         }  
+                        
+                    $_JSON_response['actions']      =   array (
+                                                                        'fix'       =>  '<a class="button-primary tips" original-title="Go to a Fix" href="'. network_admin_url ( 'plugins.php' ) .'">Fix</a>',
+                                                                        'ignore'            =>  '//--post-generated--',
+                                                                        'restore'           =>  '//--post-generated--',
+                                                                        'help'              =>  '<a class="button tips" original-title="Get Help from AI" target="_blank" href="https://chat.openai.com/?q=Help me understand the &quot; Old WordPress plugins can do damage to your website. Vulnerabilities are found within plugins all the time. Unmaintained code drastically increase the risk, as there are no patches for known issues. Inconsistent updates can lead to serious security issues and compatibility problems, and land you in technical debt. This will check for plugins with more than a year since their last update..&quot;. This is a Scan Item in WP Hide plugin">AI Help</a>',
+                                                                        );  
                         
                     return $this->return_json_response( $_JSON_response );
                 

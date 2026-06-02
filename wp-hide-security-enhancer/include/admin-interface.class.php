@@ -95,38 +95,8 @@
                                 
                                                                 
                                 $results    =   $this->functions->check_server_environment();
+                                $this->functions->output_server_environment_issues( $results );
                                 
-                                if ( $results['found_issues'] !==  FALSE )
-                                    {
-                            
-                                        ?>
-                                        <div class="start-container title test">
-                                            <h2><?php esc_html_e( "Checking your environment ..", 'wp-hide-security-enhancer' ) ?></h2>
-                                        </div>
-                                        <div class="container-description environment-notices">
-                                        <?php
-                                        
-                                        if ( $results['found_issues'] !==  FALSE )
-                                            {    
-                                                echo wp_kses ( $results['errors'], $allow_tags );
-                                            }
-                                        
-                                        if ( $results['critical_issues'] ===  TRUE )
-                                            {    
-                                                ?>
-                                                <p class="framed"><span class="dashicons dashicons-warning error"></span> <?php esc_html_e('Critical issues were identified on your site, please fix them before proceeding with customizations.', 'wp-hide-security-enhancer') ?></p>
-                                                <?php
-                                            }
-                                        
-                                        if ( $results['found_issues'] ===  FALSE )
-                                            {    
-                                                ?>
-                                                <p><span class="dashicons dashicons-plugins-checked"></span> <?php esc_html_e('No problems have been found on your server environment.', 'wp-hide-security-enhancer') ?></p>
-                                                <?php
-                                            }
-                                        ?></div><?php
-                                    }
-
                             ?>
                             
                             <div class="content<?php if( $results['critical_issues'] ) { echo (' something-wrong'); } ?>">

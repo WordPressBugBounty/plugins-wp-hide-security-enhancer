@@ -45,24 +45,45 @@
                     if ( $safe_mode    === TRUE   )
                         {
                             $_JSON_response['status']       =   FALSE;
-                            $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span>The register_globals is ON. 
-                                                                        To fix this security issue, change the php.ini:
 
-                                                                        <br /><code>safe_mode = "off"</code>
+                            $_JSON_response['description']  =   '<div class="vulnerability-report">
 
-                                                                        <br />or within .htaccess:
-
-                                                                        <br /><code>php_flag safe_mode off</code>.', 'wp-hide-security-enhancer' );
-                            $_JSON_response['actions']      =   array (
-                                                                        'ignore'            =>  '//--post-generated--',
-                                                                        'restore'           =>  '//--post-generated--',
-                                                                        );
+                                                                    <div class="description">
+                                                                        <p>' . __( 'The register_globals setting is currently enabled. This outdated and insecure feature can automatically turn user input into global variables, increasing the risk of variable injection and other attacks. It is strongly recommended to disable this setting, as it is deprecated and unsafe for modern applications.', 'wp-hide-security-enhancer' ) . '</p>
+                                                                    </div>
+                                                                    
+                                                                    <div class="description">
+                                                                        <p>' . __( 'To fix this security issue, change the php.ini', 'wp-hide-security-enhancer' ) . '</p>
+                                                                    </div>
+                                                                    <div class="code_example">
+                                                                        <ul>
+                                                                            <li>safe_mode = "off"</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    
+                                                                    <div class="description">
+                                                                        <p>' . __( 'You can disable this within .htaccess', 'wp-hide-security-enhancer' ) . '</p>
+                                                                    </div>
+                                                                    <div class="code_example">
+                                                                        <ul>
+                                                                            <li>php_flag safe_mode off</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                            
+                                                                 </div>';
+                            
                         }
                         else
                         {
                             $_JSON_response['status']       =   TRUE;
                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-yes"></span>The safe_mode is Off.', 'wp-hide-security-enhancer' );
                         }  
+                        
+                    $_JSON_response['actions']      =   array (
+                                                                        'ignore'            =>  '//--post-generated--',
+                                                                        'restore'           =>  '//--post-generated--',
+                                                                        'help'              =>  '<a class="button tips" original-title="Get Help from AI" target="_blank" href="https://chat.openai.com/?q=Help me understand the &quot; The PHP safe mode is an attempt to solve the shared-server security problem. It is architecturally incorrect to try to solve this problem at the PHP level, but since the alternatives at the web server and OS levels aren\'t very realistic, many people, especially ISP\'s, use safe mode for now.&quot;. This is a Scan Item in WP Hide plugin">AI Help</a>',
+                                                                        );  
                         
                     return $this->return_json_response( $_JSON_response );
                 

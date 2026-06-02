@@ -91,13 +91,14 @@
                                             $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span>  The current Wordpress version stability tag is ', 'wp-hide-security-enhancer' ) . '<b> ' . strtoupper ( $wp_stability ) .'</b> ' . __('. This is critical and require urgent WordPress update.', 'wp-hide-security-enhancer' );
                                             $_JSON_response['score_points'] =   20;
                                         }
-                                        
-                                    $_JSON_response['actions']      =   array (
-                                                                        'fix'       =>  '<a class="button-primary" target="_blank" href="'. get_dashboard_url( '', 'update-core.php', 'admin' ) .'">Fix</a>',
+                                    
+                                }
+                                
+                            $_JSON_response['actions']      =   array (
+                                                                        'fix'       =>  '<a class="button-primary fix" target="_blank" href="'. network_admin_url ( 'update-core.php' ) .'">Fix</a>',
                                                                         'ignore'            =>  '//--post-generated--',
                                                                         'restore'           =>  '//--post-generated--',
                                                                         );
-                                }    
                         }
                         
                     return $this->return_json_response( $_JSON_response );

@@ -54,12 +54,21 @@
                         else
                         {
                             $_JSON_response['status']       =   FALSE;
-                            $_JSON_response['description']  =   __( '<span class="dashicons dashicons-no"></span> You are using an older PHP version that the minimum recommended.', 'wp-hide-security-enhancer' );
-                            $_JSON_response['actions']      =   array (
+                            $_JSON_response['description']  =   '<div class="vulnerability-report">
+
+                                                                            <div class="description">
+                                                                                <p>' . __( 'You are using an older PHP version that the minimum recommended.', 'wp-hide-security-enhancer' ) . '</p>
+                                                                            </div>
+                                                                                                                                                                                            
+                                                                         </div>';
+                            
+                        }  
+                        
+                    $_JSON_response['actions']      =   array (
                                                                         'ignore'            =>  '//--post-generated--',
                                                                         'restore'           =>  '//--post-generated--',
-                                                                        );
-                        }  
+                                                                        'help'              =>  '<a class="button tips" original-title="Get Help from AI" target="_blank" href="https://chat.openai.com/?q=Help me understand the &quot; Using a higher MySQL version ensures better capability for your system. Older versions are often exploitable making the system unstable and predisposing to security breaches.&quot;. This is a Scan Item in WP Hide plugin">AI Help</a>',
+                                                                        );  
                         
                     return $this->return_json_response( $_JSON_response );
                 

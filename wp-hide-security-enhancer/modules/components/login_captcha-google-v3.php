@@ -277,8 +277,8 @@
                     if ( is_wp_error ( $user ) )
                         return $user;
 
-                    if ( ! isset ( $_POST['g-recaptcha-response'] ) )
-                        return $user;
+                    if ( ! isset( $_POST['g-recaptcha-response'] ) || empty( $_POST['g-recaptcha-response'] ) )
+                        return new WP_Error( 'g3_error', esc_html__( 'Unable to verify that you are human.', 'wp-hide-security-enhancer' ) );
                         
                     $api_response   =   $this->g3_api_check( $_POST['g-recaptcha-response'] );
                         

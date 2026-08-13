@@ -3,8 +3,8 @@ Contributors: nsp-code, tdgu
 Donate link: https://www.nsp-code.com/
 Tags: hide, security, headers, login, 2fa
 Requires at least: 2.8
-Tested up to: 7.0
-Stable tag: 2.8.9
+Tested up to: 7.1
+Stable tag: 2.9.1
 License: GPLv2 or later
 
 Protect your website by concealing vulnerable WordPress traces, plugins, themes, login/admin url. 2FA, Captcha, Firewall, Security Headers etc.
@@ -464,6 +464,13 @@ We’re continuously improving WP Hide! If there’s a feature you need—whethe
 2. Sample front html code.
 
 == Changelog == 
+
+= 2.9.1 =
+* Improvements for Google Captcha V2/V3
+* Include compatibility for WooCommerce, bbPress, BuddyPress with the WP Hide Google Captcha V2/V3. 
+* Improved urls updates for robots.txt file ( generated file ).
+* when the option "Replace default admin URLs within Robots.txt" is active, use random replacement for /wp-admin/ in the robots.txt
+* Fix: missing $replacement_list_json data in serialize class.
 
 = 2.8.9 =
 * Fix: Return login error, when Google Captcha is active and the captcha field is empty. 

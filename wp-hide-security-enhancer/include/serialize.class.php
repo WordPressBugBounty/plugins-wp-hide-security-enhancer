@@ -71,7 +71,9 @@
                         $last = end($path);
                         if ( ! is_serialized( $value )   &&  is_string( $value )) 
                             {                                
-                                $founds = array_filter( $replacement_list_json, function($needle) use ($value ) {
+                                $search =   array_keys ( self::$replacement_list_compare );
+                                
+                                $founds = array_filter( $search, function($needle) use ($value ) {
                                     return stripos( $value, $needle) !== false;
                                 });
                                 

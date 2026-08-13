@@ -13,5 +13,12 @@
     "type"          : "wordpress-plugin",
     "require"       : {
                             "composer/installers": "~1.0"
+                        },
+    "extra":            {
+                        "installer-paths": {
+                          "wp-content/plugins/wp-hide-security-enhancer/": [
+                            "nsp-code/wp-hide"
+                          ]
                         }
-}
+                      }
+        }

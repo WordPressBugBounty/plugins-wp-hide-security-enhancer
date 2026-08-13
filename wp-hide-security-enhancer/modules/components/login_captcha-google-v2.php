@@ -189,19 +189,64 @@
                 }
                 
             
-            function init_captcha( $saved_field_data )
+            function init_captcha( $saved_field_data ) 
                 {
-                    if ( $saved_field_data['captcha_type']  ==  'google_v2'  &&  ! empty ( $saved_field_data['g2-site-key'] )  &&  ! empty ( $saved_field_data['g2-site-secret-key'] )   &&  isset ( $saved_field_data['g2_checked_for'] ) &&  ! empty ( $saved_field_data['g2_checked_for'] )   &&  md5 ( $saved_field_data['g2-site-key'] . $saved_field_data['g2-site-secret-key'] )  ==  $saved_field_data['g2_checked_for'] )
+                    if ( $saved_field_data['captcha_type'] == 'google_v2'
+                        && ! empty( $saved_field_data['g2-site-key'] )
+                        && ! empty( $saved_field_data['g2-site-secret-key'] )
+                        && isset( $saved_field_data['g2_checked_for'] )
+                        && ! empty( $saved_field_data['g2_checked_for'] )
+                        && md5( $saved_field_data['g2-site-key'] . $saved_field_data['g2-site-secret-key'] ) == $saved_field_data['g2_checked_for'] )
                         {
-                            add_action('login_form',            array ( $this, 'login_form' ) );
-                            add_action('authenticate',          array ( $this, 'authenticate' ), 99 );
-                            
-                            add_action('lostpassword_form',     array ( $this, 'lostpassword_form' ) );
-                            add_action('lostpassword_post',     array ( $this, 'lostpassword_post' ), 99 );
-                               
-                            add_action('register_form',         array ( $this, 'register_form' ) );
-                            add_action('registration_errors',   array ( $this, 'registration_errors' ), 99 );   
+                            add_action( 'plugins_loaded', array( $this, 'captcha_hooks' ) );
                         }
+                }
+                
+                
+            function captcha_hooks()
+                {
+                    add_action( 'login_form',           array( $this, 'login_form' ) );
+                    add_action( 'authenticate',         array( $this, 'authenticate' ), 99 );
+
+                    add_action( 'lostpassword_form',    array( $this, 'lostpassword_form' ) );
+                    add_action( 'lostpassword_post',    array( $this, 'lostpassword_post' ), 99 );
+
+                    add_action( 'register_form',        array( $this, 'register_form' ) );
+                    add_action( 'registration_errors',  array( $this, 'registration_errors' ), 99 );
+
+                    if ( class_exists( 'WooCommerce' ) ) {
+                        add_action( 'woocommerce_login_form',                       array( $this, 'login_form' ) );
+                        add_filter( 'woocommerce_process_login_errors',             array( $this, 'wc_authenticate' ), 99, 3 );
+
+                        add_action( 'woocommerce_lostpassword_form',                array( $this, 'lostpassword_form' ) );
+                        add_filter( 'woocommerce_process_lost_password_errors',     array( $this, 'wc_lostpassword_post' ), 99, 2 );
+
+                        add_action( 'woocommerce_register_form',                    array( $this, 'register_form' ) );
+                        add_filter( 'woocommerce_process_registration_errors',      array( $this, 'wc_registration_errors' ), 99, 4 );
+                    }
+
+
+                    if ( class_exists( 'bbPress' ) ) {
+                        add_action( 'bbp_login_form',           array( $this, 'login_form' ) );
+                        add_filter( 'bbp_authenticate',         array( $this, 'authenticate' ), 99 );
+
+                        add_action( 'bbp_register_form',        array( $this, 'register_form' ) );
+                        add_filter( 'bbp_registration_errors',  array( $this, 'registration_errors' ), 99 );
+                    }
+
+                    if ( class_exists( 'BuddyPress' ) ) {
+                        add_action( 'bp_before_login_form_fields',      array( $this, 'login_form' ) );
+                        add_action( 'bp_signup_validate',               array( $this, 'bp_registration_errors' ), 99 );
+                        add_action( 'bp_before_registration_submit_buttons', array( $this, 'register_form' ) );
+                    }
+
+                    if ( class_exists( 'UM' ) ) {
+                        add_action( 'um_after_login_fields',        array( $this, 'login_form' ) );
+                        add_filter( 'um_submit_form_errors_hook__login', array( $this, 'um_authenticate' ), 99, 2 );
+
+                        add_action( 'um_after_register_fields',     array( $this, 'register_form' ) );
+                        add_filter( 'um_submit_form_errors_hook__register', array( $this, 'um_registration_errors' ), 99, 2 );
+                    }   
                 }
                 
                 
@@ -221,11 +266,11 @@
                         <script src="https://www.google.com/recaptcha/api.js?hl=<?php 
                         
                         if ( $values['g2-language'] ==  'auto' )
-                            echo esc_attr ( get_locale() );
+                            echo get_locale();
                             else
-                            echo esc_attr ( $values['g2-language'] ); ?>" async defer></script>
+                            echo $values['g2-language']; ?>" async defer></script>
                             
-                        <div class="g-recaptcha" data-sitekey="<?php echo esc_attr ( $values['g2-site-key'] ) ?>" data-theme="<?php echo esc_attr ( $values['g2-theme'] ) ?>"></div>    
+                        <div class="g-recaptcha" data-sitekey="<?php echo $values['g2-site-key'] ?>" data-theme="<?php echo $values['g2-theme'] ?>"></div>    
                         
                     
                     <?php
@@ -256,6 +301,10 @@
                 {
                     if ( ! is_object ( $user )  ||  ! isset ( $user->ID ) ) 
                         return $user;
+                        
+                    // Let WooCommerce handle its own login form via woocommerce_process_login_errors
+                    if ( isset( $_POST['woocommerce-login-nonce'] ) )
+                        return $user;
                     
                     if ( ( defined( 'REST_REQUEST' ) && REST_REQUEST )  ||  ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) )
                         return $user;
@@ -277,6 +326,24 @@
                 
                 }
                 
+            function wc_authenticate( $validation_errors, $username, $password ) 
+                {
+                    if ( ( defined( 'REST_REQUEST' ) && REST_REQUEST ) || ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) )
+                        return $validation_errors;
+
+                    if ( ! isset( $_POST['g-recaptcha-response'] ) || empty( $_POST['g-recaptcha-response'] ) ) {
+                        $validation_errors->add( 'g2_error', esc_html__( 'Unable to verify that you are human.', 'wp-hide-security-enhancer' ) );
+                        return $validation_errors;
+                    }
+
+                    $api_response = $this->g2_api_check( $_POST['g-recaptcha-response'] );
+
+                    if ( $api_response->success !== TRUE )
+                        $validation_errors->add( 'g2_error', esc_html__( 'Unable to verify that you are human.', 'wp-hide-security-enhancer' ) );
+
+                    return $validation_errors;
+                }
+                
                 
             function register_form()
                 {
@@ -286,14 +353,21 @@
             
             function registration_errors( $errors )
                 {
-                    if ( ( defined( 'REST_REQUEST' ) && REST_REQUEST )  ||  ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) )
-                        return $errors;   
-                    
-                    $api_response   =   $this->g2_api_check( $_POST['g-recaptcha-response'] );
-                        
-                    if( $api_response->success !==  TRUE )
-                        $errors->add( 'g2_error', sprintf( '<strong>%s</strong>: %s', __( 'Error!', 'wp-hide-security-enhancer' ), __('Unable to verify that you are human.', 'wp-hide-security-enhancer') ) );
-  
+
+                    if ( ( defined( 'REST_REQUEST' ) && REST_REQUEST ) || ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) )
+                        return $errors;
+
+                    // ADD THIS GUARD - currently missing
+                    if ( ! isset( $_POST['g-recaptcha-response'] ) || empty( $_POST['g-recaptcha-response'] ) ) {
+                        $errors->add( 'g2_error', sprintf( '<strong>%s</strong>: %s', __( 'Error!', 'wp-hide-security-enhancer' ), __( 'Unable to verify that you are human.', 'wp-hide-security-enhancer' ) ) );
+                        return $errors;
+                    }
+
+                    $api_response = $this->g2_api_check( $_POST['g-recaptcha-response'] );
+
+                    if ( $api_response->success !== TRUE )
+                        $errors->add( 'g2_error', sprintf( '<strong>%s</strong>: %s', __( 'Error!', 'wp-hide-security-enhancer' ), __( 'Unable to verify that you are human.', 'wp-hide-security-enhancer' ) ) );
+
                     return $errors;
                                         
                 }
@@ -307,16 +381,112 @@
             
             function lostpassword_post( $errors )
                 {
-                    if ( ( defined( 'REST_REQUEST' ) && REST_REQUEST )  ||  ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) )
-                        return $errors;   
-                    
-                    $api_response   =   $this->g2_api_check( $_POST['g-recaptcha-response'] );
-                        
-                    if( $api_response->success !==  TRUE )
-                        $errors->add( 'g2_error', sprintf( '<strong>%s</strong>: %s', __( 'Error!', 'wp-hide-security-enhancer' ), __('Unable to verify that you are human.', 'wp-hide-security-enhancer') ) );
-  
+                    if ( ( defined( 'REST_REQUEST' ) && REST_REQUEST ) || ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) )
+                        return $errors;
+
+                    // ADD THIS GUARD - currently missing
+                    if ( ! isset( $_POST['g-recaptcha-response'] ) || empty( $_POST['g-recaptcha-response'] ) ) {
+                        $errors->add( 'g2_error', sprintf( '<strong>%s</strong>: %s', __( 'Error!', 'wp-hide-security-enhancer' ), __( 'Unable to verify that you are human.', 'wp-hide-security-enhancer' ) ) );
+                        return $errors;
+                    }
+
+                    $api_response = $this->g2_api_check( $_POST['g-recaptcha-response'] );
+
+                    if ( $api_response->success !== TRUE )
+                        $errors->add( 'g2_error', sprintf( '<strong>%s</strong>: %s', __( 'Error!', 'wp-hide-security-enhancer' ), __( 'Unable to verify that you are human.', 'wp-hide-security-enhancer' ) ) );
+
                     return $errors;
                                         
+                }
+                
+                
+            /**
+            * 
+            * WooCommerce lost password
+            * @param mixed $errors
+            * @param mixed $user_data
+            */
+            function wc_lostpassword_post( $errors, $user_data ) 
+                {
+                    if ( ! isset( $_POST['g-recaptcha-response'] ) || empty( $_POST['g-recaptcha-response'] ) ) {
+                        $errors->add( 'g2_error', esc_html__( 'Unable to verify that you are human.', 'wp-hide-security-enhancer' ) );
+                        return $errors;
+                    }
+                    $api_response = $this->g2_api_check( $_POST['g-recaptcha-response'] );
+                    if ( $api_response->success !== TRUE )
+                        $errors->add( 'g2_error', esc_html__( 'Unable to verify that you are human.', 'wp-hide-security-enhancer' ) );
+                    return $errors;
+                }
+
+            /**
+            * 
+            * WooCommerce registration
+            * @param mixed $errors
+            * @param mixed $username
+            * @param mixed $password
+            * @param mixed $email
+            */
+            function wc_registration_errors( $errors, $username, $password, $email ) 
+                {
+                    if ( ! isset( $_POST['g-recaptcha-response'] ) || empty( $_POST['g-recaptcha-response'] ) ) {
+                        $errors->add( 'g2_error', esc_html__( 'Unable to verify that you are human.', 'wp-hide-security-enhancer' ) );
+                        return $errors;
+                    }
+                    $api_response = $this->g2_api_check( $_POST['g-recaptcha-response'] );
+                    if ( $api_response->success !== TRUE )
+                        $errors->add( 'g2_error', esc_html__( 'Unable to verify that you are human.', 'wp-hide-security-enhancer' ) );
+                    return $errors;
+                }
+
+            /**
+            * 
+            * BuddyPress registration validation
+            */
+            function bp_registration_errors() 
+                {
+                    if ( ! isset( $_POST['g-recaptcha-response'] ) || empty( $_POST['g-recaptcha-response'] ) ) {
+                        bp_core_add_message( __( 'Unable to verify that you are human.', 'wp-hide-security-enhancer' ), 'error' );
+                        return;
+                    }
+                    $api_response = $this->g2_api_check( $_POST['g-recaptcha-response'] );
+                    if ( $api_response->success !== TRUE )
+                        bp_core_add_message( __( 'Unable to verify that you are human.', 'wp-hide-security-enhancer' ), 'error' );
+                }
+
+            /**
+            * 
+            * Ultimate Member login
+            * @param mixed $args
+            * @param mixed $form_data
+            * @return mixed
+            */
+            function um_authenticate( $args, $form_data ) 
+                {
+                    if ( ! isset( $_POST['g-recaptcha-response'] ) || empty( $_POST['g-recaptcha-response'] ) ) {
+                        UM()->form()->add_error( 'g2_error', __( 'Unable to verify that you are human.', 'wp-hide-security-enhancer' ) );
+                        return;
+                    }
+                    $api_response = $this->g2_api_check( $_POST['g-recaptcha-response'] );
+                    if ( $api_response->success !== TRUE )
+                        UM()->form()->add_error( 'g2_error', __( 'Unable to verify that you are human.', 'wp-hide-security-enhancer' ) );
+                }
+
+            /**
+            * 
+            * Ultimate Member registration
+            * @param mixed $args
+            * @param mixed $form_data
+            * @return mixed
+            */
+            function um_registration_errors( $args, $form_data ) 
+                {
+                    if ( ! isset( $_POST['g-recaptcha-response'] ) || empty( $_POST['g-recaptcha-response'] ) ) {
+                        UM()->form()->add_error( 'g2_error', __( 'Unable to verify that you are human.', 'wp-hide-security-enhancer' ) );
+                        return;
+                    }
+                    $api_response = $this->g2_api_check( $_POST['g-recaptcha-response'] );
+                    if ( $api_response->success !== TRUE )
+                        UM()->form()->add_error( 'g2_error', __( 'Unable to verify that you are human.', 'wp-hide-security-enhancer' ) );
                 }
             
             

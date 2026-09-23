@@ -5,7 +5,7 @@
 * Description: Hide and increase Security for your WordPress website instance using smart techniques. No files are changed on your server.
 * Author: Nsp Code
 * Author URI: http://www.nsp-code.com 
-* Version: 2.9.1
+* Version: 2.9.3
 * Text Domain: wp-hide-security-enhancer
 * Domain Path: /languages/
 * Requires at least: 4.0
@@ -59,6 +59,9 @@
             flush_rewrite_rules();     
             
             global $wph;
+
+            if ( isset( $wph->activity_log ) && is_object( $wph->activity_log ) )
+                $wph->activity_log->maybe_create_table();
             
             //check if permalinks where saved
             $wph->custom_permalinks_applied   =   $wph->functions->rewrite_rules_applied();
@@ -81,6 +84,9 @@
             WPH_functions::unlink_mu_loader();
             
             delete_option( 'wph-previous-login-url' );
+
+            if ( class_exists( 'WPH_activity_log' ) )
+                WPH_activity_log::deactivate();
             
         }    
         

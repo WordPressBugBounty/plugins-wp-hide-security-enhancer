@@ -9,7 +9,7 @@
 #wph h3.handle {border-bottom: 1px solid #e1e1e1; font-size: 14px;    line-height: 1.4;    margin: 0;    padding: 8px 12px;}
 #wph .postbox {margin-bottom: 10px; overflow:hidden}
 #wph .wph_input fieldset label { margin-bottom: 7px; display: block; }
-#wph #reset_settings_form .reset_settings {    margin-top: -39px;margin-left: 10px;}
+#wph #reset_settings_form .reset_settings {    margin-top: -49px;margin-left: 10px;}
 #wph h2 #reset_settings, #wph #reset_settings_form .reset_settings {   z-index: 10; position: relative; }
 #wph span.wph-pro {background-color: #f04d46; color:#FFF; font-weight: bold;display: inline-block; padding: 2px 4px;}
 #wph .button-primary span.wph-pro {margin: -1px 0 -1px -1px;}

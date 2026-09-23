@@ -1,0 +1,29 @@
+#security-scan.wph-activity-log .wph-log-overview {grid-template-columns:repeat(3,minmax(0,1fr));}
+#security-scan.wph-activity-log .wph-log-section {margin-top:2rem;}
+#security-scan.wph-activity-log .wph-log-filter {padding:1rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+#security-scan.wph-activity-log .wph-log-filter label {font-weight:600;margin-right:.5rem;}
+#security-scan.wph-activity-log .wph-log-filter select {margin-right:.5rem;}
+#security-scan.wph-activity-log .wph-log-table-card {margin-top:.75rem;}
+#security-scan.wph-activity-log .wph-log-table-card .gc-body {padding:0;}
+#security-scan.wph-activity-log .wph-log-table-wrap {overflow-x:auto;}
+#security-scan.wph-activity-log .wph-log-table-card table {border:0;box-shadow:none;margin:0;min-width:850px;}
+#security-scan.wph-activity-log .wph-log-table-card th {background:hsl(var(--muted));color:hsl(var(--muted-foreground));font-size:.75rem;text-transform:uppercase;}
+#security-scan.wph-activity-log .wph-log-table-card td {vertical-align:top;color:hsl(var(--foreground));font-size:.8125rem;}
+#security-scan.wph-activity-log .wph-log-table-card code {font-size:.73rem;white-space:normal;word-break:break-all;}
+#security-scan.wph-activity-log .wph-log-user-agent {display:block;color:hsl(var(--muted-foreground));font-size:.7rem;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:4px;}
+#security-scan.wph-activity-log .wph-log-severity {display:inline-block;border-radius:4px;padding:2px 6px;font-size:.68rem;margin-top:4px;background:#edf2f7;color:#475569;}
+#security-scan.wph-activity-log .severity-warning {background:hsl(var(--warning) / .15);color:#8a5600;}
+#security-scan.wph-activity-log .severity-critical {background:hsl(var(--destructive) / .12);color:hsl(var(--destructive));}
+#security-scan.wph-activity-log .wph-log-settings {margin-top:2rem;}
+#security-scan.wph-activity-log .wph-log-settings .gc-body {padding:1.25rem;}
+#security-scan.wph-activity-log .wph-log-settings p {margin:0 0 1rem;}
+#security-scan.wph-activity-log .wph-log-setting-row {align-items:center;display:flex;gap:.5rem;}
+#security-scan.wph-activity-log .wph-log-setting-row > label {flex:0 0 135px;}
+#security-scan.wph-activity-log .wph-log-settings input[type="number"] {width:90px;margin-left:0;}
+#security-scan.wph-activity-log .wph-log-settings input[type="text"] {margin-left:0;}
+#security-scan.wph-activity-log .wph-log-checkbox {display:inline-block;margin:8px 16px 0 0;}
+#security-scan.wph-activity-log p.wph-log-save {margin-top:2.5rem;}
+#security-scan.wph-activity-log .wph-log-clear {margin:0;}
+#security-scan.wph-activity-log .wph-log-actions {display:flex;align-items:center;gap:.5rem;}
+#security-scan.wph-activity-log .tablenav {padding:8px 12px;margin:0;}
+@media (max-width:782px) {#security-scan.wph-activity-log .wph-log-overview {grid-template-columns:1fr;}#security-scan.wph-activity-log .wph-log-filter {align-items:flex-start;flex-direction:column;}#security-scan.wph-activity-log .wph-log-filter select {max-width:100%;margin:8px 0;}#security-scan.wph-activity-log .wph-log-setting-row {align-items:flex-start;flex-direction:column;gap:.25rem;}#security-scan.wph-activity-log .wph-log-setting-row > label {flex-basis:auto;}}

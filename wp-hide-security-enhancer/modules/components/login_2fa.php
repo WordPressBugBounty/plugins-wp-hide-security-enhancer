@@ -439,6 +439,7 @@
                             $error = array();
                             if ( is_wp_error( $result ) ) 
                                 {
+                                    do_action( 'wp-hide/2fa/failed', $user, $_2fa_id, $result );
                                     do_action( 'wp_login_failed', $user->user_login, $result );
 
                                     $error_type     =   $result->get_error_code();

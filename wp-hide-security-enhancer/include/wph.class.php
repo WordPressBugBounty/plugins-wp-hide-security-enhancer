@@ -35,6 +35,8 @@
             var $maintenances               =   array();
             
             var $security_scan              =   FALSE;
+            var $activity_log               =   FALSE;
+            var $activity_log_interface     =   FALSE;
             var $admin_interface            =   FALSE;
             
             var $_2fa                       =   FALSE;
@@ -251,6 +253,9 @@
                     //load other components
                     include_once(WPH_PATH . '/include/admin-interfaces/security-scan.class.php');
                     $this->security_scan    =   new WPH_security_scan();
+
+                    include_once(WPH_PATH . '/include/activity-log.class.php');
+                    $this->activity_log     =   new WPH_activity_log();
            
                 }
                 
@@ -456,6 +461,12 @@
                     $hookID   =             add_submenu_page( 'wp-hide', 'WP Hide', $menu_title, 'manage_options', 'wp-hide-security-scan', array( $this->security_scan,'_render' ) );
                     add_action('admin_print_styles-' . $hookID ,    array( $this->security_scan, 'admin_print_styles'));
                     add_action('admin_print_scripts-' . $hookID ,   array( $this->security_scan, 'admin_print_scripts'));
+
+                    include_once(WPH_PATH . '/include/admin-interfaces/activity-log.class.php');
+                    $this->activity_log_interface = new WPH_activity_log_interface( $this->activity_log );
+                    $hookID = add_submenu_page( 'wp-hide', 'WP Hide', '<span class="wph-info">Overview&rarr;</span> Logs', 'manage_options', 'wp-hide-logs', array( $this->activity_log_interface, '_render' ) );
+                    add_action('admin_print_styles-' . $hookID , array( $this->activity_log_interface, 'admin_print_styles' ) );
+                    add_action('admin_print_scripts-' . $hookID , array( $this->activity_log_interface, 'admin_print_scripts' ) );
          
                     $current_page       =   isset ( $_GET['page'] ) ?       preg_replace( '/[^a-zA-Z0-9\-\_$]/m' , "", $_GET['page'] ) :        '';
                     $current_component  =   isset ( $_GET['component'] ) ?  preg_replace( '/[^a-zA-Z0-9\-\_$]/m' , "", $_GET['component'] ) :   '';
@@ -859,6 +870,9 @@
                 {
                     if(!isset($_GET['wph-throw-404']))
                         return;
+
+                    if ( is_object( $this->activity_log ) )
+                        $this->activity_log->log_blocked_request( isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '' );
                         
                     global $wp_query;
 

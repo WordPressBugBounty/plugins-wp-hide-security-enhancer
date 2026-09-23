@@ -160,7 +160,7 @@
                                                 ?>
                                             </div>    
                                             
-                                            <?php if ( $require_save ) { ?>       
+												<?php if ( $require_save ) { ?>       
                                             <table class="wph_submit widefat">
                                                 <tbody>
                                                     <tr class="submit">
@@ -175,6 +175,7 @@
                                             </form>
                                             
                                             <?php if ( $require_save ) { ?>
+                                        
                                             <form id="reset_settings_form" action="<?php echo esc_url(admin_url( 'admin.php?page=wp-hide')) ?>" method="post" <?php
                                                         if($this->wph->server_htaccess_config    === FALSE && $this->wph->server_web_config   === FALSE) {echo (' class="disabled"');}
                                                     ?>>
@@ -220,6 +221,7 @@
                                                     
                                                 </script>
                                             </form>
+                                
                                             <?php } ?>
                                              
                                         </div>

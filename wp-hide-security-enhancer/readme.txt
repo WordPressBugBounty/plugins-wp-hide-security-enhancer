@@ -3,8 +3,8 @@ Contributors: nsp-code, tdgu
 Donate link: https://www.nsp-code.com/
 Tags: hide, security, headers, login, 2fa
 Requires at least: 2.8
-Tested up to: 7.1
-Stable tag: 2.9.1
+Tested up to: 7.1.2
+Stable tag: 2.9.3
 License: GPLv2 or later
 
 Protect your website by concealing vulnerable WordPress traces, plugins, themes, login/admin url. 2FA, Captcha, Firewall, Security Headers etc.
@@ -463,7 +463,12 @@ We’re continuously improving WP Hide! If there’s a feature you need—whethe
 1. Admin Interface.
 2. Sample front html code.
 
-== Changelog == 
+== Changelog ==  
+
+= 2.9.3 =
+* Process the logger module request_uri and remove sensitive data like token, access_token, authorization, password etc.
+* On log_blocked_request use the IP to create the hash, instead the request_uri and IP.
+* Sanitize the logger export CSV.
 
 = 2.9.1 =
 * Improvements for Google Captcha V2/V3
